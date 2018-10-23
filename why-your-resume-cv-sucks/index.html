@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Why your Resume/CV sucks, and what to do about it &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Why your Resume/CV sucks, and what to do about it Comments Feed" href="/why-your-resume-cv-sucks/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/why-your-resume-cv-sucks/" />
+<link rel='shortlink' href='/?p=728' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fwhy-your-resume-cv-sucks%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fwhy-your-resume-cv-sucks%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-728">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-728" class="post-728 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Why your Resume/CV sucks, and what to do about it</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p>Most people don’t know what the purpose of a Resume (also called CV) is. It is not to tell your life’s story, it’s not to list everything you’ve done on any project whatsoever in the last fifty years, and it certainly isn’t enough to get you a job.</p>
+<p>The only purpose of a CV is to get you an interview. That’s it. Your average recruiter / hiring manager will have a stack of 50-60 CVs in front of them. The recruiter will only send those forward that s/he thinks will have a chance of getting the job. If you put them to sleep, they will bin your resume.</p>
+<p>Similarly, the hiring manager will also  get a hundred CVs from ten different recruiters. They too have to make a quick decision on who to call for an interview. And to make it worse, most will have other responsibilities, which means your CV will only be read in coffee breaks.<br />
+Now here is your challenge: Is your CV interesting enough so that a bored manager, who really has to go to the loo as soon as he finishes his coffee, will spend more than 60 seconds looking at it? Cause that’s how long you will get. That’s the maximum figure by the way. You may only get fifteen seconds if your resume is a big block of boring text.</p>
+<p>&nbsp;</p>
+<h4>Things which make your Resume suck</h4>
+<p>This is only a short list, as it depends on the job and your experience. If you are a young graduate, the problems you face will be different, as instead of a long CV, you will have a very short one. But you may still have fluff and empty words.</p>
+<p><strong>It is boring and filled with empty words</strong></p>
+<p>“My mission in life is to optimize my strategy and become a domain specific team player. TCP IP Facebook Twitter.”</p>
+<p>We make fun of the MBA types who use pretentious and complicated words. Yet when it comes to building our own resume, we start using the same empty words.</p>
+<p>I have seen far too many CVs with empty personal statements. If it doesn’t add to the bottom line, get rid of it. People hire you because you can make them money; not because they want to admire your fancy English, or because they want to help you fulfill your personal goals.</p>
+<p><strong>Not targeted</strong></p>
+<p>Your resume contains everything under the sun . Too long, pages and pages of blah blah blah.  If twenty two years ago you worked as an intern for a cheese factory, that is not relevant to your application for a vice president.</p>
+<p>The CV must be targeted at the job. If the job is for a Linux developer, all those 20 paragraphs about the time you created that killer webpage are useless.</p>
+<p>Your resume must not be more than 1-2 pages in length, no matter how much experience you have.</p>
+<p><strong>Doesn&#8217;t answer the question &#8220;What&#8217;s in it for me?&#8221;</strong></p>
+<p>The only thing the company cares about is what you can do for them, and not vice versa. It must be immediately clear, by looking at your resume and cover letter, that you are useful to them.  The manager must look at your CV and go &#8220;Yup, this guy/gal looks like the sort of person who can fix my problem.&#8221;</p>
+<p>So how do you do that?  By following all the other advice in this blog. Make your CV short, targeted and relevant. That&#8217;s it.</p>
+<p><strong>You write your whole biography</strong></p>
+<p>One thing I&#8217;ve seen a lot is that the person&#8217;s whole life history is put in the resume. &#8220;Well, I was born back in the 60s, when men were men, and the women were women. And then I joined BigSoft&#8230;.&#8221;</p>
+<p>Everything you ever did does not need to go on your resume. If it isn&#8217;t relevant, take it out.</p>
+<p><strong>Too much fluff </strong></p>
+<p>All interesting bit is hidden beneath tonnes of garbage, which is usually of the form blah blah blah. If it isn&#8217;t relevant take it out. If it adds nothing, take it out. Don&#8217;t make your CV boring- you are not trying to win the Man Booker prize!</p>
+<p><strong>Too many sentences</strong></p>
+<p>Thick blobs of text make it hard to read. Remember the manager who has to go to the loo? You have to hold his attention. Which one of these versions do you prefer:</p>
+<p><strong>Version A</strong></p>
+<p>I have worked as a senior software developer. My job was to write great code, while working under tight deadlines. We used mainly C and C++. In C++, we used the C11 features, as well as Boost libraries when required. Many design patterns like Composite, Factory and Decorator were used. We also wrote web frameworks in Python.</p>
+<p><strong>Version B</strong></p>
+<ul>
+<li>Senior engineer, used to working with tight deadlines</li>
+<li>C/C++11, with design patterns like Composite, Factory and Decorator</li>
+<li>Python was used for web development.</li>
+</ul>
+<p>Version B will win every time. Version A may not even be read.</p>
+<p><strong>Not qualified for the job </strong></p>
+<p>Your put everything you ever touched on in the CV, but you really aren’t qualified for the job. Even if you get the interview, you won’t get the job.</p>
+<p>&nbsp;</p>
+<h4>Example of a bad CV</h4>
+<p>Okay, enough theory. Here&#8217;s a bad CV I created. There&#8217;s only one job, as I grew bored of just typing it. Try to read through it, and see what&#8217;s wrong:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8263b6aa8303205298" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+Name: Bhrantu Bihari
+
+Personal Goal: Become the best engineer by following the team spirit and optimizing my life around 
+technological innovation.
+
+Date of birth: 1 Jan 1901
+Place of Birth:  Loondumb
+Address: 27 Foobar Street. Golem Pur, East Ham
+Telephone: 007 006 005 1234
+Email: stud_muffin_99 @ aol.com
+
+Marital status: Married with five kids
+
+Qualifications
+BSc in Computer Science and Potato farming
+
+Experience:
+
+2001 – Present Senior Quality optimizer engineer
+
+I am responsible for ensuring the quality metrics are approved and meet the highest quality standards of our company and the ISO 9000 committee. I take on tasks that are challenging and proactively meet new challenges in a dynamic and educational way. I have trained many engineers in the ISO 9000 quality metric, ensuring blah blah blah blah blah blah blah standards synergy Ipso actum laurem dommi ni sidri. I also write documentation for our main software tool, that can generate pictures of dancing bunnies based on user input. Also, I made sure our coffee machine never ran out of coffee.
+
+Software experience: Windows 95, Dos 3.2, Solarix.
+Standards knowledge: Iso 9000, ISO 9001
+
+Hobbies: Playing tennis, gardening, cards, reading, cooking. I blog about C# development.</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-2">2</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-4">4</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-6">6</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-8">8</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-10">10</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-12">12</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-14">14</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-16">16</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-18">18</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-20">20</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-22">22</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-24">24</div><div class="crayon-num" data-line="crayon-5bcf8263b6aa8303205298-25">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6aa8303205298-26">26</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-1"><span class="crayon-v">Name</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">Bhrantu </span><span class="crayon-e">Bihari</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-3"><span class="crayon-e">Personal </span><span class="crayon-v">Goal</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">Become </span><span class="crayon-e">the </span><span class="crayon-e">best </span><span class="crayon-e">engineer </span><span class="crayon-e">by </span><span class="crayon-e">following </span><span class="crayon-e">the </span><span class="crayon-e">team </span><span class="crayon-e">spirit </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">optimizing </span><span class="crayon-e">my </span><span class="crayon-e">life </span><span class="crayon-e">around </span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-4"><span class="crayon-e">technological </span><span class="crayon-v">innovation</span><span class="crayon-sy">.</span></div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-6"><span class="crayon-e">Date </span><span class="crayon-e">of </span><span class="crayon-v">birth</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-h"> </span><span class="crayon-i">Jan</span><span class="crayon-h"> </span><span class="crayon-cn">1901</span></div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-7"><span class="crayon-e">Place </span><span class="crayon-e">of </span><span class="crayon-v">Birth</span><span class="crayon-o">:</span> <span class="crayon-h"> </span><span class="crayon-e">Loondumb</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-8"><span class="crayon-v">Address</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">27</span><span class="crayon-h"> </span><span class="crayon-e">Foobar </span><span class="crayon-v">Street</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-e">Golem </span><span class="crayon-v">Pur</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">East </span><span class="crayon-e">Ham</span></div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-9"><span class="crayon-v">Telephone</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">007</span><span class="crayon-h"> </span><span class="crayon-cn">006</span><span class="crayon-h"> </span><span class="crayon-cn">005</span><span class="crayon-h"> </span><span class="crayon-cn">1234</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-10"><span class="crayon-v">Email</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-v">stud_muffin</span><span class="crayon-sy">_</span>99<span class="crayon-h"> </span><span class="crayon-sy">@</span><span class="crayon-h"> </span><span class="crayon-v">aol</span><span class="crayon-sy">.</span><span class="crayon-e">com</span></div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-12"><span class="crayon-e">Marital </span><span class="crayon-v">status</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">Married </span><span class="crayon-e">with </span><span class="crayon-e">five </span><span class="crayon-e">kids</span></div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-13">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-14"><span class="crayon-e">Qualifications</span></div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-15"><span class="crayon-e">BSc </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">Computer </span><span class="crayon-e">Science </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">Potato </span><span class="crayon-e">farming</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-16">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-17"><span class="crayon-v">Experience</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-18">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-19"><span class="crayon-cn">2001</span><span class="crayon-h"> </span>–<span class="crayon-h"> </span><span class="crayon-e">Present </span><span class="crayon-e">Senior </span><span class="crayon-e">Quality </span><span class="crayon-e">optimizer </span><span class="crayon-i">engineer</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-20">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-21"><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-e">am </span><span class="crayon-e">responsible </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">ensuring </span><span class="crayon-e">the </span><span class="crayon-e">quality </span><span class="crayon-e">metrics </span><span class="crayon-e">are </span><span class="crayon-e">approved </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">meet </span><span class="crayon-e">the </span><span class="crayon-e">highest </span><span class="crayon-e">quality </span><span class="crayon-e">standards </span><span class="crayon-e">of </span><span class="crayon-e">our </span><span class="crayon-e">company </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">the </span><span class="crayon-i">ISO</span><span class="crayon-h"> </span><span class="crayon-cn">9000</span><span class="crayon-h"> </span><span class="crayon-v">committee</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-e">take </span><span class="crayon-e">on </span><span class="crayon-e">tasks </span><span class="crayon-e">that </span><span class="crayon-e">are </span><span class="crayon-e">challenging </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">proactively </span><span class="crayon-e">meet </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">challenges </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">dynamic </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">educational </span><span class="crayon-v">way</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-e">have </span><span class="crayon-e">trained </span><span class="crayon-e">many </span><span class="crayon-e">engineers </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">the </span><span class="crayon-i">ISO</span><span class="crayon-h"> </span><span class="crayon-cn">9000</span><span class="crayon-h"> </span><span class="crayon-e">quality </span><span class="crayon-v">metric</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">ensuring </span><span class="crayon-e">blah </span><span class="crayon-e">blah </span><span class="crayon-e">blah </span><span class="crayon-e">blah </span><span class="crayon-e">blah </span><span class="crayon-e">blah </span><span class="crayon-e">blah </span><span class="crayon-e">standards </span><span class="crayon-e">synergy </span><span class="crayon-e">Ipso </span><span class="crayon-e">actum </span><span class="crayon-e">laurem </span><span class="crayon-e">dommi </span><span class="crayon-e">ni </span><span class="crayon-v">sidri</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-e">also </span><span class="crayon-e">write </span><span class="crayon-e">documentation </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">our </span><span class="crayon-e">main </span><span class="crayon-e">software </span><span class="crayon-v">tool</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">that </span><span class="crayon-e">can </span><span class="crayon-e">generate </span><span class="crayon-e">pictures </span><span class="crayon-e">of </span><span class="crayon-e">dancing </span><span class="crayon-e">bunnies </span><span class="crayon-e">based </span><span class="crayon-e">on </span><span class="crayon-e">user </span><span class="crayon-v">input</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-v">Also</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-e">made </span><span class="crayon-e">sure </span><span class="crayon-e">our </span><span class="crayon-e">coffee </span><span class="crayon-e">machine </span><span class="crayon-e">never </span><span class="crayon-e">ran </span><span class="crayon-e">out </span><span class="crayon-e">of </span><span class="crayon-v">coffee</span><span class="crayon-sy">.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-22">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-23"><span class="crayon-e">Software </span><span class="crayon-v">experience</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-i">Windows</span><span class="crayon-h"> </span><span class="crayon-cn">95</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">Dos</span><span class="crayon-h"> </span><span class="crayon-cn">3.2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Solarix</span><span class="crayon-sy">.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-24"><span class="crayon-e">Standards </span><span class="crayon-v">knowledge</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-i">Iso</span><span class="crayon-h"> </span><span class="crayon-cn">9000</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">ISO</span><span class="crayon-h"> </span><span class="crayon-cn">9001</span></div><div class="crayon-line" id="crayon-5bcf8263b6aa8303205298-25">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6aa8303205298-26"><span class="crayon-v">Hobbies</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">Playing </span><span class="crayon-v">tennis</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">gardening</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">cards</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">reading</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">cooking</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-e">blog </span><span class="crayon-i">about</span><span class="crayon-h"> </span><span class="crayon-v">C</span><span class="crayon-p"># development.</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0036 seconds] -->
+<p>&nbsp;</p>
+<p><strong>Problems:</strong></p>
+<p><strong>Boring</strong>: Tell me honestly, did you read through the big blob of test in the middle? Neither did I, and I typed it. Look carefully, I&#8217;ve put garbage text in the middle. But the chances are, you didn&#8217;t even notice it. So why would an employer?</p>
+<p><strong>Pretentious</strong>: The personal goals section is nothing but empty fluff that has been thrown in to impress interviewers (it fails).</p>
+<p><strong>Filled with useless info:</strong> Like he was responsible for coffee machine.</p>
+<p><strong>Useful info is hidden beneath a ton of garbage:</strong> No manager will read that big paragraph. You have to wade through piles of useless information, like he has five kids and his email address is stud_muffin @ aol.com.</p>
+<p>The knowledge of the software he knows should be at the top, as it will allow the manager to quickly skim his CV and see if he&#8217;s worth calling for an interview.</p>
+<p>The hobbies section is also useless. Does anyone really care you know gardening, unless you are applying for a gardener&#8217;s job?</p>
+<h4>Fixed CV</h4>
+<p>Okay, here is the fixed CV.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8263b6ab3145884945" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+Name: Bhrantu Bihari
+
+Software experience: Windows 95, Dos 3.2, Solarix.
+Standards knowledge: Iso 9000, ISO 9001
+
+Experience:
+2001 – Present Senior Quality optimizer engineer
+* Responsible for ISO 9000 compliance
+* Responsible for training people for ISO compliance
+* Wrote the documentation for our main software tool
+
+Qualifications
+BSc in Computer Science and Potato farming
+
+Hobbies: I maintain a blog on C#.</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8263b6ab3145884945-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6ab3145884945-2">2</div><div class="crayon-num" data-line="crayon-5bcf8263b6ab3145884945-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6ab3145884945-4">4</div><div class="crayon-num" data-line="crayon-5bcf8263b6ab3145884945-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6ab3145884945-6">6</div><div class="crayon-num" data-line="crayon-5bcf8263b6ab3145884945-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6ab3145884945-8">8</div><div class="crayon-num" data-line="crayon-5bcf8263b6ab3145884945-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6ab3145884945-10">10</div><div class="crayon-num" data-line="crayon-5bcf8263b6ab3145884945-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6ab3145884945-12">12</div><div class="crayon-num" data-line="crayon-5bcf8263b6ab3145884945-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8263b6ab3145884945-14">14</div><div class="crayon-num" data-line="crayon-5bcf8263b6ab3145884945-15">15</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8263b6ab3145884945-1"><span class="crayon-v">Name</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">Bhrantu </span><span class="crayon-e">Bihari</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6ab3145884945-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8263b6ab3145884945-3"><span class="crayon-e">Software </span><span class="crayon-v">experience</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-i">Windows</span><span class="crayon-h"> </span><span class="crayon-cn">95</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">Dos</span><span class="crayon-h"> </span><span class="crayon-cn">3.2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Solarix</span><span class="crayon-sy">.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6ab3145884945-4"><span class="crayon-e">Standards </span><span class="crayon-v">knowledge</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-i">Iso</span><span class="crayon-h"> </span><span class="crayon-cn">9000</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">ISO</span><span class="crayon-h"> </span><span class="crayon-cn">9001</span></div><div class="crayon-line" id="crayon-5bcf8263b6ab3145884945-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6ab3145884945-6"><span class="crayon-v">Experience</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8263b6ab3145884945-7"><span class="crayon-cn">2001</span><span class="crayon-h"> </span>–<span class="crayon-h"> </span><span class="crayon-e">Present </span><span class="crayon-e">Senior </span><span class="crayon-e">Quality </span><span class="crayon-e">optimizer </span><span class="crayon-e">engineer</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6ab3145884945-8"><span class="crayon-e">*</span><span class="crayon-h"> </span><span class="crayon-e">Responsible </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">ISO</span><span class="crayon-h"> </span><span class="crayon-cn">9000</span><span class="crayon-h"> </span><span class="crayon-e">compliance</span></div><div class="crayon-line" id="crayon-5bcf8263b6ab3145884945-9"><span class="crayon-e">*</span><span class="crayon-h"> </span><span class="crayon-e">Responsible </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">training </span><span class="crayon-e">people </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">ISO </span><span class="crayon-e">compliance</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6ab3145884945-10"><span class="crayon-e">*</span><span class="crayon-h"> </span><span class="crayon-e">Wrote </span><span class="crayon-e">the </span><span class="crayon-e">documentation </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">our </span><span class="crayon-e">main </span><span class="crayon-e">software </span><span class="crayon-e">tool</span></div><div class="crayon-line" id="crayon-5bcf8263b6ab3145884945-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6ab3145884945-12"><span class="crayon-e">Qualifications</span></div><div class="crayon-line" id="crayon-5bcf8263b6ab3145884945-13"><span class="crayon-e">BSc </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">Computer </span><span class="crayon-e">Science </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">Potato </span><span class="crayon-e">farming</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8263b6ab3145884945-14">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8263b6ab3145884945-15"><span class="crayon-v">Hobbies</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-i">maintain</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">blog </span><span class="crayon-i">on</span><span class="crayon-h"> </span><span class="crayon-v">C</span><span class="crayon-p">#.</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p>I have moved the software section to the top. The experience section has had all fluff removed, and I&#8217;ve added bullet points to make skimming easy. Anything not directly related to the job has been deleted. In the hobbies section, I have kept the C# blog mention, as it shows he has interest in learning new stuff.</p>
+<p>Now tell me honestly: Wasn&#8217;t it a damn sight easier reading this CV?</p>
+<h4>Your challenge</h4>
+<p>Your challenge is to do the same for your CV. Stuck? <a title="About and Contact" href="http://pyskool.com/contact/">Contact me</a>, and I&#8217;ll help, no charge. Even if you think your CV is perfect, it doesn&#8217;t hurt to get second opinion, does it?</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			One thought on &ldquo;Why your Resume/CV sucks, and what to do about it&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-33006" class="comment even thread-even depth-1">
+			<article id="div-comment-33006" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/52477631ae3de328ffb4293fb1a18ce3?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/52477631ae3de328ffb4293fb1a18ce3?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">VIJAY RAJA</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-your-resume-cv-sucks/#comment-33006">
+							<time datetime="2018-07-24T07:19:56+00:00">
+								July 24, 2018 at 7:19 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Really Useful, with very useful set of examples.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-your-resume-cv-sucks/?replytocom=33006#respond' onclick='return addComment.moveForm( "div-comment-33006", "33006", "respond", "728" )' aria-label='Reply to VIJAY RAJA'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/why-your-resume-cv-sucks/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='728' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="f0ba205aa5" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="219"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

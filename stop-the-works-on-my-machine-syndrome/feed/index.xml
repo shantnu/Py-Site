@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Stop the &#8220;Works on My Machine&#8221; Syndrome</title>
+	<atom:link href="/stop-the-works-on-my-machine-syndrome/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/stop-the-works-on-my-machine-syndrome/#comment-16149</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 26 Mar 2015 20:49:11 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1385#comment-16149</guid>
+		<description><![CDATA[Thank Karthik, if you write it up, please share it.]]></description>
+		<content:encoded><![CDATA[<p>Thank Karthik, if you write it up, please share it.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Karthik Prabhakar</title>
+		<link>/stop-the-works-on-my-machine-syndrome/#comment-16148</link>
+		<dc:creator><![CDATA[Karthik Prabhakar]]></dc:creator>
+		<pubDate>Thu, 26 Mar 2015 17:54:40 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1385#comment-16148</guid>
+		<description><![CDATA[I have been huge fan out isolated enviornments for development , experimentation or simple to get my hands on something i want to play around with. I spent nearly 10 years in Java space &#038; continue to work professionally in this space. Although I am puzzled why i never picked up playing with python , which i have been doing recently for last 6 months or so. Let me cut to the chase here , I been using virtual box long before vagrant was used , vagrant saved lot of headaches of me dealing with creating vm choosing os etc.. which you already know. 
+
+But what exactly docker has done is to create containers for me which i can reuse again &#038; again with different application code base.
+lets say i deploy flask applications App A Code in vagrant running on port 8080 etc. now i want to add App B into the same shared folder in vagrant to be able to run , or else i will spin up another vagrant vm to have run my App B in there. 
+
+Docker solves it that i will create a base image for Flask application , all i need to do is start container with volume mounting on it with different instance names instanceA running AppA &#038; instanceB running with AppB. Isolation of code base running on same platform of flask running in two containers gives me isolation of code base &#038; run time which is great for me as i do not want AppB code base into instance A and AppA code base in instance B. 
+
+Long Story short I can run one vagrant box which can have multiple docker containers for playing around &#038; destroying it. It more efficient to be doing all this on my mac with 8GB which i allocate vagrant instance 2 GB and i am done running multiple instances on it.
+
+Should i need to run two versions of vagrant with each 2GB i am eating up my host os which can show significant performance of runtime environment even for dev testing etc.
+
+I am soon gonna write it up in my blog although i must warn you that i am a no-vice blogger. I have seen huge gains in my process using vagrant + core os (which is linux os of choice as it has native support for docker , you can run on ubuntu as well) container i use to host docker containers based on images.]]></description>
+		<content:encoded><![CDATA[<p>I have been huge fan out isolated enviornments for development , experimentation or simple to get my hands on something i want to play around with. I spent nearly 10 years in Java space &amp; continue to work professionally in this space. Although I am puzzled why i never picked up playing with python , which i have been doing recently for last 6 months or so. Let me cut to the chase here , I been using virtual box long before vagrant was used , vagrant saved lot of headaches of me dealing with creating vm choosing os etc.. which you already know. </p>
+<p>But what exactly docker has done is to create containers for me which i can reuse again &amp; again with different application code base.<br />
+lets say i deploy flask applications App A Code in vagrant running on port 8080 etc. now i want to add App B into the same shared folder in vagrant to be able to run , or else i will spin up another vagrant vm to have run my App B in there. </p>
+<p>Docker solves it that i will create a base image for Flask application , all i need to do is start container with volume mounting on it with different instance names instanceA running AppA &amp; instanceB running with AppB. Isolation of code base running on same platform of flask running in two containers gives me isolation of code base &amp; run time which is great for me as i do not want AppB code base into instance A and AppA code base in instance B. </p>
+<p>Long Story short I can run one vagrant box which can have multiple docker containers for playing around &amp; destroying it. It more efficient to be doing all this on my mac with 8GB which i allocate vagrant instance 2 GB and i am done running multiple instances on it.</p>
+<p>Should i need to run two versions of vagrant with each 2GB i am eating up my host os which can show significant performance of runtime environment even for dev testing etc.</p>
+<p>I am soon gonna write it up in my blog although i must warn you that i am a no-vice blogger. I have seen huge gains in my process using vagrant + core os (which is linux os of choice as it has native support for docker , you can run on ubuntu as well) container i use to host docker containers based on images.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/stop-the-works-on-my-machine-syndrome/#comment-16134</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Tue, 17 Mar 2015 10:24:44 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1385#comment-16134</guid>
+		<description><![CDATA[Thanks Philip.
+
+I looked at the official documentation, and I must confess I have no idea how it works, or what it does.]]></description>
+		<content:encoded><![CDATA[<p>Thanks Philip.</p>
+<p>I looked at the official documentation, and I must confess I have no idea how it works, or what it does.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Phillip Oldham</title>
+		<link>/stop-the-works-on-my-machine-syndrome/#comment-16133</link>
+		<dc:creator><![CDATA[Phillip Oldham]]></dc:creator>
+		<pubDate>Tue, 17 Mar 2015 10:04:11 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1385#comment-16133</guid>
+		<description><![CDATA[Don&#039;t forget Buildout! It&#039;s similar to virtualenv, but keeps everything sandboxed in the project directory, and can run &quot;recipes&quot; to do common tasks like set-up databases, compile C libraries, etc.]]></description>
+		<content:encoded><![CDATA[<p>Don&#8217;t forget Buildout! It&#8217;s similar to virtualenv, but keeps everything sandboxed in the project directory, and can run &#8220;recipes&#8221; to do common tasks like set-up databases, compile C libraries, etc.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/stop-the-works-on-my-machine-syndrome/#comment-16130</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Sat, 14 Mar 2015 22:28:34 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1385#comment-16130</guid>
+		<description><![CDATA[Thanks William. How would we go about doing this? Do you have any links?]]></description>
+		<content:encoded><![CDATA[<p>Thanks William. How would we go about doing this? Do you have any links?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/stop-the-works-on-my-machine-syndrome/#comment-16127</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Sat, 14 Mar 2015 22:23:35 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1385#comment-16127</guid>
+		<description><![CDATA[Thanks Andrew, I did not know that you could create packages for other languages.
+
+I do have problems with your other 2 points:
+
+1. Binstar.org doesn&#039;t work so well. I tried to install OpenCV for it, but it never worked. I tried it on Linux, and it worked. But there was no documentation to suggest that the files were Linux only. 
+
+2. I have never managed to get Conda environments to work on Windows, though it works on Linux.]]></description>
+		<content:encoded><![CDATA[<p>Thanks Andrew, I did not know that you could create packages for other languages.</p>
+<p>I do have problems with your other 2 points:</p>
+<p>1. Binstar.org doesn&#8217;t work so well. I tried to install OpenCV for it, but it never worked. I tried it on Linux, and it worked. But there was no documentation to suggest that the files were Linux only. </p>
+<p>2. I have never managed to get Conda environments to work on Windows, though it works on Linux.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: William ML Leslie</title>
+		<link>/stop-the-works-on-my-machine-syndrome/#comment-16124</link>
+		<dc:creator><![CDATA[William ML Leslie]]></dc:creator>
+		<pubDate>Fri, 13 Mar 2015 23:37:56 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1385#comment-16124</guid>
+		<description><![CDATA[5. Vendor your dependencies.
+
+Sticking all of your deps in your project makes them easy to search, deploy, and patch if necessary.  It stops new developers from downloading from PyPI each time.  It also means you don&#039;t have to install the one thing that makes deployment and versioning a nightmare: Setuptools.
+
+Unfortunately this method does require some more manual labor when you first use a package, especially for packages with native extensions.  But until we get a real solution to this problem, it&#039;s the one with the least friction.]]></description>
+		<content:encoded><![CDATA[<p>5. Vendor your dependencies.</p>
+<p>Sticking all of your deps in your project makes them easy to search, deploy, and patch if necessary.  It stops new developers from downloading from PyPI each time.  It also means you don&#8217;t have to install the one thing that makes deployment and versioning a nightmare: Setuptools.</p>
+<p>Unfortunately this method does require some more manual labor when you first use a package, especially for packages with native extensions.  But until we get a real solution to this problem, it&#8217;s the one with the least friction.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Andrew M. Farrell</title>
+		<link>/stop-the-works-on-my-machine-syndrome/#comment-16121</link>
+		<dc:creator><![CDATA[Andrew M. Farrell]]></dc:creator>
+		<pubDate>Fri, 13 Mar 2015 18:38:03 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1385#comment-16121</guid>
+		<description><![CDATA[A couple other benefits of using Conda:
+1) It language agnostic, so you can also use it to create packages for node.js, FORTRAN, go, R, and ruby packages.
+2) You browse packages on channels like https://binstar.org/javascript and then install them with `conda install --channel iojs`
+3) Like virtualenv, you can create an environment in conda with `conda create --name shrubbery python=2.6` or, if you have an environment.yml file with all the packages you want to install listed, `conda env create --file ~/path/to/environment.yml`. To activate the environment, run `source activate environmentname`]]></description>
+		<content:encoded><![CDATA[<p>A couple other benefits of using Conda:<br />
+1) It language agnostic, so you can also use it to create packages for node.js, FORTRAN, go, R, and ruby packages.<br />
+2) You browse packages on channels like <a href="https://binstar.org/javascript" rel="nofollow">https://binstar.org/javascript</a> and then install them with <code>conda install --channel iojs</code><br />
+3) Like virtualenv, you can create an environment in conda with <code>conda create --name shrubbery python=2.6</code> or, if you have an environment.yml file with all the packages you want to install listed, <code>conda env create --file ~/path/to/environment.yml</code>. To activate the environment, run <code>source activate environmentname</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/stop-the-works-on-my-machine-syndrome/#comment-16114</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 12 Mar 2015 16:40:10 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1385#comment-16114</guid>
+		<description><![CDATA[That&#039;s true. VMs do have an overhead. At the end of the day, you are running a whole OS on top of another OS]]></description>
+		<content:encoded><![CDATA[<p>That&#8217;s true. VMs do have an overhead. At the end of the day, you are running a whole OS on top of another OS</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/stop-the-works-on-my-machine-syndrome/#comment-16113</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 12 Mar 2015 16:29:25 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1385#comment-16113</guid>
+		<description><![CDATA[Thanks Aaron, that&#039;s a very detailed list.]]></description>
+		<content:encoded><![CDATA[<p>Thanks Aaron, that&#8217;s a very detailed list.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

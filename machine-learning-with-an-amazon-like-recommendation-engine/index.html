@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Machine Learning with an Amazon like Recommendation Engine &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/machine-learning-with-an-amazon-like-recommendation-engine/" />
+<link rel='shortlink' href='/?p=3037' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fmachine-learning-with-an-amazon-like-recommendation-engine%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fmachine-learning-with-an-amazon-like-recommendation-engine%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-3037">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-3037" class="post-3037 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Machine Learning with an Amazon like Recommendation Engine</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p><a href="/python-for-scientists-and-engineers/"><strong>Intro: Start here</strong></a></p>
+<p><a href="/installing-the-libraries-required-for-the-book/"><strong>Installing the libraries required for the book</strong></a></p>
+<p><strong>Beginners Start Here:</strong><a href="/create-a-word-counter-in-python/"><strong> </strong></a></p>
+<p style="padding-left: 30px;"><a href="/create-a-word-counter-in-python/"><strong>Create a Word Counter in Python</strong></a></p>
+<p style="padding-left: 30px;"><a href="/an-introduction-to-numpy-and-matplotlib/"><strong>An introduction to Numpy and Matplotlib</strong></a></p>
+<p style="padding-left: 30px;"><a href="/introduction-to-pandas/" target="_blank"><strong>Introduction to Pandas with Practical Examples (New)</strong></a></p>
+<p><strong>Main Book</strong></p>
+<p><a href="/image-and-video-processing-in-python/"><strong>Image and Video Processing in Python</strong></a></p>
+<p><a href="/data-analysis-with-pandas/"><strong>Data Analysis with Pandas</strong></a></p>
+<p><a href="/audio-and-digital-signal-processingdsp-in-python/"><strong>Audio and Digital Signal Processing (DSP)</strong></a></p>
+<p><a href="/control-your-raspberry-pi-from-your-phone-tablet/"><strong>Control Your Raspberry Pi From Your Phone / Tablet</strong></a></p>
+<p><strong>Machine Learning Section</strong></p>
+<p style="padding-left: 30px;"><a href="/machine-learning-with-an-amazon-like-recommendation-engine/"><strong>Machine Learning with an Amazon like Recommendation Engine</strong></a></p>
+<p><strong>Machine Learning New Stuff<br /></strong></p>
+<p style="padding-left: 30px;"><strong> <a href="/machine-learning-for-complete-beginners/" target="_blank">Machine Learning For Complete Beginners:</a> </strong>Learn how to predict how many Titanic survivors using machine learning. No previous knowledge needed!</p>
+<p style="padding-left: 30px;"><a href="/cross-validation-and-model-selection/" target="_blank"><strong>Cross Validation and Model Selection</strong></a>: In which we look at cross validation, and how to choose between different machine learning algorithms. Working with the Iris flower dataset and the Pima diabetes dataset.</p>
+<p style="padding-left: 30px;"><strong>Natural Language Processing</strong></p>
+<p style="padding-left: 30px;"><a href="/natural-language-processing-and-sentiment-analysis-with-python/"   target="_blank"><strong>0. Introduction to NLP and Sentiment Analysis</strong></a></p>
+<p style="padding-left: 30px;"><strong><a href="/introduction-to-nltk-natural-language-processing-with-python/" target="_blank">1. Natural Language Processing with NTLK</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/intro-to-nltk-part-2/" target="_blank">2. Intro to NTLK, Part 2</a></strong></p>
+<p style="padding-left: 30px;"><a href="/build-a-sentiment-analysis-app-with-movie-reviews/" target="_blank"><strong>3. Build a sentiment analysis program</strong></a></p>
+<p style="padding-left: 30px;"><strong><a href="/practice-session-sentiment-analysis-with-twitter/" target="_blank">4. Sentiment Analysis with Twitter</a></strong></p>
+<p style="padding-left: 30px;"><strong><span class="trail-end"><a href="/analysing-the-enron-email-corpus/"   target="_blank">5. Analysing the Enron Email Corpus</a></span></strong>: The Enron Email corpus has half a million files spread over 2.5 GB. When looking at data this size, the question is, where do you even start?</p>
+<p style="padding-left: 30px;"><a href="/build-a-spam-filter/" target="_blank"><strong>6. Build a Spam Filter using the Enron Corpus</strong></a></p>
+<hr /><hr />
+<p style="padding-left: 30px;"></p>
+<p>If you have been to Amazon, you must have seen the &#8220;also bought&#8221; section, which recommends which other movies / books you will like, based on the movies your currently bought/rated.</p>
+<p>Amazon is a special case of this, as it hires hundreds of engineers whose job is to tweak this algorithm. And it works great for things like books. I have bought many great books based on Amazon&#8217;s recommendation. It works for movies as well. Where it fails is for items that are not usually rated/reviewed, at least as much as books/movies. Things like household products. I recently bought a drain cleaner, and was immediately bombarded with toilet cleaning products, even though the cleaner had been a one time buy.</p>
+<p>That said, their algorithm works well in the general case, and is the main reason Amazon has become such a powerhouse. Amazon always recommends the items it thinks you will like. If you think that is a big deal, try going to Amazon&#8217;s rivals for books, like B&amp;N, Apple or Kobo. They always have the same 4-5 books they always recommend, a list that is updated once a month, and usually represents books by big publishers who have paid top dollar to be featured.</p>
+<p>Like I said, Amazon&#8217;s algorithm is highly tweaked (and secret), and is based on years of experience. While we can&#8217;t replicate what they did, we can understand the theory of how the algorithm works.</p>
+<p>At its heart, the algorithm looks at items you have rated, and tries to find people who rated the same items in the same way as you. It then checks which other books/movies they liked that you haven&#8217;t bought yet, and recommends it to you.</p>
+<p>So if you constantly rate action movies as high, the algorithm will show you other highly recommended action movies. But what if you like both action and scifi? Based on my experience, you will get recommendations for both.</p>
+<p>So how does the algorithm know which movies to recommend? In technical terms, it looks which movies are most co-related to the ones you rated.</p>
+<p><strong>Pearson Correlation</strong></p>
+<p>The Pearson Correlation coefficient measures how strongly related two items are, ie, will increasing one increase the other as well? The easiest way to understand this is via a diagram.</p>
+<p><img src="/wp-content/uploads/2017/04/pearson.jpg" alt="" class="aligncenter size-full wp-image-3040" width="1123" height="794" srcset="/wp-content/uploads/2017/04/pearson.jpg 1123w, /wp-content/uploads/2017/04/pearson-300x212.jpg 300w, /wp-content/uploads/2017/04/pearson-768x543.jpg 768w, /wp-content/uploads/2017/04/pearson-1024x724.jpg 1024w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></p>
+<p>The first image is of positive correlation- the values are moving up in step.  The second is an example of negative correlation, ie, increasing one will decrease the other. That means they are inversely related. The third is random data- it shows no correlation. This is actually the most common case, as not everything has correlation to everything else (unless you believe in weird psychic phenomena).</p>
+<p>How does this work in practice? Simple. Again, numpy already has functions for Pearson correlation. All you need to do is call them with different inputs.</p>
+<p>In fact, numpy has two functions for the Pearson coefficient. One is really slow, and one is fast. I don&#8217;t know why they have two functions, must be a historical thing. I will only use the faster function. Let me give you a few quick examples on how it works.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebb8f758438876" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+a = [1, 2, 3, 4, 5]
+b = [1, 3, 9, 20, 22]
+
+np.corrcoef(a,b)[1][0]
+
+Out[8]: 0.969954025101608
+
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebb8f758438876-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb8f758438876-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebb8f758438876-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb8f758438876-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebb8f758438876-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb8f758438876-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebb8f758438876-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb8f758438876-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebb8f758438876-1"><span class="crayon-v">a</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">4</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb8f758438876-2"><span class="crayon-v">b</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">9</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">20</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">22</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf8317ebb8f758438876-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb8f758438876-4"><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">corrcoef</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-v">b</span><span class="crayon-sy">)</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf8317ebb8f758438876-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb8f758438876-6"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">8</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.969954025101608</span></div><div class="crayon-line" id="crayon-5bcf8317ebb8f758438876-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb8f758438876-8">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0016 seconds] -->
+<p></p>
+<p><em>np.corrcoef()</em> is the function we are using. It returns a value from -1 to 1. -1 is strong negative correlation, while +1 is strong positive correlation. 0 means no correlation. You may also note that it returns an array, and I&#8217;m reading the <em>[1][0]</em>th value. That is because this function can be used to compare multiple arrays, and so it returns a matrix of correlated values. For our case with only two arrays, we just need one of the values returned, and we read this one.</p>
+<p>I declare two arrays, <em>a</em> and <em>b</em>. Notice that both contain increasing numbers. When I call the <em>np.corrcoef()</em> function on them, I get a value of 0.9, very high correlation.</p>
+<p>Now let&#8217;s try a more random input:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebb99757785176" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+a = [1, 2, 3, 4, 5]
+c = [2 , 7, 9, 1, 0]
+np.corrcoef(a,c)[1][0]
+Out[9]: -0.39904344223381105
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebb99757785176-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb99757785176-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebb99757785176-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb99757785176-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebb99757785176-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebb99757785176-1"><span class="crayon-v">a</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">4</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb99757785176-2"><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">7</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">9</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf8317ebb99757785176-3"><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">corrcoef</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-v">c</span><span class="crayon-sy">)</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb99757785176-4"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">9</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.39904344223381105</span></div><div class="crayon-line" id="crayon-5bcf8317ebb99757785176-5">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0013 seconds] -->
+<p></p>
+<p>This time I get -0.3, which makes sense, as there is no correlation between random data.</p>
+<p>This will become more clear as we look at the example.</p>
+<h2>Dive into the code</h2>
+<p>Okay, now that we know the theory, let&#8217;s dive into the code.</p>
+<p>I have generated some random data for a few movie ratings. Let&#8217;s have a look at it (ml_data1.py):</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebb9d712353400" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+{'Terminator': {'Tom': 4.0,
+'Jack': 1.5,
+'Lisa': 3.0,
+'Sally': 2.0},
+
+'Terminator 2': {'Tom': 5.0,
+'Jack' : 1.0,
+'Lisa': 3.5,
+'Sally': 2.0},
+
+'It happened one night': {'Tom': 3.5,
+'Jack': 3.5,
+'Tiger': 4.0,
+'Lisa': 5.0,
+'Michele': 3.0,
+'Sally': 4.0,},
+
+'27 Dresses': {'Tom': 3.0,
+'Jack': 3.5,
+'Tiger': 3.0,
+'Lisa': 5.0,
+'Michele': 4.0,
+'Sally': 4.0},
+
+'Poirot': {'Tom': 4.0,
+'Jack': 3.0,
+'Tiger': 5.0,
+'Lisa': 4.0,
+'Michele': 3.5,
+'Sally': 3.0,
+},
+
+'Sherlock Holmes': {'Tom': 4.0,
+'Jack': 3.0,
+'Tiger': 3.5,
+'Lisa': 3.5,
+'Sally': 2.0,
+}}
+
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-8">8</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-10">10</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-12">12</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-14">14</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-16">16</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-18">18</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-20">20</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-22">22</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-24">24</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-25">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-26">26</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-27">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-28">28</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-29">29</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-30">30</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-31">31</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-32">32</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-33">33</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-34">34</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-35">35</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-36">36</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-37">37</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-38">38</div><div class="crayon-num" data-line="crayon-5bcf8317ebb9d712353400-39">39</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebb9d712353400-40">40</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-1"><span class="crayon-sy">{</span><span class="crayon-s">'Terminator'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'Tom'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-2"><span class="crayon-s">'Jack'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">1.5</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-3"><span class="crayon-s">'Lisa'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-4"><span class="crayon-s">'Sally'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">2.0</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-6"><span class="crayon-s">'Terminator 2'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'Tom'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">5.0</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-7"><span class="crayon-s">'Jack'</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">1.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-8"><span class="crayon-s">'Lisa'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.5</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-9"><span class="crayon-s">'Sally'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">2.0</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-11"><span class="crayon-s">'It happened one night'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'Tom'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.5</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-12"><span class="crayon-s">'Jack'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.5</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-13"><span class="crayon-s">'Tiger'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-14"><span class="crayon-s">'Lisa'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">5.0</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-15"><span class="crayon-s">'Michele'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-16"><span class="crayon-s">'Sally'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.0</span><span class="crayon-sy">,</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-17">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-18"><span class="crayon-s">'27 Dresses'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'Tom'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.0</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-19"><span class="crayon-s">'Jack'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.5</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-20"><span class="crayon-s">'Tiger'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.0</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-21"><span class="crayon-s">'Lisa'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">5.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-22"><span class="crayon-s">'Michele'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.0</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-23"><span class="crayon-s">'Sally'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.0</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-24">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-25"><span class="crayon-s">'Poirot'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'Tom'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-26"><span class="crayon-s">'Jack'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.0</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-27"><span class="crayon-s">'Tiger'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">5.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-28"><span class="crayon-s">'Lisa'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.0</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-29"><span class="crayon-s">'Michele'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.5</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-30"><span class="crayon-s">'Sally'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.0</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-31"><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-32">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-33"><span class="crayon-s">'Sherlock Holmes'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'Tom'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-34"><span class="crayon-s">'Jack'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.0</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-35"><span class="crayon-s">'Tiger'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.5</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-36"><span class="crayon-s">'Lisa'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.5</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-37"><span class="crayon-s">'Sally'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">2.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-38"><span class="crayon-sy">}</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5bcf8317ebb9d712353400-39">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebb9d712353400-40">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0040 seconds] -->
+<p></p>
+<p>The movie data is stored as a dictionary. Each dictionary has its own sub-dictionary. Let&#8217;s have a look at the first movie:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebba0725149684" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+'Terminator': {'Tom': 4.0,
+'Jack': 1.5,
+'Lisa': 3.0,
+'Sally': 2.0},
+
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebba0725149684-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebba0725149684-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebba0725149684-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebba0725149684-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebba0725149684-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebba0725149684-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebba0725149684-1"><span class="crayon-s">'Terminator'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'Tom'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebba0725149684-2"><span class="crayon-s">'Jack'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">1.5</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebba0725149684-3"><span class="crayon-s">'Lisa'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebba0725149684-4"><span class="crayon-s">'Sally'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">2.0</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebba0725149684-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebba0725149684-6">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>The movie Terminator has been rated by four people: Tom has given it a score of 4.0, while Jack has given it 1.5, and so on. These numbers are random (ie, I just made them up).</p>
+<p>You will notice that not all people have rated all the movies. This is something we will need to take into account when we are calculating the correlation.</p>
+<p>Let&#8217;s open up the file <em>calc_correlation.py</em>  Ignore the function for now, let&#8217;s see the main code:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebba3949265640" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+if len(sys.argv) &lt; 2:
+    print("Usage: python calc_correlation.py &lt;data file.py&gt;")
+    exit(1)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebba3949265640-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebba3949265640-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebba3949265640-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebba3949265640-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">sys</span><span class="crayon-sy">.</span><span class="crayon-v">argv</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebba3949265640-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Usage: python calc_correlation.py &lt;data file.py&gt;"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8317ebba3949265640-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">exit</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>We want to give the script a data file to calculate the correlation on, in this case, ml_data1.py, the file we looked at before. If the file is not given, we print the usage and exit.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebba6995323202" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+with open(sys.argv[1], 'r') as f:
+  temp = f.read()
+  movies_list = ast.literal_eval(temp)
+  print(movies_list)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebba6995323202-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebba6995323202-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebba6995323202-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebba6995323202-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebba6995323202-1"><span class="crayon-e">with </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-v">sys</span><span class="crayon-sy">.</span><span class="crayon-v">argv</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'r'</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebba6995323202-2"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">temp</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8317ebba6995323202-3"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">movies_list</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">ast</span><span class="crayon-sy">.</span><span class="crayon-e">literal_eval</span><span class="crayon-sy">(</span><span class="crayon-v">temp</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebba6995323202-4"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">movies_list</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0011 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>If you have never used the <em>with</em> function in Python, it&#8217;s a cool fairly new feature. Normally, when you open a file, you have to close it, deal with any errors etc. <em>with</em> does all that for you. It will open the file, close it at the end, and handle any errors that may arise.</p>
+<p>Looking at the code line by line.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebba9678466798" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+with open(sys.argv[1], 'r') as f:
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebba9678466798-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebba9678466798-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebba9678466798-1"><span class="crayon-e">with </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-v">sys</span><span class="crayon-sy">.</span><span class="crayon-v">argv</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'r'</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebba9678466798-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>We open the file passed as first argument as read only.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbac487863346" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+temp = f.read()
+movies_list = ast.literal_eval(temp)
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbac487863346-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbac487863346-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbac487863346-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbac487863346-1"><span class="crayon-v">temp</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbac487863346-2"><span class="crayon-v">movies_list</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">ast</span><span class="crayon-sy">.</span><span class="crayon-e">literal_eval</span><span class="crayon-sy">(</span><span class="crayon-v">temp</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8317ebbac487863346-3">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>The first thing we do is read the file into a <em>temp</em> variable. The next line may require some explanation.</p>
+<p>A nifty feature in Python is the <em>eval()</em> function. It allows you to generate Python code in real time and run it. Obviously, this is very dangerous, as you don&#8217;t know what you are reading. Someone may put in code to delete all your files. For this reason, <em>eval</em> is almost never used in practice.</p>
+<p>The <em>literal_eval()</em> function in the <em>ast</em> library gets around the risks of <em>eval</em>. <em>literal_eval</em> will only allow Python data structures like lists, dictionaries, or any other Python data structure to be read. If you try to read anything else, it will throw an error.</p>
+<p>But why do I need it anyway? The file I am reading, <em>ml_data1.py</em> contains a Python dictionary. However, when we read the file, it is read as a text file. I need to convert it to a Python dictionary. That is what <em>literal_eval</em> will do. It takes the data it read and converts it to a Python dictionary I can use. If I try to pass in something dangerous, the function will throw an error.</p>
+<p>There are other ways to do this, like using the <em>json</em> module, which I will show you later.</p>
+<p>Anyway, now we have read the data into a file.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbaf236852736" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+correlated_dict = {}
+for movie in movies_list:
+  correlated_dict[movie] =  find_correlation(movies_list, movie)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbaf236852736-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbaf236852736-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbaf236852736-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbaf236852736-1"><span class="crayon-v">correlated_dict</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbaf236852736-2"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">movie </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">movies_list</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8317ebbaf236852736-3"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">correlated_dict</span><span class="crayon-sy">[</span><span class="crayon-v">movie</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-e">find_correlation</span><span class="crayon-sy">(</span><span class="crayon-v">movies_list</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">movie</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p><em>movies_list</em> is what we read in from the file. We loop over that and find the correlation for each movie. Let&#8217;s looks at how the function <em>find_correlation()</em> does that.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbb2794261245" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+def find_correlation(movie_list, movie_for_correlation):
+    '''
+    Input:
+    movie_list - List of movies
+    movie_for_correlation: The movie to calculate the correlation for
+
+    Return:
+    Dictionary of correlation for movie_for_correlation
+    '''</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbb2794261245-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbb2794261245-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbb2794261245-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbb2794261245-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebbb2794261245-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbb2794261245-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebbb2794261245-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbb2794261245-8">8</div><div class="crayon-num" data-line="crayon-5bcf8317ebbb2794261245-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbb2794261245-1"><span class="crayon-e">def </span><span class="crayon-e">find_correlation</span><span class="crayon-sy">(</span><span class="crayon-v">movie_list</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">movie_for_correlation</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbb2794261245-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-s">''</span><span class="crayon-s">'</span></div><div class="crayon-line" id="crayon-5bcf8317ebbb2794261245-3"><span class="crayon-s">&nbsp;&nbsp;&nbsp;&nbsp;Input:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbb2794261245-4"><span class="crayon-s">&nbsp;&nbsp;&nbsp;&nbsp;movie_list - List of movies</span></div><div class="crayon-line" id="crayon-5bcf8317ebbb2794261245-5"><span class="crayon-s">&nbsp;&nbsp;&nbsp;&nbsp;movie_for_correlation: The movie to calculate the correlation for</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbb2794261245-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebbb2794261245-7"><span class="crayon-s">&nbsp;&nbsp;&nbsp;&nbsp;Return:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbb2794261245-8"><span class="crayon-s">&nbsp;&nbsp;&nbsp;&nbsp;Dictionary of correlation for movie_for_correlation</span></div><div class="crayon-line" id="crayon-5bcf8317ebbb2794261245-9"><span class="crayon-s">&nbsp;&nbsp;&nbsp;&nbsp;'</span><span class="crayon-s">''</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>The function takes two parameters: A list of movies, and the movie to find the correlation for (within that list). It returns a dictionary of correlated values.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbb5074081771" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+correlate_dict = {}
+for movie in movie_list:
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbb5074081771-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbb5074081771-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbb5074081771-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbb5074081771-1"><span class="crayon-v">correlate_dict</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbb5074081771-2"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">movie </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">movie_list</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8317ebbb5074081771-3">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>We declare <em>correlate_dict</em>, the final dictionary we will return.  We then loop over the movie list.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbb8850784827" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Don't include current movie in correlation, as you can't compare a movie to itself!
+if movie != movie_for_correlation:
+
+  movie_for_correlation_list = []
+  movie_to_compare_list = []</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbb8850784827-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbb8850784827-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbb8850784827-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbb8850784827-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebbb8850784827-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbb8850784827-1"><span class="crayon-p"># Don't include current movie in correlation, as you can't compare a movie to itself!</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbb8850784827-2"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">movie</span><span class="crayon-h"> </span><span class="crayon-o">!=</span><span class="crayon-h"> </span><span class="crayon-v">movie_for_correlation</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8317ebbb8850784827-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbb8850784827-4"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">movie_for_correlation_list</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf8317ebbb8850784827-5"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">movie_to_compare_list</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>When doing the calculations, we don&#8217;t want to compare a movie to itself (as that would always show perfect correlation). So we check for that, and then declare a few empty arrays.</p>
+<p>Remember our data file?</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbbb617956622" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+{'Terminator': {'Tom': 4.0,
+'Jack': 1.5,
+'Lisa': 3.0,
+'Sally': 2.0},
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbbb617956622-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbbb617956622-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbbb617956622-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbbb617956622-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebbbb617956622-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbbb617956622-1"><span class="crayon-sy">{</span><span class="crayon-s">'Terminator'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'Tom'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbbb617956622-2"><span class="crayon-s">'Jack'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">1.5</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebbbb617956622-3"><span class="crayon-s">'Lisa'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbbb617956622-4"><span class="crayon-s">'Sally'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">2.0</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebbbb617956622-5">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>See that we have the movie, and then the people who reviewed it? Now, we loop over the reviewers.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbbe410455885" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+for reviewer_name in movie_list[movie_for_correlation]:
+
+    # Check that the reviewer has reviewed the current movie.
+    # If so, calculate the correlation coefficient.
+    # If they haven't reviewed the movie, then it makes no sense doing a correlation.
+
+    if reviewer_name in movie_list[movie]:</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbbe410455885-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbbe410455885-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbbe410455885-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbbe410455885-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebbbe410455885-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbbe410455885-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebbbe410455885-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbbe410455885-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">reviewer_name </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">movie_list</span><span class="crayon-sy">[</span><span class="crayon-v">movie_for_correlation</span><span class="crayon-sy">]</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbbe410455885-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebbbe410455885-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># Check that the reviewer has reviewed the current movie.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbbe410455885-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># If so, calculate the correlation coefficient.</span></div><div class="crayon-line" id="crayon-5bcf8317ebbbe410455885-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># If they haven't reviewed the movie, then it makes no sense doing a correlation.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbbe410455885-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebbbe410455885-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">reviewer_name </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">movie_list</span><span class="crayon-sy">[</span><span class="crayon-v">movie</span><span class="crayon-sy">]</span><span class="crayon-o">:</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>One check we do (in the last line above) is to check that <em>this</em> reviewer (the one we are looping over), reviewed the current movie. If s/he didn&#8217;t, we move to the next one.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbc1796452286" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+if reviewer_name in movie_list[movie]:
+   movie_for_correlation_list.append(movie_list[movie_for_correlation][reviewer_name])
+   movie_to_compare_list.append(movie_list[movie][reviewer_name])</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbc1796452286-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbc1796452286-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbc1796452286-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbc1796452286-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">reviewer_name </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">movie_list</span><span class="crayon-sy">[</span><span class="crayon-v">movie</span><span class="crayon-sy">]</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbc1796452286-2"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">movie_for_correlation_list</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">movie_list</span><span class="crayon-sy">[</span><span class="crayon-v">movie_for_correlation</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-v">reviewer_name</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8317ebbc1796452286-3"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">movie_to_compare_list</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">movie_list</span><span class="crayon-sy">[</span><span class="crayon-v">movie</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-v">reviewer_name</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0010 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>We are still in the for loop. If the reviewer reviewed the movie, we save their score for the current movie, as well as their score for the movie under consideration.</p>
+<p>To make it clear, let&#8217;s look at the whole for loop:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbc4172308768" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Loop through the people who reviewed the movie
+for reviewer_name in movie_list[movie_for_correlation]:
+
+    # Check that the reviewer has reviewed the current movie.
+    # If so, calculate the correlation coefficient.
+    # If they haven't reviewed the movie, then it makes no sense doing a correlation.
+
+    if reviewer_name in movie_list[movie]:
+        movie_for_correlation_list.append(movie_list[movie_for_correlation][reviewer_name])
+        movie_to_compare_list.append(movie_list[movie][reviewer_name])</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbc4172308768-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbc4172308768-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbc4172308768-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbc4172308768-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebbc4172308768-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbc4172308768-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebbc4172308768-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbc4172308768-8">8</div><div class="crayon-num" data-line="crayon-5bcf8317ebbc4172308768-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbc4172308768-10">10</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbc4172308768-1"><span class="crayon-p"># Loop through the people who reviewed the movie</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbc4172308768-2"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">reviewer_name </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">movie_list</span><span class="crayon-sy">[</span><span class="crayon-v">movie_for_correlation</span><span class="crayon-sy">]</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8317ebbc4172308768-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbc4172308768-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># Check that the reviewer has reviewed the current movie.</span></div><div class="crayon-line" id="crayon-5bcf8317ebbc4172308768-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># If so, calculate the correlation coefficient.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbc4172308768-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># If they haven't reviewed the movie, then it makes no sense doing a correlation.</span></div><div class="crayon-line" id="crayon-5bcf8317ebbc4172308768-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbc4172308768-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">reviewer_name </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">movie_list</span><span class="crayon-sy">[</span><span class="crayon-v">movie</span><span class="crayon-sy">]</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8317ebbc4172308768-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">movie_for_correlation_list</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">movie_list</span><span class="crayon-sy">[</span><span class="crayon-v">movie_for_correlation</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-v">reviewer_name</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbc4172308768-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">movie_to_compare_list</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">movie_list</span><span class="crayon-sy">[</span><span class="crayon-v">movie</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-v">reviewer_name</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0015 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>This for loop will loop over the reviewers, and if they reviewed both the movies, will store their scores in two arrays. That&#8217;s all we are doing. The complicated code is to compensate for the fact that not all people reviewed all movies.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbc8704179189" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+correlate_dict[movie] = np.corrcoef(movie_for_correlation_list,movie_to_compare_list)[1][0]
+
+return correlate_dict
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbc8704179189-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbc8704179189-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbc8704179189-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbc8704179189-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbc8704179189-1"><span class="crayon-v">correlate_dict</span><span class="crayon-sy">[</span><span class="crayon-v">movie</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">corrcoef</span><span class="crayon-sy">(</span><span class="crayon-v">movie_for_correlation_list</span><span class="crayon-sy">,</span><span class="crayon-v">movie_to_compare_list</span><span class="crayon-sy">)</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbc8704179189-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebbc8704179189-3"><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">correlate</span><span class="crayon-sy">_</span>dict</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbc8704179189-4">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>Finally, we calculate the correlation using the <em>np.corrcoef()</em> function we saw earlier. The function creates a dictionary with correlation scores for the current movie. For example, if the movie is <em>Terminator</em>, the dictionary would store what correlation score <em>Terminator</em> has to <em>Poirot</em>, to <em>Sherlock Holmes</em> etc.</p>
+<p>Each movie will have its own list. So <em>Poirot</em> will have its own dictionary which will store its relation to <em>Terminator</em> and other movies.</p>
+<p>We return the dictionary.</p>
+<p>Back in the main loop:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbcb845301958" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+for movie in movies_list:
+    correlated_dict[movie] =  find_correlation(movies_list, movie)
+
+print(correlated_dict)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbcb845301958-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbcb845301958-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbcb845301958-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbcb845301958-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbcb845301958-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">movie </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">movies_list</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbcb845301958-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">correlated_dict</span><span class="crayon-sy">[</span><span class="crayon-v">movie</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-e">find_correlation</span><span class="crayon-sy">(</span><span class="crayon-v">movies_list</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">movie</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8317ebbcb845301958-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbcb845301958-4"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">correlated_dict</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>As I said, we are creating a correlation dictionary for each movie. The goal is to create a correlation index we can use later to make recommendations.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbce841143827" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+json.dump(correlated_dict, open("corr_dict.py",'w'))
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbce841143827-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbce841143827-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbce841143827-1"><span class="crayon-v">json</span><span class="crayon-sy">.</span><span class="crayon-e">dump</span><span class="crayon-sy">(</span><span class="crayon-v">correlated_dict</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-s">"corr_dict.py"</span><span class="crayon-sy">,</span><span class="crayon-s">'w'</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbce841143827-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>Remember I said I&#8217;d show you another way to write Python dictionaries to file? This is the easier way, using the json module. It opens the file and dumps our dictionary in one go. Let&#8217;s open our file <em>corr_dict.py</em> and look at it. I&#8217;ve cleaned it a bit.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbd1900405131" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+"27 Dresses": {"Poirot": -0.30434782608695654, "Terminator 2": -0.12547286652195427, "It happened one night": 0.5791405068790082, "Sherlock Holmes": -0.27583864218368526, "Terminator": -0.15404159684748153},
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbd1900405131-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd1900405131-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbd1900405131-1"><span class="crayon-s">"27 Dresses"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">"Poirot"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.30434782608695654</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Terminator 2"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.12547286652195427</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"It happened one night"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.5791405068790082</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Sherlock Holmes"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.27583864218368526</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Terminator"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.15404159684748153</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd1900405131-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0010 seconds] -->
+<p></p>
+<p>So <em>27 Dresses</em> has a -0.3 correlation to <em>Poirot</em>, but a +0.5 to <em>It happened one night</em>, which makes sense as both as romantic movies (or not, as I deliberately made up these examples to have this correlation).</p>
+<h2>Building the recommendation engine</h2>
+<p>To understand what I&#8217;m doing, let&#8217;s work through a few examples.</p>
+<p><strong>Using correlation to rate movies</strong></p>
+<p>Say you have two movies, A and B. You have given a rating of 4.0 to A.</p>
+<p>The correlation between A and B is 1.0. Since 1.0 is the highest value, that means the movies are perfectly correlated, and the person who likes one will like the other.</p>
+<p>So your estimated score for B will be:</p>
+<p><em>4.0 x 1.0 = 4.0</em></p>
+<p>So you would give a rating of 4.0 to movie B as well (at least according to the algorithm).</p>
+<p>What if the correlation was 0.5? Your calculated score for B would be:</p>
+<p><em>4.0 x 0.5 = 2.0</em></p>
+<p>And what if it was -0.5? Your score would be <em>-2.0</em> , which means you would hate the movie.</p>
+<p>Remember, what I&#8217;m doing is looking at the movies I&#8217;ve rated, what their correlation is to movies I haven&#8217;t rated, and then try to find my anticipated score. And I do this for all the 3 movies I&#8217;ve rated.</p>
+<p>Before we start on that, I&#8217;ve cleaned up corr_dict.py for humans (as it&#8217;s originally only used by machines). The cleaned copy is in <em>corr_dict_cleaned.py</em>:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbd4586562222" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+{
+"27 Dresses": {"Poirot": -0.30434782608695654, "Terminator 2": -0.13998740998253317, "It happened one night": 0.5791405068790082, "Sherlock Holmes": -0.27583864218368526, "Terminator": -0.16796775328675631},
+
+"It happened one night": {"Terminator 2": 0.25275763912268084, "27 Dresses": 0.5791405068790082, "Terminator": 0.42437890059987993, "Sherlock Holmes": 0.0, "Poirot": 0.2895702534395041},
+
+"Terminator 2": {"Poirot": 0.87845527687491742, "27 Dresses": -0.13998740998253317, "It happened one night": 0.25275763912268084, "Sherlock Holmes": 0.73889576951817515, "Terminator": 0.92184471452179317},
+
+"Terminator": {"Terminator 2": 0.92184471452179317, "27 Dresses": -0.16796775328675631, "It happened one night": 0.42437890059987993, "Sherlock Holmes": 0.77020798423740755, "Poirot": 0.72664794872022465},
+
+"Poirot": {"Terminator 2": 0.87845527687491742, "27 Dresses": -0.30434782608695654, "It happened one night": 0.2895702534395041, "Sherlock Holmes": 0.6698938453032357, "Terminator": 0.72664794872022465},
+
+"Sherlock Holmes": {"Poirot": 0.6698938453032357, "Terminator 2": 0.73889576951817515, "27 Dresses": -0.27583864218368526, "It happened one night": 0.0, "Terminator": 0.77020798423740755}
+
+}
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbd4586562222-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd4586562222-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbd4586562222-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd4586562222-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebbd4586562222-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd4586562222-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebbd4586562222-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd4586562222-8">8</div><div class="crayon-num" data-line="crayon-5bcf8317ebbd4586562222-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd4586562222-10">10</div><div class="crayon-num" data-line="crayon-5bcf8317ebbd4586562222-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd4586562222-12">12</div><div class="crayon-num" data-line="crayon-5bcf8317ebbd4586562222-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd4586562222-14">14</div><div class="crayon-num" data-line="crayon-5bcf8317ebbd4586562222-15">15</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbd4586562222-1"><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd4586562222-2"><span class="crayon-s">"27 Dresses"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">"Poirot"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.30434782608695654</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Terminator 2"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.13998740998253317</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"It happened one night"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.5791405068790082</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Sherlock Holmes"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.27583864218368526</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Terminator"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.16796775328675631</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebbd4586562222-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd4586562222-4"><span class="crayon-s">"It happened one night"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">"Terminator 2"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.25275763912268084</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"27 Dresses"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.5791405068790082</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Terminator"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.42437890059987993</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Sherlock Holmes"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Poirot"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.2895702534395041</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebbd4586562222-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd4586562222-6"><span class="crayon-s">"Terminator 2"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">"Poirot"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.87845527687491742</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"27 Dresses"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.13998740998253317</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"It happened one night"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.25275763912268084</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Sherlock Holmes"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.73889576951817515</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Terminator"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.92184471452179317</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebbd4586562222-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd4586562222-8"><span class="crayon-s">"Terminator"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">"Terminator 2"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.92184471452179317</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"27 Dresses"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.16796775328675631</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"It happened one night"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.42437890059987993</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Sherlock Holmes"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.77020798423740755</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Poirot"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.72664794872022465</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebbd4586562222-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd4586562222-10"><span class="crayon-s">"Poirot"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">"Terminator 2"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.87845527687491742</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"27 Dresses"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.30434782608695654</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"It happened one night"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.2895702534395041</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Sherlock Holmes"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.6698938453032357</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Terminator"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.72664794872022465</span><span class="crayon-sy">}</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebbd4586562222-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd4586562222-12"><span class="crayon-s">"Sherlock Holmes"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">"Poirot"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.6698938453032357</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Terminator 2"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.73889576951817515</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"27 Dresses"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.27583864218368526</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"It happened one night"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"Terminator"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.77020798423740755</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5bcf8317ebbd4586562222-13">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd4586562222-14"><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5bcf8317ebbd4586562222-15">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0046 seconds] -->
+<p></p>
+<p>Let&#8217;s start with 27 dresses, and try to calculate its anticipated score:</p>
+<table>
+<thead>
+<tr>
+<th>My Movie (A) </th>
+<th>  My rating for movie (B) </th>
+<th>  Correlation of (B) with 27 dresses (C) </th>
+<th>  My calculated score: (B) * (C)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Terminator </td>
+<td>5.0</td>
+<td>-0.16</td>
+<td>-0.8</td>
+</tr>
+<tr>
+<td>Sherlock Holmes </td>
+<td>4.0</td>
+<td>-0.27</td>
+<td>-1.08</td>
+</tr>
+<tr>
+<td>Poirot</td>
+<td>4.5</td>
+<td>-0.3</td>
+<td>-1.35</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>Total: -3.23</td>
+</tr>
+</tbody>
+</table>
+<p>So table A lists the movies I rated, B is the score I gave them. C is the correlation the current movie (27 Dresses) to the movie I rated (Terminator). I multiply B by C to get the score I would be expected to give to the current movie (27 dresses).</p>
+<p>So for the very first movie, Terminator, we get a score of <em>5.0 x -0.16 = -0.8</em>.</p>
+<p>I then do this for all three movies I have rated, and total them up to get one score.</p>
+<p>The total score is -3.23. There are many ways to get the average score, but I will use the simplest: Average. I divide the above with number of movies I rated (three) to get -1.07. This is my expected rating for <em>27 Dresses</em>. Clearly, this movie is not recommended.</p>
+<p>Let&#8217;s do the same for Terminator 2:</p>
+<table>
+<thead>
+<tr>
+<th>My Movie (A) </th>
+<th>  My rating for movie (B) </th>
+<th>  Correlation of (B) with 27 dresses (C) </th>
+<th>  My calculated score: (B) * (C)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Terminator </td>
+<td>5.0</td>
+<td>0.92</td>
+<td>4.6</td>
+</tr>
+<tr>
+<td>Sherlock Holmes </td>
+<td>4.0</td>
+<td>0.73</td>
+<td>2.92</td>
+</tr>
+<tr>
+<td>Poirot</td>
+<td>4.5</td>
+<td>0.87</td>
+<td>3.9</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>Total: 11.43</td>
+</tr>
+</tbody>
+</table>
+<p>Dividing by 3, the average score is 3.8 for <em>Terminator 2</em>. This movie would be strong recommended.</p>
+<p>Let&#8217;s now look at the code in <em>ml_main.py</em>:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbd9570081660" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+import pdb
+import json
+
+# My ratings for movies.
+my_movies = {'Terminator': 5.0,
+'Sherlock Holmes' : 4.0,
+'Poirot' : 4.5
+}
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbd9570081660-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd9570081660-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbd9570081660-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd9570081660-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebbd9570081660-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd9570081660-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebbd9570081660-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbd9570081660-8">8</div><div class="crayon-num" data-line="crayon-5bcf8317ebbd9570081660-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbd9570081660-1"><span class="crayon-e">import </span><span class="crayon-e">pdb</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd9570081660-2"><span class="crayon-e">import </span><span class="crayon-v">json</span></div><div class="crayon-line" id="crayon-5bcf8317ebbd9570081660-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd9570081660-4"><span class="crayon-p"># My ratings for movies.</span></div><div class="crayon-line" id="crayon-5bcf8317ebbd9570081660-5"><span class="crayon-v">my_movies</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'Terminator'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">5.0</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd9570081660-6"><span class="crayon-s">'Sherlock Holmes'</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.0</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebbd9570081660-7"><span class="crayon-s">'Poirot'</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">4.5</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbd9570081660-8"><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5bcf8317ebbd9570081660-9">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>After importing the modules we need, we declare a dictionary called <em>my_movies</em>, which contains a few movies that I have rated. This will be used to drive our recommendation engine.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbdf869138295" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Read the data from the correlation dictionary we calculated earlier
+correlated_dict = json.load(open("corr_dict.py"))
+
+# A dictionary to store the total of my calculated votes
+total_my_votes = {}
+
+# A running total  to store intermediate results.
+running_total = 0
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbdf869138295-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbdf869138295-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbdf869138295-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbdf869138295-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebbdf869138295-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbdf869138295-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebbdf869138295-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbdf869138295-8">8</div><div class="crayon-num" data-line="crayon-5bcf8317ebbdf869138295-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbdf869138295-1"><span class="crayon-p"># Read the data from the correlation dictionary we calculated earlier</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbdf869138295-2"><span class="crayon-v">correlated_dict</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">json</span><span class="crayon-sy">.</span><span class="crayon-e">load</span><span class="crayon-sy">(</span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-s">"corr_dict.py"</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8317ebbdf869138295-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbdf869138295-4"><span class="crayon-p"># A dictionary to store the total of my calculated votes</span></div><div class="crayon-line" id="crayon-5bcf8317ebbdf869138295-5"><span class="crayon-v">total_my_votes</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbdf869138295-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebbdf869138295-7"><span class="crayon-p"># A running total  to store intermediate results.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbdf869138295-8"><span class="crayon-v">running_total</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0</span></div><div class="crayon-line" id="crayon-5bcf8317ebbdf869138295-9">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p>We open the dictionary we created, <em>corr_dict.py</em>, and declare some variables.  We are using the <em>json</em> library we used last time.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbe5736791833" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Loop over rated movies
+for movie_key in my_movies.keys():
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbe5736791833-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbe5736791833-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbe5736791833-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbe5736791833-1"><span class="crayon-p"># Loop over rated movies</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbe5736791833-2"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">movie_key </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">my_movies</span><span class="crayon-sy">.</span><span class="crayon-e">keys</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8317ebbe5736791833-3">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>We loop over the movies we rated.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbea662013147" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Loop over the dictionary of correlation coefficients
+for movie_to_compare in correlated_dict[movie_key]:
+    running_total = 0</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbea662013147-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbea662013147-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbea662013147-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbea662013147-1"><span class="crayon-p"># Loop over the dictionary of correlation coefficients</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbea662013147-2"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">movie_to_compare </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">correlated_dict</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8317ebbea662013147-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">running_total</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>For the current movie we are looping over, we look at the correlation coefficients. To remind you what that means, for our first movie <em>Terminator</em>, these are the coefficients:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbef393037653" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+"Terminator":
+{
+"Terminator 2": 0.92184471452179317,
+"27 Dresses": -0.16796775328675631,
+"It happened one night": 0.42437890059987993,
+"Sherlock Holmes": 0.77020798423740755,
+"Poirot": 0.72664794872022465
+}
+
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbef393037653-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbef393037653-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbef393037653-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbef393037653-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebbef393037653-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbef393037653-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebbef393037653-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbef393037653-8">8</div><div class="crayon-num" data-line="crayon-5bcf8317ebbef393037653-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbef393037653-10">10</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbef393037653-1"><span class="crayon-s">"Terminator"</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbef393037653-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5bcf8317ebbef393037653-3"><span class="crayon-s">"Terminator 2"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.92184471452179317</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbef393037653-4"><span class="crayon-s">"27 Dresses"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">0.16796775328675631</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebbef393037653-5"><span class="crayon-s">"It happened one night"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.42437890059987993</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbef393037653-6"><span class="crayon-s">"Sherlock Holmes"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.77020798423740755</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8317ebbef393037653-7"><span class="crayon-s">"Poirot"</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.72664794872022465</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbef393037653-8"><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5bcf8317ebbef393037653-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbef393037653-10">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>The above shows that Terminator has a 0.92 correlation with Terminator 2. Since 1.0 is the max value, this shows a very strong correlation.</p>
+<p>In the next line, we loop over all the movies we have a correlation for. Obviously, this will include movies we have already rated. So our next step is to get rid of them, as we only want the correlation for movies we have not seen or rated.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbf4691045274" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+if movie_to_compare not in my_movies.keys():
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbf4691045274-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbf4691045274-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbf4691045274-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">movie_to_compare </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">my_movies</span><span class="crayon-sy">.</span><span class="crayon-e">keys</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbf4691045274-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>Next line:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbf8338493009" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# If this is the first time we are running the code, we won't have anything stored.
+# In that case, create a new dictionary element.
+if movie_to_compare not in total_my_votes:
+    # Line below creates a new dictionary element for total_my_votes and gives it a value.
+    total_my_votes.setdefault(movie_to_compare, (correlated_dict[movie_key][movie_to_compare] * my_movies[movie_key]) )
+
+else:
+    # If this is not the first time, merely update the values we have created before
+    total_my_votes[movie_to_compare] += correlated_dict[movie_key][movie_to_compare] * my_movies[movie_key]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbf8338493009-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbf8338493009-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbf8338493009-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbf8338493009-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebbf8338493009-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbf8338493009-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebbf8338493009-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbf8338493009-8">8</div><div class="crayon-num" data-line="crayon-5bcf8317ebbf8338493009-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbf8338493009-1"><span class="crayon-p"># If this is the first time we are running the code, we won't have anything stored.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbf8338493009-2"><span class="crayon-p"># In that case, create a new dictionary element.</span></div><div class="crayon-line" id="crayon-5bcf8317ebbf8338493009-3"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">movie_to_compare </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">total_my_votes</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbf8338493009-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># Line below creates a new dictionary element for total_my_votes and gives it a value.</span></div><div class="crayon-line" id="crayon-5bcf8317ebbf8338493009-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">total_my_votes</span><span class="crayon-sy">.</span><span class="crayon-e">setdefault</span><span class="crayon-sy">(</span><span class="crayon-v">movie_to_compare</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">correlated_dict</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-v">movie_to_compare</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-v">my_movies</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbf8338493009-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebbf8338493009-7"><span class="crayon-st">else</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbf8338493009-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># If this is not the first time, merely update the values we have created before</span></div><div class="crayon-line" id="crayon-5bcf8317ebbf8338493009-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">total_my_votes</span><span class="crayon-sy">[</span><span class="crayon-v">movie_to_compare</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">+=</span><span class="crayon-h"> </span><span class="crayon-v">correlated_dict</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-v">movie_to_compare</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-v">my_movies</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0011 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>What I am doing is calculating the correlation for all the movies. The first time we enter the loop, this code is called:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebbfe027946171" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+if movie_to_compare not in total_my_votes:
+    # Line below creates a new dictionary element for total_my_votes and gives it a value.
+    total_my_votes.setdefault(movie_to_compare, (correlated_dict[movie_key][movie_to_compare] * my_movies[movie_key]) )</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebbfe027946171-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebbfe027946171-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebbfe027946171-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebbfe027946171-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">movie_to_compare </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">total_my_votes</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebbfe027946171-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># Line below creates a new dictionary element for total_my_votes and gives it a value.</span></div><div class="crayon-line" id="crayon-5bcf8317ebbfe027946171-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">total_my_votes</span><span class="crayon-sy">.</span><span class="crayon-e">setdefault</span><span class="crayon-sy">(</span><span class="crayon-v">movie_to_compare</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">correlated_dict</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-v">movie_to_compare</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-v">my_movies</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>It merely says that if this is the first time, create a new dictionary element for <em>total_my_votes[movie_to_compare]</em> , and give it the value of <em>correlated_dict[movie_key][movie_to_compare] x  my_movies[movie_key]</em>, which is the same as the calculations I showed you earlier. That&#8217;s all the function <em>setdefault</em> does: It creates a dictionary element if none exists.</p>
+<p>The second time we enter the loop, we update the dictionary value:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebc03646030316" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+else:
+   # If this is not the first time, merely update the values we have created before
+   total_my_votes[movie_to_compare] += correlated_dict[movie_key][movie_to_compare] * my_movies[movie_key]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebc03646030316-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebc03646030316-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebc03646030316-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebc03646030316-1"><span class="crayon-st">else</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebc03646030316-2"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-p"># If this is not the first time, merely update the values we have created before</span></div><div class="crayon-line" id="crayon-5bcf8317ebc03646030316-3"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">total_my_votes</span><span class="crayon-sy">[</span><span class="crayon-v">movie_to_compare</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">+=</span><span class="crayon-h"> </span><span class="crayon-v">correlated_dict</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-v">movie_to_compare</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-v">my_movies</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>As you can see, I am keeping the total. As I explained in the example above, I keep the total, and later average it. We do it like this:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebc08010468962" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+recommended_movies = {}
+for movie_key in total_my_votes.keys():
+    recommended_movies[movie_key] =  total_my_votes[movie_key] / len(total_my_votes.keys())</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebc08010468962-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebc08010468962-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebc08010468962-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebc08010468962-1"><span class="crayon-v">recommended_movies</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebc08010468962-2"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">movie_key </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">total_my_votes</span><span class="crayon-sy">.</span><span class="crayon-e">keys</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8317ebc08010468962-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">recommended_movies</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">total_my_votes</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">total_my_votes</span><span class="crayon-sy">.</span><span class="crayon-e">keys</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0011 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>Finally, we run our code to see which movies would be recommended. I&#8217;m using &gt; 3.0 as strong recommendation, &gt;0.0 as normal recommendation, 0 or less as not recommended.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebc0d565103177" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+for movie_key in recommended_movies:
+    if recommended_movies[movie_key] &gt; 3.0:
+        print ("Strongly recommended for you: ", movie_key)
+    elif recommended_movies[movie_key] &gt; 0.0:
+        print("Recommended for you: ", movie_key)
+    else :
+        print("Not recommended: ", movie_key)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebc0d565103177-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebc0d565103177-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebc0d565103177-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebc0d565103177-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebc0d565103177-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebc0d565103177-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebc0d565103177-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebc0d565103177-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">movie_key </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">recommended_movies</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebc0d565103177-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">recommended_movies</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-cn">3.0</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8317ebc0d565103177-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">"Strongly recommended for you: "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">movie_key</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebc0d565103177-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">elif </span><span class="crayon-v">recommended_movies</span><span class="crayon-sy">[</span><span class="crayon-v">movie_key</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-cn">0.0</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8317ebc0d565103177-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Recommended for you: "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">movie_key</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebc0d565103177-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">else</span><span class="crayon-h"> </span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8317ebc0d565103177-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Not recommended: "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">movie_key</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0015 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>Running the code:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8317ebc12806538366" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+$$ python ml_main.py
+
+total_my_votes =  {u'Terminator 2': 11.517855396618794, u'27 Dresses': -3.312758552559827, u'It happened one night': 3.424960643477168}
+
+{u'Terminator 2': 3.8392851322062644, u'27 Dresses': -1.1042528508532756, u'It happened one night': 1.1416535478257226}
+
+Strongly recommended for you:  Terminator 2
+Not recommended:  27 Dresses
+Recommended for you:  It happened one night
+
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8317ebc12806538366-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebc12806538366-2">2</div><div class="crayon-num" data-line="crayon-5bcf8317ebc12806538366-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebc12806538366-4">4</div><div class="crayon-num" data-line="crayon-5bcf8317ebc12806538366-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebc12806538366-6">6</div><div class="crayon-num" data-line="crayon-5bcf8317ebc12806538366-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebc12806538366-8">8</div><div class="crayon-num" data-line="crayon-5bcf8317ebc12806538366-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8317ebc12806538366-10">10</div><div class="crayon-num" data-line="crayon-5bcf8317ebc12806538366-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8317ebc12806538366-1"><span class="crayon-sy">$</span><span class="crayon-sy">$</span><span class="crayon-h"> </span><span class="crayon-e">python </span><span class="crayon-v">ml_main</span><span class="crayon-sy">.</span><span class="crayon-e">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebc12806538366-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebc12806538366-3"><span class="crayon-v">total_my_votes</span><span class="crayon-h"> </span><span class="crayon-o">=</span> <span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-i">u</span><span class="crayon-s">'Terminator 2'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">11.517855396618794</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">u</span><span class="crayon-s">'27 Dresses'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">3.312758552559827</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">u</span><span class="crayon-s">'It happened one night'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.424960643477168</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebc12806538366-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebc12806538366-5"><span class="crayon-sy">{</span><span class="crayon-i">u</span><span class="crayon-s">'Terminator 2'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">3.8392851322062644</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">u</span><span class="crayon-s">'27 Dresses'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">1.1042528508532756</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">u</span><span class="crayon-s">'It happened one night'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">1.1416535478257226</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebc12806538366-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebc12806538366-7"><span class="crayon-e">Strongly </span><span class="crayon-e">recommended </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-v">you</span><span class="crayon-o">:</span> <span class="crayon-h"> </span><span class="crayon-i">Terminator</span><span class="crayon-h"> </span><span class="crayon-cn">2</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebc12806538366-8"><span class="crayon-st">Not</span><span class="crayon-h"> </span><span class="crayon-v">recommended</span><span class="crayon-o">:</span> <span class="crayon-h"> </span><span class="crayon-cn">27</span><span class="crayon-h"> </span><span class="crayon-e">Dresses</span></div><div class="crayon-line" id="crayon-5bcf8317ebc12806538366-9"><span class="crayon-e">Recommended </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-v">you</span><span class="crayon-o">:</span> <span class="crayon-h"> </span><span class="crayon-e">It </span><span class="crayon-e">happened </span><span class="crayon-e">one </span><span class="crayon-i">night</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8317ebc12806538366-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8317ebc12806538366-11">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0021 seconds] -->
+<p></p>
+<p>We are getting the same results for Terminator 2 and 27 dresses as we calculated by hand.</p>
+<h2>In real life</h2>
+<p>You will have seen that the I kept the code to calculate the correlation coefficients separate from the main code. That&#8217;s because these would change every day and every hour, based on what users were buying.</p>
+<p>You would then have to run <em>calc_correlation.py</em> regularly with the updated data. This would typically be done at night, when the servers were not loaded. If you are someone like Amazon, you&#8217;d have millions and millions of entries in your dataset, and this could take a fair bit of time. Of course, then you&#8217;d be using optimised database technologies to handle this large amount of data.</p>
+<p>And, that&#8217;s it. Hopefully, you know a bit about machine learning now. If you want some challenge, or want to improve your machine learning skills, the next step is to take some real life data, like the MoviesLens database, and build a recommendation engine based on that.</p>
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

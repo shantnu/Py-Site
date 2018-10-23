@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Build a Reddit Bot Part 2: Reply to posts</title>
+	<atom:link href="/build-a-reddit-bot-part-2-reply-to-posts/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Synik</title>
+		<link>/build-a-reddit-bot-part-2-reply-to-posts/#comment-33037</link>
+		<dc:creator><![CDATA[Synik]]></dc:creator>
+		<pubDate>Tue, 24 Jul 2018 15:42:33 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=229#comment-33037</guid>
+		<description><![CDATA[Thanks for the reply, Shantnu. 
+
+I probably neglected to mention it, but I did add a print statement to print the id, and it was correctly printing it, but still only saving the id to the notepad when i move the final with statement inside the if loop. Due to this I am able to determine the id itself isnt the issue. 
+
+The locking out occurs after the first initial post is made. Due to the id not being saved, the loop keeps trying to make a post. I changed the limit where the max is falls on the first &quot;i love python&quot; post (limit=6) and it works perfectly! So due to all this, really thinking the issue is with the loop somewhere.]]></description>
+		<content:encoded><![CDATA[<p>Thanks for the reply, Shantnu. </p>
+<p>I probably neglected to mention it, but I did add a print statement to print the id, and it was correctly printing it, but still only saving the id to the notepad when i move the final with statement inside the if loop. Due to this I am able to determine the id itself isnt the issue. </p>
+<p>The locking out occurs after the first initial post is made. Due to the id not being saved, the loop keeps trying to make a post. I changed the limit where the max is falls on the first &#8220;i love python&#8221; post (limit=6) and it works perfectly! So due to all this, really thinking the issue is with the loop somewhere.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-2-reply-to-posts/#comment-33013</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Tue, 24 Jul 2018 08:54:43 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=229#comment-33013</guid>
+		<description><![CDATA[Maybe the reason it isnt writing because there isnt anything to write? Ie, the problem is that you are getting nothing from the server. The fact that you are getting locked out gives me a hint.
+
+I would take 1-2 days off, then try again, this time printing to the screen as well as writing to a file. This will tell you if you are getting any data]]></description>
+		<content:encoded><![CDATA[<p>Maybe the reason it isnt writing because there isnt anything to write? Ie, the problem is that you are getting nothing from the server. The fact that you are getting locked out gives me a hint.</p>
+<p>I would take 1-2 days off, then try again, this time printing to the screen as well as writing to a file. This will tell you if you are getting any data</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Synik</title>
+		<link>/build-a-reddit-bot-part-2-reply-to-posts/#comment-32987</link>
+		<dc:creator><![CDATA[Synik]]></dc:creator>
+		<pubDate>Mon, 23 Jul 2018 23:27:41 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=229#comment-32987</guid>
+		<description><![CDATA[My last update for today: 
+
+I think the issue is with the final with open statement. 
+
+I tried to move it inside the 2nd if loop, and it was writing to the notepad, but not exiting the for loop limit. Something might be missing or incorrect, but I&#039;m too much of a beginner to figure it out. Even the code from github is not working correctly.]]></description>
+		<content:encoded><![CDATA[<p>My last update for today: </p>
+<p>I think the issue is with the final with open statement. </p>
+<p>I tried to move it inside the 2nd if loop, and it was writing to the notepad, but not exiting the for loop limit. Something might be missing or incorrect, but I&#8217;m too much of a beginner to figure it out. Even the code from github is not working correctly.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Synik</title>
+		<link>/build-a-reddit-bot-part-2-reply-to-posts/#comment-32983</link>
+		<dc:creator><![CDATA[Synik]]></dc:creator>
+		<pubDate>Mon, 23 Jul 2018 23:09:22 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=229#comment-32983</guid>
+		<description><![CDATA[I cant edit my posts, so have to keep replying: 
+
+Its looking like I got it to write to the file now, I&#039;m really not sure how, but its writing to the txt file. The issue I&#039;m having now is the code is ignoring that the ID is in the file, and keeps looping based off the limit number, which always causes me to get locked out for 10 minutes.]]></description>
+		<content:encoded><![CDATA[<p>I cant edit my posts, so have to keep replying: </p>
+<p>Its looking like I got it to write to the file now, I&#8217;m really not sure how, but its writing to the txt file. The issue I&#8217;m having now is the code is ignoring that the ID is in the file, and keeps looping based off the limit number, which always causes me to get locked out for 10 minutes.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Synik</title>
+		<link>/build-a-reddit-bot-part-2-reply-to-posts/#comment-32977</link>
+		<dc:creator><![CDATA[Synik]]></dc:creator>
+		<pubDate>Mon, 23 Jul 2018 21:58:20 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=229#comment-32977</guid>
+		<description><![CDATA[I found that it seems to be an issue with post_id being undefined.  Do I have to define it even when its the same as in the github code? Confused.]]></description>
+		<content:encoded><![CDATA[<p>I found that it seems to be an issue with post_id being undefined.  Do I have to define it even when its the same as in the github code? Confused.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Synik</title>
+		<link>/build-a-reddit-bot-part-2-reply-to-posts/#comment-32976</link>
+		<dc:creator><![CDATA[Synik]]></dc:creator>
+		<pubDate>Mon, 23 Jul 2018 21:16:40 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=229#comment-32976</guid>
+		<description><![CDATA[I&#039;m having some issues with the submission ID being written to a text file. 
+
+The program does create a text file if it is not there, but won&#039;t write to it. I have already set all permissions to full control for all users on my computer, so it should have read/write access. 
+
+I also copied the github code into a new file and ran that. Its not even making a new file (I used a different name for my file vs github code). 
+
+Pretty confused with this and not sure where to go from here. I keep getting posting limit reached due to the program attempting to post multiple times to your subreddit post.]]></description>
+		<content:encoded><![CDATA[<p>I&#8217;m having some issues with the submission ID being written to a text file. </p>
+<p>The program does create a text file if it is not there, but won&#8217;t write to it. I have already set all permissions to full control for all users on my computer, so it should have read/write access. </p>
+<p>I also copied the github code into a new file and ran that. Its not even making a new file (I used a different name for my file vs github code). </p>
+<p>Pretty confused with this and not sure where to go from here. I keep getting posting limit reached due to the program attempting to post multiple times to your subreddit post.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-2-reply-to-posts/#comment-25367</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Tue, 06 Mar 2018 05:10:44 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=229#comment-25367</guid>
+		<description><![CDATA[Yes, you could either do it dynamically on page load, or store the data to a database and read it later. 
+
+In Flask you would use something like Jinja templates to render the data in a web browser]]></description>
+		<content:encoded><![CDATA[<p>Yes, you could either do it dynamically on page load, or store the data to a database and read it later. </p>
+<p>In Flask you would use something like Jinja templates to render the data in a web browser</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: vin</title>
+		<link>/build-a-reddit-bot-part-2-reply-to-posts/#comment-25362</link>
+		<dc:creator><![CDATA[vin]]></dc:creator>
+		<pubDate>Mon, 05 Mar 2018 21:28:41 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=229#comment-25362</guid>
+		<description><![CDATA[Stupid question but could I retrieve news from a subreddit and display it in my web application using praw?]]></description>
+		<content:encoded><![CDATA[<p>Stupid question but could I retrieve news from a subreddit and display it in my web application using praw?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-2-reply-to-posts/#comment-21435</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 27 Jul 2017 09:48:08 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=229#comment-21435</guid>
+		<description><![CDATA[Is your Python code correctly idented?]]></description>
+		<content:encoded><![CDATA[<p>Is your Python code correctly idented?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: TheCosmicWolf</title>
+		<link>/build-a-reddit-bot-part-2-reply-to-posts/#comment-21426</link>
+		<dc:creator><![CDATA[TheCosmicWolf]]></dc:creator>
+		<pubDate>Tue, 25 Jul 2017 18:40:49 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=229#comment-21426</guid>
+		<description><![CDATA[[root@vps ~]# python dabbot.py
+  File &quot;dabbot.py&quot;, line 46
+    f.write(post_id + &quot;1&quot;)
+    ^
+IndentationError: expected an indented block
+
+Getting this, did i forget something?]]></description>
+		<content:encoded><![CDATA[<p>[root@vps ~]# python dabbot.py<br />
+  File &#8220;dabbot.py&#8221;, line 46<br />
+    f.write(post_id + &#8220;1&#8221;)<br />
+    ^<br />
+IndentationError: expected an indented block</p>
+<p>Getting this, did i forget something?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Build a Reddit Bot Part 3: Automate your bot</title>
+	<atom:link href="/build-a-reddit-bot-part-3-automate-your-bot/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-37616</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 04 Oct 2018 09:41:38 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-37616</guid>
+		<description><![CDATA[That’s a very good comment, but a bit of an overkill, I feel.]]></description>
+		<content:encoded><![CDATA[<p>That’s a very good comment, but a bit of an overkill, I feel.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Andrew D. Schatz</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-37604</link>
+		<dc:creator><![CDATA[Andrew D. Schatz]]></dc:creator>
+		<pubDate>Thu, 04 Oct 2018 04:05:33 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-37604</guid>
+		<description><![CDATA[Hey everyone.  I was having some issues with crontab and think I found a universal solution for all Unix-based users (any linux distro or iOS).  If you are running Ubuntu 18.04 and are struggling to get your python file to run in cron, then you&#039;re in the exact same boat as me.  If you&#039;re running Windows, then the only advice I can offer is to install Git and use the Git Bash terminal, but I&#039;m not positive that will work.
+
+After much googling, I found this answer on Stack Overflow that steered me in the right direction:
+
+https://stackoverflow.com/questions/26049459/python-script-not-running-in-cron/38682365#38682365
+
+My understanding is that cron and Python don&#039;t always work well together for some reason.  So this person came up with the idea to write a shell script (file extension is .sh) that executes the Python file and have cron call that instead.
+
+Instead of the line given in the tutorial written in your crontab file, use the following line instead:
+
+* * * * * sh /home/[yourUserName]/auto_delete.sh
+
+I&#039;m not sure if it is necessary to have this script in your home directory or not, but mine is.  Also, you can name your file whatever you want, but I just copied the the user&#039;s example and I&#039;m too lazy to change it.
+
+For your shell script, make sure it is in the same directory that you wrote in your cron file and has the same name (/home/[yourUserName]/auto_delete.sh). Use any text editor (I chose Vim) and have it say the following, but just know that I&#039;m not a shell scripting expert and only know a handful of useful commands:
+
+#!/bin/sh
+echo $(date) &#062;&#062; bash_cron_log.txt
+/[your]/[directory]/[where]/[python]/[executable]/[is]/[installed] /[your]/[directory]/[where]/[bot]/[file]/[is]/[located]/someBotFile.py &#062;&#062; bash_cron_log.txt
+
+What this will do create a text file (or append to an existing text file) called bash_cron_log.txt in the same directory as your shell script.  Also, this will be where all of your output from your Python file is written.  For example, if you have print(&quot;connected&quot;) in your python file after your Reddit instantiation, it will write &quot;connected&quot; out to that .txt file.  However, you will need to edit your Python file to access the correct directory for posts_replied_to.txt, unless you&#039;re okay with it being in the same file as your shell script.  For example, this is what my text file looked like after I had that print statement in my python script for 3 minutes:
+
+Wed Oct 3 22:27:01 CDT 2018
+Wed Oct 3 22:28:01 CDT 2018
+Wed Oct 3 22:29:01 CDT 2018
+connected
+Wed Oct 3 22:30:01 CDT 2018
+connected
+Wed Oct 3 22:31:01 CDT 2018
+connected
+Wed Oct 3 22:32:01 CDT 2018
+Wed Oct 3 22:33:01 CDT 2018
+Wed Oct 3 22:34:01 CDT 2018
+
+Notice that all the times are exactly 1 minute apart.  This is because cron&#039;s minimum time between runs is 1 minute (I think this is true).  If you want it to run more frequently than 1 minute intervals, then you need to use something else.
+
+If you don&#039;t know where your Python executable is installed, just type &quot;which python&quot; in your terminal and it will give you the exact path you need to for that first argument you&#039;re looking for.
+
+Okay, I think I covered everything.  Thank you Shantnu for making this tutorial and that subreddit for us to play around in.  If I made a mistake anywhere in here, whether it&#039;s a typo or I&#039;m misunderstanding a concept, please let me know and I&#039;ll change it.]]></description>
+		<content:encoded><![CDATA[<p>Hey everyone.  I was having some issues with crontab and think I found a universal solution for all Unix-based users (any linux distro or iOS).  If you are running Ubuntu 18.04 and are struggling to get your python file to run in cron, then you&#8217;re in the exact same boat as me.  If you&#8217;re running Windows, then the only advice I can offer is to install Git and use the Git Bash terminal, but I&#8217;m not positive that will work.</p>
+<p>After much googling, I found this answer on Stack Overflow that steered me in the right direction:</p>
+<p><a href="https://stackoverflow.com/questions/26049459/python-script-not-running-in-cron/38682365#38682365" rel="nofollow">https://stackoverflow.com/questions/26049459/python-script-not-running-in-cron/38682365#38682365</a></p>
+<p>My understanding is that cron and Python don&#8217;t always work well together for some reason.  So this person came up with the idea to write a shell script (file extension is .sh) that executes the Python file and have cron call that instead.</p>
+<p>Instead of the line given in the tutorial written in your crontab file, use the following line instead:</p>
+<p>* * * * * sh /home/[yourUserName]/auto_delete.sh</p>
+<p>I&#8217;m not sure if it is necessary to have this script in your home directory or not, but mine is.  Also, you can name your file whatever you want, but I just copied the the user&#8217;s example and I&#8217;m too lazy to change it.</p>
+<p>For your shell script, make sure it is in the same directory that you wrote in your cron file and has the same name (/home/[yourUserName]/auto_delete.sh). Use any text editor (I chose Vim) and have it say the following, but just know that I&#8217;m not a shell scripting expert and only know a handful of useful commands:</p>
+<p>#!/bin/sh<br />
+echo $(date) &gt;&gt; bash_cron_log.txt<br />
+/[your]/[directory]/[where]/[python]/[executable]/[is]/[installed] /[your]/[directory]/[where]/[bot]/[file]/[is]/[located]/someBotFile.py &gt;&gt; bash_cron_log.txt</p>
+<p>What this will do create a text file (or append to an existing text file) called bash_cron_log.txt in the same directory as your shell script.  Also, this will be where all of your output from your Python file is written.  For example, if you have print(&#8220;connected&#8221;) in your python file after your Reddit instantiation, it will write &#8220;connected&#8221; out to that .txt file.  However, you will need to edit your Python file to access the correct directory for posts_replied_to.txt, unless you&#8217;re okay with it being in the same file as your shell script.  For example, this is what my text file looked like after I had that print statement in my python script for 3 minutes:</p>
+<p>Wed Oct 3 22:27:01 CDT 2018<br />
+Wed Oct 3 22:28:01 CDT 2018<br />
+Wed Oct 3 22:29:01 CDT 2018<br />
+connected<br />
+Wed Oct 3 22:30:01 CDT 2018<br />
+connected<br />
+Wed Oct 3 22:31:01 CDT 2018<br />
+connected<br />
+Wed Oct 3 22:32:01 CDT 2018<br />
+Wed Oct 3 22:33:01 CDT 2018<br />
+Wed Oct 3 22:34:01 CDT 2018</p>
+<p>Notice that all the times are exactly 1 minute apart.  This is because cron&#8217;s minimum time between runs is 1 minute (I think this is true).  If you want it to run more frequently than 1 minute intervals, then you need to use something else.</p>
+<p>If you don&#8217;t know where your Python executable is installed, just type &#8220;which python&#8221; in your terminal and it will give you the exact path you need to for that first argument you&#8217;re looking for.</p>
+<p>Okay, I think I covered everything.  Thank you Shantnu for making this tutorial and that subreddit for us to play around in.  If I made a mistake anywhere in here, whether it&#8217;s a typo or I&#8217;m misunderstanding a concept, please let me know and I&#8217;ll change it.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: cerealknitter</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-30760</link>
+		<dc:creator><![CDATA[cerealknitter]]></dc:creator>
+		<pubDate>Tue, 26 Jun 2018 12:02:57 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-30760</guid>
+		<description><![CDATA[Ok thank you anyway, I&#039;ll keep looking around and try different things]]></description>
+		<content:encoded><![CDATA[<p>Ok thank you anyway, I&#8217;ll keep looking around and try different things</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: cerealknitter</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-30759</link>
+		<dc:creator><![CDATA[cerealknitter]]></dc:creator>
+		<pubDate>Tue, 26 Jun 2018 12:01:50 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-30759</guid>
+		<description><![CDATA[Oops sorry for the repost, I didn&#039;t see the first one had gone through]]></description>
+		<content:encoded><![CDATA[<p>Oops sorry for the repost, I didn&#8217;t see the first one had gone through</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: cerealknitter</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-30758</link>
+		<dc:creator><![CDATA[cerealknitter]]></dc:creator>
+		<pubDate>Tue, 26 Jun 2018 12:00:37 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-30758</guid>
+		<description><![CDATA[Hi Shantnu, thanks for the great tuto !
+I am creating my bot on the linux subsystem on windows 10 instead of a VM, so I don&#039;t really know where to pick up on the 3 part 
+Very noob question indeed, I don&#039;t usually write in python, nor do I use linux so I&#039;m a bit lost
+Thanks again for giving us some of your time !]]></description>
+		<content:encoded><![CDATA[<p>Hi Shantnu, thanks for the great tuto !<br />
+I am creating my bot on the linux subsystem on windows 10 instead of a VM, so I don&#8217;t really know where to pick up on the 3 part<br />
+Very noob question indeed, I don&#8217;t usually write in python, nor do I use linux so I&#8217;m a bit lost<br />
+Thanks again for giving us some of your time !</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-30754</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Tue, 26 Jun 2018 11:13:45 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-30754</guid>
+		<description><![CDATA[I have never used this feature, so dont know.]]></description>
+		<content:encoded><![CDATA[<p>I have never used this feature, so dont know.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: cerealknitter</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-30753</link>
+		<dc:creator><![CDATA[cerealknitter]]></dc:creator>
+		<pubDate>Tue, 26 Jun 2018 10:26:28 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-30753</guid>
+		<description><![CDATA[Hi Shantnu ! Thanks for this tutorial, it&#039;s great and very easy to follow. I created my bot using the the Linux subsystem in Windows 10 instead of creating a VM so I don&#039;t really know where I should start on this part of the tuto. 
+Thanks for your help so far !]]></description>
+		<content:encoded><![CDATA[<p>Hi Shantnu ! Thanks for this tutorial, it&#8217;s great and very easy to follow. I created my bot using the the Linux subsystem in Windows 10 instead of creating a VM so I don&#8217;t really know where I should start on this part of the tuto.<br />
+Thanks for your help so far !</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-20535</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Mon, 10 Apr 2017 09:18:11 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-20535</guid>
+		<description><![CDATA[can you try it with the latest Python version (3.5 or above)?
+
+Also, what platform are you using (Cygwin? Debian?). You will have to search for the cron problems on that system, as the behaviour might change]]></description>
+		<content:encoded><![CDATA[<p>can you try it with the latest Python version (3.5 or above)?</p>
+<p>Also, what platform are you using (Cygwin? Debian?). You will have to search for the cron problems on that system, as the behaviour might change</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: madhav thaker</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-20521</link>
+		<dc:creator><![CDATA[madhav thaker]]></dc:creator>
+		<pubDate>Sat, 08 Apr 2017 00:02:32 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-20521</guid>
+		<description><![CDATA[I tried creating the output file and they are just empty. So that means my cron script is working but it is not executing my code. Oddly, when I run my script outside of crontab in vangrant, it works but I get the following errors:
+  
+  SNIMissingWarning
+
+/usr/local/lib/python2.7/dist-packages/requests/packages/urllib3/util/ssl_.py:132: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. You can upgrade to a newer version of Python to solve this. For more information, see https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+
+  InsecurePlatformWarning
+
+/usr/local/lib/python2.7/dist-packages/requests/packages/urllib3/util/ssl_.py:132: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. You can upgrade to a newer version of Python to solve this. For more information, see https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings]]></description>
+		<content:encoded><![CDATA[<p>I tried creating the output file and they are just empty. So that means my cron script is working but it is not executing my code. Oddly, when I run my script outside of crontab in vangrant, it works but I get the following errors:</p>
+<p>  SNIMissingWarning</p>
+<p>/usr/local/lib/python2.7/dist-packages/requests/packages/urllib3/util/ssl_.py:132: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. You can upgrade to a newer version of Python to solve this. For more information, see <a href="https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings" rel="nofollow">https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings</a></p>
+<p>  InsecurePlatformWarning</p>
+<p>/usr/local/lib/python2.7/dist-packages/requests/packages/urllib3/util/ssl_.py:132: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. You can upgrade to a newer version of Python to solve this. For more information, see <a href="https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings" rel="nofollow">https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-20519</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Fri, 07 Apr 2017 19:50:49 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-20519</guid>
+		<description><![CDATA[Debugging cron scripts is a pain (I know from experience). I would try to write some output to a file, to check if the script is even running. It took me a few tries before even I got it working.]]></description>
+		<content:encoded><![CDATA[<p>Debugging cron scripts is a pain (I know from experience). I would try to write some output to a file, to check if the script is even running. It took me a few tries before even I got it working.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

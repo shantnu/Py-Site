@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>In Which I Rant a Little &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; In Which I Rant a Little Comments Feed" href="/in-which-i-rant-a-little/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/in-which-i-rant-a-little/" />
+<link rel='shortlink' href='/?p=1692' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fin-which-i-rant-a-little%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fin-which-i-rant-a-little%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1692">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1692" class="post-1692 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">In Which I Rant a Little</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<h4><strong>Build a Twitter Analytics App</strong></h4>
+<p style="padding-left: 30px;"><strong><a href="/build-a-twitter-analytics-app-using-python/"> 1 Introduction: Start Here</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/the-first-step-design-your-solution/">2 The First Step: Design Your Solution</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/in-which-i-rant-a-little/">3 In Which I Rant a Little</a></strong></p>
+<p style="padding-left: 30px;"><a href="/twitter-analyser-my-design/"><strong>4  Design Solution</strong> </a></p>
+<p style="padding-left: 30px;"><strong><a href="/writing-great-code/">5 Writing Great Code</a></strong></p>
+<p style="padding-left: 30px;"><strong>6 Writing the Backend Twitter Server</strong></p>
+<p style="padding-left: 60px;"><a href="/writing-the-code-in-small-parts-part-1-the-basic-app/"><strong>Writing the Code in Small Parts: Part 1, The Basic App</strong> </a></p>
+<p style="padding-left: 60px;"><strong><a href="/part-2-adding-a-counter-to-exit/">Part 2: Adding a Counter to Exit</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/part-3-adding-language-and-retweet-count/">Part 3: Adding Language and Retweet Count</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/organising-our-code/">Part 4: Organising Our Code</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/adding-the-data-to-a-database/">7 Adding the Data to a Database</a></strong></p>
+<p style="padding-left: 30px;"><a href="/testing-what-and-how-to-test/"><strong>8 <span class="trail-end">Testing: What and How to Test</span></strong></a></p>
+<p style="padding-left: 60px;"><strong><a href="/testing-our-frontend/">8.1 Testing Our Frontend</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/testing-our-backend/">8.2 Testing Our Backend</a></strong></p>
+<p style="padding-left: 30px;"><strong>9 Displaying our Data using the Flask Webserver</strong></p>
+<p style="padding-left: 60px;"><strong><a href="/introduction-to-flask-for-python/">9.1 Introduction to Flask</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/adding-templates-to-our-flask-app/">9.2 Adding templates to our Flask app</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/displaying-our-tweets-in-the-flask-web-server/">9.3 Displaying our Tweets in the Flask Web Server</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/future-work-and-improvements/">10 Future Work and Improvements</a></strong></p>
+<p><img class="alignnone aligncenter" src="https://uproxx.files.wordpress.com/2014/10/old-man-cloud.jpg" alt="" width="504" height="277" /></p>
+<p>On a public forum, I got a rather snarky comment saying there wasn&#8217;t a single line of code in my tutorial, and I was wasting people&#8217;s time. Even though the person who said this is clearly a troll, I thought I&#8217;d explain a bit <strong>why</strong> we are building  this project this way.</p>
+<p>I have been working as a software engineer for years now, and I guess things which maybe common sense to me, are not common sense to a new programmer. So let me tell you this now. Some of you maybe shocked.</p>
+<p>If you go work for any of the top software companies, only about 30% of your time will be spent coding. For an average project, you will spend:</p>
+<ul>
+<li>30-40% of your time designing the solution. Yes, this much. The more time you spend early on, the less you need to spend fixing bugs later.</p>
+</li>
+<li>
+<p>Another 30-40% writing the code, which includes writing tests.</p>
+</li>
+<li>
+<p>10-20% debugging and testing.</p>
+</li>
+<li>
+<p>10% in code reviews.</p>
+</li>
+</ul>
+<p>I realise it adds up to &gt; 100%, but I&#8217;m just using rough figures. And the above doesn&#8217;t include time in meetings, or other busy work.</p>
+<p>That means that only about 30% of your time is spent coding. <em>So if you complete something like Codecademy, <strong>you only know less than 30%</strong> of what you need to know</em>. Actually,  a lot less, as real programming includes knowing things like writing clean code, organising your code, writing code that can be maintained for 5+ years.</p>
+<p>Here&#8217;s the thing: Most companies won&#8217;t tell you this. They will just expect you to know it. But if you turn up at a good company and start writing code without first thinking about the problem, you will be told off.</p>
+<p>Software Engineering is an art. Being proud of your work, doing work like an artisan is what separates us from code monkeys.</p>
+<p>Say you hired someone to build our home. The builder turns up, his pants hanging down to his ass, cheap rolled up cigarette hanging from his mouth,  and says &#8220;Yup, we&#8217;ll build your house in a week.&#8221;</p>
+<p>And he starts throwing bricks willy nilly, in the shape of a wall. But a few days later, he realises he is going at a 30% angle, so throws everything down and starts again. A few days later, he realises he built a wall where there should have been a window. The builder laughs and says, &#8220;Mistakes happen. What are you gonna do?&#8221;</p>
+<p>What will you do? Will you ask him why he didn&#8217;t design blueprints of the house before he started throwing bricks around?</p>
+<p>&#8220;Hey, I&#8217;m a builder, not a designer,&#8221; he says.</p>
+<p>Do you see now how many business owners see programmers? Just like that builder, pants hanging down, boasting, &#8220;Yeah, we&#8217;ll build that website in a week. No problem.&#8221;</p>
+<p>Most of the problems we faced in programming today have been faced before, and thought about. <em>The Mythical Man Month</em> was written in freakin&#8217; 1975, and talks about many of the problems a programmer in 2015 would face.</p>
+<p>Many programmer complain they are treated with respect by management. Well, act like a professional. Be proud of your craft.</p>
+<p>For most software companies, <strong>writing code is not the problem</strong>. The biggest problem any software company will face is managing complexity. You will have dozens, if not hundreds, of programmers working in parallel on the same code base, adding features, fixing bugs, refactoring code to make it more maintainable.  Code that was written five years ago might suddenly develop a new bug when it is used in a new place. It is complete chaos.</p>
+<p>The only way to manage this chaos is to have the highest standards. Most of the time, this just means communicating what you are doing. <a href="/3-things-every-programmer-must-learn/">Communication is the key thing</a> which separates the senior/architect level people from the beginners. Most failures in software companies, including the big blowups you read about in the papers, happen because of poor communication. Someone assumes something will happen in a certain way / on a certain date, and never bothers to check.</p>
+<p>And that&#8217;s why everything must be done by a process. Process becomes irritating when it becomes an end in itself, but having no process or poor processes is worse than having too much process. And in this case, the process we are talking about (design-code-test-repeat) is led by engineers, for the engineers, so there is no reason not to follow it.</p>
+<p>And now, on the orders of the boss (my wife), I will stop my rant.</p>
+<p>I will say this though: These things are easy to learn, provided you are willing to learn.</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/in-which-i-rant-a-little/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='1692' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="2961cd857b" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="125"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

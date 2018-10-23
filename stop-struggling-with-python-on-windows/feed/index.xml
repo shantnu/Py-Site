@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Stop struggling with Python on Windows</title>
+	<atom:link href="/stop-struggling-with-python-on-windows/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Sachin</title>
+		<link>/stop-struggling-with-python-on-windows/#comment-34308</link>
+		<dc:creator><![CDATA[Sachin]]></dc:creator>
+		<pubDate>Mon, 13 Aug 2018 11:46:26 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=46#comment-34308</guid>
+		<description><![CDATA[For some reason, I&#039;m not at all able to install python using Anaconda distribution on windows 7, 64 bit machine. IT gives error of &quot;Conda  not recognized ...&quot;
+I&#039;ve tried many different ways suggested on different forums. (diable ativirus,using miniconda etc.)
+I&#039;d really appreciate help on this ...
+Sachin Jadhav]]></description>
+		<content:encoded><![CDATA[<p>For some reason, I&#8217;m not at all able to install python using Anaconda distribution on windows 7, 64 bit machine. IT gives error of &#8220;Conda  not recognized &#8230;&#8221;<br />
+I&#8217;ve tried many different ways suggested on different forums. (diable ativirus,using miniconda etc.)<br />
+I&#8217;d really appreciate help on this &#8230;<br />
+Sachin Jadhav</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/stop-struggling-with-python-on-windows/#comment-32573</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Tue, 17 Jul 2018 16:32:13 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=46#comment-32573</guid>
+		<description><![CDATA[Yes, delete it.
+
+Also have a look at the anaconda forums- this might be a bug they know about. If not, you migth be able to raise a new one]]></description>
+		<content:encoded><![CDATA[<p>Yes, delete it.</p>
+<p>Also have a look at the anaconda forums- this might be a bug they know about. If not, you migth be able to raise a new one</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: May</title>
+		<link>/stop-struggling-with-python-on-windows/#comment-32572</link>
+		<dc:creator><![CDATA[May]]></dc:creator>
+		<pubDate>Tue, 17 Jul 2018 15:47:54 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=46#comment-32572</guid>
+		<description><![CDATA[hi all, i came here because I had a strange situation when working on anaconda with windows. At first everything worked perfectly but since i created a separate virtual env and loaded it to run a separate code from terminal in this new environment, I have been having issues running code on jupyter notebook. i was just not able to read a simple hdf file that returned a value error but the point is I cannot comprehend what happened and now after uninstalling and reinstalling anaconda, I am still having the same problem. I also noticed that after uninstalling anaconda, I still have the anaconda folder in my directory. I want to know if it is safe to manually delete it? Thanks.]]></description>
+		<content:encoded><![CDATA[<p>hi all, i came here because I had a strange situation when working on anaconda with windows. At first everything worked perfectly but since i created a separate virtual env and loaded it to run a separate code from terminal in this new environment, I have been having issues running code on jupyter notebook. i was just not able to read a simple hdf file that returned a value error but the point is I cannot comprehend what happened and now after uninstalling and reinstalling anaconda, I am still having the same problem. I also noticed that after uninstalling anaconda, I still have the anaconda folder in my directory. I want to know if it is safe to manually delete it? Thanks.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Mr Impractial-pants</title>
+		<link>/stop-struggling-with-python-on-windows/#comment-30869</link>
+		<dc:creator><![CDATA[Mr Impractial-pants]]></dc:creator>
+		<pubDate>Wed, 27 Jun 2018 14:15:41 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=46#comment-30869</guid>
+		<description><![CDATA[Thanks for the post! I&#039;ve been programming on both pylin and pywin for a number of few years now, bouncing between machines, vms, oses, and ides, virtualenvs / enviros for different projects. And yeah, it&#039;s an elephant in the room for a mostly love-blinded python convert from 10 or so years back, but... I&#039;ve kinda gotten used to the open-pit-toilet of the std pywin experience. 
+
+If my primary win box ever gains enough space i&#039;ll be sure to give ana a crack, like I should have some time ago. But when you&#039;re walking over a spaghetti bridge high above a croc-infested-turd-river filled with sharp rocks, the changes happen... slowly and carefully. ;)
+
+Oh, and yes, your point is well made. Just because i do have wizard powers (including lightning from fingers) and have gotten through all the hellish hurdles to make things work, that doesn&#039;t make me a clever-clogs because so little of the struggle was time well spent. Rather, it was time spent being an I-can&#039;t-let-things-go-nerd, to my own detriment. 
+Shame, Mr Impractial-pants, shame.]]></description>
+		<content:encoded><![CDATA[<p>Thanks for the post! I&#8217;ve been programming on both pylin and pywin for a number of few years now, bouncing between machines, vms, oses, and ides, virtualenvs / enviros for different projects. And yeah, it&#8217;s an elephant in the room for a mostly love-blinded python convert from 10 or so years back, but&#8230; I&#8217;ve kinda gotten used to the open-pit-toilet of the std pywin experience. </p>
+<p>If my primary win box ever gains enough space i&#8217;ll be sure to give ana a crack, like I should have some time ago. But when you&#8217;re walking over a spaghetti bridge high above a croc-infested-turd-river filled with sharp rocks, the changes happen&#8230; slowly and carefully. 😉</p>
+<p>Oh, and yes, your point is well made. Just because i do have wizard powers (including lightning from fingers) and have gotten through all the hellish hurdles to make things work, that doesn&#8217;t make me a clever-clogs because so little of the struggle was time well spent. Rather, it was time spent being an I-can&#8217;t-let-things-go-nerd, to my own detriment.<br />
+Shame, Mr Impractial-pants, shame.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Aaron</title>
+		<link>/stop-struggling-with-python-on-windows/#comment-26106</link>
+		<dc:creator><![CDATA[Aaron]]></dc:creator>
+		<pubDate>Tue, 03 Apr 2018 18:37:03 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=46#comment-26106</guid>
+		<description><![CDATA[My sentiments exactly in regards to the painful process of getting Python to work on Windows 10. 
+I&#039;m glad you talked about installing it 8 times not working because that was my next move. I suspected it wouldn&#039;t make a difference so I am going to try some of the other suggestions here. 
+
+Thanks for the article.]]></description>
+		<content:encoded><![CDATA[<p>My sentiments exactly in regards to the painful process of getting Python to work on Windows 10.<br />
+I&#8217;m glad you talked about installing it 8 times not working because that was my next move. I suspected it wouldn&#8217;t make a difference so I am going to try some of the other suggestions here. </p>
+<p>Thanks for the article.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Srinivasan</title>
+		<link>/stop-struggling-with-python-on-windows/#comment-22076</link>
+		<dc:creator><![CDATA[Srinivasan]]></dc:creator>
+		<pubDate>Mon, 16 Oct 2017 17:19:50 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=46#comment-22076</guid>
+		<description><![CDATA[Even Anaconda is not straightforward with Windows in a corporate environment where things that are free is looked at with suspicion. Its a Nightmare when  you attempt conda create -n pyxxx python=x.x.x  only to result in a connection timeout error. Rather for winpython works for standard libraries like numpy, and scipy. But with matplotlib it crashes too. 
+
+Regards,
+
+#0K]]></description>
+		<content:encoded><![CDATA[<p>Even Anaconda is not straightforward with Windows in a corporate environment where things that are free is looked at with suspicion. Its a Nightmare when  you attempt conda create -n pyxxx python=x.x.x  only to result in a connection timeout error. Rather for winpython works for standard libraries like numpy, and scipy. But with matplotlib it crashes too. </p>
+<p>Regards,</p>
+<p>#0K</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ernesto</title>
+		<link>/stop-struggling-with-python-on-windows/#comment-21962</link>
+		<dc:creator><![CDATA[Ernesto]]></dc:creator>
+		<pubDate>Thu, 12 Oct 2017 08:57:07 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=46#comment-21962</guid>
+		<description><![CDATA[I have a question or two: 
+
+Why Anaconda over some of the other SciPy stack offerings? I come from a MATLAB background and thus Python (x,y) looks nice to me. Ideally I would find something cross-platform (I use Linux, Mac, and Windows) which Python (x,y) is not. These are the offerings I&#039;ve been considering:
+
+Anaconda: https://www.anaconda.com/
+
+Python (x,y): https://python-xy.github.io/
+
+WinPython: https://winpython.github.io/
+
+Pyzo: http://www.pyzo.org/]]></description>
+		<content:encoded><![CDATA[<p>I have a question or two: </p>
+<p>Why Anaconda over some of the other SciPy stack offerings? I come from a MATLAB background and thus Python (x,y) looks nice to me. Ideally I would find something cross-platform (I use Linux, Mac, and Windows) which Python (x,y) is not. These are the offerings I&#8217;ve been considering:</p>
+<p>Anaconda: <a href="https://www.anaconda.com/" rel="nofollow">https://www.anaconda.com/</a></p>
+<p>Python (x,y): <a href="https://python-xy.github.io/" rel="nofollow">https://python-xy.github.io/</a></p>
+<p>WinPython: <a href="https://winpython.github.io/" rel="nofollow">https://winpython.github.io/</a></p>
+<p>Pyzo: <a href="http://www.pyzo.org/" rel="nofollow">http://www.pyzo.org/</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/stop-struggling-with-python-on-windows/#comment-21875</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 28 Sep 2017 09:34:30 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=46#comment-21875</guid>
+		<description><![CDATA[Python installations should be independent. Delete the directories, and make sure you delete any path variables.
+
+Also check under c:\users\USERNAME, some installers put stuff there.]]></description>
+		<content:encoded><![CDATA[<p>Python installations should be independent. Delete the directories, and make sure you delete any path variables.</p>
+<p>Also check under c:\users\USERNAME, some installers put stuff there.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Navid Nobani</title>
+		<link>/stop-struggling-with-python-on-windows/#comment-21871</link>
+		<dc:creator><![CDATA[Navid Nobani]]></dc:creator>
+		<pubDate>Wed, 27 Sep 2017 18:36:55 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=46#comment-21871</guid>
+		<description><![CDATA[Any thoughts on clean uninstalling of Python ? I have 2 versions of python and dozens of libraries and I afraid simple uninstallation (through control panel) remains a mess behind.]]></description>
+		<content:encoded><![CDATA[<p>Any thoughts on clean uninstalling of Python ? I have 2 versions of python and dozens of libraries and I afraid simple uninstallation (through control panel) remains a mess behind.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: otoby</title>
+		<link>/stop-struggling-with-python-on-windows/#comment-21528</link>
+		<dc:creator><![CDATA[otoby]]></dc:creator>
+		<pubDate>Fri, 11 Aug 2017 10:57:55 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=46#comment-21528</guid>
+		<description><![CDATA[To be clear, PHP does not have this much issue -- wammp, xamp, winp etc. The easiest option moving forward is a linux VM as python seem to work much better on Linux.
+
+Other alternative would be for Python to help provide common libraries that require compilation during the setup of python for windows.]]></description>
+		<content:encoded><![CDATA[<p>To be clear, PHP does not have this much issue &#8212; wammp, xamp, winp etc. The easiest option moving forward is a linux VM as python seem to work much better on Linux.</p>
+<p>Other alternative would be for Python to help provide common libraries that require compilation during the setup of python for windows.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

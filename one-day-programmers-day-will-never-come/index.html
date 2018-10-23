@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>One Day Programmers: Your day will never come &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; One Day Programmers: Your day will never come Comments Feed" href="/one-day-programmers-day-will-never-come/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/one-day-programmers-day-will-never-come/" />
+<link rel='shortlink' href='/?p=889' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fone-day-programmers-day-will-never-come%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fone-day-programmers-day-will-never-come%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-889">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-889" class="post-889 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">One Day Programmers: Your day will never come</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p>If you&#8217;re a programmer (or indeed, in any related technical field, like web design, sysadmin etc), you know how to build stuff. You know how to take an idea and make it something worthwhile. Chances are, you&#8217;ve made a lot of money for your employers.</p>
+<p>So you wonder, why are you doing all this work for others? You could start your own thing.</p>
+<p>You think about starting your own company, working the hours you want, cutting out the middle man.</p>
+<p>You think about writing a book, and becoming The Expert in your field.</p>
+<p>You think about writing that cool open source program that will be used by everyone from Google to that hot new startup.</p>
+<p>And then you do nothing.</p>
+<p>Why is that?</p>
+<p>You want to start something. One day, you think to yourself. One day, I&#8217;ll do it. And then they&#8217;ll see. You&#8217;ll finally show them the stuff you&#8217;re made of.</p>
+<p>And that&#8217;s where you make your first mistake.</p>
+<p><strong>One day never comes.</strong></p>
+<p>You will never get extra time.</p>
+<p>Your boss will never let you clock off early so you can build your own stuff. You&#8217;ll still be stuck pulling the same long hours for the same miserable pay.</p>
+<p>Your spouse will never get a job with an investment bank and agree to support you (don&#8217;t laugh. I thought like this like for a long time, till my wife asked me to stop eating wild mushrooms).</p>
+<p>You will always be short of time. You&#8217;ll need to squeeze every minute you have. Whether you start today, or ten years from now. Besides, if you spent even <em>one hour in the last week</em> watching TV, you have time to start your own project.</p>
+<p>So why aren&#8217;t you starting today?</p>
+<p>Maybe you did start. But you realised how hard the road is. How long and lonely it is. You start, but find the long grind very depressing. And so you give up.</p>
+<p>And that&#8217;s where you make your second mistake.</p>
+<p>You never finish anything. It&#8217;s not enough to have great ideas. You need to finish them too.</p>
+<p>So find people like yourself. Form a group. Motivate each other. Offer help to others, and get support from them. That&#8217;s the only way to succeed. It&#8217;s hard for all of us. The road is hard enough without tripping over your own shoelaces. You will face many problems&#8211; don&#8217;t let stupid things like disappointment or depression stop you.</p>
+<p>Form a group, and start today. Don&#8217;t wait for one day.</p>
+<p><strong>One day will never come.</strong></p>
+
+
+
+<p><!--End mc_embed_signup--></p>
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			15 thoughts on &ldquo;One Day Programmers: Your day will never come&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-14919" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-14919" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/da9d6f80c40e1362005f46bccd6f5c4f?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/da9d6f80c40e1362005f46bccd6f5c4f?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://myprogrammingsteps.blogspot.com/' rel='external nofollow' class='url'>Bogdan</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14919">
+							<time datetime="2014-06-06T18:38:39+00:00">
+								June 6, 2014 at 6:38 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I 100% agree.  It is similar to those that say, &#8220;Man, I wish I was rich.  Or I wish I did this or that.&#8221;  Well, do it.  There are some constraints in life that prevent some individuals from accomplishing the things they want, but the majority simply fail to give themselves a push towards the right direction.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14919#respond' onclick='return addComment.moveForm( "div-comment-14919", "14919", "respond", "889" )' aria-label='Reply to Bogdan'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14920" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14920" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14920">
+							<time datetime="2014-06-06T22:01:06+00:00">
+								June 6, 2014 at 10:01 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Indeed. Your chances of success are increased by 100% if you actually get off your posterior and do something 🙂</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14920#respond' onclick='return addComment.moveForm( "div-comment-14920", "14920", "respond", "889" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-14922" class="comment even depth-2 parent">
+			<article id="div-comment-14922" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/39fafa2908bc2252ca065df53fde507e?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/39fafa2908bc2252ca065df53fde507e?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Yakov</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14922">
+							<time datetime="2014-06-07T07:05:47+00:00">
+								June 7, 2014 at 7:05 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Your comment only applies to minor things but the wah you&#8217;ve written it is so general that it sounds like people are only poor because they aren&#8217;t motivated. So yes, this advice is helpful for people who never learned to play the guitar or who always wanted to sail a boat but since all other outcomes&#8211;specifically economic ones&#8211;are determined by chance, there&#8217;s only so much we can do. The <em>real</em> lesson to take from this is that we need to motivate ourselves to work together in solidarity against traitors who steal our labor.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14922#respond' onclick='return addComment.moveForm( "div-comment-14922", "14922", "respond", "889" )' aria-label='Reply to Yakov'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14923" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-3 parent">
+			<article id="div-comment-14923" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14923">
+							<time datetime="2014-06-07T10:33:19+00:00">
+								June 7, 2014 at 10:33 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Yakov,</p>
+<p>I never said anything about people being poor because they aren&#8217;t motivated.  Where did you get that from?</p>
+<p>My blog is aimed at programmers in first world countries who are certainly not &#8220;poor&#8221; by any definition. </p>
+<p>All I&#8217;m trying to say is, if you feel miserable and want to start your business one day, don&#8217;t wait, and start something now. The road is hard and long, and you won&#8217;t get anywhere by planning and thinking.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14923#respond' onclick='return addComment.moveForm( "div-comment-14923", "14923", "respond", "889" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14931" class="comment even depth-4 parent">
+			<article id="div-comment-14931" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/6ff6a77b5df95df5ed675b0e926b147c?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/6ff6a77b5df95df5ed675b0e926b147c?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Daniel Benavides</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14931">
+							<time datetime="2014-06-08T21:03:09+00:00">
+								June 8, 2014 at 9:03 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>And what is the word programmer of the first world means?<br />
+The ones who make systems programming or just isolated apps.</p>
+<p>Thanks in advance</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14931#respond' onclick='return addComment.moveForm( "div-comment-14931", "14931", "respond", "889" )' aria-label='Reply to Daniel Benavides'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14933" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-5">
+			<article id="div-comment-14933" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14933">
+							<time datetime="2014-06-09T15:39:30+00:00">
+								June 9, 2014 at 3:39 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I mean developed countries like US, UK etc.</p>
+				</div><!-- .comment-content -->
+
+							</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14921" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-14921" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/b2480eb6f094c784a58a531f5dd1c033?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/b2480eb6f094c784a58a531f5dd1c033?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Jake</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14921">
+							<time datetime="2014-06-07T03:57:04+00:00">
+								June 7, 2014 at 3:57 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I can deal with the having no time. I can deal with the 4 hours sleep because I&#8217;m doing too many things. I can put my all into buckling down and striking something out&#8230;</p>
+<p>But I can&#8217;t figure out what to do.<br />
+I have no brilliant ideas.</p>
+<p>And that problem alone will drive me into madness one day.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14921#respond' onclick='return addComment.moveForm( "div-comment-14921", "14921", "respond", "889" )' aria-label='Reply to Jake'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14924" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14924" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14924">
+							<time datetime="2014-06-07T10:46:48+00:00">
+								June 7, 2014 at 10:46 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Ahhhh, the old &#8220;I don&#8217;t have any ideas&#8221; myth.</p>
+<p>Dude, just start something. Anything. Ideas are worth nothing. The problems with ideas is that they will enslave you (I got this from the excellent Amy Hoy, who blogs at <a href="http://unicornfree.com/" rel="nofollow">http://unicornfree.com</a> )</p>
+<p>Choose something that irritates you, no matter how small, and build a solution for it. You will then need to improve it based on feedback, but you won&#8217;t get that unless you have something tangible. This is a huge topic that I can&#8217;t really discuss in a comment. I&#8217;ll try to write about this in a future blog. Meanwhile, feel free to contact me offline.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14924#respond' onclick='return addComment.moveForm( "div-comment-14924", "14924", "respond", "889" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-14925" class="comment even depth-2 parent">
+			<article id="div-comment-14925" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/0dd75f6c744e02e634a79a7bd7bbdbdc?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/0dd75f6c744e02e634a79a7bd7bbdbdc?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://linux-workers.tumblr.com/' rel='external nofollow' class='url'>Ikem</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14925">
+							<time datetime="2014-06-07T10:51:02+00:00">
+								June 7, 2014 at 10:51 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You don&#8217;t need to be brillant. You need a guy with ideas.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14925#respond' onclick='return addComment.moveForm( "div-comment-14925", "14925", "respond", "889" )' aria-label='Reply to Ikem'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14926" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-3">
+			<article id="div-comment-14926" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14926">
+							<time datetime="2014-06-07T11:07:32+00:00">
+								June 7, 2014 at 11:07 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Actually, you need hard work to finish implementing your ideas. The cliched 1% inspiration, 99% perspiration.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14926#respond' onclick='return addComment.moveForm( "div-comment-14926", "14926", "respond", "889" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14927" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-14927" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/98aedfd1c8b1044d607720a2287d201a?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/98aedfd1c8b1044d607720a2287d201a?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">sulfide</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14927">
+							<time datetime="2014-06-07T11:41:29+00:00">
+								June 7, 2014 at 11:41 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for the kick in the ass</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14927#respond' onclick='return addComment.moveForm( "div-comment-14927", "14927", "respond", "889" )' aria-label='Reply to sulfide'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14928" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14928" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14928">
+							<time datetime="2014-06-07T14:43:58+00:00">
+								June 7, 2014 at 2:43 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>No problem, mate. Anytime you want another kick in the ass, you know where to find me! 🙂</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14928#respond' onclick='return addComment.moveForm( "div-comment-14928", "14928", "respond", "889" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14929" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-14929" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/8ccd18ac72611df5d37d911e709f56bf?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/8ccd18ac72611df5d37d911e709f56bf?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://nigelb.me/' rel='external nofollow' class='url'>nigelb</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14929">
+							<time datetime="2014-06-08T17:43:33+00:00">
+								June 8, 2014 at 5:43 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I&#8217;ve been in this state as well for the longest time. I&#8217;ve just committed to spending 1 hour every morning on a personal project. Anything.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14929#respond' onclick='return addComment.moveForm( "div-comment-14929", "14929", "respond", "889" )' aria-label='Reply to nigelb'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14930" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14930" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/one-day-programmers-day-will-never-come/#comment-14930">
+							<time datetime="2014-06-08T18:09:45+00:00">
+								June 8, 2014 at 6:09 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Well done. Be sure to go for small things that you can finish in a month, at most. Ideally, in a week. It is very satisfying to finish stuff, and gives you the courage to carry on through the hard times.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/one-day-programmers-day-will-never-come/?replytocom=14930#respond' onclick='return addComment.moveForm( "div-comment-14930", "14930", "respond", "889" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14932" class="pingback even thread-even depth-1">
+			<div class="comment-body">
+				Pingback: <a href='http://jackgerrits.wordpress.com/2014/06/09/time-slips/' rel='external nofollow' class='url'>Time slips | Modern Musings</a> 			</div>
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/one-day-programmers-day-will-never-come/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='889' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="886c18becd" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="83"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

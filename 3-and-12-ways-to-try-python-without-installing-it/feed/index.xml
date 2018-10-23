@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: 3 and 1/2 ways to try Python without installing it</title>
+	<atom:link href="/3-and-12-ways-to-try-python-without-installing-it/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Denis</title>
+		<link>/3-and-12-ways-to-try-python-without-installing-it/#comment-55</link>
+		<dc:creator><![CDATA[Denis]]></dc:creator>
+		<pubDate>Sun, 05 Oct 2014 03:35:30 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=90#comment-55</guid>
+		<description><![CDATA[Wakari and sage online worth mentioning for scientific and engineering applications]]></description>
+		<content:encoded><![CDATA[<p>Wakari and sage online worth mentioning for scientific and engineering applications</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

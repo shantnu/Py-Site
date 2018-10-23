@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Why use a version control system</title>
+	<atom:link href="/use-version-control-system/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Thomas O'Brien</title>
+		<link>/use-version-control-system/#comment-14852</link>
+		<dc:creator><![CDATA[Thomas O'Brien]]></dc:creator>
+		<pubDate>Fri, 12 Sep 2014 11:13:00 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=170#comment-14852</guid>
+		<description><![CDATA[Small software house. 6 developers.It took me 2 years to drag the team into version control and I still get told it&#039;s rubbish when they use it incorrectly.
+
+If you are not using what I now call &quot;collaboration control&quot;, you are digging trenches with a spoon, and good luck but I&#039;m out of here,
+
+Why version control?
+which folder has the most recent code for that client ?
+what broke the latest version I built ?
+what changes have been made to the clients latest live release so I can work out what might have broken it at 2:00am
+my disk got wiped, I&#039;ve lost the last weeks work!
+have I got the changes that developer&#039;s x,y,z  made last week ?
+take your pick.
+
+Which VCS.
+I played with SVN, nope. Mercurial, better but DVCS meant that everyone commited locally and we ended up with unmergable code, nope. Discovered fossil. 
+
+Why fossil? 
+1. Checkin comments can be altered and clarified when you see them in a month&#039;s time and wonder WTF that description means.
+2 Single exe. No install.
+3. We copied the Apple OSx version to the Mac Mini server with the repositories on, to serve the Web front end. Windows exe on the Win7 dev machines.
+4. scriptable.
+5. relocate repositories with a simple copy.
+
+I did end up writing a right click context menu front end so I could enforce some rules regarding repository locations, adapt to Windows where file names are not case sensitive, etc. and nobody had to remember any commands.( 2,500 line batch script fine )]]></description>
+		<content:encoded><![CDATA[<p>Small software house. 6 developers.It took me 2 years to drag the team into version control and I still get told it&#8217;s rubbish when they use it incorrectly.</p>
+<p>If you are not using what I now call &#8220;collaboration control&#8221;, you are digging trenches with a spoon, and good luck but I&#8217;m out of here,</p>
+<p>Why version control?<br />
+which folder has the most recent code for that client ?<br />
+what broke the latest version I built ?<br />
+what changes have been made to the clients latest live release so I can work out what might have broken it at 2:00am<br />
+my disk got wiped, I&#8217;ve lost the last weeks work!<br />
+have I got the changes that developer&#8217;s x,y,z  made last week ?<br />
+take your pick.</p>
+<p>Which VCS.<br />
+I played with SVN, nope. Mercurial, better but DVCS meant that everyone commited locally and we ended up with unmergable code, nope. Discovered fossil. </p>
+<p>Why fossil?<br />
+1. Checkin comments can be altered and clarified when you see them in a month&#8217;s time and wonder WTF that description means.<br />
+2 Single exe. No install.<br />
+3. We copied the Apple OSx version to the Mac Mini server with the repositories on, to serve the Web front end. Windows exe on the Win7 dev machines.<br />
+4. scriptable.<br />
+5. relocate repositories with a simple copy.</p>
+<p>I did end up writing a right click context menu front end so I could enforce some rules regarding repository locations, adapt to Windows where file names are not case sensitive, etc. and nobody had to remember any commands.( 2,500 line batch script fine )</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Stephen</title>
+		<link>/use-version-control-system/#comment-14851</link>
+		<dc:creator><![CDATA[Stephen]]></dc:creator>
+		<pubDate>Thu, 29 May 2014 00:53:39 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=170#comment-14851</guid>
+		<description><![CDATA[thx. very helpful.]]></description>
+		<content:encoded><![CDATA[<p>thx. very helpful.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

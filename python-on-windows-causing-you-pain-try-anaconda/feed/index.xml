@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Python on Windows causing you pain? Try Anaconda</title>
+	<atom:link href="/python-on-windows-causing-you-pain-try-anaconda/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: chitra lalawat</title>
+		<link>/python-on-windows-causing-you-pain-try-anaconda/#comment-35873</link>
+		<dc:creator><![CDATA[chitra lalawat]]></dc:creator>
+		<pubDate>Fri, 07 Sep 2018 12:14:47 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=79#comment-35873</guid>
+		<description><![CDATA[Hey... 
+type the line below in anaconda prompt-
+conda install -c anaconda opencv]]></description>
+		<content:encoded><![CDATA[<p>Hey&#8230;<br />
+type the line below in anaconda prompt-<br />
+conda install -c anaconda opencv</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Helen</title>
+		<link>/python-on-windows-causing-you-pain-try-anaconda/#comment-23577</link>
+		<dc:creator><![CDATA[Helen]]></dc:creator>
+		<pubDate>Tue, 26 Dec 2017 03:15:49 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=79#comment-23577</guid>
+		<description><![CDATA[You can try typing &quot;source activate py3&quot; in shell to change to python3 environment. But the precondition is that you have configured your environment. 
+PS: &quot;py3&quot; is the name you defined of your python 3 package, so it should be changed according to your practical situation.]]></description>
+		<content:encoded><![CDATA[<p>You can try typing &#8220;source activate py3&#8221; in shell to change to python3 environment. But the precondition is that you have configured your environment.<br />
+PS: &#8220;py3&#8221; is the name you defined of your python 3 package, so it should be changed according to your practical situation.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: booleeny</title>
+		<link>/python-on-windows-causing-you-pain-try-anaconda/#comment-18150</link>
+		<dc:creator><![CDATA[booleeny]]></dc:creator>
+		<pubDate>Mon, 16 May 2016 14:43:19 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=79#comment-18150</guid>
+		<description><![CDATA[Whoever falls about this post. Try https://winpython.github.io/ which comes along with pyQt and all you need.]]></description>
+		<content:encoded><![CDATA[<p>Whoever falls about this post. Try <a href="https://winpython.github.io/" rel="nofollow">https://winpython.github.io/</a> which comes along with pyQt and all you need.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Scott Blackwell</title>
+		<link>/python-on-windows-causing-you-pain-try-anaconda/#comment-16574</link>
+		<dc:creator><![CDATA[Scott Blackwell]]></dc:creator>
+		<pubDate>Thu, 30 Jul 2015 20:15:26 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=79#comment-16574</guid>
+		<description><![CDATA[If you go to c: from c:\Anaconda after you change to an environment then all the usual  commands like spyder. will execute in the env you have activated.  This is because the c:\Anaconda directory will overrule the path set in the activate command.]]></description>
+		<content:encoded><![CDATA[<p>If you go to c: from c:\Anaconda after you change to an environment then all the usual  commands like spyder. will execute in the env you have activated.  This is because the c:\Anaconda directory will overrule the path set in the activate command.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/python-on-windows-causing-you-pain-try-anaconda/#comment-27</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Sun, 27 Jul 2014 09:28:07 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=79#comment-27</guid>
+		<description><![CDATA[I use Powershell.
+I was trying a Python 3 environment.
+I typed activate, it changed the command prompt to show the py3 environment had been activated.
+
+Yet when I ran the python command, it still ran Python 2.7. The only way to run the Python 3 interpreter was to go into that directory, which beats the purpose of environments.
+
+ Going online, it seems quite a few people have faced this problem, and there are many creative solutions. However, I don&#039;t have the time or inclination to try them.]]></description>
+		<content:encoded><![CDATA[<p>I use Powershell.<br />
+I was trying a Python 3 environment.<br />
+I typed activate, it changed the command prompt to show the py3 environment had been activated.</p>
+<p>Yet when I ran the python command, it still ran Python 2.7. The only way to run the Python 3 interpreter was to go into that directory, which beats the purpose of environments.</p>
+<p> Going online, it seems quite a few people have faced this problem, and there are many creative solutions. However, I don&#8217;t have the time or inclination to try them.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Travis Oliphant</title>
+		<link>/python-on-windows-causing-you-pain-try-anaconda/#comment-26</link>
+		<dc:creator><![CDATA[Travis Oliphant]]></dc:creator>
+		<pubDate>Sat, 26 Jul 2014 22:00:12 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=79#comment-26</guid>
+		<description><![CDATA[Thanks for your comments and feedback.  
+
+I&#039;m curious, though, about your statement that environments don&#039;t work.   What does that mean?   What did you try?   Which shell are you using (the standard cmd.exe shell?)
+
+There is a command &quot;activate&quot; that will activate your environment.  If you have an environment named &quot;test&quot;, then the command &quot;activate test&quot; will make that your default environment.    If you find a bug, the open source project conda would love to receive your bug-report.]]></description>
+		<content:encoded><![CDATA[<p>Thanks for your comments and feedback.  </p>
+<p>I&#8217;m curious, though, about your statement that environments don&#8217;t work.   What does that mean?   What did you try?   Which shell are you using (the standard cmd.exe shell?)</p>
+<p>There is a command &#8220;activate&#8221; that will activate your environment.  If you have an environment named &#8220;test&#8221;, then the command &#8220;activate test&#8221; will make that your default environment.    If you find a bug, the open source project conda would love to receive your bug-report.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

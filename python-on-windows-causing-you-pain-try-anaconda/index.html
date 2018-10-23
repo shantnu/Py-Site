@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Python on Windows causing you pain? Try Anaconda &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Python on Windows causing you pain? Try Anaconda Comments Feed" href="/python-on-windows-causing-you-pain-try-anaconda/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"https:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/python-on-windows-causing-you-pain-try-anaconda/" />
+<link rel='shortlink' href='/?p=79' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=https%3A%2F%2F%2Fpython-on-windows-causing-you-pain-try-anaconda%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=https%3A%2F%2F%2Fpython-on-windows-causing-you-pain-try-anaconda%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-79">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-79" class="post-79 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Python on Windows causing you pain? Try Anaconda</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p>My<a href="/stop-struggling-with-python-on-windows/"> last post </a>on Python with Windows got almost 5000 views in a day, and hundreds of comments on Reddit, and 22+ on my own. The most common comment was <em>You Loser, can&#8217;t even install Python? You&#8217;re pathetic</em>. The second most common comment was<em> I faced the exact same problem, and decided to move away from Windows (&amp; in some cases, Python itself).</em></p>
+<p>This makes me sad.  Clearly there is a problem. Worse than that, there is macho posturing and rudeness which is completely unhelpful to beginners.</p>
+<p>The most interesting comment I got was from Sebastian, the runs the <a href="https://www.dashingd3js.com/">the DashingD3.js </a> tutorial website:</p>
+<blockquote><p>&#8220;I teach live D3.js workshops where we use Python on the command line for running the simplest web server possible. EVERY SINGLE TIME &#8211; there are one to two people who have a windows computer instead of mac / linux / unix based computer. EVERY SINGLE TIME &#8211; this person falls behind because they have to spend somewhere between 10-60 minutes installing python on WIndows, getting python on their PATH, being able to run &#8220;python -m SimpleHTTPServer&#8221; on their command line&#8221;</p></blockquote>
+<p>Sebastian&#8217;s experience isn&#8217;t even that unique. If you teach Python, or regularly have to deal with beginners, you will see this problem again and again. Which is why I&#8217;ve trying to find solutions, and that&#8217;s what led me to Anaconda.</p>
+<p><strong>Anaconda: Why it&#8217;s useful</strong></p>
+<p>If you have struggled with Python on Windows, you might want to look at <a href="http://continuum.io/downloads">Anaconda</a>. The advantages it has are:</p>
+<ol>
+<li>Installs in one place only, no spreading Python libraries all over the place (I&#8217;m looking at you, Activestate). That means it&#8217;s easy to upgrade/remove. And it automatically adds itself to the path on Windows, solving a big pain for beginners.</p>
+</li>
+<li>
+<p>Comes with most libraries you may need installed. This includes libraries like numpy, scipy which normally have to be compiled.</p>
+</li>
+</ol>
+<p>3.  It comes with a fairly good packaging manager, Conda, as well as Pip.</p>
+<p>Always use the package manager to install libraries. Try not to download and install them from online sources, as they might not be easy to remove. Especially on Windows, where nothing  is ever uninstalled and lives like a ghost in the registry.</p>
+<ol>
+<li>It allows you to create isolated environments. (But not really. see below)</li>
+</ol>
+<p><strong>Anaconda: Where it doesn&#8217;t work</strong></p>
+<p><strong>NOTE: This section is obsolete as of 2016. Conda envs now work like a charm. The packages like OpenCV are mainly for Linux, which is why they didnt install. But that&#8217;s another whole discussion.</strong></p>
+<p>But not everything is perfect with Anaconda. I found 2 big problems:</p>
+<ol>
+<li>While you can create environments, activating them doesnt work, at least on Windows. I had to actually go into the directory to use the environment I created(which sort of beats the whole purpose). Now, this might be a problem with the Windows path variable, but it still reflects badly on Anaconda. I&#8217;d stick to VirtualEnv for now. (The problem with VirtualEnv is that it only allows you to create Python environments, while Conda environments are more flexible, ie, you can have non-Python libraries as well).</p>
+</li>
+<li>
+<p>Anaconda allows you to add new packages(ones they don&#8217;t support) via an extenal service (binstar.org). When I tried to install OpenCv from it, however, it didn&#8217;t work, even though I tried to download from 3-4 different repositories. Again, it might be a problem of the people who uploaded them, but still. Since they market this feature on their website, they must also ensure it works.</p>
+</li>
+</ol>
+<p>In spite of these failures, I would still recommend <a href="http://continuum.io/downloads">Anaconda</a>, as it&#8217;s miles better than anything out there. If you are on Windows, nothing beats Anaconda if you want a hassle free Python experience.</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			6 thoughts on &ldquo;Python on Windows causing you pain? Try Anaconda&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-26" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-26" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/6c8561779fff34c62074c614d19980fc?s=42&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/6c8561779fff34c62074c614d19980fc?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Travis Oliphant</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/python-on-windows-causing-you-pain-try-anaconda/#comment-26">
+							<time datetime="2014-07-26T22:00:12+00:00">
+								July 26, 2014 at 10:00 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for your comments and feedback.  </p>
+<p>I&#8217;m curious, though, about your statement that environments don&#8217;t work.   What does that mean?   What did you try?   Which shell are you using (the standard cmd.exe shell?)</p>
+<p>There is a command &#8220;activate&#8221; that will activate your environment.  If you have an environment named &#8220;test&#8221;, then the command &#8220;activate test&#8221; will make that your default environment.    If you find a bug, the open source project conda would love to receive your bug-report.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/python-on-windows-causing-you-pain-try-anaconda/?replytocom=26#respond' onclick='return addComment.moveForm( "div-comment-26", "26", "respond", "79" )' aria-label='Reply to Travis Oliphant'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-27" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2 parent">
+			<article id="div-comment-27" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/python-on-windows-causing-you-pain-try-anaconda/#comment-27">
+							<time datetime="2014-07-27T09:28:07+00:00">
+								July 27, 2014 at 9:28 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I use Powershell.<br />
+I was trying a Python 3 environment.<br />
+I typed activate, it changed the command prompt to show the py3 environment had been activated.</p>
+<p>Yet when I ran the python command, it still ran Python 2.7. The only way to run the Python 3 interpreter was to go into that directory, which beats the purpose of environments.</p>
+<p> Going online, it seems quite a few people have faced this problem, and there are many creative solutions. However, I don&#8217;t have the time or inclination to try them.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/python-on-windows-causing-you-pain-try-anaconda/?replytocom=27#respond' onclick='return addComment.moveForm( "div-comment-27", "27", "respond", "79" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-23577" class="comment even depth-3">
+			<article id="div-comment-23577" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/dcc2d5ff5c64d51e85e5156a48292518?s=42&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/dcc2d5ff5c64d51e85e5156a48292518?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Helen</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/python-on-windows-causing-you-pain-try-anaconda/#comment-23577">
+							<time datetime="2017-12-26T03:15:49+00:00">
+								December 26, 2017 at 3:15 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You can try typing &#8220;source activate py3&#8221; in shell to change to python3 environment. But the precondition is that you have configured your environment.<br />
+PS: &#8220;py3&#8221; is the name you defined of your python 3 package, so it should be changed according to your practical situation.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/python-on-windows-causing-you-pain-try-anaconda/?replytocom=23577#respond' onclick='return addComment.moveForm( "div-comment-23577", "23577", "respond", "79" )' aria-label='Reply to Helen'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-16574" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-16574" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/e67cd5b0bf1c024129b1609d2f5b17f2?s=42&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/e67cd5b0bf1c024129b1609d2f5b17f2?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Scott Blackwell</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/python-on-windows-causing-you-pain-try-anaconda/#comment-16574">
+							<time datetime="2015-07-30T20:15:26+00:00">
+								July 30, 2015 at 8:15 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>If you go to c: from c:\Anaconda after you change to an environment then all the usual  commands like spyder. will execute in the env you have activated.  This is because the c:\Anaconda directory will overrule the path set in the activate command.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/python-on-windows-causing-you-pain-try-anaconda/?replytocom=16574#respond' onclick='return addComment.moveForm( "div-comment-16574", "16574", "respond", "79" )' aria-label='Reply to Scott Blackwell'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-18150" class="comment even thread-even depth-1">
+			<article id="div-comment-18150" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/de52bf3a22739133dbaa7ea0e14d6a63?s=42&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/de52bf3a22739133dbaa7ea0e14d6a63?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">booleeny</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/python-on-windows-causing-you-pain-try-anaconda/#comment-18150">
+							<time datetime="2016-05-16T14:43:19+00:00">
+								May 16, 2016 at 2:43 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Whoever falls about this post. Try <a href="https://winpython.github.io/" rel="nofollow">https://winpython.github.io/</a> which comes along with pyQt and all you need.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/python-on-windows-causing-you-pain-try-anaconda/?replytocom=18150#respond' onclick='return addComment.moveForm( "div-comment-18150", "18150", "respond", "79" )' aria-label='Reply to booleeny'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-35873" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-35873" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='https://secure.gravatar.com/avatar/8597af7a0c8dc9ffbf8d605351e69a95?s=42&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/8597af7a0c8dc9ffbf8d605351e69a95?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">chitra lalawat</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/python-on-windows-causing-you-pain-try-anaconda/#comment-35873">
+							<time datetime="2018-09-07T12:14:47+00:00">
+								September 7, 2018 at 12:14 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hey&#8230;<br />
+type the line below in anaconda prompt-<br />
+conda install -c anaconda opencv</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/python-on-windows-causing-you-pain-try-anaconda/?replytocom=35873#respond' onclick='return addComment.moveForm( "div-comment-35873", "35873", "respond", "79" )' aria-label='Reply to chitra lalawat'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/python-on-windows-causing-you-pain-try-anaconda/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='79' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="7ef3ad2557" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="171"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"https:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

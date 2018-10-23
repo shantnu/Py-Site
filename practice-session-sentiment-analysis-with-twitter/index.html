@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Practice Session: Sentiment Analysis with Twitter &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/practice-session-sentiment-analysis-with-twitter/" />
+<link rel='shortlink' href='/?p=1967' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fpractice-session-sentiment-analysis-with-twitter%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fpractice-session-sentiment-analysis-with-twitter%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1967">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1967" class="post-1967 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Practice Session: Sentiment Analysis with Twitter</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p><a href="/natural-language-processing-and-sentiment-analysis-with-python/"><strong>0. Introduction to NLP and Sentiment Analysis</strong></a></p>
+<p><strong><a href="/introduction-to-nltk-natural-language-processing-with-python/">1. Natural Language Processing with NTLK</a></strong></p>
+<p><strong><a href="/intro-to-nltk-part-2/">2. Intro to NTLK, Part 2</a></strong></p>
+<p><a href="/build-a-sentiment-analysis-app-with-movie-reviews/"><strong>3. Build a sentiment analysis program:</strong> </a> We finally use all we learnt above to make a program that analyses sentiment of movie reviews</p>
+<p><strong><a href="/practice-session-sentiment-analysis-with-twitter/">4. Sentiment Analysis with Twitter</a></strong>: A practice session for you, with a bit of learning.</p>
+<hr />
+<p>&nbsp;</p>
+<p>Okay, so the practice session.</p>
+<p>This contains a mixture of me teaching you stuff (like how to read Tweets in your Ntlk corpora), plus code you write yourself.</p>
+<p><em>Sentiment Twitter.ipynb</em> is the file you are working with.</p>
+<p><iframe width="800" height="450" src="https://player.vimeo.com/video/148792702?title=0&amp;byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe></p>
+<p>Okay, since this is a practice session, I won&#8217;t explain everything. You are supposed to learn. I will cover the new stuff related to reading Twitter data.</p>
+<p>This Twitter data is in the ntlk corpora folder, under twitter_samples.</p>
+<p><a href="/wp-content/uploads/2015/12/nltk3.png" rel="attachment wp-att-2084"><img src="/wp-content/uploads/2015/12/nltk3.png" alt="nltk3" class="aligncenter size-full wp-image-2084" width="715" height="314" srcset="/wp-content/uploads/2015/12/nltk3.png 715w, /wp-content/uploads/2015/12/nltk3-300x132.png 300w" sizes="(max-width: 715px) 85vw, 715px" /></a>You have your positive and negative tweets, in json format, which is how Twitter returns them.</p>
+<p><em>Side note: If you want to know how to gather your own Twitter samples, <a href="/build-a-twitter-analytics-app-using-python/">see here</a>.</em></p>
+<p>But you don&#8217;t have to worry about parsing json files. Ntlk gives us handy functions to read the data.</p>
+<p>Warning: The way the data was collected was, the tweets were classified negative or positive based on smileys. So if the tweet contained <em>: )</em> it was classified as positive. This will have ramifications for us later on.</p>
+<p>Make sure you have the notebook open in a new tab, as I will only go over parts of it. I expect you to write the code for the rest yourself. If you get stuck, look at the last lesson, as the  code is very similar.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf81b90aa65620355182" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+twitter_samples.fileids()
+
+['negative_tweets.json', 'positive_tweets.json', 'tweets.20150430-223406.json']</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf81b90aa65620355182-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81b90aa65620355182-2">2</div><div class="crayon-num" data-line="crayon-5bcf81b90aa65620355182-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf81b90aa65620355182-1"><span class="crayon-v">twitter_samples</span><span class="crayon-sy">.</span><span class="crayon-e">fileids</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81b90aa65620355182-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf81b90aa65620355182-3"><span class="crayon-sy">[</span><span class="crayon-s">'negative_tweets.json'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'positive_tweets.json'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'tweets.20150430-223406.json'</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p>Like movie reviews, you can see the types of files-in this you have the negative, positive, and the complete list.</p>
+<p>This is how you read the Twitter samples. I&#8217;m only showing you the negative file, but the process is the same for the positive.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf81b90aa73970442352" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+strings = twitter_samples.strings('negative_tweets.json')
+for string in strings[:5]:
+    print(string)
+
+hopeless for tmr :(
+Everything in the kids section of IKEA is so cute. Shame I'm nearly 19 in 2 months :(
+@Hegelbon That heart sliding into the waste basket. :(
+“@ketchBurning: I hate Japanese call him "bani" :( :(”
+
+Me too
+Dang starting next week I have "work" :(</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf81b90aa73970442352-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81b90aa73970442352-2">2</div><div class="crayon-num" data-line="crayon-5bcf81b90aa73970442352-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81b90aa73970442352-4">4</div><div class="crayon-num" data-line="crayon-5bcf81b90aa73970442352-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81b90aa73970442352-6">6</div><div class="crayon-num" data-line="crayon-5bcf81b90aa73970442352-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81b90aa73970442352-8">8</div><div class="crayon-num" data-line="crayon-5bcf81b90aa73970442352-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81b90aa73970442352-10">10</div><div class="crayon-num" data-line="crayon-5bcf81b90aa73970442352-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf81b90aa73970442352-1"><span class="crayon-v">strings</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">twitter_samples</span><span class="crayon-sy">.</span><span class="crayon-e">strings</span><span class="crayon-sy">(</span><span class="crayon-s">'negative_tweets.json'</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81b90aa73970442352-2"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-t">string</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">strings</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-cn">5</span><span class="crayon-sy">]</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf81b90aa73970442352-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-t">string</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81b90aa73970442352-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf81b90aa73970442352-5"><span class="crayon-e">hopeless </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-v">tmr</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-sy">(</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81b90aa73970442352-6"><span class="crayon-e">Everything </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">the </span><span class="crayon-e">kids </span><span class="crayon-e">section </span><span class="crayon-e">of </span><span class="crayon-e">IKEA </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-e">so </span><span class="crayon-v">cute</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-i">Shame</span><span class="crayon-h"> </span><span class="crayon-i">I</span>'<span class="crayon-i">m</span><span class="crayon-h"> </span><span class="crayon-i">nearly</span><span class="crayon-h"> </span><span class="crayon-cn">19</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-v">months</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-sy">(</span></div><div class="crayon-line" id="crayon-5bcf81b90aa73970442352-7"><span class="crayon-sy">@</span><span class="crayon-e">Hegelbon </span><span class="crayon-e">That </span><span class="crayon-e">heart </span><span class="crayon-e">sliding </span><span class="crayon-e">into </span><span class="crayon-e">the </span><span class="crayon-e">waste </span><span class="crayon-v">basket</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-sy">(</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81b90aa73970442352-8">“<span class="crayon-sy">@</span><span class="crayon-v">ketchBurning</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-e">hate </span><span class="crayon-e">Japanese </span><span class="crayon-e">call </span><span class="crayon-i">him</span><span class="crayon-h"> </span><span class="crayon-s">"bani"</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-sy">(</span>”</div><div class="crayon-line" id="crayon-5bcf81b90aa73970442352-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81b90aa73970442352-10"><span class="crayon-e">Me </span><span class="crayon-e">too</span></div><div class="crayon-line" id="crayon-5bcf81b90aa73970442352-11"><span class="crayon-e">Dang </span><span class="crayon-e">starting </span><span class="crayon-e">next </span><span class="crayon-i">week</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-i">have</span><span class="crayon-h"> </span><span class="crayon-s">"work"</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-sy">(</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0021 seconds] -->
+<p></p>
+<p>I only print the first 5 tweets above.</p>
+<p>The next steps are to rewrite the <em>create_word_features()</em> function, and then collect the negative and positive tweets.</p>
+<p>You will get 5000 tweets in each category. Create the training list with 8000, and test with 2000 tweets.</p>
+<p>Create a Naive Bayes classifier and test your algorithm.</p>
+<p>I got an accuracy of 97%, which just <strong>looks wrong</strong>.</p>
+<p>Why? Take a minute to think.</p>
+<p>The original data contains smileys. So our machine learning algorithm can ignore the text, and just look at the smiley to give a positive or negative review. We need to remove the smileys.</p>
+<p>I give you some code:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf81b90aa79753169222" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+print(string)
+print(string.replace(":", ""))
+print(string.replace(":", "").replace(")", "").replace("(", ""))
+
+@DanielOConnel18 you could say he will have egg on his face :-)
+@DanielOConnel18 you could say he will have egg on his face -)
+@DanielOConnel18 you could say he will have egg on his face -</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf81b90aa79753169222-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81b90aa79753169222-2">2</div><div class="crayon-num" data-line="crayon-5bcf81b90aa79753169222-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81b90aa79753169222-4">4</div><div class="crayon-num" data-line="crayon-5bcf81b90aa79753169222-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81b90aa79753169222-6">6</div><div class="crayon-num" data-line="crayon-5bcf81b90aa79753169222-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf81b90aa79753169222-1"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-t">string</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81b90aa79753169222-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-t">string</span><span class="crayon-sy">.</span><span class="crayon-e">replace</span><span class="crayon-sy">(</span><span class="crayon-s">":"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">""</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf81b90aa79753169222-3"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-t">string</span><span class="crayon-sy">.</span><span class="crayon-e">replace</span><span class="crayon-sy">(</span><span class="crayon-s">":"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">""</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">replace</span><span class="crayon-sy">(</span><span class="crayon-s">")"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">""</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">replace</span><span class="crayon-sy">(</span><span class="crayon-s">"("</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">""</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81b90aa79753169222-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf81b90aa79753169222-5"><span class="crayon-sy">@</span><span class="crayon-e">DanielOConnel18 </span><span class="crayon-e">you </span><span class="crayon-e">could </span><span class="crayon-e">say </span><span class="crayon-e">he </span><span class="crayon-e">will </span><span class="crayon-e">have </span><span class="crayon-e">egg </span><span class="crayon-e">on </span><span class="crayon-e">his </span><span class="crayon-v">face</span><span class="crayon-h"> </span><span class="crayon-o">:</span><span class="crayon-o">-</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81b90aa79753169222-6"><span class="crayon-sy">@</span><span class="crayon-e">DanielOConnel18 </span><span class="crayon-e">you </span><span class="crayon-e">could </span><span class="crayon-e">say </span><span class="crayon-e">he </span><span class="crayon-e">will </span><span class="crayon-e">have </span><span class="crayon-e">egg </span><span class="crayon-e">on </span><span class="crayon-e">his </span><span class="crayon-v">face</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf81b90aa79753169222-7"><span class="crayon-sy">@</span><span class="crayon-e">DanielOConnel18 </span><span class="crayon-e">you </span><span class="crayon-e">could </span><span class="crayon-e">say </span><span class="crayon-e">he </span><span class="crayon-e">will </span><span class="crayon-e">have </span><span class="crayon-e">egg </span><span class="crayon-e">on </span><span class="crayon-e">his </span><span class="crayon-v">face</span><span class="crayon-h"> </span><span class="crayon-o">-</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0016 seconds] -->
+<p></p>
+<p>The last line above,</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf81b90aa7e651580241" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+print(string.replace(":", "").replace(")", "").replace("(", ""))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf81b90aa7e651580241-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf81b90aa7e651580241-1"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-t">string</span><span class="crayon-sy">.</span><span class="crayon-e">replace</span><span class="crayon-sy">(</span><span class="crayon-s">":"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">""</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">replace</span><span class="crayon-sy">(</span><span class="crayon-s">")"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">""</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">replace</span><span class="crayon-sy">(</span><span class="crayon-s">"("</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">""</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>is what you will use in your code to remove the smileys.</p>
+<p>You will need to recreate the negative and positive tweets, this time removing the smileys using the code above.</p>
+<p>Re-run the Naive Bayes classifier. This time the accuracy goes down to 75%, but the results are more accurate as they use the actual tweet text, and not the presence of a smiley(which may not even be there).</p>
+<p>This was a key learning feature: Make sure the data you work with is representative of what you are testing.</p>
+<p>Test your classifier with real tweets about movies. Is it accurate?</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

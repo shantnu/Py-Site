@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Stop struggling with Python on Windows &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Stop struggling with Python on Windows Comments Feed" href="/stop-struggling-with-python-on-windows/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/stop-struggling-with-python-on-windows/" />
+<link rel='shortlink' href='/?p=46' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fstop-struggling-with-python-on-windows%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fstop-struggling-with-python-on-windows%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-46">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-46" class="post-46 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Stop struggling with Python on Windows</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p>The title of the page isn&#8217;t a hyperbole. If you have every tried to use Python beyond toy problems on Windows, you will have struggled with library clashes, 32/64 bit versions, ghost libraries (that seemed to be installed, but can&#8217;t be called).</p>
+<p>As someone who uninstalled and reinstalled Python eight times in the last four weeks, let me tell you, getting Python working perfectly on Windows isn&#8217;t easy.</p>
+<p>&#8220;But Mr T,&#8221; you say, &#8220;what&#8217;s the problem? You go to python.org and just download it. What&#8217;s the big deal?&#8221;</p>
+<p><del>If you plan to just stick to solving Project Euler or other such toy problems, then the official site is good enough.</del></p>
+<p><em>(Note: Lots of people have taken the previous sentence as an insult. It is not, and I apologise if it came out that way. All I meant was, in this day and age, it&#8217;s a shame there is no good packager for Python on Windows).</em></p>
+<p>But I found that as soon as you try to do anything more complicated, like install libraries which need to be compiled (like numpy or scipy), the official build starts falling down. For my<a href="/"> upcoming course on Python</a>, I needed a lot of third party libraries, and I found that Python&#8217;s packaging system is really broken.</p>
+<p>Here are some of the few Python versions I&#8217;ve tried:</p>
+<p><strong>1. The official from Python.org:</strong> Especially on Windows, this is good only for learning. I didn&#8217;t find it very stable, and even installing basic things like Virtualenv gave me problems.</p>
+<p><strong>2. The version from ActiveState</strong>: ActiveState have a version of Python, and it&#8217;s a lot more stable than the official version. It also makes it easy to install packages, and for a long time, this is what I used. But then I tried to install OpenCv, and got problems with versions. I decided to re-install Python, and that&#8217;s when I hit problems.</p>
+<p>For some stupid reason, ActiveState install libraries in the C:\users\&lt;name&gt;\roaming\ region. These libraries take precedence over the local files (maybe due it being higher on the path hierarchy). Anyway, even after installing a different Python build (from Conda, see below), I kept getting library clashes which I couldn&#8217;t trace. I blamed Conda and spent weeks investigating obtuse error messages. I finally realised that ActiveState was to blame. The path to Python libraries must have been put in the registry or something, because even when I deleted the folders, it still looked for them in the Roaming folders.</p>
+<p>I had to reinstall ActiveState Python, remove the libraries, and then uninstall it again.<br />
+Why am I telling you this? To show you how hard getting Python running can be on Windows. Recently, I discovered Anaconda, and that&#8217;s what I recommend now.</p>
+<p><strong> 3. Anaconda</strong><br />
+Based on the open source Conda packaging system, <a href="http://continuum.io/downloads">Anaconda</a> is the best Python distribution I have found till now. For one, it comes with all the scientific libraries like numpy, scipy etc preinstalled, so you don&#8217;t have to worry about messing with compiling them yourself.</p>
+<p>Second, it does not put important stuff in hidden folders (as far as I can see). Uninstalling it is easy and works.</p>
+<p>Conda isn&#8217;t perfect, as I couldn&#8217;t get its environment system to work. But it&#8217;s a lot better than anything out there, and the only one I would recommend, at least on Windows</p>
+<p>To install new packages, first try to use <a href="http://conda.pydata.org/docs/commands/install.html">Conda install</a>. If there is no Conda package, try <a href="http://en.wikipedia.org/wiki/Pip_%28package_manager%29">pip</a>, and then compiling from source (but never use easy_install).</p>
+<p><strong>In conclusion</strong></p>
+<p>Stop struggling with Python on Windows. Avoid distributions with fancy install methods (I&#8217;m looking at you, ActiveState). Install the <a href="http://continuum.io/downloads">Anaconda</a> build, preferably 32 bit (as some libraries aren&#8217;t available for 64 bit, and you will get library clashes).</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			34 thoughts on &ldquo;Stop struggling with Python on Windows&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-3" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-3" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/600841a4bd3599a7a304daa6f1cd73bd?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/600841a4bd3599a7a304daa6f1cd73bd?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Matthew Blott</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-3">
+							<time datetime="2014-07-21T22:44:24+00:00">
+								July 21, 2014 at 10:44 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You describe my experience about 9 months ago! I&#8217;ve become so frustrated I am now getting myself a Mac &#8211; I have issues with Ruby, PHP and Node on Windows as well. The main program installers work without much bother but as soon as you start playing with third party libraries you will get issues.</p>
+<p>I&#8217;ve not tried Anaconda but I&#8217;ve just had a look and it has an impressive set of libraries out the box, I&#8217;ll try it out. You might want to have a look at this site (if you haven&#8217;t already):</p>
+<p><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/" rel="nofollow">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a></p>
+<p>It&#8217;s an impressive up to date list of Windows binaries for Python packages and I&#8217;ve installed a few with good results!</p>
+<p>Regards,</p>
+<p>Matt 😉</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=3#respond' onclick='return addComment.moveForm( "div-comment-3", "3", "respond", "46" )' aria-label='Reply to Matthew Blott'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-5" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-5" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-5">
+							<time datetime="2014-07-22T08:04:09+00:00">
+								July 22, 2014 at 8:04 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks Matt. Many people struggle, but there is a macho attitude in the community &#8220;Just be a big boy and get on with it&#8221;, which is why I decided to write this post.</p>
+<p>It&#8217;s not just a Python issue- as you mention, other frameworks, most notably Ruby have had problems as well. I was looking at a job posting by a famous company for Ruby developers, and the advert basically said &#8220;You must be good with Linux, as Ruby doesn&#8217;t work on Windows&#8221; (their words, not mine).</p>
+<p>Yes, I&#8217;ve seen that link, even tried a few libraries from it. While they work, my problem is the same: I&#8217;d rather have a centralised package manager than having to install/uninstall libraries from a dozen locations. That&#8217;s what I like about Conda. It makes it easier to manage once you have more than a dozen libraries.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=5#respond' onclick='return addComment.moveForm( "div-comment-5", "5", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-8" class="comment even depth-2 parent">
+			<article id="div-comment-8" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/eda24cc4f31a898dbd2528b6b2860390?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/eda24cc4f31a898dbd2528b6b2860390?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Robert</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-8">
+							<time datetime="2014-07-22T09:32:15+00:00">
+								July 22, 2014 at 9:32 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Just a innocent question, (at least I&#8217;m trying not to make it loaded 🙂 ) why not install a virtual machine in windows for your use case, or dual boot to Linux, instead of buying another machine?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=8#respond' onclick='return addComment.moveForm( "div-comment-8", "8", "respond", "46" )' aria-label='Reply to Robert'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-9" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-3">
+			<article id="div-comment-9" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-9">
+							<time datetime="2014-07-22T09:57:55+00:00">
+								July 22, 2014 at 9:57 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Robert, that&#8217;s a good point. For my course, I will be using a VM running Linux, but I&#8217;ve been asked by many people for help on Windows, so I thought I&#8217;d give it a try. I thought, how hard can it be? Plenty hard, it seems.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=9#respond' onclick='return addComment.moveForm( "div-comment-9", "9", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-20" class="comment even depth-3">
+			<article id="div-comment-20" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/600841a4bd3599a7a304daa6f1cd73bd?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/600841a4bd3599a7a304daa6f1cd73bd?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Matthew Blott</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-20">
+							<time datetime="2014-07-22T23:22:14+00:00">
+								July 22, 2014 at 11:22 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I did try Linux but I find you have to do a fair bit of heavy lifting with it. For example, Node has a Mac installer (and Windows) but you have to build it with Linux. That&#8217;s fine for a production server but when you want to tinker around with stuff (as I do) it gets a bit inconvenient. I use C# a lot and building that on Linux is a mission &#8211; on a Mac it just works out the box. Because Windows and Mac aren&#8217;t free means they get targeted for the professional dev tools. I know there are some lovers of Linux out there and I&#8217;m not knocking you!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=20#respond' onclick='return addComment.moveForm( "div-comment-20", "20", "respond", "46" )' aria-label='Reply to Matthew Blott'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-21528" class="comment odd alt depth-2">
+			<article id="div-comment-21528" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/7a1402a80c9f269721d4f2a20bef9761?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/7a1402a80c9f269721d4f2a20bef9761?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">otoby</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-21528">
+							<time datetime="2017-08-11T10:57:55+00:00">
+								August 11, 2017 at 10:57 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>To be clear, PHP does not have this much issue &#8212; wammp, xamp, winp etc. The easiest option moving forward is a linux VM as python seem to work much better on Linux.</p>
+<p>Other alternative would be for Python to help provide common libraries that require compilation during the setup of python for windows.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=21528#respond' onclick='return addComment.moveForm( "div-comment-21528", "21528", "respond", "46" )' aria-label='Reply to otoby'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-4" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-4" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/afe13d6f733c0a31397dbd227c1d020f?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/afe13d6f733c0a31397dbd227c1d020f?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">sasek</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-4">
+							<time datetime="2014-07-21T23:19:15+00:00">
+								July 21, 2014 at 11:19 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Windows is the problem, not python.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=4#respond' onclick='return addComment.moveForm( "div-comment-4", "4", "respond", "46" )' aria-label='Reply to sasek'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-6" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-6" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-6">
+							<time datetime="2014-07-22T08:06:28+00:00">
+								July 22, 2014 at 8:06 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Normally, i&#8217;d agree with you, but not in this case.</p>
+<p>The scientific community has had long problems with the Python core developers, as described by the creator of Anaconda here:</p>
+<p><a href="http://technicaldiscovery.blogspot.co.uk/2013/12/why-i-promote-conda.html" rel="nofollow">http://technicaldiscovery.blogspot.co.uk/2013/12/why-i-promote-conda.html</a></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=6#respond' onclick='return addComment.moveForm( "div-comment-6", "6", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-21375" class="comment even depth-2 parent">
+			<article id="div-comment-21375" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/83e416a17659a5cd0fd5886346fe6960?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/83e416a17659a5cd0fd5886346fe6960?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Sam</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-21375">
+							<time datetime="2017-07-16T08:45:14+00:00">
+								July 16, 2017 at 8:45 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>With all due respect, the open-source bullshit philosophy is the ultimate problem. Why is that everything works perfect on windows except whatever open-source?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=21375#respond' onclick='return addComment.moveForm( "div-comment-21375", "21375", "respond", "46" )' aria-label='Reply to Sam'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-21377" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-3">
+			<article id="div-comment-21377" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-21377">
+							<time datetime="2017-07-16T12:42:21+00:00">
+								July 16, 2017 at 12:42 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>That&#8217;s a good point. There is a bit of passive aggressiveness when it comes to Windows.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=21377#respond' onclick='return addComment.moveForm( "div-comment-21377", "21377", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-7" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-7" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/cdeaa3664f03e9cf681abd3f03121dbe?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/cdeaa3664f03e9cf681abd3f03121dbe?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://bearonunicycle.com/' rel='external nofollow' class='url'>Andrey</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-7">
+							<time datetime="2014-07-22T09:15:43+00:00">
+								July 22, 2014 at 9:15 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Have you been developing for Windows for 1—2 weeks? For 7 years of Python programming I can assure you you should have no problems installing virtualenv, numpy, scikits or even PYAudio. Windows version of Python have the same stability as any other versions.</p>
+<p>Don&#8217;t blame the tools.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=7#respond' onclick='return addComment.moveForm( "div-comment-7", "7", "respond", "46" )' aria-label='Reply to Andrey'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-10" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-10" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-10">
+							<time datetime="2014-07-22T09:58:58+00:00">
+								July 22, 2014 at 9:58 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Andrey, obviously, I&#8217;m pretty incompetent. I should stop showing my face in public. In fact, I&#8217;m going to do cover my face with a paper bag right now. 🙂</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=10#respond' onclick='return addComment.moveForm( "div-comment-10", "10", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-15" class="comment even depth-2">
+			<article id="div-comment-15" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/177f75fab34fb9cb4bea532d0afbedee?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/177f75fab34fb9cb4bea532d0afbedee?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://stuartaxon.com/' rel='external nofollow' class='url'>Stu</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-15">
+							<time datetime="2014-07-22T18:10:10+00:00">
+								July 22, 2014 at 6:10 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>If you dont have vs installed already it is a pain to work out which sdk to install to get compiling working.</p>
+<p>Last time I did numpy on windows in a virtualenv I had to unpack the installer and use easy install on the parts inside, which wasnt intuitive.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=15#respond' onclick='return addComment.moveForm( "div-comment-15", "15", "respond", "46" )' aria-label='Reply to Stu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-21" class="comment odd alt depth-2">
+			<article id="div-comment-21" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/600841a4bd3599a7a304daa6f1cd73bd?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/600841a4bd3599a7a304daa6f1cd73bd?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Matthew Blott</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-21">
+							<time datetime="2014-07-22T23:28:31+00:00">
+								July 22, 2014 at 11:28 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I didn&#8217;t blame any &#8220;tools&#8221; I said you&#8217;ll find a lot of third party libraries don&#8217;t run on Windows. Do you dispute this? And since I said I had problems months ago your question of whether I&#8217;ve only been using Windows for a couple of weeks I will have to put down to impertinence.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=21#respond' onclick='return addComment.moveForm( "div-comment-21", "21", "respond", "46" )' aria-label='Reply to Matthew Blott'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-11" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-11" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/c58698639ae0081f6b3cf7cd836227b6?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/c58698639ae0081f6b3cf7cd836227b6?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">richard fernandez</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-11">
+							<time datetime="2014-07-22T11:14:01+00:00">
+								July 22, 2014 at 11:14 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I use Anaconda on Linux and it works great! Python is not really suited for Windows but that&#8217;s why there are VMs for those who can&#8217;t get around needing windows on their machine.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=11#respond' onclick='return addComment.moveForm( "div-comment-11", "11", "respond", "46" )' aria-label='Reply to richard fernandez'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-12" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-12" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-12">
+							<time datetime="2014-07-22T12:23:38+00:00">
+								July 22, 2014 at 12:23 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>That&#8217;s very true, Richard. That&#8217;s why I&#8217;m planning to stick with a Linux VM for my book</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=12#respond' onclick='return addComment.moveForm( "div-comment-12", "12", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-13" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-13" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/140926274fbb4439f5d528643148edd7?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/140926274fbb4439f5d528643148edd7?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Gavin Scott</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-13">
+							<time datetime="2014-07-22T17:06:35+00:00">
+								July 22, 2014 at 5:06 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Anaconda might be the most powerful (and free!) software package for general end-user computing that there is. It just works, and it gives you everything you need on all three major platforms to do virtually anything out of the box.</p>
+<p>I too recommend: <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/" rel="nofollow">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a> for those Windows things you might need that are not available as conda packages (like Postgres and MySQL database drives to go with SQL Alchemy). The installers from there integrate well with anaconda (it will find all Python environments registered on the machine, let you pick one, and then install into the correct places).</p>
+<p>anaconda installs in a single directory and makes it easy to have multiple versions and multiple python versions installed. It comes with the Spyder IDE, and all the iPython stuff, including what&#8217;s probably the most impressive component of the Python eco-system these days, the iPython Notebook interface. I now do basically all my calculation and ad-hoc computing in support of my development work inside Notebooks.</p>
+<p>Honestly everyone who does any form of &#8220;computing&#8221; using their computer needs to have the anaconda system, and Python is the #1 language/tool to learn because you can do and drive basically anything and everything with it.</p>
+<p>If you&#8217;re an iOS user, there are a couple great Python environments there too. Pythonista (<a href="http://omz-software.com/pythonista/" rel="nofollow">http://omz-software.com/pythonista/</a>) for the iPhone and iPad and now also the new Computable (<a href="http://computableapp.com/" rel="nofollow">http://computableapp.com/</a>) which brings the iPython Notebook interface plus numpy, sympy, pandas, etc. to the iPad.</p>
+<p>G.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=13#respond' onclick='return addComment.moveForm( "div-comment-13", "13", "respond", "46" )' aria-label='Reply to Gavin Scott'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-16" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-16" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-16">
+							<time datetime="2014-07-22T19:54:25+00:00">
+								July 22, 2014 at 7:54 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks Gavin, that was useful</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=16#respond' onclick='return addComment.moveForm( "div-comment-16", "16", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-14" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/177f75fab34fb9cb4bea532d0afbedee?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/177f75fab34fb9cb4bea532d0afbedee?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://stuartaxon.com/' rel='external nofollow' class='url'>Stu</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-14">
+							<time datetime="2014-07-22T18:04:12+00:00">
+								July 22, 2014 at 6:04 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>If you want a proper setup &#8211; virtualenvs, and lots oc libraries that need a compiler it is a pain.</p>
+<p>Having wasted many hours myself I always use linux in a vm if I have a windows box and advise others to do the same.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=14#respond' onclick='return addComment.moveForm( "div-comment-14", "14", "respond", "46" )' aria-label='Reply to Stu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-17" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-17" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-17">
+							<time datetime="2014-07-22T19:54:36+00:00">
+								July 22, 2014 at 7:54 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>True</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=17#respond' onclick='return addComment.moveForm( "div-comment-17", "17", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-18" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-18" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/eb35377232e05217f6cd9f549fad7ba4?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/eb35377232e05217f6cd9f549fad7ba4?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Steve</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-18">
+							<time datetime="2014-07-22T19:55:15+00:00">
+								July 22, 2014 at 7:55 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>An interesting article and I recognise some of the challenges of Python on Windows but have to say that it doesn&#8217;t accord with my experience. I&#8217;ve found the ActiveState 32bit Python 2.7 to be stable and with pypm it is trivial to install 95% of what I need &#8211; matplotlib, numpy, scipy, ipython, pandas, nmap, etc, etc. OpenCV was easy to install too &#8211; the install instructions on the website work perfectly &#8211; you do read the instructions, don&#8217;t you? 😉  If you really want a command line package manager for the OS you can always install Chocolatey <a href="https://chocolatey.org/" rel="nofollow">https://chocolatey.org/</a>.</p>
+<p>I&#8217;ve spent many years working with various Linux distros too and could write a similar article on the challenges posed by that OS. The time I&#8217;ve spent getting CUPS to work with my printer easily outweighs any time spent fiddling with Windows to get Python to work nicely. </p>
+<p>I think that it&#8217;s quite realistic to develop with Python on Windows or *nix but you should expect in either OS that you sometimes have to get under the hood in order to get things to work!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=18#respond' onclick='return addComment.moveForm( "div-comment-18", "18", "respond", "46" )' aria-label='Reply to Steve'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2 parent">
+			<article id="div-comment-19" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-19">
+							<time datetime="2014-07-22T20:04:06+00:00">
+								July 22, 2014 at 8:04 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>ActiveState Python is stable, I just dont like its packaging manager.</p>
+<p>And you are right that Linux has its own problems. But since a large number of people (majority?) use Windows, I thought I&#8217;d write on that</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=19#respond' onclick='return addComment.moveForm( "div-comment-19", "19", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-22" class="comment even depth-3">
+			<article id="div-comment-22" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/140926274fbb4439f5d528643148edd7?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/140926274fbb4439f5d528643148edd7?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Gavin Scott</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-22">
+							<time datetime="2014-07-22T23:33:12+00:00">
+								July 22, 2014 at 11:33 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>If you want to understand more about the python packaging problems and how conda is intended to be a complete solution to the problem, this might be worth 20m of your time&#8230;</p>
+<p><a href="https://www.youtube.com/watch?v=UaIvrDWrIWM" rel="nofollow">https://www.youtube.com/watch?v=UaIvrDWrIWM</a></p>
+<p>(actually all the SciPy 2014 talks are up on YouTube and they&#8217;re pretty much all awesome and worth your time)</p>
+<p>G.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=22#respond' onclick='return addComment.moveForm( "div-comment-22", "22", "respond", "46" )' aria-label='Reply to Gavin Scott'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-23" class="comment odd alt depth-2 parent">
+			<article id="div-comment-23" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/600841a4bd3599a7a304daa6f1cd73bd?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/600841a4bd3599a7a304daa6f1cd73bd?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Matthew Blott</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-23">
+							<time datetime="2014-07-22T23:33:40+00:00">
+								July 22, 2014 at 11:33 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Generally developing Python on Windows isn&#8217;t too bad it&#8217;s just there are restrictions I&#8217;d rather do without.</p>
+<p>I tried Chocolatey but got rid of it. Windows uninstalls have a habit of leaving turds in your file system and registry so I only install stuff with Revo Installer now, much safer 🙂</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=23#respond' onclick='return addComment.moveForm( "div-comment-23", "23", "respond", "46" )' aria-label='Reply to Matthew Blott'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-24" class="comment byuser comment-author-shantnu bypostauthor even depth-3">
+			<article id="div-comment-24" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-24">
+							<time datetime="2014-07-23T08:58:52+00:00">
+								July 23, 2014 at 8:58 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p><i> Windows uninstalls have a habit of leaving turds in your file system and registry</i></p>
+<p>True. We need to start running Windows in a VM (instead of Linux, which is what people do), and every six months wipe everything and start clean 🙂</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=24#respond' onclick='return addComment.moveForm( "div-comment-24", "24", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-21871" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-21871" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/cfa7be2d9683ade27e91735a58c8d249?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/cfa7be2d9683ade27e91735a58c8d249?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Navid Nobani</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-21871">
+							<time datetime="2017-09-27T18:36:55+00:00">
+								September 27, 2017 at 6:36 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Any thoughts on clean uninstalling of Python ? I have 2 versions of python and dozens of libraries and I afraid simple uninstallation (through control panel) remains a mess behind.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=21871#respond' onclick='return addComment.moveForm( "div-comment-21871", "21871", "respond", "46" )' aria-label='Reply to Navid Nobani'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-21875" class="comment byuser comment-author-shantnu bypostauthor even depth-2">
+			<article id="div-comment-21875" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-21875">
+							<time datetime="2017-09-28T09:34:30+00:00">
+								September 28, 2017 at 9:34 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Python installations should be independent. Delete the directories, and make sure you delete any path variables.</p>
+<p>Also check under c:\users\USERNAME, some installers put stuff there.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=21875#respond' onclick='return addComment.moveForm( "div-comment-21875", "21875", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-21962" class="comment odd alt thread-even depth-1">
+			<article id="div-comment-21962" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/5e1960c56b1e9a3659f7aaa57ee5c27d?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/5e1960c56b1e9a3659f7aaa57ee5c27d?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Ernesto</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-21962">
+							<time datetime="2017-10-12T08:57:07+00:00">
+								October 12, 2017 at 8:57 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I have a question or two: </p>
+<p>Why Anaconda over some of the other SciPy stack offerings? I come from a MATLAB background and thus Python (x,y) looks nice to me. Ideally I would find something cross-platform (I use Linux, Mac, and Windows) which Python (x,y) is not. These are the offerings I&#8217;ve been considering:</p>
+<p>Anaconda: <a href="https://www.anaconda.com/" rel="nofollow">https://www.anaconda.com/</a></p>
+<p>Python (x,y): <a href="https://python-xy.github.io/" rel="nofollow">https://python-xy.github.io/</a></p>
+<p>WinPython: <a href="https://winpython.github.io/" rel="nofollow">https://winpython.github.io/</a></p>
+<p>Pyzo: <a href="http://www.pyzo.org/" rel="nofollow">http://www.pyzo.org/</a></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=21962#respond' onclick='return addComment.moveForm( "div-comment-21962", "21962", "respond", "46" )' aria-label='Reply to Ernesto'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-22076" class="comment even thread-odd thread-alt depth-1">
+			<article id="div-comment-22076" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/98cca282ebf5cb7f9e06a9a6fcddc6f5?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/98cca282ebf5cb7f9e06a9a6fcddc6f5?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://www.hash0k.com/' rel='external nofollow' class='url'>Srinivasan</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-22076">
+							<time datetime="2017-10-16T17:19:50+00:00">
+								October 16, 2017 at 5:19 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Even Anaconda is not straightforward with Windows in a corporate environment where things that are free is looked at with suspicion. Its a Nightmare when  you attempt conda create -n pyxxx python=x.x.x  only to result in a connection timeout error. Rather for winpython works for standard libraries like numpy, and scipy. But with matplotlib it crashes too. </p>
+<p>Regards,</p>
+<p>#0K</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=22076#respond' onclick='return addComment.moveForm( "div-comment-22076", "22076", "respond", "46" )' aria-label='Reply to Srinivasan'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-26106" class="comment odd alt thread-even depth-1">
+			<article id="div-comment-26106" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/1f06bbb2d6ebc5cd62171a90727c0f72?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/1f06bbb2d6ebc5cd62171a90727c0f72?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Aaron</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-26106">
+							<time datetime="2018-04-03T18:37:03+00:00">
+								April 3, 2018 at 6:37 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>My sentiments exactly in regards to the painful process of getting Python to work on Windows 10.<br />
+I&#8217;m glad you talked about installing it 8 times not working because that was my next move. I suspected it wouldn&#8217;t make a difference so I am going to try some of the other suggestions here. </p>
+<p>Thanks for the article.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=26106#respond' onclick='return addComment.moveForm( "div-comment-26106", "26106", "respond", "46" )' aria-label='Reply to Aaron'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-30869" class="comment even thread-odd thread-alt depth-1">
+			<article id="div-comment-30869" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/5b690e7320a980e9247c7a6986c5861a?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/5b690e7320a980e9247c7a6986c5861a?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Mr Impractial-pants</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-30869">
+							<time datetime="2018-06-27T14:15:41+00:00">
+								June 27, 2018 at 2:15 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for the post! I&#8217;ve been programming on both pylin and pywin for a number of few years now, bouncing between machines, vms, oses, and ides, virtualenvs / enviros for different projects. And yeah, it&#8217;s an elephant in the room for a mostly love-blinded python convert from 10 or so years back, but&#8230; I&#8217;ve kinda gotten used to the open-pit-toilet of the std pywin experience. </p>
+<p>If my primary win box ever gains enough space i&#8217;ll be sure to give ana a crack, like I should have some time ago. But when you&#8217;re walking over a spaghetti bridge high above a croc-infested-turd-river filled with sharp rocks, the changes happen&#8230; slowly and carefully. 😉</p>
+<p>Oh, and yes, your point is well made. Just because i do have wizard powers (including lightning from fingers) and have gotten through all the hellish hurdles to make things work, that doesn&#8217;t make me a clever-clogs because so little of the struggle was time well spent. Rather, it was time spent being an I-can&#8217;t-let-things-go-nerd, to my own detriment.<br />
+Shame, Mr Impractial-pants, shame.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=30869#respond' onclick='return addComment.moveForm( "div-comment-30869", "30869", "respond", "46" )' aria-label='Reply to Mr Impractial-pants'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-32572" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-32572" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/b92b10a675c0eddc73eac786e1970bea?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/b92b10a675c0eddc73eac786e1970bea?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">May</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-32572">
+							<time datetime="2018-07-17T15:47:54+00:00">
+								July 17, 2018 at 3:47 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>hi all, i came here because I had a strange situation when working on anaconda with windows. At first everything worked perfectly but since i created a separate virtual env and loaded it to run a separate code from terminal in this new environment, I have been having issues running code on jupyter notebook. i was just not able to read a simple hdf file that returned a value error but the point is I cannot comprehend what happened and now after uninstalling and reinstalling anaconda, I am still having the same problem. I also noticed that after uninstalling anaconda, I still have the anaconda folder in my directory. I want to know if it is safe to manually delete it? Thanks.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=32572#respond' onclick='return addComment.moveForm( "div-comment-32572", "32572", "respond", "46" )' aria-label='Reply to May'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-32573" class="comment byuser comment-author-shantnu bypostauthor even depth-2">
+			<article id="div-comment-32573" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-32573">
+							<time datetime="2018-07-17T16:32:13+00:00">
+								July 17, 2018 at 4:32 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Yes, delete it.</p>
+<p>Also have a look at the anaconda forums- this might be a bug they know about. If not, you migth be able to raise a new one</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=32573#respond' onclick='return addComment.moveForm( "div-comment-32573", "32573", "respond", "46" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-34308" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-34308" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/47435eb61268f11b3745445f961dc450?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/47435eb61268f11b3745445f961dc450?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Sachin</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/stop-struggling-with-python-on-windows/#comment-34308">
+							<time datetime="2018-08-13T11:46:26+00:00">
+								August 13, 2018 at 11:46 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>For some reason, I&#8217;m not at all able to install python using Anaconda distribution on windows 7, 64 bit machine. IT gives error of &#8220;Conda  not recognized &#8230;&#8221;<br />
+I&#8217;ve tried many different ways suggested on different forums. (diable ativirus,using miniconda etc.)<br />
+I&#8217;d really appreciate help on this &#8230;<br />
+Sachin Jadhav</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/stop-struggling-with-python-on-windows/?replytocom=34308#respond' onclick='return addComment.moveForm( "div-comment-34308", "34308", "respond", "46" )' aria-label='Reply to Sachin'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/stop-struggling-with-python-on-windows/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='46' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="95176e9a9e" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="212"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

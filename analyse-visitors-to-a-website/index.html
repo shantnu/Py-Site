@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Analyse visitors to a website &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/analyse-visitors-to-a-website/" />
+<link rel='shortlink' href='/?p=1865' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fanalyse-visitors-to-a-website%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fanalyse-visitors-to-a-website%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1865">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1865" class="post-1865 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Analyse visitors to a website</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p>This is still a introductory video (ie, the content is fairly simple).</p>
+<p>All we will do is analyse and graph the visitors to a website. The key skill here is merging. The repo is <a href="https://github.com/shantnu/Pandas-website">here</a>, and the file we are working with is <em> Website visitors.ipynb</em>.</p>
+<p>&nbsp;</p>
+<p><iframe width="800" height="450" src="https://player.vimeo.com/video/146557914?title=0&amp;byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe></p>
+<p>Another simple example, the goal here is to learn merging in Pandas.</p>
+<p>The repo has two files: <em>visitors.csv</em> and <em>visitors-new.csv</em>. Both files are similar. The first contains all visitors to a crappy unknown website (mine). The second contains the new visitors only (visiting the website for the first time). The format of the two files is also the same.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82e76bcf2163288785" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+#####
+##### VISITORS
+#####
+
+2015-02-09,59
+2015-02-08,79
+2015-02-07,73</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82e76bcf2163288785-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82e76bcf2163288785-2">2</div><div class="crayon-num" data-line="crayon-5bcf82e76bcf2163288785-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82e76bcf2163288785-4">4</div><div class="crayon-num" data-line="crayon-5bcf82e76bcf2163288785-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82e76bcf2163288785-6">6</div><div class="crayon-num" data-line="crayon-5bcf82e76bcf2163288785-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82e76bcf2163288785-1"><span class="crayon-p">#####</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82e76bcf2163288785-2"><span class="crayon-p">##### VISITORS</span></div><div class="crayon-line" id="crayon-5bcf82e76bcf2163288785-3"><span class="crayon-p">#####</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82e76bcf2163288785-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82e76bcf2163288785-5"><span class="crayon-cn">2015</span><span class="crayon-o">-</span><span class="crayon-cn">02</span><span class="crayon-o">-</span><span class="crayon-cn">09</span><span class="crayon-sy">,</span><span class="crayon-cn">59</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82e76bcf2163288785-6"><span class="crayon-cn">2015</span><span class="crayon-o">-</span><span class="crayon-cn">02</span><span class="crayon-o">-</span><span class="crayon-cn">08</span><span class="crayon-sy">,</span><span class="crayon-cn">79</span></div><div class="crayon-line" id="crayon-5bcf82e76bcf2163288785-7"><span class="crayon-cn">2015</span><span class="crayon-o">-</span><span class="crayon-cn">02</span><span class="crayon-o">-</span><span class="crayon-cn">07</span><span class="crayon-sy">,</span><span class="crayon-cn">73</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>The first five lines are a comment- we will need to remove them when we read the file.</p>
+<p>The actual data starts below, and is in the format: <em>date</em>, <em>visitors</em>. So on 9 Feb, 2015, we got 59 visitors.</p>
+<p>We start with importing the required libraries:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82e76bcfe289644666" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+import pandas as pd
+import matplotlib.pyplot as plt
+%pylab inline</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82e76bcfe289644666-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82e76bcfe289644666-2">2</div><div class="crayon-num" data-line="crayon-5bcf82e76bcfe289644666-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82e76bcfe289644666-1"><span class="crayon-e">import </span><span class="crayon-e">pandas </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-e">pd</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82e76bcfe289644666-2"><span class="crayon-e">import </span><span class="crayon-v">matplotlib</span><span class="crayon-sy">.</span><span class="crayon-e">pyplot </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-v">plt</span></div><div class="crayon-line" id="crayon-5bcf82e76bcfe289644666-3"><span class="crayon-o">%</span><span class="crayon-e">pylab </span><span class="crayon-v">inline</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>The data doesn&#8217;t contain any headers, so we have to define our own.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82e76bd03632554722" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+headers = ["date", "visitors"]
+data = pd.read_csv("visitors.csv", skiprows=4, names = headers)
+data.head()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82e76bd03632554722-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82e76bd03632554722-2">2</div><div class="crayon-num" data-line="crayon-5bcf82e76bd03632554722-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82e76bd03632554722-1"><span class="crayon-v">headers</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">"date"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"visitors"</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82e76bd03632554722-2"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">pd</span><span class="crayon-sy">.</span><span class="crayon-e">read_csv</span><span class="crayon-sy">(</span><span class="crayon-s">"visitors.csv"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">skiprows</span><span class="crayon-o">=</span><span class="crayon-cn">4</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">names</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">headers</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82e76bd03632554722-3"><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>The only thing new above is: <em>skiprows = 4</em>. That&#8217;s because we need to skip the first 4 lines in the file, as they contain comments.</p>
+<p>Why 4? If you count the lines, you will see there are actually 5 unusable lines. This confused me for sometime. We skip 4 rows, because Pandas assumes the 5th line is for the header(which we are providing).</p>
+<table class="dataframe" border="1">
+<thead>
+<tr>
+<th></th>
+<th>date</th>
+<th>visitors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2015-02-09</td>
+<td>59</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2015-02-08</td>
+<td>79</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2015-02-07</td>
+<td>73</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2015-02-06</td>
+<td>89</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2015-02-05</td>
+<td>80</td>
+</tr>
+</tbody>
+</table>
+<p>The data looks correct. Let&#8217;s read the other csv file as well:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82e76bd09518562526" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+headers = ["date", "visitors_new"]
+data_new = pd.read_csv("visitors-new.csv", skiprows=4, names = headers)
+data_new.head()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82e76bd09518562526-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82e76bd09518562526-2">2</div><div class="crayon-num" data-line="crayon-5bcf82e76bd09518562526-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82e76bd09518562526-1"><span class="crayon-v">headers</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">"date"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"visitors_new"</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82e76bd09518562526-2"><span class="crayon-v">data_new</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">pd</span><span class="crayon-sy">.</span><span class="crayon-e">read_csv</span><span class="crayon-sy">(</span><span class="crayon-s">"visitors-new.csv"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">skiprows</span><span class="crayon-o">=</span><span class="crayon-cn">4</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">names</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">headers</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82e76bd09518562526-3"><span class="crayon-v">data_new</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<table class="dataframe" border="1">
+<thead>
+<tr>
+<th></th>
+<th>date</th>
+<th>visitors_new</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2015-02-09</td>
+<td>55</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2015-02-08</td>
+<td>64</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2015-02-07</td>
+<td>61</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2015-02-06</td>
+<td>79</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2015-02-05</td>
+<td>60</td>
+</tr>
+</tbody>
+</table>
+<p>We have read both the csv files. You will note they contain a common field: <em>date</em>.</p>
+<p>The dates are actually the same. If you look at both the fields, the first date is <em>2015-02-09</em>.</p>
+<p>We will now merge these two dataframes, so we can look at the combined data.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82e76bd0f012473755" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data_combined = pd.merge(data, data_new)
+data_combined.head()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82e76bd0f012473755-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82e76bd0f012473755-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82e76bd0f012473755-1"><span class="crayon-v">data_combined</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">pd</span><span class="crayon-sy">.</span><span class="crayon-e">merge</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">data_new</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82e76bd0f012473755-2"><span class="crayon-v">data_combined</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>The <em>pd.merge()</em> function merged the two dataframes. We just pass in the names of the dataframes, and Pandas is smart enough to figure out that <em>date</em> is common between them, so it merges on date. You can also manually specify which field you want to merge on.</p>
+<table class="dataframe" border="1">
+<thead>
+<tr>
+<th></th>
+<th>date</th>
+<th>visitors</th>
+<th>visitors_new</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2015-02-09</td>
+<td>59</td>
+<td>55</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2015-02-08</td>
+<td>79</td>
+<td>64</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2015-02-07</td>
+<td>73</td>
+<td>61</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2015-02-06</td>
+<td>89</td>
+<td>79</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2015-02-05</td>
+<td>80</td>
+<td>60</td>
+</tr>
+</tbody>
+</table>
+<p>We see that the two separate structures have been merges, so we can now see visitors and new visitors on the same page.</p>
+<p>Let&#8217;s sort the date now, so that they are in ascending format (I think they are in descending format at the moment).</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82e76bd14857308670" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data_combined.sort(["date"], inplace=True)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82e76bd14857308670-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82e76bd14857308670-1"><span class="crayon-v">data_combined</span><span class="crayon-sy">.</span><span class="crayon-e">sort</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span><span class="crayon-s">"date"</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">inplace</span><span class="crayon-o">=</span><span class="crayon-t">True</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>We now want to plot the data, and we want the <em>date</em> to be the x axis. As before, we will set the <em>date</em> as the index.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82e76bd1a913507836" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data_combined.set_index("date", inplace=True)
+data_combined.head()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82e76bd1a913507836-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82e76bd1a913507836-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82e76bd1a913507836-1"><span class="crayon-v">data_combined</span><span class="crayon-sy">.</span><span class="crayon-e">set_index</span><span class="crayon-sy">(</span><span class="crayon-s">"date"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">inplace</span><span class="crayon-o">=</span><span class="crayon-t">True</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82e76bd1a913507836-2"><span class="crayon-v">data_combined</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<table class="dataframe" border="1">
+<thead>
+<tr>
+<th></th>
+<th>visitors</th>
+<th>visitors_new</th>
+</tr>
+<tr>
+<th>date</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>2014-07-14</th>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr>
+<th>2014-07-15</th>
+<td>58</td>
+<td>55</td>
+</tr>
+<tr>
+<th>2014-07-16</th>
+<td>18</td>
+<td>15</td>
+</tr>
+<tr>
+<th>2014-07-17</th>
+<td>14</td>
+<td>10</td>
+</tr>
+<tr>
+<th>2014-07-18</th>
+<td>11</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<p>This is our final sorted structure. We can now just plot it.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82e76bd1f159601129" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data_combined.plot()
+plt.show()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82e76bd1f159601129-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82e76bd1f159601129-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82e76bd1f159601129-1"><span class="crayon-v">data_combined</span><span class="crayon-sy">.</span><span class="crayon-e">plot</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82e76bd1f159601129-2"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">show</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p><a href="/wp-content/uploads/2015/12/visitors.png" rel="attachment wp-att-2027"><img src="/wp-content/uploads/2015/12/visitors.png" alt="visitors" class="aligncenter wp-image-2027" height="431" width="578" srcset="/wp-content/uploads/2015/12/visitors.png 800w, /wp-content/uploads/2015/12/visitors-300x224.png 300w, /wp-content/uploads/2015/12/visitors-768x573.png 768w" sizes="(max-width: 578px) 85vw, 578px" /></a>The number of visitors closely matches new visitors, mainly because this was a fresh website, and most visitors were new.</p>
+<p>Next: We look at pie chart plotting, and a very<a href="/website-visitors-part-2-dealing-with-corrupt-data/"> tricky problem that took me hours to fix</a>.</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

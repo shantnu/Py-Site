@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Why use a version control system &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Why use a version control system Comments Feed" href="/use-version-control-system/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/use-version-control-system/" />
+<link rel='shortlink' href='/?p=170' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fuse-version-control-system%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fuse-version-control-system%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-170">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-170" class="post-170 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Why use a version control system</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p>It continually surprises me, so much so I think it is a hoax, but I keep hearing about companies that don&#8217;t use version control (also called revision control)</p>
+<p>&nbsp;</p>
+<h4>What&#8217;s version control, and why do you need it?</h4>
+<p>So you write the perfect piece of code. It can display Lolcats on the screen. Everything is going perfect. You are thinking of starting a company to capitalise on your code. You know there is a huge demand for this feature, and venture capitalists are just dying for someone to target this valuable market.</p>
+<p>So you write your code, and then get busy with other things. The latest Y-Box is out, and you need to catch up on your gaming. You <del>waste</del> gainfully spend a whole week finishing Battle of Nerds 3. And then you get back to your multimillion idea. It&#8217;s almost complete, you just need to change a few icons on the screen, add a few fancy buttons. And then, you are set for life.</p>
+<p>You make the changes, and (drums rolling &#8230; ) nothing works. The whole thing falls apart. You press Ctrl Z (undo) many times to remove all your changes, but the code still isn&#8217;t working. In panic, you scream. Why isn&#8217;t it working! It was working just a week ago. You can see your dreams of sitting on piles of cash go up in smoke. Why does this always happen to you?</p>
+<p>Think this is bad? Now imagine ten people working on your code, living in different parts of the world. They are all changing the code, and breaking it. You&#8217;ll never get your LolCats masterpiece to work!</p>
+<p>&nbsp;</p>
+<h4>How I discovered version control</h4>
+<p>My first job was at a startup. A cool one, with super hackers who read /. everyday, used vi/emacs on Linux, and just loved the command line. And they didn&#8217;t use version control(till a year later). Just goes to show, it&#8217;s not just boring old insurance companies that don&#8217;t follow the best practices. So at the time, I felt the need to backup my code. I hit the same problem I described above- code would work one day, and not the next. So I needed to be able to go back in time and look at old code.</p>
+<p>I hit on the sexy and totally original idea of saving my code in folders. So at the end of the day, I would save that day&#8217;s code as  &#8220;Code_folder &lt;date&gt;&#8221;. Hey, gimme a break. I was young and foolish, and ate a lot of wild mushrooms I found growing in the forest.</p>
+<p>The approach, while inefficient, sort of worked. And then I read about SVN. I installed Torrtoise SVN, and discovered I could manage my code much easily with it. I created a repository on my hard drive(a bad idea, as if the disk failed, I&#8217;d lose everything; but still better than folders).</p>
+<p>And that&#8217;s when I learned the fun of managing software. Even though Tortoise was quite mature at the time(this was around 2005), one day it crashed, and I lost all my data. I smacked my head and went back to using folders. It would be 2009-10 before Tortoise became stable. By that time, I was with a new company, and they installed SVN, making sure to use a stable version.</p>
+<p>BTW, Tortoise is still an unstable piece of crap, as I will describe later.</p>
+<p>&nbsp;</p>
+<h4>What version control (VC) does for you</h4>
+<p>Version control is very useful. I discovered this the hard way, but VC allows you to do several useful things:</p>
+<p><em>It allows you to go back to an old version of code, if you break the current code</em></p>
+<p>The main purpose of VC</p>
+<p><em>It allows you to see what other people in the team are doing.</em></p>
+<p>Since every version control system forces you to enter comments, you can see what changes other people are making. Most VCs will allow you to setup emails, so you will get an email anyone checks in anything, if you are a control freak.</p>
+<p>If the code breaks, you can look at the logs and figure out who last checked in the code (and then whip them, as is the tradition).</p>
+<p><em>It allows you to create branches and releases</em></p>
+<p>In the real world, you will often need to branch, or create a release. Branch is when you want to implement a minor feature, maybe for a client, and don&#8217;t want to interfere with the trunk (as you have existing users you&#8217;d rather not piss off). So you branch off, work on that branch, and merge back to trunk when you are done. Or, if you work in a messed up company, you keep the branch, and maintain hundreds of branches (see below).</p>
+<p>You might also have releases: If you are selling installed software, and you release a version, you will want to create a special release branch for it. That way, you can fix bugs in that release only, without affecting the newer code.</p>
+<p>&nbsp;</p>
+<h4>Best Practices with version control</h4>
+<p>&nbsp;</p>
+<p><em>Try to keep branches to a minimum</em></p>
+<p>Especially if you are working with centralised VCS, like SVN. And even more especially if you are working in the real world with real customers, and not on some hobbyist project.</p>
+<p><strong>The stuff of nightmares:</strong> You have ten different branches, and you keep seeing the same bug crop up again and again.</p>
+<p>&#8220;But I just fixed that!&#8221;</p>
+<p>&#8220;No, that was on the other branch.&#8221;</p>
+<p>I mention real customers, as they will often come to you with weird requests (and also buckets of money; never forget that). You will have to create branches for them, if you don&#8217;t want to piss off your favourite customers. Branches can&#8217;t be avoided. What you should do is merge the branches back to trunk. That way, all bugs are fixed in one place, and one place only.</p>
+<p>&nbsp;</p>
+<p><em>Check in every day, or at least every other day</em></p>
+<p>This is easier with DVCS, but you can do it with SVN if you create a private branch. But with DVCS, it&#8217;s just so easy. Keep committing to your local branch, and push when the code works.</p>
+<p>&nbsp;</p>
+<p><em>Automated / Overnight tests</em></p>
+<p>You must have automated tests, that run each day. Overnight is a good system, as you can run multiple tests without worrying about slowing users. Seriously, it&#8217;s no good if you check everything in, but don&#8217;t test it two days before shipping (you do do that, don&#8217;t you? Admit it. I will not judge you).</p>
+<p>&nbsp;</p>
+<p>Have I forgotten something? Please add in the comments below.</p>
+<p>&nbsp;</p>
+<p><strong>So which VC should you use?</strong><a href="/svn-vs-git-vs-mercurial/"> SVN or Git or Mercurial? Read on&#8230;</a></p>
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			2 thoughts on &ldquo;Why use a version control system&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-14851" class="comment even thread-even depth-1">
+			<article id="div-comment-14851" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/68779418f0ff6c195f4c89d9a025f68b?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/68779418f0ff6c195f4c89d9a025f68b?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Stephen</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/use-version-control-system/#comment-14851">
+							<time datetime="2014-05-29T00:53:39+00:00">
+								May 29, 2014 at 12:53 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>thx. very helpful.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/use-version-control-system/?replytocom=14851#respond' onclick='return addComment.moveForm( "div-comment-14851", "14851", "respond", "170" )' aria-label='Reply to Stephen'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-14852" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-14852" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/c8224f5a53b3144467767615fe7a3e19?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/c8224f5a53b3144467767615fe7a3e19?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://pyskool.com/use-version-control-system/' rel='external nofollow' class='url'>Thomas O'Brien</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/use-version-control-system/#comment-14852">
+							<time datetime="2014-09-12T11:13:00+00:00">
+								September 12, 2014 at 11:13 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Small software house. 6 developers.It took me 2 years to drag the team into version control and I still get told it&#8217;s rubbish when they use it incorrectly.</p>
+<p>If you are not using what I now call &#8220;collaboration control&#8221;, you are digging trenches with a spoon, and good luck but I&#8217;m out of here,</p>
+<p>Why version control?<br />
+which folder has the most recent code for that client ?<br />
+what broke the latest version I built ?<br />
+what changes have been made to the clients latest live release so I can work out what might have broken it at 2:00am<br />
+my disk got wiped, I&#8217;ve lost the last weeks work!<br />
+have I got the changes that developer&#8217;s x,y,z  made last week ?<br />
+take your pick.</p>
+<p>Which VCS.<br />
+I played with SVN, nope. Mercurial, better but DVCS meant that everyone commited locally and we ended up with unmergable code, nope. Discovered fossil. </p>
+<p>Why fossil?<br />
+1. Checkin comments can be altered and clarified when you see them in a month&#8217;s time and wonder WTF that description means.<br />
+2 Single exe. No install.<br />
+3. We copied the Apple OSx version to the Mac Mini server with the repositories on, to serve the Web front end. Windows exe on the Win7 dev machines.<br />
+4. scriptable.<br />
+5. relocate repositories with a simple copy.</p>
+<p>I did end up writing a right click context menu front end so I could enforce some rules regarding repository locations, adapt to Windows where file names are not case sensitive, etc. and nobody had to remember any commands.( 2,500 line batch script fine )</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/use-version-control-system/?replytocom=14852#respond' onclick='return addComment.moveForm( "div-comment-14852", "14852", "respond", "170" )' aria-label='Reply to Thomas O&#039;Brien'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/use-version-control-system/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='170' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="480eb6af12" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="67"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

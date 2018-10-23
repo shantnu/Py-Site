@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Xkcd Style Sql Injection Hack in Python</title>
+	<atom:link href="/xkcd-style-sql-injection-hack-in-python/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/xkcd-style-sql-injection-hack-in-python/#comment-19126</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Tue, 11 Oct 2016 12:48:21 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1604#comment-19126</guid>
+		<description><![CDATA[Thanks, I&#039;ll fix it]]></description>
+		<content:encoded><![CDATA[<p>Thanks, I&#8217;ll fix it</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: M P</title>
+		<link>/xkcd-style-sql-injection-hack-in-python/#comment-19122</link>
+		<dc:creator><![CDATA[M P]]></dc:creator>
+		<pubDate>Tue, 11 Oct 2016 02:46:36 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1604#comment-19122</guid>
+		<description><![CDATA[Hi! There&#039;s a couple of Python 2 &quot;print&quot; statements that won&#039;t work in Python 3:
+print result
+should be
+print(result)
+
+print c.fetchone()
+should be
+print(c.fetchone())
+
+Nice tutorial!]]></description>
+		<content:encoded><![CDATA[<p>Hi! There&#8217;s a couple of Python 2 &#8220;print&#8221; statements that won&#8217;t work in Python 3:<br />
+print result<br />
+should be<br />
+print(result)</p>
+<p>print c.fetchone()<br />
+should be<br />
+print(c.fetchone())</p>
+<p>Nice tutorial!</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

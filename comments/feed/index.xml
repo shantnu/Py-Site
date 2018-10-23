@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments for Python For Engineers</title>
+	<atom:link href="/comments/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>Comment on Build a Reddit Bot Part 3: Automate your bot by Shantnu</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-37616</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 04 Oct 2018 09:41:38 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-37616</guid>
+		<description><![CDATA[That’s a very good comment, but a bit of an overkill, I feel.]]></description>
+		<content:encoded><![CDATA[<p>That’s a very good comment, but a bit of an overkill, I feel.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Build a Reddit Bot Part 3: Automate your bot by Andrew D. Schatz</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-37604</link>
+		<dc:creator><![CDATA[Andrew D. Schatz]]></dc:creator>
+		<pubDate>Thu, 04 Oct 2018 04:05:33 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-37604</guid>
+		<description><![CDATA[Hey everyone.  I was having some issues with crontab and think I found a universal solution for all Unix-based users (any linux distro or iOS).  If you are running Ubuntu 18.04 and are struggling to get your python file to run in cron, then you&#039;re in the exact same boat as me.  If you&#039;re running Windows, then the only advice I can offer is to install Git and use the Git Bash terminal, but I&#039;m not positive that will work.
+
+After much googling, I found this answer on Stack Overflow that steered me in the right direction:
+
+https://stackoverflow.com/questions/26049459/python-script-not-running-in-cron/38682365#38682365
+
+My understanding is that cron and Python don&#039;t always work well together for some reason.  So this person came up with the idea to write a shell script (file extension is .sh) that executes the Python file and have cron call that instead.
+
+Instead of the line given in the tutorial written in your crontab file, use the following line instead:
+
+* * * * * sh /home/[yourUserName]/auto_delete.sh
+
+I&#039;m not sure if it is necessary to have this script in your home directory or not, but mine is.  Also, you can name your file whatever you want, but I just copied the the user&#039;s example and I&#039;m too lazy to change it.
+
+For your shell script, make sure it is in the same directory that you wrote in your cron file and has the same name (/home/[yourUserName]/auto_delete.sh). Use any text editor (I chose Vim) and have it say the following, but just know that I&#039;m not a shell scripting expert and only know a handful of useful commands:
+
+#!/bin/sh
+echo $(date) &#062;&#062; bash_cron_log.txt
+/[your]/[directory]/[where]/[python]/[executable]/[is]/[installed] /[your]/[directory]/[where]/[bot]/[file]/[is]/[located]/someBotFile.py &#062;&#062; bash_cron_log.txt
+
+What this will do create a text file (or append to an existing text file) called bash_cron_log.txt in the same directory as your shell script.  Also, this will be where all of your output from your Python file is written.  For example, if you have print(&quot;connected&quot;) in your python file after your Reddit instantiation, it will write &quot;connected&quot; out to that .txt file.  However, you will need to edit your Python file to access the correct directory for posts_replied_to.txt, unless you&#039;re okay with it being in the same file as your shell script.  For example, this is what my text file looked like after I had that print statement in my python script for 3 minutes:
+
+Wed Oct 3 22:27:01 CDT 2018
+Wed Oct 3 22:28:01 CDT 2018
+Wed Oct 3 22:29:01 CDT 2018
+connected
+Wed Oct 3 22:30:01 CDT 2018
+connected
+Wed Oct 3 22:31:01 CDT 2018
+connected
+Wed Oct 3 22:32:01 CDT 2018
+Wed Oct 3 22:33:01 CDT 2018
+Wed Oct 3 22:34:01 CDT 2018
+
+Notice that all the times are exactly 1 minute apart.  This is because cron&#039;s minimum time between runs is 1 minute (I think this is true).  If you want it to run more frequently than 1 minute intervals, then you need to use something else.
+
+If you don&#039;t know where your Python executable is installed, just type &quot;which python&quot; in your terminal and it will give you the exact path you need to for that first argument you&#039;re looking for.
+
+Okay, I think I covered everything.  Thank you Shantnu for making this tutorial and that subreddit for us to play around in.  If I made a mistake anywhere in here, whether it&#039;s a typo or I&#039;m misunderstanding a concept, please let me know and I&#039;ll change it.]]></description>
+		<content:encoded><![CDATA[<p>Hey everyone.  I was having some issues with crontab and think I found a universal solution for all Unix-based users (any linux distro or iOS).  If you are running Ubuntu 18.04 and are struggling to get your python file to run in cron, then you&#8217;re in the exact same boat as me.  If you&#8217;re running Windows, then the only advice I can offer is to install Git and use the Git Bash terminal, but I&#8217;m not positive that will work.</p>
+<p>After much googling, I found this answer on Stack Overflow that steered me in the right direction:</p>
+<p><a href="https://stackoverflow.com/questions/26049459/python-script-not-running-in-cron/38682365#38682365" rel="nofollow">https://stackoverflow.com/questions/26049459/python-script-not-running-in-cron/38682365#38682365</a></p>
+<p>My understanding is that cron and Python don&#8217;t always work well together for some reason.  So this person came up with the idea to write a shell script (file extension is .sh) that executes the Python file and have cron call that instead.</p>
+<p>Instead of the line given in the tutorial written in your crontab file, use the following line instead:</p>
+<p>* * * * * sh /home/[yourUserName]/auto_delete.sh</p>
+<p>I&#8217;m not sure if it is necessary to have this script in your home directory or not, but mine is.  Also, you can name your file whatever you want, but I just copied the the user&#8217;s example and I&#8217;m too lazy to change it.</p>
+<p>For your shell script, make sure it is in the same directory that you wrote in your cron file and has the same name (/home/[yourUserName]/auto_delete.sh). Use any text editor (I chose Vim) and have it say the following, but just know that I&#8217;m not a shell scripting expert and only know a handful of useful commands:</p>
+<p>#!/bin/sh<br />
+echo $(date) &gt;&gt; bash_cron_log.txt<br />
+/[your]/[directory]/[where]/[python]/[executable]/[is]/[installed] /[your]/[directory]/[where]/[bot]/[file]/[is]/[located]/someBotFile.py &gt;&gt; bash_cron_log.txt</p>
+<p>What this will do create a text file (or append to an existing text file) called bash_cron_log.txt in the same directory as your shell script.  Also, this will be where all of your output from your Python file is written.  For example, if you have print(&#8220;connected&#8221;) in your python file after your Reddit instantiation, it will write &#8220;connected&#8221; out to that .txt file.  However, you will need to edit your Python file to access the correct directory for posts_replied_to.txt, unless you&#8217;re okay with it being in the same file as your shell script.  For example, this is what my text file looked like after I had that print statement in my python script for 3 minutes:</p>
+<p>Wed Oct 3 22:27:01 CDT 2018<br />
+Wed Oct 3 22:28:01 CDT 2018<br />
+Wed Oct 3 22:29:01 CDT 2018<br />
+connected<br />
+Wed Oct 3 22:30:01 CDT 2018<br />
+connected<br />
+Wed Oct 3 22:31:01 CDT 2018<br />
+connected<br />
+Wed Oct 3 22:32:01 CDT 2018<br />
+Wed Oct 3 22:33:01 CDT 2018<br />
+Wed Oct 3 22:34:01 CDT 2018</p>
+<p>Notice that all the times are exactly 1 minute apart.  This is because cron&#8217;s minimum time between runs is 1 minute (I think this is true).  If you want it to run more frequently than 1 minute intervals, then you need to use something else.</p>
+<p>If you don&#8217;t know where your Python executable is installed, just type &#8220;which python&#8221; in your terminal and it will give you the exact path you need to for that first argument you&#8217;re looking for.</p>
+<p>Okay, I think I covered everything.  Thank you Shantnu for making this tutorial and that subreddit for us to play around in.  If I made a mistake anywhere in here, whether it&#8217;s a typo or I&#8217;m misunderstanding a concept, please let me know and I&#8217;ll change it.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Contact by bsp</title>
+		<link>/contact/#comment-37280</link>
+		<dc:creator><![CDATA[bsp]]></dc:creator>
+		<pubDate>Fri, 28 Sep 2018 03:00:55 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=32#comment-37280</guid>
+		<description><![CDATA[Thank you for your article. This is the most satisfying tutorial so far, you explained it clearly.]]></description>
+		<content:encoded><![CDATA[<p>Thank you for your article. This is the most satisfying tutorial so far, you explained it clearly.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Your first GUI app with Python and PyQt by Fred</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-36961</link>
+		<dc:creator><![CDATA[Fred]]></dc:creator>
+		<pubDate>Sun, 23 Sep 2018 06:29:31 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-36961</guid>
+		<description><![CDATA[This may sound odd but did you key in a value in price_box before you hit the calculateButton?]]></description>
+		<content:encoded><![CDATA[<p>This may sound odd but did you key in a value in price_box before you hit the calculateButton?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Your first GUI app with Python and PyQt by Fred Paul</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-36935</link>
+		<dc:creator><![CDATA[Fred Paul]]></dc:creator>
+		<pubDate>Sat, 22 Sep 2018 21:40:04 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-36935</guid>
+		<description><![CDATA[I&#039;m working on a project to control a FM receiver over serial using AT commends.  I didn&#039;t have a problem with just Pfython3 text.  My background used Visual Basic for all my GUI needs but I&#039;ve moved tp RASPBERRY PI.  I tried PAGE but it didnt work as expected.  WINPYTHON is promising with QTDesigner and PyQT5.  And the uic utility to convert ui to py.  Sounds confussing?   
+
+Your tutorial was exactly what I needed.  I&#039;ll let you know if it works out.
+
+You asked if more tutorials would be beneficial.  YES  Focussed on engineering with the GIO.  
+
+Thanks]]></description>
+		<content:encoded><![CDATA[<p>I&#8217;m working on a project to control a FM receiver over serial using AT commends.  I didn&#8217;t have a problem with just Pfython3 text.  My background used Visual Basic for all my GUI needs but I&#8217;ve moved tp RASPBERRY PI.  I tried PAGE but it didnt work as expected.  WINPYTHON is promising with QTDesigner and PyQT5.  And the uic utility to convert ui to py.  Sounds confussing?   </p>
+<p>Your tutorial was exactly what I needed.  I&#8217;ll let you know if it works out.</p>
+<p>You asked if more tutorials would be beneficial.  YES  Focussed on engineering with the GIO.  </p>
+<p>Thanks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Python on Windows causing you pain? Try Anaconda by chitra lalawat</title>
+		<link>/python-on-windows-causing-you-pain-try-anaconda/#comment-35873</link>
+		<dc:creator><![CDATA[chitra lalawat]]></dc:creator>
+		<pubDate>Fri, 07 Sep 2018 12:14:47 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=79#comment-35873</guid>
+		<description><![CDATA[Hey... 
+type the line below in anaconda prompt-
+conda install -c anaconda opencv]]></description>
+		<content:encoded><![CDATA[<p>Hey&#8230;<br />
+type the line below in anaconda prompt-<br />
+conda install -c anaconda opencv</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Your first GUI app with Python and PyQt by Shantnu</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-35152</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Mon, 27 Aug 2018 21:50:59 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-35152</guid>
+		<description><![CDATA[Never done it on the RPI, so can’t say. 
+
+Maybe other commenters can help......]]></description>
+		<content:encoded><![CDATA[<p>Never done it on the RPI, so can’t say. </p>
+<p>Maybe other commenters can help&#8230;&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Your first GUI app with Python and PyQt by Dan Kuzdas</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-35151</link>
+		<dc:creator><![CDATA[Dan Kuzdas]]></dc:creator>
+		<pubDate>Mon, 27 Aug 2018 21:37:17 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-35151</guid>
+		<description><![CDATA[Shantnu
+I have updated my code but really bumping my head against the wall on how to update a textbox within the MyApp  QT class based on def good / def bad GPIO inputs on the Raspberry pi
+See code below:
+Looking to use the Raspberry pi to update a MySQL database with real time production data. Have it all working with QPushButton events, but need to pass contact closure  event to MyApp class
+Any Thoughts 
+ 
+from __future__ import division
+import sys
+from PyQt4 import QtCore, QtGui, uic
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+def scrap(channel):
+    GPIO.output(18, GPIO.HIGH)
+    print(&#039;scrap part&#039;)
+    
+    # How would I update a text box in the  in the MyApp Class? 
+
+def good(channel):
+    GPIO.output(18, GPIO.HIGH)
+    print(&#039;good part&#039;)
+
+    # How would I update a text box in the  in the MyApp Class? 
+    
+    time.sleep(0.1)
+    GPIO.output(18, GPIO.LOW)
+
+GPIO.add_event_detect(24, GPIO.FALLING, callback=scrap, bouncetime=500)
+GPIO.add_event_detect(25, GPIO.FALLING, callback=good, bouncetime=500)
+
+qtCreatorFile = &quot;tax_calc.ui&quot; # Enter file here.
+Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
+class MyApp(QtGui.QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        QtGui.QMainWindow.__init__(self)
+        Ui_MainWindow.__init__(self)
+        self.setupUi(self)
+        self.calc_tax_button.clicked.connect(self.CalculateTax)
+
+    def CalculateTax(self):
+        price = int(self.price_box.toPlainText())
+        tax = (self.tax_rate.value())
+        total_price = price  + ((tax / 100) * price)
+        total_price_string = &quot;The total price with tax is: &quot; + str(total_price)
+        self.results_window.setText(total_price_string)
+   
+if __name__ == &quot;__main__&quot;:
+    app = QtGui.QApplication(sys.argv)
+    window = MyApp()
+    window.show()
+    sys.exit(app.exec_())]]></description>
+		<content:encoded><![CDATA[<p>Shantnu<br />
+I have updated my code but really bumping my head against the wall on how to update a textbox within the MyApp  QT class based on def good / def bad GPIO inputs on the Raspberry pi<br />
+See code below:<br />
+Looking to use the Raspberry pi to update a MySQL database with real time production data. Have it all working with QPushButton events, but need to pass contact closure  event to MyApp class<br />
+Any Thoughts </p>
+<p>from __future__ import division<br />
+import sys<br />
+from PyQt4 import QtCore, QtGui, uic<br />
+import RPi.GPIO as GPIO<br />
+import time</p>
+<p>GPIO.setmode(GPIO.BCM)<br />
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)<br />
+GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)</p>
+<p>def scrap(channel):<br />
+    GPIO.output(18, GPIO.HIGH)<br />
+    print(&#8216;scrap part&#8217;)</p>
+<p>    # How would I update a text box in the  in the MyApp Class? </p>
+<p>def good(channel):<br />
+    GPIO.output(18, GPIO.HIGH)<br />
+    print(&#8216;good part&#8217;)</p>
+<p>    # How would I update a text box in the  in the MyApp Class? </p>
+<p>    time.sleep(0.1)<br />
+    GPIO.output(18, GPIO.LOW)</p>
+<p>GPIO.add_event_detect(24, GPIO.FALLING, callback=scrap, bouncetime=500)<br />
+GPIO.add_event_detect(25, GPIO.FALLING, callback=good, bouncetime=500)</p>
+<p>qtCreatorFile = &#8220;tax_calc.ui&#8221; # Enter file here.<br />
+Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)<br />
+class MyApp(QtGui.QMainWindow, Ui_MainWindow):<br />
+    def __init__(self):<br />
+        QtGui.QMainWindow.__init__(self)<br />
+        Ui_MainWindow.__init__(self)<br />
+        self.setupUi(self)<br />
+        self.calc_tax_button.clicked.connect(self.CalculateTax)</p>
+<p>    def CalculateTax(self):<br />
+        price = int(self.price_box.toPlainText())<br />
+        tax = (self.tax_rate.value())<br />
+        total_price = price  + ((tax / 100) * price)<br />
+        total_price_string = &#8220;The total price with tax is: &#8221; + str(total_price)<br />
+        self.results_window.setText(total_price_string)</p>
+<p>if __name__ == &#8220;__main__&#8221;:<br />
+    app = QtGui.QApplication(sys.argv)<br />
+    window = MyApp()<br />
+    window.show()<br />
+    sys.exit(app.exec_())</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Your first GUI app with Python and PyQt by Shantnu</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-35000</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Sat, 25 Aug 2018 15:41:38 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-35000</guid>
+		<description><![CDATA[Thanks <img src="https://s.w.org/images/core/emoji/11/72x72/1f64f.png" alt="🙏" class="wp-smiley" style="height: 1em; max-height: 1em;" />]]></description>
+		<content:encoded><![CDATA[<p>Thanks 🙏</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Your first GUI app with Python and PyQt by Sapan Mankad</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-34997</link>
+		<dc:creator><![CDATA[Sapan Mankad]]></dc:creator>
+		<pubDate>Sat, 25 Aug 2018 14:56:19 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-34997</guid>
+		<description><![CDATA[This is an excellent tutorial for all beginners like me for PyQt GUI Design in Python. You are helping the community with such informative blogs. Keep on doing this. Looking forward for more such blogs from you. Thanks..!]]></description>
+		<content:encoded><![CDATA[<p>This is an excellent tutorial for all beginners like me for PyQt GUI Design in Python. You are helping the community with such informative blogs. Keep on doing this. Looking forward for more such blogs from you. Thanks..!</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

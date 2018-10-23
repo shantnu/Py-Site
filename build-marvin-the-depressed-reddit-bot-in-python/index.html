@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Build Marvin the Depressed Reddit Bot in Python &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/build-marvin-the-depressed-reddit-bot-in-python/" />
+<link rel='shortlink' href='/?p=2747' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fbuild-marvin-the-depressed-reddit-bot-in-python%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fbuild-marvin-the-depressed-reddit-bot-in-python%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-2747">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-2747" class="post-2747 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Build Marvin the Depressed Reddit Bot in Python</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<h4><strong>Build a Reddit Bot Series</strong></h4>
+<p style="padding-left: 30px;"><a href="/build-a-reddit-bot-part-1/">Part 1: Read posts from reddit</a></p>
+<p style="padding-left: 30px;"><a href="/build-a-reddit-bot-part-2-reply-to-posts/">Part 2: Reply to posts</a></p>
+<p style="padding-left: 30px;"><a title="Build a Reddit Bot Part 3: Automate your bot" href="/build-a-reddit-bot-part-3-automate-your-bot/">Part 3: Automate our Bot</a></p>
+<p style="padding-left: 30px;"><a href="/build-marvin-the-depressed-reddit-bot-in-python/">Part 4: Marvin the Depressed Bot</a></p>
+<p>There are many bots on Reddit (and Twitter etc), most of whom are very helpful.</p>
+<p>There is one bot that reminds of you something; another transcribes xkcd comic strips.</p>
+<p>Our bot is not going to be like that. Our bot will be a depressed loner who will reply to your plea for help with more insults.</p>
+<p>Introducing Marvin the Depressed Robot:</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/en/c/cb/Marvin_%28HHGG%29.jpg" class="aligncenter" width="148" height="243" /></p>
+<p><em>The theory behind bots</em>: Most bots on reddit follow the same formula: They scan for a keyword in the comments, and reply based on a formula. We will follow this formula. To <del>be insulted by</del>  get inspirational quotes from our bot, just add the words: <em>Marvin help</em> to your post.</p>
+<p>Our script will continually monitor all new posts, and when it sees <em>Marvin help</em>, it will jump into action.</p>
+<p><strong>Prerequisites</strong>: Make sure you have done Parts 1 &amp; 2 of the tutorial. Part 3 isn&#8217;t necessary, as this blog will try a new approach.</p>
+<p><strong>As before</strong>:  I created a special sub-Reddit for this series. Please please please stick to that. I don&#8217;t want you spamming other Reddits. The moderators may ban you, and Reddit may ban my user agent (please read part one if you don&#8217;t know what that means). So please stick to practising here:</p>
+<p><a href="http://www.reddit.com/r/pythonforengineers">http://www.reddit.com/r/pythonforengineers</a></p>
+<p>This is my own sub-Reddit, and you have full permission to play in that region.</p>
+<p>Before we start, all the source code is <a href="https://github.com/shantnu/RedditBot/blob/master/Marvin/marvin_bot.py">here</a>.</p>
+<p><strong>Build Our Bot</strong></p>
+<p>The first thing to do is to get some sarcastic Marvin quotes. Imdb is a good source.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf81d8e68a7504354541" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" touchscreen minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick"  style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Quotes taken from: http://www.imdb.com/character/ch0007553/quotes
+marvin_quotes = \
+[
+" I've calculated your chance of survival, but I don't think you'll like it. ",
+
+" Do you want me to sit in a corner and rust or just fall apart where I'm standing?",
+
+"Here I am, brain the size of a planet, and they tell me to take you up to the bridge. Call that job satisfaction? Cause I don't. ",
+
+"Here I am, brain the size of a planet, and they ask me to pick up a piece of paper. ",
+
+" It gives me a headache just trying to think down to your level. ",
+
+" You think you've got problems. What are you supposed to do if you are a manically depressed robot? No, don't even bother answering. I'm 50,000 times more intelligent than you and even I don't know the answer.",
+
+"Zaphod Beeblebrox: There's a whole new life stretching out in front of you. Marvin: Oh, not another one.",
+
+"The first ten million years were the worst. And the second ten million... they were the worst too. The third ten million I didn't enjoy at all. After that, I went into a bit of a decline. ",
+
+"Sorry, did I say something wrong? Pardon me for breathing which I never do anyway so I don't know why I bother to say it oh God I'm so depressed. ",
+
+" I have a million ideas, but, they all point to certain death. ",
+
+]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-2">2</div><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-4">4</div><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-6">6</div><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-8">8</div><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-10">10</div><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-12">12</div><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-14">14</div><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-16">16</div><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-18">18</div><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-20">20</div><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-22">22</div><div class="crayon-num" data-line="crayon-5bcf81d8e68a7504354541-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68a7504354541-24">24</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-1"><span class="crayon-p"># Quotes taken from: http://www.imdb.com/character/ch0007553/quotes</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-2"><span class="crayon-v">marvin_quotes</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">\</span></div><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-3"><span class="crayon-sy">[</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-4"><span class="crayon-s">" I've calculated your chance of survival, but I don't think you'll like it. "</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-6"><span class="crayon-s">" Do you want me to sit in a corner and rust or just fall apart where I'm standing?"</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-8"><span class="crayon-s">"Here I am, brain the size of a planet, and they tell me to take you up to the bridge. Call that job satisfaction? Cause I don't. "</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-10"><span class="crayon-s">"Here I am, brain the size of a planet, and they ask me to pick up a piece of paper. "</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-12"><span class="crayon-s">" It gives me a headache just trying to think down to your level. "</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-13">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-14"><span class="crayon-s">" You think you've got problems. What are you supposed to do if you are a manically depressed robot? No, don't even bother answering. I'm 50,000 times more intelligent than you and even I don't know the answer."</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-15">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-16"><span class="crayon-s">"Zaphod Beeblebrox: There's a whole new life stretching out in front of you. Marvin: Oh, not another one."</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-17">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-18"><span class="crayon-s">"The first ten million years were the worst. And the second ten million... they were the worst too. The third ten million I didn't enjoy at all. After that, I went into a bit of a decline. "</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-19">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-20"><span class="crayon-s">"Sorry, did I say something wrong? Pardon me for breathing which I never do anyway so I don't know why I bother to say it oh God I'm so depressed. "</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-21">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-22"><span class="crayon-s">" I have a million ideas, but, they all point to certain death. "</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf81d8e68a7504354541-23">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68a7504354541-24"><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0016 seconds] -->
+<p></p>
+<p>Let&#8217;s create our Reddit bot and point it to our sub-reddit:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf81d8e68b2877632202" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" touchscreen minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick"  style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+reddit = praw.Reddit('bot1')
+
+subreddit = reddit.subreddit("pythonforengineers")</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf81d8e68b2877632202-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68b2877632202-2">2</div><div class="crayon-num" data-line="crayon-5bcf81d8e68b2877632202-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf81d8e68b2877632202-1"><span class="crayon-v">reddit</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">praw</span><span class="crayon-sy">.</span><span class="crayon-e">Reddit</span><span class="crayon-sy">(</span><span class="crayon-s">'bot1'</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68b2877632202-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf81d8e68b2877632202-3"><span class="crayon-v">subreddit</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">reddit</span><span class="crayon-sy">.</span><span class="crayon-e">subreddit</span><span class="crayon-sy">(</span><span class="crayon-s">"pythonforengineers"</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>Now we come to the  crux of the code.</p>
+<p>Praw added this feature fairly recently, the ability to iterate over all new  posts in a subreddit. In their official example, they show you how to<a href="http://praw.readthedocs.io/en/latest/tutorials/reply_bot.html"> track new posts</a>. This method is called monitoring the submission stream, and it does so indefinitely.</p>
+<p>We are going to do something slightly different and monitor all new replies to posts.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf81d8e68b6088380364" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" touchscreen minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick"  style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+for comment in subreddit.stream.comments():</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf81d8e68b6088380364-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf81d8e68b6088380364-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">comment </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">subreddit</span><span class="crayon-sy">.</span><span class="crayon-v">stream</span><span class="crayon-sy">.</span><span class="crayon-e">comments</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>This line will continually monitor all new comments on every single post in the sub-reddit. It will run forever until you press Ctrl+C to kill the program.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf81d8e68b9897159990" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" touchscreen minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick"  style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+if re.search("Marvin Help", comment.body, re.IGNORECASE):</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf81d8e68b9897159990-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf81d8e68b9897159990-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">re</span><span class="crayon-sy">.</span><span class="crayon-e">search</span><span class="crayon-sy">(</span><span class="crayon-s">"Marvin Help"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">comment</span><span class="crayon-sy">.</span><span class="crayon-v">body</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">re</span><span class="crayon-sy">.</span><span class="crayon-v">IGNORECASE</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>We search for our keyword <em>Marvin help</em> in every single comment&#8217;s body. If we find it:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf81d8e68bc571896315" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" touchscreen minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick"  style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+marvin_reply = "Marvin the Depressed Robot says: " + random.choice(marvin_quotes)
+comment.reply(marvin_reply)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf81d8e68bc571896315-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68bc571896315-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf81d8e68bc571896315-1"><span class="crayon-v">marvin_reply</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"Marvin the Depressed Robot says: "</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-v">random</span><span class="crayon-sy">.</span><span class="crayon-e">choice</span><span class="crayon-sy">(</span><span class="crayon-v">marvin_quotes</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68bc571896315-2"><span class="crayon-v">comment</span><span class="crayon-sy">.</span><span class="crayon-e">reply</span><span class="crayon-sy">(</span><span class="crayon-v">marvin_reply</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>We choose a random quote from Marvin, and use the <em>comment.reply()</em> to reply to the message.</p>
+<p>Let&#8217;s test our bot.</p>
+<p>We create an empty post with a call to help to Marvin:</p>
+<p><a href="/wp-content/uploads/2016/12/redditbot4.jpg"><img src="/wp-content/uploads/2016/12/redditbot4.jpg" alt="" class="aligncenter size-full wp-image-2754" width="1146" height="769" srcset="/wp-content/uploads/2016/12/redditbot4.jpg 1146w, /wp-content/uploads/2016/12/redditbot4-300x201.jpg 300w, /wp-content/uploads/2016/12/redditbot4-768x515.jpg 768w, /wp-content/uploads/2016/12/redditbot4-1024x687.jpg 1024w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></a>As you can see, I&#8217;m feeling depressed as Justin Bieber hasn&#8217;t released an album for months, and I asked Marvin for help.</p>
+<p>Let&#8217;s run our bot now.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf81d8e68bf223194054" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" touchscreen minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick"  style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+$ python marvin_bot.py
+I'm depressed!
+
+Justin Bieber hasn't released an album for months.
+
+Marvin help
+
+
+Marvin the Depressed Robot says:  It gives me a headache just trying to think down to your level.</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf81d8e68bf223194054-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68bf223194054-2">2</div><div class="crayon-num" data-line="crayon-5bcf81d8e68bf223194054-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68bf223194054-4">4</div><div class="crayon-num" data-line="crayon-5bcf81d8e68bf223194054-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68bf223194054-6">6</div><div class="crayon-num" data-line="crayon-5bcf81d8e68bf223194054-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf81d8e68bf223194054-8">8</div><div class="crayon-num" data-line="crayon-5bcf81d8e68bf223194054-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf81d8e68bf223194054-1"><span class="crayon-sy">$</span><span class="crayon-h"> </span><span class="crayon-e">python </span><span class="crayon-v">marvin_bot</span><span class="crayon-e">.py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68bf223194054-2"><span class="crayon-i">I</span>'<span class="crayon-i">m</span><span class="crayon-h"> </span><span class="crayon-v">depressed</span><span class="crayon-o">!</span></div><div class="crayon-line" id="crayon-5bcf81d8e68bf223194054-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68bf223194054-4"><span class="crayon-e">Justin </span><span class="crayon-e">Bieber </span><span class="crayon-i">hasn</span>'<span class="crayon-i">t</span><span class="crayon-h"> </span><span class="crayon-e">released </span><span class="crayon-e">an </span><span class="crayon-e">album </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-v">months</span><span class="crayon-sy">.</span></div><div class="crayon-line" id="crayon-5bcf81d8e68bf223194054-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68bf223194054-6"><span class="crayon-e">Marvin </span><span class="crayon-e">help</span></div><div class="crayon-line" id="crayon-5bcf81d8e68bf223194054-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf81d8e68bf223194054-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf81d8e68bf223194054-9"><span class="crayon-e">Marvin </span><span class="crayon-e">the </span><span class="crayon-e">Depressed </span><span class="crayon-e">Robot </span><span class="crayon-v">says</span><span class="crayon-o">:</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-e">It </span><span class="crayon-e">gives </span><span class="crayon-i">me</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">headache </span><span class="crayon-e">just </span><span class="crayon-e">trying </span><span class="crayon-st">to</span><span class="crayon-h"> </span><span class="crayon-e">think </span><span class="crayon-e">down </span><span class="crayon-st">to</span><span class="crayon-h"> </span><span class="crayon-e">your </span><span class="crayon-v">level</span><span class="crayon-sy">.</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>Go to the subreddit page:</p>
+<p><a href="/wp-content/uploads/2016/12/redditbot5.jpg"><img src="/wp-content/uploads/2016/12/redditbot5.jpg" alt="" class="aligncenter size-full wp-image-2755" width="1318" height="491" srcset="/wp-content/uploads/2016/12/redditbot5.jpg 1318w, /wp-content/uploads/2016/12/redditbot5-300x112.jpg 300w, /wp-content/uploads/2016/12/redditbot5-768x286.jpg 768w, /wp-content/uploads/2016/12/redditbot5-1024x381.jpg 1024w, /wp-content/uploads/2016/12/redditbot5-1200x447.jpg 1200w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></a>And there you go. We are one step closer to the future. Now we just to write a towel bot, and a bot that replies <em>DON&#8217;T PANIC</em> to every single post.</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

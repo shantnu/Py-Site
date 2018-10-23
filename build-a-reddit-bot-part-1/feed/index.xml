@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Build a Reddit Bot Part 1</title>
+	<atom:link href="/build-a-reddit-bot-part-1/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Steve Shambles</title>
+		<link>/build-a-reddit-bot-part-1/#comment-34461</link>
+		<dc:creator><![CDATA[Steve Shambles]]></dc:creator>
+		<pubDate>Fri, 17 Aug 2018 00:41:20 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=143#comment-34461</guid>
+		<description><![CDATA[Your comments about the praw,ini ended a nightmare day for me thank you. 
+Have a look at my reddit image grabber with GUI full source if anyone wants it.
+https://stevepython.wordpress.com/2018/08/17/trouble-with-my-exes]]></description>
+		<content:encoded><![CDATA[<p>Your comments about the praw,ini ended a nightmare day for me thank you.<br />
+Have a look at my reddit image grabber with GUI full source if anyone wants it.<br />
+<a href="https://stevepython.wordpress.com/2018/08/17/trouble-with-my-exes" rel="nofollow">https://stevepython.wordpress.com/2018/08/17/trouble-with-my-exes</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-1/#comment-33853</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Mon, 06 Aug 2018 10:05:26 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=143#comment-33853</guid>
+		<description><![CDATA[Thats a great point, thanks!
+
+Updated the article with this.]]></description>
+		<content:encoded><![CDATA[<p>Thats a great point, thanks!</p>
+<p>Updated the article with this.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Farid Karadsheh</title>
+		<link>/build-a-reddit-bot-part-1/#comment-33838</link>
+		<dc:creator><![CDATA[Farid Karadsheh]]></dc:creator>
+		<pubDate>Mon, 06 Aug 2018 03:40:18 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=143#comment-33838</guid>
+		<description><![CDATA[Reddit has updated it&#039;s website to a new look. If you come across a link above that does not work, then you will have to change the url.
+
+Here is an example:
+Above we have the link http://www.reddit.com/dev/api
+Yet, it says not found. If we change the link to http://old.reddit.com/dev/api then the link should work.
+
+In short, if a reddit link does not work change the &quot;www&quot; to &quot;old&quot;, so the link looks like &quot;old.reddit.com&quot;]]></description>
+		<content:encoded><![CDATA[<p>Reddit has updated it&#8217;s website to a new look. If you come across a link above that does not work, then you will have to change the url.</p>
+<p>Here is an example:<br />
+Above we have the link <a href="http://www.reddit.com/dev/api" rel="nofollow">http://www.reddit.com/dev/api</a><br />
+Yet, it says not found. If we change the link to <a href="http://old.reddit.com/dev/api" rel="nofollow">http://old.reddit.com/dev/api</a> then the link should work.</p>
+<p>In short, if a reddit link does not work change the &#8220;www&#8221; to &#8220;old&#8221;, so the link looks like &#8220;old.reddit.com&#8221;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-1/#comment-28549</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 24 May 2018 07:29:44 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=143#comment-28549</guid>
+		<description><![CDATA[You have to ask permission from other sub Reddit! Many ban bots; it’s like spamming someone.]]></description>
+		<content:encoded><![CDATA[<p>You have to ask permission from other sub Reddit! Many ban bots; it’s like spamming someone.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: njibhu16</title>
+		<link>/build-a-reddit-bot-part-1/#comment-28528</link>
+		<dc:creator><![CDATA[njibhu16]]></dc:creator>
+		<pubDate>Thu, 24 May 2018 01:48:59 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=143#comment-28528</guid>
+		<description><![CDATA[I removed the condition    
+ # If we haven&#039;t replied to this post before
+    if submission.id not in posts_replied_to:
+But it didn&#039;t seem to work neither !]]></description>
+		<content:encoded><![CDATA[<p>I removed the condition<br />
+ # If we haven&#8217;t replied to this post before<br />
+    if submission.id not in posts_replied_to:<br />
+But it didn&#8217;t seem to work neither !</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: njibhu16</title>
+		<link>/build-a-reddit-bot-part-1/#comment-28523</link>
+		<dc:creator><![CDATA[njibhu16]]></dc:creator>
+		<pubDate>Wed, 23 May 2018 23:53:14 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=143#comment-28523</guid>
+		<description><![CDATA[The part2 worked fine on pythonforengineers
+but when I changed to another subreddit it didn&#039;t work
+ie: subreddit = reddit.subreddit(&#039;SEO&#039;)   # Also tried OnlineTrafficTeam but didn&#039;t work !
+Can you please help ?
+Thanks]]></description>
+		<content:encoded><![CDATA[<p>The part2 worked fine on pythonforengineers<br />
+but when I changed to another subreddit it didn&#8217;t work<br />
+ie: subreddit = reddit.subreddit(&#8216;SEO&#8217;)   # Also tried OnlineTrafficTeam but didn&#8217;t work !<br />
+Can you please help ?<br />
+Thanks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-1/#comment-26312</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Fri, 13 Apr 2018 08:01:41 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=143#comment-26312</guid>
+		<description><![CDATA[How r u running the script? Run it from the command line:
+
+&lt;code&gt;python script.py&lt;/code&gt;]]></description>
+		<content:encoded><![CDATA[<p>How r u running the script? Run it from the command line:</p>
+<p><code>python script.py</code></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Logan Cuddy</title>
+		<link>/build-a-reddit-bot-part-1/#comment-26306</link>
+		<dc:creator><![CDATA[Logan Cuddy]]></dc:creator>
+		<pubDate>Fri, 13 Apr 2018 02:12:54 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=143#comment-26306</guid>
+		<description><![CDATA[when i run the script, it opens terminal and then closes immediately, is this supposed to happen?]]></description>
+		<content:encoded><![CDATA[<p>when i run the script, it opens terminal and then closes immediately, is this supposed to happen?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-1/#comment-23467</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Mon, 18 Dec 2017 13:19:44 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=143#comment-23467</guid>
+		<description><![CDATA[Cool, thanks!]]></description>
+		<content:encoded><![CDATA[<p>Cool, thanks!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/build-a-reddit-bot-part-1/#comment-23466</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Mon, 18 Dec 2017 13:18:51 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=143#comment-23466</guid>
+		<description><![CDATA[Your error message tells you exactly what&#039;s wrong. Read it carfully]]></description>
+		<content:encoded><![CDATA[<p>Your error message tells you exactly what&#8217;s wrong. Read it carfully</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Adding the Data to a Database &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/adding-the-data-to-a-database/" />
+<link rel='shortlink' href='/?p=1760' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fadding-the-data-to-a-database%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fadding-the-data-to-a-database%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1760">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1760" class="post-1760 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Adding the Data to a Database</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<h4><strong>Build a Twitter Analytics App</strong></h4>
+<p style="padding-left: 30px;"><strong><a href="/build-a-twitter-analytics-app-using-python/"> 1 Introduction: Start Here</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/the-first-step-design-your-solution/">2 The First Step: Design Your Solution</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/in-which-i-rant-a-little/">3 In Which I Rant a Little</a></strong></p>
+<p style="padding-left: 30px;"><a href="/twitter-analyser-my-design/"><strong>4  Design Solution</strong> </a></p>
+<p style="padding-left: 30px;"><strong><a href="/writing-great-code/">5 Writing Great Code</a></strong></p>
+<p style="padding-left: 30px;"><strong>6 Writing the Backend Twitter Server</strong></p>
+<p style="padding-left: 60px;"><a href="/writing-the-code-in-small-parts-part-1-the-basic-app/"><strong>Writing the Code in Small Parts: Part 1, The Basic App</strong> </a></p>
+<p style="padding-left: 60px;"><strong><a href="/part-2-adding-a-counter-to-exit/">Part 2: Adding a Counter to Exit</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/part-3-adding-language-and-retweet-count/">Part 3: Adding Language and Retweet Count</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/organising-our-code/">Part 4: Organising Our Code</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/adding-the-data-to-a-database/">7 Adding the Data to a Database</a></strong></p>
+<p style="padding-left: 30px;"><a href="/testing-what-and-how-to-test/"><strong>8 <span class="trail-end">Testing: What and How to Test</span></strong></a></p>
+<p style="padding-left: 60px;"><strong><a href="/testing-our-frontend/">8.1 Testing Our Frontend</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/testing-our-backend/">8.2 Testing Our Backend</a></strong></p>
+<p style="padding-left: 30px;"><strong>9 Displaying our Data using the Flask Webserver</strong></p>
+<p style="padding-left: 60px;"><strong><a href="/introduction-to-flask-for-python/">9.1 Introduction to Flask</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/adding-templates-to-our-flask-app/">9.2 Adding templates to our Flask app</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/displaying-our-tweets-in-the-flask-web-server/">9.3 Displaying our Tweets in the Flask Web Server</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/future-work-and-improvements/">10 Future Work and Improvements</a></strong></p>
+<p>So far, we were just printing our data. But if we want to pass it to the webserver, we need to store it somewhere.</p>
+<p>Before we go ahead, I hope you downloaded the <a href="http://sqlitebrowser.org/">Sqlite Browser</a>, as I recommend earlier. It&#8217;ll help you check you are writing the values to the database correctly.</p>
+<p>While you could have the Flask server gather the data in real time, that is bad design practice, because the two things are then <em>closely coupled</em>. This is a technical term that means changing one part of the code will affect the other. This is very bad, as a bug in one part will cause failures in another, and that will make it impossible to debug.</p>
+<p>We want to keep our codebase independent, so each part can be tested and debugged separately. That&#8217;s why the code that reads live tweets is separate from the code that displays it on a web browser.</p>
+<p>Okay, let&#8217;s get started. First thing we need to do is create the database. The code is taken from <a href="https://github.com/shantnu/TwitterAnalyser/blob/master/Part4/create_db.py">here</a>, though I will only go over a few relevant parts (enough for you to understand what&#8217;s going on:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f0a6798353681732" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+import sqlite3
+
+db = "../twit_data.db"
+
+conn = sqlite3.connect(db)
+c = conn.cursor()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f0a6798353681732-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a6798353681732-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f0a6798353681732-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a6798353681732-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f0a6798353681732-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a6798353681732-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f0a6798353681732-1"><span class="crayon-e">import </span><span class="crayon-e">sqlite3</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a6798353681732-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f0a6798353681732-3"><span class="crayon-v">db</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"../twit_data.db"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a6798353681732-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f0a6798353681732-5"><span class="crayon-v">conn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sqlite3</span><span class="crayon-sy">.</span><span class="crayon-e">connect</span><span class="crayon-sy">(</span><span class="crayon-v">db</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a6798353681732-6"><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">cursor</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>We open our database and connect to it. We are using Sqlite3, which automatically creates the database if it doesn&#8217;t exist.</p>
+<p>&nbsp;</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f0a67a2903824485" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+cmd = "CREATE TABLE lang_data (language TEXT, top_language TEXT, datetime TEXT)"
+c.execute(cmd)
+
+
+conn.commit()
+
+conn.close()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f0a67a2903824485-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67a2903824485-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f0a67a2903824485-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67a2903824485-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f0a67a2903824485-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67a2903824485-6">6</div><div class="crayon-num" data-line="crayon-5bcf82f0a67a2903824485-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f0a67a2903824485-1"><span class="crayon-v">cmd</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"CREATE TABLE lang_data (language TEXT, top_language TEXT, datetime TEXT)"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67a2903824485-2"><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-v">cmd</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f0a67a2903824485-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67a2903824485-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f0a67a2903824485-5"><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">commit</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67a2903824485-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f0a67a2903824485-7"><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>We&#8217;re just going to look at one table, to see how it works.</p>
+<p>We are using raw sql in the example above, to create a table called <em>lang_data</em> that contains 3 fields. language and top_language is what we get from Twitter. We are also storing the date-time, so that we can do things like <em>Get all tweets in the last hour</em>.</p>
+<p>If you run this file, it will create the database for you.</p>
+<p><strong>Writing to the database</strong></p>
+<p>Okay, let&#8217;s see how we will write to our database. Code is <a href="https://github.com/shantnu/TwitterAnalyser/blob/master/Part4/twit1.py">here</a>.</p>
+<p>We create a connection to our database in the main code:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f0a67a6062947386" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+if __name__ == "__main__":
+    num_tweets_to_grab = 1000
+    retweet_count = 10000
+    try:
+        conn = sqlite3.connect(db)        
+        twit = TwitterMain(num_tweets_to_grab, retweet_count, conn)
+
+    except Exception as e:
+        print(e.__doc__)
+
+    finally:
+        conn.close()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f0a67a6062947386-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67a6062947386-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f0a67a6062947386-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67a6062947386-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f0a67a6062947386-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67a6062947386-6">6</div><div class="crayon-num" data-line="crayon-5bcf82f0a67a6062947386-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67a6062947386-8">8</div><div class="crayon-num" data-line="crayon-5bcf82f0a67a6062947386-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67a6062947386-10">10</div><div class="crayon-num" data-line="crayon-5bcf82f0a67a6062947386-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67a6062947386-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f0a67a6062947386-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">__name__</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-s">"__main__"</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67a6062947386-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">num_tweets_to_grab</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">1000</span></div><div class="crayon-line" id="crayon-5bcf82f0a67a6062947386-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">retweet_count</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">10000</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67a6062947386-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">try</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf82f0a67a6062947386-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">conn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sqlite3</span><span class="crayon-sy">.</span><span class="crayon-e">connect</span><span class="crayon-sy">(</span><span class="crayon-v">db</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67a6062947386-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">twit</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">TwitterMain</span><span class="crayon-sy">(</span><span class="crayon-v">num_tweets_to_grab</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">retweet_count</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">conn</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f0a67a6062947386-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67a6062947386-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">except </span><span class="crayon-e">Exception </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-v">e</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf82f0a67a6062947386-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">e</span><span class="crayon-sy">.</span><span class="crayon-v">__doc__</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67a6062947386-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f0a67a6062947386-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">finally</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67a6062947386-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0009 seconds] -->
+<p></p>
+<p>As you can see, we are passing this database to the <em>TwitterMain</em> class, but opening and closing it from the main code. This is important, as if the class code crashes, we&#8217;ll still be able to close the database safely. That&#8217;s what the <em>finally</em> code above does.</p>
+<p>How do we write to the database?</p>
+<p>In the <em><span class="pl-en">get_streaming_data()</span></em> function, we get the results from the <em>stats</em> class, and write them to the database.  Note that this happens after all the Tweets have been gathered (so the real time nature of the script is not compromised):</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f0a67a9833572394" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+    lang, top_lang, top_tweets = self.stats.get_stats()
+ 
+    self.c.execute("INSERT INTO lang_data VALUES (?,?, DATETIME('now'))", (str(list(Counter(lang).items())), str(list(Counter(top_lang).items()))))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f0a67a9833572394-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67a9833572394-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f0a67a9833572394-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f0a67a9833572394-1"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">lang</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">top_lang</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">top_tweets</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-r">self</span><span class="crayon-sy">.</span><span class="crayon-v">stats</span><span class="crayon-sy">.</span><span class="crayon-e">get_stats</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67a9833572394-2"><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-5bcf82f0a67a9833572394-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r">self</span><span class="crayon-sy">.</span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-s">"INSERT INTO lang_data VALUES (?,?, DATETIME('now'))"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-e">str</span><span class="crayon-sy">(</span><span class="crayon-e">list</span><span class="crayon-sy">(</span><span class="crayon-e">Counter</span><span class="crayon-sy">(</span><span class="crayon-v">lang</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">items</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">str</span><span class="crayon-sy">(</span><span class="crayon-e">list</span><span class="crayon-sy">(</span><span class="crayon-e">Counter</span><span class="crayon-sy">(</span><span class="crayon-v">top_lang</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">items</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>We add the <em>lang</em> and <em>top_lang</em> to the database, along with the current time. Note that I&#8217;m doing something weird with the languages:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f0a67ac627460233" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+(str(list(Counter(lang).items()))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f0a67ac627460233-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f0a67ac627460233-1"><span class="crayon-sy">(</span><span class="crayon-e">str</span><span class="crayon-sy">(</span><span class="crayon-e">list</span><span class="crayon-sy">(</span><span class="crayon-e">Counter</span><span class="crayon-sy">(</span><span class="crayon-v">lang</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">items</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>This is because we can&#8217;t store Python objects in a database. So I convert them to a Counter, and then a string. This is how it looks in the actual database:</p>
+<p>&nbsp;</p>
+<p><a href="/wp-content/uploads/2015/09/db_capture.png"><img class="aligncenter size-large wp-image-1761" src="/wp-content/uploads/2015/09/db_capture-1024x232.png" alt="db_capture" width="1024" height="232" srcset="/wp-content/uploads/2015/09/db_capture-1024x232.png 1024w, /wp-content/uploads/2015/09/db_capture-300x68.png 300w, /wp-content/uploads/2015/09/db_capture.png 1341w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></a></p>
+<p>If you look at the <em>top_language</em> field above, you&#8217;ll see it&#8217;s a string that contains a Python list. That means I can read it easily.</p>
+<p>These were the top languages. The actual top tweets are returned as a list. We&#8217;ll write each one to the database:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f0a67af787465454" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+        for t in top_tweets:
+            self.c.execute("INSERT INTO twit_data VALUES (?, DATETIME('now'))", (t,))
+
+        self.conn.commit()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f0a67af787465454-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67af787465454-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f0a67af787465454-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67af787465454-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f0a67af787465454-1"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">t</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">top_tweets</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67af787465454-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r">self</span><span class="crayon-sy">.</span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-s">"INSERT INTO twit_data VALUES (?, DATETIME('now'))"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">t</span><span class="crayon-sy">,</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f0a67af787465454-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67af787465454-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r">self</span><span class="crayon-sy">.</span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">commit</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>We loop over the tweets, writing each one, and the current time. We then commit the database.</p>
+<p>And this is how we write the Trends:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f0a67b2818791273" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+    def get_trends(self):
+        trends = self.api.trends_place(1)
+        trend_data = []
+
+        for trend in trends[0]["trends"]:
+            #print(trend['name'])
+            trend_tweets = []
+            trend_tweets.append(trend['name'])
+            tt = tweepy.Cursor(self.api.search, q = trend['name']).items(3)
+         
+            for t in tt:                
+                trend_tweets.append(self.get_tweet_html(t.id))
+                #print(tweet_html)
+
+            trend_data.append(tuple(trend_tweets))
+
+        self.c.executemany("INSERT INTO trend_data VALUES (?,?,?,?, DATETIME('now'))", trend_data)
+
+        self.conn.commit()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f0a67b2818791273-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67b2818791273-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f0a67b2818791273-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67b2818791273-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f0a67b2818791273-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67b2818791273-6">6</div><div class="crayon-num" data-line="crayon-5bcf82f0a67b2818791273-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67b2818791273-8">8</div><div class="crayon-num" data-line="crayon-5bcf82f0a67b2818791273-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67b2818791273-10">10</div><div class="crayon-num" data-line="crayon-5bcf82f0a67b2818791273-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67b2818791273-12">12</div><div class="crayon-num" data-line="crayon-5bcf82f0a67b2818791273-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67b2818791273-14">14</div><div class="crayon-num" data-line="crayon-5bcf82f0a67b2818791273-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67b2818791273-16">16</div><div class="crayon-num" data-line="crayon-5bcf82f0a67b2818791273-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f0a67b2818791273-18">18</div><div class="crayon-num" data-line="crayon-5bcf82f0a67b2818791273-19">19</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f0a67b2818791273-1"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">def </span><span class="crayon-e">get_trends</span><span class="crayon-sy">(</span><span class="crayon-r">self</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67b2818791273-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trends</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-r">self</span><span class="crayon-sy">.</span><span class="crayon-v">api</span><span class="crayon-sy">.</span><span class="crayon-e">trends_place</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f0a67b2818791273-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trend_data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67b2818791273-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f0a67b2818791273-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">trend </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">trends</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-s">"trends"</span><span class="crayon-sy">]</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67b2818791273-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p">#print(trend['name'])</span></div><div class="crayon-line" id="crayon-5bcf82f0a67b2818791273-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trend_tweets</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67b2818791273-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trend_tweets</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">trend</span><span class="crayon-sy">[</span><span class="crayon-s">'name'</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f0a67b2818791273-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">tt</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">tweepy</span><span class="crayon-sy">.</span><span class="crayon-e">Cursor</span><span class="crayon-sy">(</span><span class="crayon-r">self</span><span class="crayon-sy">.</span><span class="crayon-v">api</span><span class="crayon-sy">.</span><span class="crayon-v">search</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">q</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">trend</span><span class="crayon-sy">[</span><span class="crayon-s">'name'</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">items</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67b2818791273-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></div><div class="crayon-line" id="crayon-5bcf82f0a67b2818791273-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">t</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">tt</span><span class="crayon-o">:</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67b2818791273-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trend_tweets</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-r">self</span><span class="crayon-sy">.</span><span class="crayon-e">get_tweet_html</span><span class="crayon-sy">(</span><span class="crayon-v">t</span><span class="crayon-sy">.</span><span class="crayon-v">id</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f0a67b2818791273-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p">#print(tweet_html)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67b2818791273-14">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f0a67b2818791273-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trend_data</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-e">tuple</span><span class="crayon-sy">(</span><span class="crayon-v">trend_tweets</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67b2818791273-16">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f0a67b2818791273-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r">self</span><span class="crayon-sy">.</span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">executemany</span><span class="crayon-sy">(</span><span class="crayon-s">"INSERT INTO trend_data VALUES (?,?,?,?, DATETIME('now'))"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">trend_data</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f0a67b2818791273-18">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f0a67b2818791273-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r">self</span><span class="crayon-sy">.</span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">commit</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0017 seconds] -->
+<p></p>
+<p>This time, we have a trend and 3 Tweets with each trend.</p>
+<p>So we build up our list in this way: The first entry is the trend, and the next three are the example tweets of the trend.</p>
+<p>We then create a tuple with this list. This allows us to write the whole thing as one block into the database.</p>
+<p>Have a look at the <a href="https://github.com/shantnu/TwitterAnalyser/blob/master/Part4/twit1.py">complete code</a>, run it a few times, make sure you understand what is happening.</p>
+<p>This concludes our backend code.</p>
+<p>But you may have noticed there is a big thing missing: <strong>Tests</strong>. We&#8217;ll fix that in the next section. But first, some theory on testing.</p>
+
+
+
+<p>&nbsp;</p>
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

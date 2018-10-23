@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Your first GUI app with Python and PyQt</title>
+	<atom:link href="/your-first-gui-app-with-python-and-pyqt/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Fred</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-36961</link>
+		<dc:creator><![CDATA[Fred]]></dc:creator>
+		<pubDate>Sun, 23 Sep 2018 06:29:31 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-36961</guid>
+		<description><![CDATA[This may sound odd but did you key in a value in price_box before you hit the calculateButton?]]></description>
+		<content:encoded><![CDATA[<p>This may sound odd but did you key in a value in price_box before you hit the calculateButton?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Fred Paul</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-36935</link>
+		<dc:creator><![CDATA[Fred Paul]]></dc:creator>
+		<pubDate>Sat, 22 Sep 2018 21:40:04 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-36935</guid>
+		<description><![CDATA[I&#039;m working on a project to control a FM receiver over serial using AT commends.  I didn&#039;t have a problem with just Pfython3 text.  My background used Visual Basic for all my GUI needs but I&#039;ve moved tp RASPBERRY PI.  I tried PAGE but it didnt work as expected.  WINPYTHON is promising with QTDesigner and PyQT5.  And the uic utility to convert ui to py.  Sounds confussing?   
+
+Your tutorial was exactly what I needed.  I&#039;ll let you know if it works out.
+
+You asked if more tutorials would be beneficial.  YES  Focussed on engineering with the GIO.  
+
+Thanks]]></description>
+		<content:encoded><![CDATA[<p>I&#8217;m working on a project to control a FM receiver over serial using AT commends.  I didn&#8217;t have a problem with just Pfython3 text.  My background used Visual Basic for all my GUI needs but I&#8217;ve moved tp RASPBERRY PI.  I tried PAGE but it didnt work as expected.  WINPYTHON is promising with QTDesigner and PyQT5.  And the uic utility to convert ui to py.  Sounds confussing?   </p>
+<p>Your tutorial was exactly what I needed.  I&#8217;ll let you know if it works out.</p>
+<p>You asked if more tutorials would be beneficial.  YES  Focussed on engineering with the GIO.  </p>
+<p>Thanks</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-35152</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Mon, 27 Aug 2018 21:50:59 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-35152</guid>
+		<description><![CDATA[Never done it on the RPI, so can’t say. 
+
+Maybe other commenters can help......]]></description>
+		<content:encoded><![CDATA[<p>Never done it on the RPI, so can’t say. </p>
+<p>Maybe other commenters can help&#8230;&#8230;</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dan Kuzdas</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-35151</link>
+		<dc:creator><![CDATA[Dan Kuzdas]]></dc:creator>
+		<pubDate>Mon, 27 Aug 2018 21:37:17 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-35151</guid>
+		<description><![CDATA[Shantnu
+I have updated my code but really bumping my head against the wall on how to update a textbox within the MyApp  QT class based on def good / def bad GPIO inputs on the Raspberry pi
+See code below:
+Looking to use the Raspberry pi to update a MySQL database with real time production data. Have it all working with QPushButton events, but need to pass contact closure  event to MyApp class
+Any Thoughts 
+ 
+from __future__ import division
+import sys
+from PyQt4 import QtCore, QtGui, uic
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+def scrap(channel):
+    GPIO.output(18, GPIO.HIGH)
+    print(&#039;scrap part&#039;)
+    
+    # How would I update a text box in the  in the MyApp Class? 
+
+def good(channel):
+    GPIO.output(18, GPIO.HIGH)
+    print(&#039;good part&#039;)
+
+    # How would I update a text box in the  in the MyApp Class? 
+    
+    time.sleep(0.1)
+    GPIO.output(18, GPIO.LOW)
+
+GPIO.add_event_detect(24, GPIO.FALLING, callback=scrap, bouncetime=500)
+GPIO.add_event_detect(25, GPIO.FALLING, callback=good, bouncetime=500)
+
+qtCreatorFile = &quot;tax_calc.ui&quot; # Enter file here.
+Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
+class MyApp(QtGui.QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        QtGui.QMainWindow.__init__(self)
+        Ui_MainWindow.__init__(self)
+        self.setupUi(self)
+        self.calc_tax_button.clicked.connect(self.CalculateTax)
+
+    def CalculateTax(self):
+        price = int(self.price_box.toPlainText())
+        tax = (self.tax_rate.value())
+        total_price = price  + ((tax / 100) * price)
+        total_price_string = &quot;The total price with tax is: &quot; + str(total_price)
+        self.results_window.setText(total_price_string)
+   
+if __name__ == &quot;__main__&quot;:
+    app = QtGui.QApplication(sys.argv)
+    window = MyApp()
+    window.show()
+    sys.exit(app.exec_())]]></description>
+		<content:encoded><![CDATA[<p>Shantnu<br />
+I have updated my code but really bumping my head against the wall on how to update a textbox within the MyApp  QT class based on def good / def bad GPIO inputs on the Raspberry pi<br />
+See code below:<br />
+Looking to use the Raspberry pi to update a MySQL database with real time production data. Have it all working with QPushButton events, but need to pass contact closure  event to MyApp class<br />
+Any Thoughts </p>
+<p>from __future__ import division<br />
+import sys<br />
+from PyQt4 import QtCore, QtGui, uic<br />
+import RPi.GPIO as GPIO<br />
+import time</p>
+<p>GPIO.setmode(GPIO.BCM)<br />
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)<br />
+GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)</p>
+<p>def scrap(channel):<br />
+    GPIO.output(18, GPIO.HIGH)<br />
+    print(&#8216;scrap part&#8217;)</p>
+<p>    # How would I update a text box in the  in the MyApp Class? </p>
+<p>def good(channel):<br />
+    GPIO.output(18, GPIO.HIGH)<br />
+    print(&#8216;good part&#8217;)</p>
+<p>    # How would I update a text box in the  in the MyApp Class? </p>
+<p>    time.sleep(0.1)<br />
+    GPIO.output(18, GPIO.LOW)</p>
+<p>GPIO.add_event_detect(24, GPIO.FALLING, callback=scrap, bouncetime=500)<br />
+GPIO.add_event_detect(25, GPIO.FALLING, callback=good, bouncetime=500)</p>
+<p>qtCreatorFile = &#8220;tax_calc.ui&#8221; # Enter file here.<br />
+Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)<br />
+class MyApp(QtGui.QMainWindow, Ui_MainWindow):<br />
+    def __init__(self):<br />
+        QtGui.QMainWindow.__init__(self)<br />
+        Ui_MainWindow.__init__(self)<br />
+        self.setupUi(self)<br />
+        self.calc_tax_button.clicked.connect(self.CalculateTax)</p>
+<p>    def CalculateTax(self):<br />
+        price = int(self.price_box.toPlainText())<br />
+        tax = (self.tax_rate.value())<br />
+        total_price = price  + ((tax / 100) * price)<br />
+        total_price_string = &#8220;The total price with tax is: &#8221; + str(total_price)<br />
+        self.results_window.setText(total_price_string)</p>
+<p>if __name__ == &#8220;__main__&#8221;:<br />
+    app = QtGui.QApplication(sys.argv)<br />
+    window = MyApp()<br />
+    window.show()<br />
+    sys.exit(app.exec_())</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-35000</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Sat, 25 Aug 2018 15:41:38 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-35000</guid>
+		<description><![CDATA[Thanks <img src="https://s.w.org/images/core/emoji/11/72x72/1f64f.png" alt="🙏" class="wp-smiley" style="height: 1em; max-height: 1em;" />]]></description>
+		<content:encoded><![CDATA[<p>Thanks 🙏</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Sapan Mankad</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-34997</link>
+		<dc:creator><![CDATA[Sapan Mankad]]></dc:creator>
+		<pubDate>Sat, 25 Aug 2018 14:56:19 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-34997</guid>
+		<description><![CDATA[This is an excellent tutorial for all beginners like me for PyQt GUI Design in Python. You are helping the community with such informative blogs. Keep on doing this. Looking forward for more such blogs from you. Thanks..!]]></description>
+		<content:encoded><![CDATA[<p>This is an excellent tutorial for all beginners like me for PyQt GUI Design in Python. You are helping the community with such informative blogs. Keep on doing this. Looking forward for more such blogs from you. Thanks..!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-34939</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Fri, 24 Aug 2018 18:09:29 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-34939</guid>
+		<description><![CDATA[self is used in classes. You are using code that was copied from a class, but using it outside the class.]]></description>
+		<content:encoded><![CDATA[<p>self is used in classes. You are using code that was copied from a class, but using it outside the class.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Dan Kuzdas</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-34936</link>
+		<dc:creator><![CDATA[Dan Kuzdas]]></dc:creator>
+		<pubDate>Fri, 24 Aug 2018 17:56:30 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-34936</guid>
+		<description><![CDATA[Shantnu
+Great tutorial. I’m am trying to port your example over to Raspberry Pi Python. Looking at using in a production environment to record scrap count entry via the General Purpose Input / Output pins on the Pi.
+GUI interface is great but having some issues when I try to reference a text box from within the GPIO portion of my program. 
+I have added an extra text box to your tax_calc.ui called    production_results_window
+But getting the following error when I have a contact closure
+Traceback (most recent call last):
+  File &quot;/home/pi/TaxCalcUpdate.py&quot;, line 37, in scrap
+    self.production_results_window.setText(&quot;Scrap&quot;)
+NameError: global name &#039;self&#039; is not defined
+
+I know this example is for Python – Not Raspberry Pi but thought maybe you might have an idea 
+
+
+
+Updated pyqt_first.py  Program
+
+from __future__ import division
+import sys
+from PyQt4 import QtCore, QtGui, uic
+import RPi.GPIO as GPIO
+import time
+
+qtCreatorFile = &quot;tax_calc.ui&quot; # Enter file here.
+Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
+
+class MyApp(QtGui.QMainWindow, Ui_MainWindow):
+    def __init__(self):
+        QtGui.QMainWindow.__init__(self)
+        Ui_MainWindow.__init__(self)
+        self.setupUi(self)
+        self.calc_tax_button.clicked.connect(self.CalculateTax)
+
+    def CalculateTax(self):
+        price = int(self.price_box.toPlainText())
+        tax = (self.tax_rate.value())
+        total_price = price  + ((tax / 100) * price)
+        total_price_string = &quot;The total price with tax is: &quot; + str(total_price)
+        self.results_window.setText(total_price_string)
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(18, GPIO.OUT)
+GPIO.output(18, GPIO.LOW)
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+def scrap(channel):
+    GPIO.output(18, GPIO.HIGH)
+    print(&#039;scrap part&#039;)
+    self.production_results_window.setText(&quot;Scrap&quot;)
+    time.sleep(0.1)
+    GPIO.output(18, GPIO.LOW)
+
+def good(channel):
+    GPIO.output(18, GPIO.HIGH)
+    print(&#039;good part&#039;)
+    self.production_results_window.setText(&quot;Good&quot;)
+    time.sleep(0.1)
+    GPIO.output(18, GPIO.LOW)
+
+GPIO.add_event_detect(24, GPIO.FALLING, callback=scrap, bouncetime=500)
+GPIO.add_event_detect(25, GPIO.FALLING, callback=good, bouncetime=500)
+  
+if __name__ == &quot;__main__&quot;:
+    app = QtGui.QApplication(sys.argv)
+    window = MyApp()
+    window.show()
+    sys.exit(app.exec_())]]></description>
+		<content:encoded><![CDATA[<p>Shantnu<br />
+Great tutorial. I’m am trying to port your example over to Raspberry Pi Python. Looking at using in a production environment to record scrap count entry via the General Purpose Input / Output pins on the Pi.<br />
+GUI interface is great but having some issues when I try to reference a text box from within the GPIO portion of my program.<br />
+I have added an extra text box to your tax_calc.ui called    production_results_window<br />
+But getting the following error when I have a contact closure<br />
+Traceback (most recent call last):<br />
+  File &#8220;/home/pi/TaxCalcUpdate.py&#8221;, line 37, in scrap<br />
+    self.production_results_window.setText(&#8220;Scrap&#8221;)<br />
+NameError: global name &#8216;self&#8217; is not defined</p>
+<p>I know this example is for Python – Not Raspberry Pi but thought maybe you might have an idea </p>
+<p>Updated pyqt_first.py  Program</p>
+<p>from __future__ import division<br />
+import sys<br />
+from PyQt4 import QtCore, QtGui, uic<br />
+import RPi.GPIO as GPIO<br />
+import time</p>
+<p>qtCreatorFile = &#8220;tax_calc.ui&#8221; # Enter file here.<br />
+Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)</p>
+<p>class MyApp(QtGui.QMainWindow, Ui_MainWindow):<br />
+    def __init__(self):<br />
+        QtGui.QMainWindow.__init__(self)<br />
+        Ui_MainWindow.__init__(self)<br />
+        self.setupUi(self)<br />
+        self.calc_tax_button.clicked.connect(self.CalculateTax)</p>
+<p>    def CalculateTax(self):<br />
+        price = int(self.price_box.toPlainText())<br />
+        tax = (self.tax_rate.value())<br />
+        total_price = price  + ((tax / 100) * price)<br />
+        total_price_string = &#8220;The total price with tax is: &#8221; + str(total_price)<br />
+        self.results_window.setText(total_price_string)</p>
+<p>GPIO.setmode(GPIO.BCM)<br />
+GPIO.setup(18, GPIO.OUT)<br />
+GPIO.output(18, GPIO.LOW)<br />
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)<br />
+GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)</p>
+<p>def scrap(channel):<br />
+    GPIO.output(18, GPIO.HIGH)<br />
+    print(&#8216;scrap part&#8217;)<br />
+    self.production_results_window.setText(&#8220;Scrap&#8221;)<br />
+    time.sleep(0.1)<br />
+    GPIO.output(18, GPIO.LOW)</p>
+<p>def good(channel):<br />
+    GPIO.output(18, GPIO.HIGH)<br />
+    print(&#8216;good part&#8217;)<br />
+    self.production_results_window.setText(&#8220;Good&#8221;)<br />
+    time.sleep(0.1)<br />
+    GPIO.output(18, GPIO.LOW)</p>
+<p>GPIO.add_event_detect(24, GPIO.FALLING, callback=scrap, bouncetime=500)<br />
+GPIO.add_event_detect(25, GPIO.FALLING, callback=good, bouncetime=500)</p>
+<p>if __name__ == &#8220;__main__&#8221;:<br />
+    app = QtGui.QApplication(sys.argv)<br />
+    window = MyApp()<br />
+    window.show()<br />
+    sys.exit(app.exec_())</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: croserII</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-33074</link>
+		<dc:creator><![CDATA[croserII]]></dc:creator>
+		<pubDate>Wed, 25 Jul 2018 06:45:26 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-33074</guid>
+		<description><![CDATA[here is  PyQt5 compatible code for pyqt_first.py
+
+import sys
+from PyQt5.QtWidgets import QMainWindow, QApplication
+from PyQt5 import uic
+
+Ui_MainWindow, QtBaseClass = uic.loadUiType(&#039;tax_calc.ui&#039;)
+
+class MyApp(QMainWindow):
+ def __init__(self):
+  super(MyApp, self).__init__()
+  self.ui = Ui_MainWindow()
+  self.ui.setupUi(self)
+  self.ui.calc_tax_button.clicked.connect(self.CalculateTax)
+
+ def CalculateTax(self):
+  price = int(self.ui.price_box.toPlainText())
+  tax = (self.ui.tax_rate.value())
+  total_price = price + ((tax / 100) * price)
+  total_price_string = &#039;The total price with tax is: &#039; + str(total_price)
+  self.ui.results_window.setText(total_price_string)
+
+if __name__ == &#039;__main__&#039;:
+ app = QApplication(sys.argv)
+ window = MyApp()
+ window.show()
+ sys.exit(app.exec_())]]></description>
+		<content:encoded><![CDATA[<p>here is  PyQt5 compatible code for pyqt_first.py</p>
+<p>import sys<br />
+from PyQt5.QtWidgets import QMainWindow, QApplication<br />
+from PyQt5 import uic</p>
+<p>Ui_MainWindow, QtBaseClass = uic.loadUiType(&#8216;tax_calc.ui&#8217;)</p>
+<p>class MyApp(QMainWindow):<br />
+ def __init__(self):<br />
+  super(MyApp, self).__init__()<br />
+  self.ui = Ui_MainWindow()<br />
+  self.ui.setupUi(self)<br />
+  self.ui.calc_tax_button.clicked.connect(self.CalculateTax)</p>
+<p> def CalculateTax(self):<br />
+  price = int(self.ui.price_box.toPlainText())<br />
+  tax = (self.ui.tax_rate.value())<br />
+  total_price = price + ((tax / 100) * price)<br />
+  total_price_string = &#8216;The total price with tax is: &#8216; + str(total_price)<br />
+  self.ui.results_window.setText(total_price_string)</p>
+<p>if __name__ == &#8216;__main__&#8217;:<br />
+ app = QApplication(sys.argv)<br />
+ window = MyApp()<br />
+ window.show()<br />
+ sys.exit(app.exec_())</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/your-first-gui-app-with-python-and-pyqt/#comment-31693</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 05 Jul 2018 15:49:45 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1410#comment-31693</guid>
+		<description><![CDATA[Sorry , no help for homework questions]]></description>
+		<content:encoded><![CDATA[<p>Sorry , no help for homework questions</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

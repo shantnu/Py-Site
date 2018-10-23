@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>How to survive a job you absolutely hate &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; How to survive a job you absolutely hate Comments Feed" href="/survive-job-you-absolutely-hate/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/survive-job-you-absolutely-hate/" />
+<link rel='shortlink' href='/?p=520' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fsurvive-job-you-absolutely-hate%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fsurvive-job-you-absolutely-hate%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-520">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-520" class="post-520 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">How to survive a job you absolutely hate</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p style="text-align: left;">I thought I was in a great place. I was grinding out code like a horny teenager grinds out you know what. If I had been born in the 70s, I would have been walking to Stayin Alive.</p>
+<p>And then, I was called into a meeting with a senior manager, almost at vice president level. And he basically told me that I was the lowest performer in the company, because &#8220;he hadn&#8217;t seen my name at all in any of the progress reports.&#8221; He didn&#8217;t bother to ask my direct manager, because in the world of senior managers, what isn&#8217;t written in email reports doesn&#8217;t exist.</p>
+<p>Sort of like the quantum world, where particles only exist when you observe them. You know, Schrodinger&#8217;s cat and stuff?</p>
+<p><a href="/wp-content/uploads/2014/03/Sch-cat.jpg"><img class="aligncenter" src="/wp-content/uploads/2014/03/Sch-cat.jpg" alt="Sch cat" height="590" width="450" /></a></p>
+<p>So because some middle level manager had forgotten to put my name on email reports, I didn&#8217;t &#8220;exist&#8221;. If you have read Catch 22, this happens to the doctor. He dies on paper, and the people stop talking to him because he is officially dead, even though he is standing right in front of them.</p>
+<p>I joke about it now, but at the time I was quite hurt. I had never felt so humiliated in my life</p>
+<p>I thought about quitting, but couldn&#8217;t because of some legal / finance issues. Basically, the company had sponsored my visa, and if I quit, I&#8217;d have to pay them thousands of pounds I didn&#8217;t have. Besides, for other, personal reasons, I couldn&#8217;t move city, and there were no jobs in my city.</p>
+<p>So I had to swallow my humiliation, and go back to work at a place I felt sick. And I mean this literally. That year, I took something like 7-8 sick periods, each lasting 2-3 days. I was put on an official HR checklist, as even in our relatively relaxed environment, that was too much.</p>
+<p>But I survived, and as the cliche goes, what doesn&#8217;t kill you makes you the President of Azerbijan.</p>
+<p>If you too are stuck in a job you can&#8217;t leave, here are some tips that may help you survive.</p>
+<h4>Surviving a work place you absolutely hate</h4>
+<p><strong>Take stock of your life</strong></p>
+<p>The first thing to do is take stock of your life. Until then, I had been cruising along in life. I didn&#8217;t have any savings, even though I was single and living in a cheap house. I wasted my time playing games, and didn&#8217;t do anything to improve my career. As soon as the incident above happened, I decided to reevaluate my life. This is a very personal process, and will be different for each of us. But take a blank diary, and write down all you feel is wrong with your life. If you don&#8217;t want to write it down, sit in a quiet place, and just think about it. You won&#8217;t have to think hard. Your subconscious already knows whats wrong: You just have to acknowledge it. There is no need to take action on this list yet. That will happen automatically when you are ready to move to the next step.</p>
+<p>Second, decide what you want to do in life. Do you want to be a top notch contractor, charging hundreds of dollars an hour? Do you want to start your own software company? Get a job at $Big_Company? You don&#8217;t need to be certain at this stage, and you can even have multiple options. But do think about the details. So if you want to become a startup founder with your own web based business, do you know how to create and run websites? Do you know how to sell on the internet?</p>
+<p>Next, start looking at how you can improve your skills. Don&#8217;t blindly change a job. That&#8217;s my advice. Because whatever problems you face now, you will carry them to the next job. <strong>Changing your environment will not change your situation. </strong>There is a reason you are in the mess you are in, and if you just move job, you will end up in the same situation again. So that&#8217;s why I say, look to improve your skills, so you can move on to something better, not just more of the same crap.</p>
+<h4>Why you should not quit a job you hate</h4>
+<p>This will fly against everything you have been told: If you hate your job, quit immediately! Walk in, give the finger to the boss, and storm out. But that will not accomplish anything.</p>
+<p>This point is very important. Just changing your job will not improve your life, unless you also change the thinking that got you into this mess. What thinking?</p>
+<ul>
+<li>If you think all managers are evil and working for Da Man, you will never take on responsibility. Which means you will never get promoted, no matter how many jobs you change.</li>
+<li>If you think capitalism and business is evil, you may never think of selling that app you wrote, and that many people would be willing to pay good money for. You will be stuck blaming evil bankers or foreigners for your problems.</li>
+<li>If you think (like 90% of programmers) that being technically good is good enough to get promoted and get pay rises, you should be prepared for a good bitch slap by Real Life. Don&#8217;t worry, I&#8217;ll be there to laugh at you, and then pick you up, and welcome you to the club. We all been there, and the sooner you get slapped down by life, the sooner you will be ready to face life as it really is, and not how you want it to be.</li>
+</ul>
+<p>If you accept you are responsible for your own life, you must also accept that your current circumstances, the ones you hate so much, are partly (or wholly, depending on how honest you are) your fault. So if you change your job, the bad habits, the wrong thinking patterns that got you into the mess you are, will carry with you to the next job. <strong>Changing your environment will not change your circumstances</strong>. Read that line again.</p>
+<p><strong>Edited to add:</strong> Based on comments on Hacker News etc, let me add this:</p>
+<p><em>If you are facing bullying, racism or sexism (or indeed any other -ism), then yes, leave immediately.</em></p>
+<p><em>But for most of us, it&#8217;s not outright bullying, but the constant grinding down, the non-stop requests for overtime, the occasional &#8220;helpful comments&#8221; that are actually insults, the constant interference, that really gets us down. Individually, they might mean nothing, but over time, they build up, and make you feel as small as the full stop at the end of this sentence. If you are facing this constant humiliation, that&#8217;s when you must plan your exit.</em></p>
+<p><strong>End of edit</strong></p>
+<h4>So what should you do?</h4>
+<p>Find out which negative patterns are holding you back from your goals. You may need the help of loved ones, friends, or even a therapist. You can do this by yourself, if you can be brutally honest, but I found it easier to get help, to see my own blind spots. And then, change your thinking (and no, it won&#8217;t happen overnight). You may find that you no longer hate your job. Or you may find that you are now skilled enough to do better. Either way, you will be in a better position to move forward, than if you had just given the finger and moved on.</p>
+<h4>Start building your skills</h4>
+<p>Which skills? You should already have a rough idea of what you want to do. Start with the skills required for that. Luckily, some skills are common. No matter what you do, learning to sell yourself will come in handy. Other than that, you might want to learn things that you find relevant, or even interesting. Don&#8217;t dismiss interesting, as you more likely to stick with things you love. These might be making a website, learning a new programming language, making professional looking video casts, or even improving your writing.</p>
+<p>Start to take control of your life. Most depression is caused  by feeling helpless, a victim of fate. If your work won&#8217;t allow it, trying taking initiative outside. Write a game, build a electromechanical Dalek using Lego and microprocessors, anything that will make you feel good about yourself. Just one thing: Do something that you can finish in a few weeks. Finish, so it is good enough to put online and show to others. Don&#8217;t choose something like writing the next Lord of the Rings, which will take you 27 years to complete. Choose something from what you want to accomplish, and start making small progress daily.</p>
+<p>This point is very important. The reason you are doing this is to build self esteem. Small, regular accomplishments will really build your self esteem.</p>
+<h4>How to move on to a better job</h4>
+<p>So how does all this help you?</p>
+<p>Simple. You are working on improving your skills in the background, aren&#8217;t you? Once you feel that you are confident, resign quietly. Don&#8217;t throw a tantrum, don&#8217;t give it to them or show them their place. Say &#8220;Thanks for everything, but I feel I must move on now.&#8221; You will come across as very professional, and will certainly get a good reference.</p>
+<p>The difference now is that you have built yourself up. You will not just changeD one crap job for another. It might take time, but no one said fulfilling your dreams is easy.</p>
+<p>Remember that there is a price to pay if you chase after your dreams. But also remember that<strong> there will be a bigger price to pay if you crush your dreams and do nothing</strong>.  You have to pay the price either way, but at least one path leads to happiness.</p>
+<p>Of course, moving jobs and taking a new plunge, one that will cause you extreme fear and doubt. I will address that in a future post.</p>
+<p><em> I have written a followup to this blog:</em>  <a href="/overcome-mind-numbing-depression/">How to overcome mind numbing depression</a></p>
+<p>If you liked this post, you might like my book:</p>
+<p><iframe width="336" height="550" style="max-width: 100%;" type="text/html" frameborder="0" allowfullscreen="allowfullscreen" src="https://read.amazon.co.uk/kp/card?asin=B00P6SGE42&amp;asin=B00P6SGE42&amp;preview=inline&amp;linkCode=kpe&amp;ref_=cm_sw_r_kb_dp_uQmNxbNH30C0S"></iframe></p>
+<p>Available as eBook and print, on Amazon, Apple iBooks, Kobo and more.</p>
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			19 thoughts on &ldquo;How to survive a job you absolutely hate&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-14866" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-14866" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/522f44265e0ed80578f6d3af4cdf7011?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/522f44265e0ed80578f6d3af4cdf7011?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Pete</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14866">
+							<time datetime="2014-03-06T22:27:08+00:00">
+								March 6, 2014 at 10:27 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Here is the one piece of gold that can&#8217;t be taught:</p>
+<blockquote><p>If you accept you are responsible for your own life</p></blockquote>
+<p>I learned this in my late twenties, and when I did I stopped being the victim in my life and realized that I am the architect. We make a choice for everything in our lives and those choices directly affect the quality. I can choose to react and nurture my emotions which can become a self-defeating ritual or I can witness my emotions, and make a conscious choice how to move from that point forward.</p>
+<p>Great write up. I don&#8217;t think there are enough people who&#8217;ve gained the insights you&#8217;ve shared here. I hope it helps others &#8220;get it&#8221;.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14866#respond' onclick='return addComment.moveForm( "div-comment-14866", "14866", "respond", "520" )' aria-label='Reply to Pete'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14867" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14867" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14867">
+							<time datetime="2014-03-06T22:44:40+00:00">
+								March 6, 2014 at 10:44 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks Pete.</p>
+<p>This was a very difficult post to write, as I am baring my secrets, the parts I&#8217;d rather keep hidden in the closet.</p>
+<p>But I keep seeing other programmer struggle with the same thing,  not realising that their problems aren&#8217;t unique. That hundreds and thousands of programmers before them have faced this exact problem and survived. And not just survived, but thrived.</p>
+<p>In the long term, it doesn&#8217;t matter. But in the short term, it can feel like the world is ending. Hopefully, at least one person will read this post and be inspired to do something with his/her life.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14867#respond' onclick='return addComment.moveForm( "div-comment-14867", "14867", "respond", "520" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14868" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-14868" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/2672921c18f36fc48e166f24a9a3d95f?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/2672921c18f36fc48e166f24a9a3d95f?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://fyll.co.uk/' rel='external nofollow' class='url'>Phil</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14868">
+							<time datetime="2014-03-06T23:10:26+00:00">
+								March 6, 2014 at 11:10 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for this post, I can reflect on a lot of these points, and I&#8217;ve certainly felt / feel a lot of what you&#8217;ve wrote.</p>
+<p>Banging my head on a table, skipping food breaks, staying up all night trying to rectify problems has only added more anxiety in almost all cases.</p>
+<p>Still surviving though&#8230; it&#8217;s constantly a learning process &#8211; such as life 🙂</p>
+<p>Phil</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14868#respond' onclick='return addComment.moveForm( "div-comment-14868", "14868", "respond", "520" )' aria-label='Reply to Phil'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14869" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14869" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14869">
+							<time datetime="2014-03-06T23:14:26+00:00">
+								March 6, 2014 at 11:14 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks Phil.</p>
+<p>If you stand back and look at it from afar, the problems no longer look that bad. But the problem is, we get so caught up in the moment, we lose perspective. As you say, this only adds to anxiety.</p>
+<p>By learning and growing, we learn better to cope with adversity.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14869#respond' onclick='return addComment.moveForm( "div-comment-14869", "14869", "respond", "520" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14870" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-14870" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/96b73b2df05032e52b249292ca33f978?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/96b73b2df05032e52b249292ca33f978?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Charles</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14870">
+							<time datetime="2014-03-07T05:53:11+00:00">
+								March 7, 2014 at 5:53 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p><cite>If you accept you are responsible for your own life</cite></p>
+<p>My rephrase on this is that if you blame other people or thing then you are affirming that what happens to you is outside of your control and you can do nothing about it. It&#8217;s just an excuse for not taking responsibility for our life.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14870#respond' onclick='return addComment.moveForm( "div-comment-14870", "14870", "respond", "520" )' aria-label='Reply to Charles'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14871" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14871" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14871">
+							<time datetime="2014-03-07T07:00:21+00:00">
+								March 7, 2014 at 7:00 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks Charles, very well said. Yes, blaming others makes you feel helpless, and even more depressed. Taking responsibility means you are in control of your life, and if you are in control, you can fix it.</p>
+<p>It&#8217;s like when a plane loses control and dives. It may look like the world is about to end, but if the pilot is in control, s/he will bring it back to normal. You need to accept that shit things will happen, and they will not always be your fault. But if you are in control of your life, you can fix any mess you find yourself in.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14871#respond' onclick='return addComment.moveForm( "div-comment-14871", "14871", "respond", "520" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14872" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-14872" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/02f2d5a5d0610a28a9a3634640385b36?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/02f2d5a5d0610a28a9a3634640385b36?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Sanjay</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14872">
+							<time datetime="2014-03-09T09:31:05+00:00">
+								March 9, 2014 at 9:31 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Your &#8220;accepting responsibility&#8221; and &#8220;taking control&#8221; part reminds me of circle of <a href="http://www.ndoherty.com/circle-of-influence-circle-of-concern/" rel="nofollow">influence/circle of concern</a>.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14872#respond' onclick='return addComment.moveForm( "div-comment-14872", "14872", "respond", "520" )' aria-label='Reply to Sanjay'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14873" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14873" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14873">
+							<time datetime="2014-03-09T11:14:28+00:00">
+								March 9, 2014 at 11:14 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thank you Sanjay, that looks useful. I&#8217;ll have a read.</p>
+<p>Thanks for sharing.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14873#respond' onclick='return addComment.moveForm( "div-comment-14873", "14873", "respond", "520" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14874" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-14874" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/9a49f4a1a99620d4d9cec9b9b31bb51e?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/9a49f4a1a99620d4d9cec9b9b31bb51e?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Rj</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14874">
+							<time datetime="2014-03-09T20:08:26+00:00">
+								March 9, 2014 at 8:08 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>The most important book I have read recently is called &#8220;things may go terribly, horribly wrong.&#8221; If you are interested in learning how to pick your attitudes better you should check it out.</p>
+<p>You must learn to view my brain as a collection of voices which attempt to tell stories about the environment and events that happen. Often they lie or are lazy and just keep repeating the same old stories.  Like most people, You trained these voices a long time ago and learning to argue with them or nullify their negative messages was difficult.</p>
+<p>The thing to realize is that every internal voice started as an external voice. Someone said something shitty or positive to you and you accepted that voice into your head permanently.</p>
+<p>When you got your bad review, that guys voice got into your head. I bet you heard his words over and over again&#8230;probably for years.</p>
+<p>One technique is to visualize negative voices and stories as coming from an external entity. The authors point is that if a circus clown tells you something bad to your face then you can write them off as an asshole and laugh in their face&#8230;but when you tell that to yourself you somehow have to accept it.  If you imagine that your internal &#8220;whines&#8221; are coming from a giant screaming, blubbering baby then you are free to laugh them off.</p>
+<p>The Oatmeal has a great comic which touches on this technique about running ultra marathons. In his own head he has personified his negative voice as a fat, grease covered, pimply monster he calls &#8220;the blerch&#8221; which tries constantly to talk him into taking thee easy road, quitting, accepting a negative story about his situation.</p>
+<p>When you hear these negative attitudes coming out of a &#8220;blerch&#8221; you simply laugh them off and go find a more positive attitude such as &#8220;I am going to need to improve how I convince people that I am doing a lot of work. I know I am weak at communication so I will buy some books on this and read them. On monday I will talk to my middle manager and express my concerns about this feedback I got.&#8221;</p>
+<p>With practice, you can retrain your inner voices to behave and that is when you make progress.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14874#respond' onclick='return addComment.moveForm( "div-comment-14874", "14874", "respond", "520" )' aria-label='Reply to Rj'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14875" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14875" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14875">
+							<time datetime="2014-03-09T20:30:25+00:00">
+								March 9, 2014 at 8:30 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for sharing this with us, RJ.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14875#respond' onclick='return addComment.moveForm( "div-comment-14875", "14875", "respond", "520" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14876" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-14876" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/d124bce52678536d445b54c2f7879383?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/d124bce52678536d445b54c2f7879383?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Helene</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14876">
+							<time datetime="2014-03-25T01:09:40+00:00">
+								March 25, 2014 at 1:09 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thank you for this. I&#8217;m not a programmer, but your words hit home on many levels that they apply to anyone in very similar situations in any other job.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14876#respond' onclick='return addComment.moveForm( "div-comment-14876", "14876", "respond", "520" )' aria-label='Reply to Helene'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14877" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14877" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14877">
+							<time datetime="2014-03-25T06:38:23+00:00">
+								March 25, 2014 at 6:38 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You are welcome, Helene.</p>
+<p>Yes, many of these situations are general, and could affect anyone. I mention programmers, as I am one and hence know of their problems firsthand.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14877#respond' onclick='return addComment.moveForm( "div-comment-14877", "14877", "respond", "520" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14878" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-14878" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/3b94690e4ec6da16b0bd7451c4f73fbf?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/3b94690e4ec6da16b0bd7451c4f73fbf?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Moshulu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14878">
+							<time datetime="2014-07-15T13:41:05+00:00">
+								July 15, 2014 at 1:41 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Great post, I am in a similar situation where I really hate my workplace (not so much my job) but I can&#8217;t leave because they are sponsoring my visa too! 🙁 I feel really trapped at the moment as normally if I was this unhappy I would just quit.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14878#respond' onclick='return addComment.moveForm( "div-comment-14878", "14878", "respond", "520" )' aria-label='Reply to Moshulu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14879" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14879" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14879">
+							<time datetime="2014-07-19T20:16:52+00:00">
+								July 19, 2014 at 8:16 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Moshulu, as someone who is a bit more wiser, just quit. Life is too short to do things you hate.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14879#respond' onclick='return addComment.moveForm( "div-comment-14879", "14879", "respond", "520" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-14880" class="comment even thread-odd thread-alt depth-1">
+			<article id="div-comment-14880" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/cef86cc15939de62fa8a8bd0bf23095c?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/cef86cc15939de62fa8a8bd0bf23095c?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">neal</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14880">
+							<time datetime="2014-12-07T12:19:11+00:00">
+								December 7, 2014 at 12:19 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Great post, I am in the same situation you are in. I&#8217;m in a job that isn&#8217;t related to my degree I&#8217;m 6 months into this job but I can&#8217;t leave because of a one year bond. </p>
+<p>I really liked this line &#8220;There is a price to pay if you chase after your dreams. But also remember that there will be a bigger price to pay if you crush your dreams and do nothing.  You have to pay the price either way, but at least one path leads to happiness.&#8221;. I really need to stop settling for a job that doesn&#8217;t fulfill me (though its high paying) and pursue my passion in life. </p>
+<p>Thanks for this man. really appreciate it.<br />
+Neal  from the Philippines</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14880#respond' onclick='return addComment.moveForm( "div-comment-14880", "14880", "respond", "520" )' aria-label='Reply to neal'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-14881" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-14881" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/3368b1f14bebd1ce54d7754f1da96ab3?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/3368b1f14bebd1ce54d7754f1da96ab3?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Lambda</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14881">
+							<time datetime="2014-12-20T23:23:55+00:00">
+								December 20, 2014 at 11:23 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Oh my god thank you. I needed this. I have an absolutely miserable web dev job and have been looking desparately for a way out. Thanks for helping me remember that the way out is to be a better me, not to lurch to another terrible job.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14881#respond' onclick='return addComment.moveForm( "div-comment-14881", "14881", "respond", "520" )' aria-label='Reply to Lambda'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14882" class="comment byuser comment-author-shantnu bypostauthor even depth-2">
+			<article id="div-comment-14882" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-14882">
+							<time datetime="2014-12-25T07:32:55+00:00">
+								December 25, 2014 at 7:32 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You are welcome, Lambda. Sometimes the most obvious things aren&#8217;t that obvious unless you stop to think about them.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=14882#respond' onclick='return addComment.moveForm( "div-comment-14882", "14882", "respond", "520" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-18645" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-18645" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/a3575dc97b3ceda52fc985c0c30dba88?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/a3575dc97b3ceda52fc985c0c30dba88?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Bunny</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-18645">
+							<time datetime="2016-07-17T16:28:59+00:00">
+								July 17, 2016 at 4:28 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I stumbled across your blog by accident, while looking for a way to find work that isn&#8217;t mind-numbing and soul-destroying, I am really glad I found your posts &#8211; I have ordered the Thrive book from Amazon as well.  It makes total sense to work on yourself, decide on what goals you want to achieve and then go for them.  I understand the message that going for your dream is difficult, but necessary, unless you want to degenerate and get worse as you get older.  Thanks again for your posts, they are really useful. Best wishes.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=18645#respond' onclick='return addComment.moveForm( "div-comment-18645", "18645", "respond", "520" )' aria-label='Reply to Bunny'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-18649" class="comment byuser comment-author-shantnu bypostauthor even depth-2">
+			<article id="div-comment-18649" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/survive-job-you-absolutely-hate/#comment-18649">
+							<time datetime="2016-07-18T08:59:28+00:00">
+								July 18, 2016 at 8:59 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks Bunny.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/survive-job-you-absolutely-hate/?replytocom=18649#respond' onclick='return addComment.moveForm( "div-comment-18649", "18649", "respond", "520" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/survive-job-you-absolutely-hate/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='520' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="396f229629" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="9"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Learning to program humans &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Learning to program humans Comments Feed" href="/learning-program-humans/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/learning-program-humans/" />
+<link rel='shortlink' href='/?p=241' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Flearning-program-humans%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Flearning-program-humans%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-241">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-241" class="post-241 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Learning to program humans</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p>The title of the post is wrong&#8211; humans aren&#8217;t like machines, you can&#8217;t program them. But if I had named the post &#8220;A few techniques that may help you get along chummy with other humans, maybe&#8221;, none of you would have clicked on it. Rather than having a simple and straight forward set of rules, humans follow a complicated set of principles, many of which are hidden in the subconsious mind, and so aren&#8217;t easily hackable. But there are a few tried and tested methods that will help you.</p>
+<p>&nbsp;</p>
+<p><strong>Learn to Empathise</strong></p>
+<p>Unless you are a psychopath, most people can empathise with other people. This includes understanding how they view the world, and how they react to stuff happening around them. Empathy doesn&#8217;t mean you have to agree with the other person, just understand why they think that way. An old Native American saying says:</p>
+<p><em>Don&#8217;t judge me until you have walked five kilometers in my shoes.</em></p>
+<p>If you want to work with people, you have to empathise. People see the world differently from you, and you have to see the world from their view if you ever want to get them to co-operate. A fifty year old CEO sees the world differently from  a pimply faced twenty five year old programmer. So when that same programmer goes into the CEO&#8217;s office with an attitude, complaining that the CEO doesn&#8217;t &#8220;get&#8221; him, you know the CEO will turn off.</p>
+<p>If the same programmer learned to talk the way the CEO does, and tried to explain his problem using language the CEO understands, like profit and loss, you bet the CEO will listen. Even if the CEO isn&#8217;t convinced, he will at least try to understand the programmers view, and may get someone else to look at the programmer&#8217;s issues.</p>
+<p>Learn to see the world from the others view. It will make your life a lot easier.</p>
+<p>&nbsp;</p>
+<p><strong>What&#8217;s in it for me?</strong></p>
+<p>One way to see the others person is to answer this simple question:</p>
+<p><em>What&#8217;s in it for me?</em></p>
+<p>Any time you go to see someone whose help you need(whether a manager, a customer, a potential date), remember this: Just because something is important for you, doesn&#8217;t mean the other person cares.</p>
+<p>This is the reason many startups fail: They build this great product, and never bother to ask the customer if they even want it. So when they try to ask money, the customer just shrugs and says &#8220;meh.&#8221; And everyone is shocked, except for the customers, who were never asked their opinion in the first place.</p>
+<p>This isn&#8217;t just a programmer issue. I was reading a book on sales (I can&#8217;t remember the name, though). The author gives an example of some bankers talking to some customers. While the customer was describing his problem, the bankers put him on hold and started discussing about all the cool products they could make for him. All the while ignoring what he was actually trying to say. No surprise, the customer moved elsewhere.</p>
+<p>It&#8217;s the same if you want to ask someone out on a date. If you want to date the prettiest boy/girl, you have to ask yourself honestly: What do you bring to the table? What&#8217;s in it for the other person?</p>
+<p>If the only thing you can come up with is &#8220;I&#8217;m a good guy,&#8221; you might as well go back to playing your video games, because attractive people meet &#8220;nice guys&#8221; all the time. This great <a href="http://www.cracked.com/blog/6-harsh-truths-that-will-make-you-better-person/">Cracked article</a> talks about this in more detail. Seriously, go read it.</p>
+<p>&nbsp;</p>
+<p><strong>Understand and fulfill personal needs</strong></p>
+<p>One thing that separates failed managers and wannabe startup founders from the real deal is this: The successful people understand that whether you are selling yourself or your product (or open source project), the decision is never a matter of simple logical thinking. You are never just selling a boxed product or downloadable software (or software as a service). You are solving someone&#8217;s need. And to really ace it, you need to understand you are solving not just someone&#8217;s business needs, but someone&#8217;s personal needs.</p>
+<p>Say you write a cool online accounting tool, that you think is the bees knees. And now you want to sell it to the bug guys. How do you go about doing so?</p>
+<p><strong>Terrible way, but one which almost every programmer will use:</strong> List all the two hundred features you cool tool has. 200! Who wouldn&#8217;t want to buy your software with that? Start emailing people, cold calling customers. Wait for the big venture capitalists to call you. Hire a secretary to field all the calls you will get.</p>
+<p><strong>A better way: </strong>Show how your software will save a big corporations thousands every month. You have the same feature as the market leader, but at a tenth of the cost. You also give discounts for yearly subscriptions.</p>
+<p>While the above may make the accounting department happy, you will most likely still not get the contract. And the reason for that is: You did not fulfill anyone&#8217;s personal needs. Saving money is a business need, but doesn&#8217;t help anyone&#8217;s career. Instead, the manager will be taking a risk by betting on you, an unknown company. For him, the safest thing is to give the contract to the largest company, even if they are ten times more expensive. As the saying goes, <em>No one got fired for hiring IBM</em>.</p>
+<p>So how do you get out of this conundrum?</p>
+<p><strong>The best way:</strong> Find the customers manager, and show him how your software can save him hours everyday. That sales report he has to create every week, and that takes him hours; show him he can now do it in ten minutes with your software. Now, the customer looks cool in front of his boss. &#8220;Look boss, this cool software saved me hours; now I can look at that tricky customer we haven&#8217;t been able to land.&#8221;</p>
+<p>Do you see the difference? Rather than trying to solve some vague business need, you have solved someone personal need. You can bet the manager will recommend your software, and even fight for you, without you having to do anything.</p>
+<p>The business case becomes redundant. You no longer need to price your software at 10% the competitors. You can and should charge more. For most companies, there is no difference in writing a cheque for $50 or $500 or $2500, so you might as well charge at the upper limit.</p>
+<p>&nbsp;</p>
+<p><strong>Talk to the heart, not the brain</strong></p>
+<p>This will go against everything you have learnt as a programmer. But you must not waste any time talking to the logical being, instead talk to the emotional being. Show how your argument will help the other person emotionally. Don&#8217;t even waste a second talking about cold logic, as that never works.</p>
+<p>Don&#8217;t believe me? Look at all these holy wars- <a title="Python vs Ruby vs Perl" href="http://pyskool.com/python-vs-ruby-vs-perl/">Python vs Ruby</a>, <a title="Svn vs Git vs Mercurial" href="http://pyskool.com/svn-vs-git-vs-mercurial/">Git vs Mercurial</a>. Logically, they don&#8217;t make sense. Anyone who knows Python can pick up Ruby in hours or days (and vice versa). It makes no logical sense debating which one is better, as the time you spend searching for and reading all those pointless debates, you could have just learned both the languages and decided for yourself. So why do people waste time in these holy wars?</p>
+<p>Because they take us back to our tribal roots. We love forming tribes, creating an us-vs-them mentality. &#8220;They&#8221; are the enemy, and we must band up against them. Open source projects that succeed in creating this tribal mentality succeed over their more logical counterparts. Don&#8217;t believe me? Look at Mercurial. They tried the logical approach, while Git tried the &#8220;We have to burn anyone who doesn&#8217;t use Git!&#8221; approach. I&#8217;ll let you decide who won, but last time I checked, almost every open source project now uses Git.</p>
+<p>So how do you talk to the heart? You may have moral objections to being manipulative, but you don&#8217;t have to be if you don&#8217;t want to. If you understood the previous section on fulfilling personal needs, you are half way there. Every time you advertise your software (which may just be a free trial on your own website), think about how your program makes others feel. Is it easy to use, making them feel smart? Or is it rude, stupid and insulting, and constantly interrupts them to tell them just how wrong they are?</p>
+<p>Don&#8217;t assume. Get a non-programmer to try out your software. You will realise exactly how they feel. Now imagine this person is a prospective client. Would they pay you money? Be honest with yourself, you will go a long way.</p>
+<p><strong>And finally&#8230;.</strong></p>
+<p>Always remember human beings are complicated things, driver by many desires and hopes, many of them hidden in the subconcious. This includes you. Never do anything that makes you uncomfortable, trust your gut instinct. If your gut says go for, really go for it! Good luck.</p>
+<p><em><strong>
+
+<br />
+</strong></em></p>
+<p><strong>Related:</strong></p>
+<p><a title="3 things every programmer must learn (and no one teaches you)" href="http://pyskool.com/3-things-every-programmer-must-learn/"><strong>3 things every programmer must learn (and no one teaches you)</strong></a></p>
+<p><strong><a title="You’re not special, and no one cares about you" href="http://pyskool.com/no-one-cares-about-you/">You’re not special, and no one cares about you<br />
+</a></strong></p>
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			2 thoughts on &ldquo;Learning to program humans&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-14854" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-14854" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/a6c7ee2d7d36ca95e7b4b126ecc9351d?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/a6c7ee2d7d36ca95e7b4b126ecc9351d?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">James</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/learning-program-humans/#comment-14854">
+							<time datetime="2014-03-03T09:16:51+00:00">
+								March 3, 2014 at 9:16 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>From the moment i got your site from ycombinator news, i stuck with it every day. Its so awesome and you hit every point of software engineer. Thank you so much for your time and efforts.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/learning-program-humans/?replytocom=14854#respond' onclick='return addComment.moveForm( "div-comment-14854", "14854", "respond", "241" )' aria-label='Reply to James'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-14855" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-14855" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/learning-program-humans/#comment-14855">
+							<time datetime="2014-03-03T14:25:11+00:00">
+								March 3, 2014 at 2:25 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thank you for the kind words. You are the first non-spammer to compliment me (and I&#8217;m not joking 🙂 )</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/learning-program-humans/?replytocom=14855#respond' onclick='return addComment.moveForm( "div-comment-14855", "14855", "respond", "241" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/learning-program-humans/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='241' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="45eb936fbb" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="92"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Displaying our Tweets in the Flask Web Server &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/displaying-our-tweets-in-the-flask-web-server/" />
+<link rel='shortlink' href='/?p=1801' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fdisplaying-our-tweets-in-the-flask-web-server%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fdisplaying-our-tweets-in-the-flask-web-server%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1801">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1801" class="post-1801 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Displaying our Tweets in the Flask Web Server</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<h4><strong>Build a Twitter Analytics App</strong></h4>
+<p style="padding-left: 30px;"><strong><a href="/build-a-twitter-analytics-app-using-python/"> 1 Introduction: Start Here</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/the-first-step-design-your-solution/">2 The First Step: Design Your Solution</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/in-which-i-rant-a-little/">3 In Which I Rant a Little</a></strong></p>
+<p style="padding-left: 30px;"><a href="/twitter-analyser-my-design/"><strong>4  Design Solution</strong> </a></p>
+<p style="padding-left: 30px;"><strong><a href="/writing-great-code/">5 Writing Great Code</a></strong></p>
+<p style="padding-left: 30px;"><strong>6 Writing the Backend Twitter Server</strong></p>
+<p style="padding-left: 60px;"><a href="/writing-the-code-in-small-parts-part-1-the-basic-app/"><strong>Writing the Code in Small Parts: Part 1, The Basic App</strong> </a></p>
+<p style="padding-left: 60px;"><strong><a href="/part-2-adding-a-counter-to-exit/">Part 2: Adding a Counter to Exit</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/part-3-adding-language-and-retweet-count/">Part 3: Adding Language and Retweet Count</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/organising-our-code/">Part 4: Organising Our Code</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/adding-the-data-to-a-database/">7 Adding the Data to a Database</a></strong></p>
+<p style="padding-left: 30px;"><a href="/testing-what-and-how-to-test/"><strong>8 <span class="trail-end">Testing: What and How to Test</span></strong></a></p>
+<p style="padding-left: 60px;"><strong><a href="/testing-our-frontend/">8.1 Testing Our Frontend</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/testing-our-backend/">8.2 Testing Our Backend</a></strong></p>
+<p style="padding-left: 30px;"><strong>9 Displaying our Data using the Flask Webserver</strong></p>
+<p style="padding-left: 60px;"><strong><a href="/introduction-to-flask-for-python/">9.1 Introduction to Flask</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/adding-templates-to-our-flask-app/">9.2 Adding templates to our Flask app</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/displaying-our-tweets-in-the-flask-web-server/">9.3 Displaying our Tweets in the Flask Web Server</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/future-work-and-improvements/">10 Future Work and Improvements</a></strong></p>
+<p>So we have most of our code in place. Our backend reads and writes the tweets to a database. We have a front end webserver that can display the tweets. Now we just need to connect the two.</p>
+<p>Let&#8217;s look at our <a href="https://github.com/shantnu/TwitterAnalyser/blob/master/Part6/app3.py">code</a>.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e8f9268703993" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+@app.route("/top_tweets")
+def top_tweets():
+    tweets, datetime_toptweets = get_top_tweets()
+    return render_template('top_tweets.html', tweets = tweets, datetime_toptweets = datetime_toptweets)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e8f9268703993-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e8f9268703993-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f72e8f9268703993-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e8f9268703993-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e8f9268703993-1"><span class="crayon-sy">@</span><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">route</span><span class="crayon-sy">(</span><span class="crayon-s">"/top_tweets"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e8f9268703993-2"><span class="crayon-e">def </span><span class="crayon-e">top_tweets</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf82f72e8f9268703993-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">tweets</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">datetime_toptweets</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">get_top_tweets</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e8f9268703993-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-e">render_template</span><span class="crayon-sy">(</span><span class="crayon-s">'top_tweets.html'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">tweets</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">tweets</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">datetime_toptweets</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">datetime_toptweets</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>We saw the top_tweets template in the last section, so let&#8217;s do that first. We are calling a function <em>get_top_tweets()</em> to get the top tweets, and the date-time. The date-time is only for debug, just so that we can check the script is running regularly. Let&#8217;s look at the function <em>get_top_tweets()</em>:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e902981866151" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+def get_top_tweets():
+    conn = sqlite3.connect(db)
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+
+    c.execute("SELECT * from twit_data  ORDER BY datetime DESC LIMIT 30")
+    result = c.fetchall()
+    tweets = []
+
+    datetime_toptweets = result[0]['datetime']
+
+    for tweet in result:
+        tweets.append(tweet['top_tweet'])
+    
+    conn.close()
+
+    return tweets, datetime_toptweets</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e902981866151-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e902981866151-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f72e902981866151-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e902981866151-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f72e902981866151-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e902981866151-6">6</div><div class="crayon-num" data-line="crayon-5bcf82f72e902981866151-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e902981866151-8">8</div><div class="crayon-num" data-line="crayon-5bcf82f72e902981866151-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e902981866151-10">10</div><div class="crayon-num" data-line="crayon-5bcf82f72e902981866151-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e902981866151-12">12</div><div class="crayon-num" data-line="crayon-5bcf82f72e902981866151-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e902981866151-14">14</div><div class="crayon-num" data-line="crayon-5bcf82f72e902981866151-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e902981866151-16">16</div><div class="crayon-num" data-line="crayon-5bcf82f72e902981866151-17">17</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e902981866151-1"><span class="crayon-e">def </span><span class="crayon-e">get_top_tweets</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e902981866151-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">conn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sqlite3</span><span class="crayon-sy">.</span><span class="crayon-e">connect</span><span class="crayon-sy">(</span><span class="crayon-v">db</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e902981866151-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-v">row_factory</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sqlite3</span><span class="crayon-sy">.</span><span class="crayon-i">Row</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e902981866151-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">cursor</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e902981866151-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e902981866151-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-s">"SELECT * from twit_data&nbsp;&nbsp;ORDER BY datetime DESC LIMIT 30"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e902981866151-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">result</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">fetchall</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e902981866151-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">tweets</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf82f72e902981866151-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e902981866151-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">datetime_toptweets</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">result</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-s">'datetime'</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf82f72e902981866151-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e902981866151-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">tweet </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">result</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf82f72e902981866151-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">tweets</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">tweet</span><span class="crayon-sy">[</span><span class="crayon-s">'top_tweet'</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e902981866151-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5bcf82f72e902981866151-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e902981866151-16">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f72e902981866151-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">tweets</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">datetime_toptweets</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></p>
+<p>We open the database and read the last 30 tweets, as well as the datetime. This is then returned to our function. As we saw in the templates section, the tweets are just printed on the screen:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e906338751004" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+{% extends "index.html" %}
+
+{% block tweets %} 
+&lt;b&gt; Most Popular Tweets &lt;/b&gt;
+    {% for tweet in tweets %}
+        {{ tweet | safe}}
+    {% endfor %}
+    
+
+ {% endblock %}</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e906338751004-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e906338751004-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f72e906338751004-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e906338751004-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f72e906338751004-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e906338751004-6">6</div><div class="crayon-num" data-line="crayon-5bcf82f72e906338751004-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e906338751004-8">8</div><div class="crayon-num" data-line="crayon-5bcf82f72e906338751004-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e906338751004-10">10</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e906338751004-1"><span class="crayon-sy">{</span><span class="crayon-i">%</span><span class="crayon-h"> </span><span class="crayon-i">extends</span><span class="crayon-h"> </span><span class="crayon-s">"index.html"</span><span class="crayon-h"> </span><span class="crayon-i">%</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e906338751004-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f72e906338751004-3"><span class="crayon-sy">{</span><span class="crayon-i">%</span><span class="crayon-h"> </span><span class="crayon-i">block</span><span class="crayon-h"> </span><span class="crayon-i">tweets</span><span class="crayon-h"> </span><span class="crayon-i">%</span><span class="crayon-sy">}</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e906338751004-4"><span class="crayon-ta">&lt;b&gt;</span><span class="crayon-h"> </span><span class="crayon-k">Most Popular Tweets &lt;/b&gt;</span></div><div class="crayon-line" id="crayon-5bcf82f72e906338751004-5"><span class="crayon-k">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span><span class="crayon-i">%</span><span class="crayon-h"> </span><span class="crayon-i">for</span><span class="crayon-h"> </span><span class="crayon-i">tweet</span><span class="crayon-h"> </span><span class="crayon-i">in</span><span class="crayon-h"> </span><span class="crayon-i">tweets</span><span class="crayon-h"> </span><span class="crayon-i">%</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e906338751004-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-i">tweet</span><span class="crayon-h"> </span><span class="crayon-i">|</span><span class="crayon-h"> </span><span class="crayon-i">safe</span><span class="crayon-sy">}</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5bcf82f72e906338751004-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">{</span><span class="crayon-i">%</span><span class="crayon-h"> </span><span class="crayon-i">endfor</span><span class="crayon-h"> </span><span class="crayon-i">%</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e906338751004-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5bcf82f72e906338751004-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e906338751004-10"><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-i">%</span><span class="crayon-h"> </span><span class="crayon-i">endblock</span><span class="crayon-h"> </span><span class="crayon-i">%</span><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p>Let&#8217;s look at the function to read the trends next:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e909589236104" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+def get_trends():
+    conn = sqlite3.connect(db)
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+
+    trend = []
+    trend_tweet = []
+
+    c.execute("SELECT * from trend_data ORDER BY datetime DESC LIMIT 10") 
+    result = c.fetchall()
+
+    datetime_trends = result[0]['datetime']
+
+    for r in result:
+        trend.append(r['trend'])
+        trend_tweet.append(r['trend_id1'])
+        trend_tweet.append(r['trend_id2'])
+        trend_tweet.append(r['trend_id3'])
+
+    conn.close()
+
+    return trend, trend_tweet, datetime_trends</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e909589236104-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e909589236104-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f72e909589236104-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e909589236104-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f72e909589236104-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e909589236104-6">6</div><div class="crayon-num" data-line="crayon-5bcf82f72e909589236104-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e909589236104-8">8</div><div class="crayon-num" data-line="crayon-5bcf82f72e909589236104-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e909589236104-10">10</div><div class="crayon-num" data-line="crayon-5bcf82f72e909589236104-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e909589236104-12">12</div><div class="crayon-num" data-line="crayon-5bcf82f72e909589236104-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e909589236104-14">14</div><div class="crayon-num" data-line="crayon-5bcf82f72e909589236104-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e909589236104-16">16</div><div class="crayon-num" data-line="crayon-5bcf82f72e909589236104-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e909589236104-18">18</div><div class="crayon-num" data-line="crayon-5bcf82f72e909589236104-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e909589236104-20">20</div><div class="crayon-num" data-line="crayon-5bcf82f72e909589236104-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e909589236104-22">22</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e909589236104-1"><span class="crayon-e">def </span><span class="crayon-e">get_trends</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e909589236104-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">conn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sqlite3</span><span class="crayon-sy">.</span><span class="crayon-e">connect</span><span class="crayon-sy">(</span><span class="crayon-v">db</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e909589236104-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-v">row_factory</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sqlite3</span><span class="crayon-sy">.</span><span class="crayon-i">Row</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e909589236104-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">cursor</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e909589236104-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e909589236104-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trend</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf82f72e909589236104-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trend_tweet</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e909589236104-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f72e909589236104-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-s">"SELECT * from trend_data ORDER BY datetime DESC LIMIT 10"</span><span class="crayon-sy">)</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e909589236104-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">result</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">fetchall</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e909589236104-11">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e909589236104-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">datetime_trends</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">result</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">[</span><span class="crayon-s">'datetime'</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf82f72e909589236104-13">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e909589236104-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">r</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">result</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf82f72e909589236104-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trend</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">r</span><span class="crayon-sy">[</span><span class="crayon-s">'trend'</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e909589236104-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trend_tweet</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">r</span><span class="crayon-sy">[</span><span class="crayon-s">'trend_id1'</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e909589236104-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trend_tweet</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">r</span><span class="crayon-sy">[</span><span class="crayon-s">'trend_id2'</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e909589236104-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">trend_tweet</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">r</span><span class="crayon-sy">[</span><span class="crayon-s">'trend_id3'</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e909589236104-19">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e909589236104-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e909589236104-21">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e909589236104-22"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">trend</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">trend_tweet</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">datetime_trends</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0028 seconds] -->
+<p></p>
+<p>This time, we only read the last 10 values; but remember, we have 1 trend, and 3 tweets for each trend.</p>
+<p>We return both the <em>trends</em> list, as well as the <em>trend_tweet</em> list, which contains the trending tweets.</p>
+<p><strong>Displaying graphs</strong></p>
+<p>Till now, our code is simple. All we are doing is taking data from our database, and displaying it on the screen. We already got the tweets in the right format using the twitter api, so we needed to do nothing else.</p>
+<p>But the languages data is different. This time, we have to actually plot it.</p>
+<p>For plotting, we will be using Google Charts.</p>
+<p>I tried dozens of JS charting libraries, but found Google Charts to be the easiest to use. Most of the others require a lot of fiddling.</p>
+<p>I am not a JS expert, I just want the libraries to work out of the box. Highcharts failed (at least for me),  d3.js is too complex. Flotcharts worked, but looks a bit dated.</p>
+<p>Google Charts surprised me: It worked out of the box, and produces beautiful graphs.</p>
+<p>Have a brief look at<a href="https://developers.google.com/chart/interactive/docs/gallery"> Google Charts examples</a>, as in most cases, I just copy pasted the code and tweaked it a little.</p>
+<p>Let&#8217;s look at the function to read the language data:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e90d045249367" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+def get_lang():
+    
+    conn = sqlite3.connect(db)
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+    c.execute("SELECT * from lang_data ORDER BY datetime DESC LIMIT 1")
+
+    result = c.fetchone()
+    lang = ast.literal_eval(result['language'])
+    top_lang = ast.literal_eval(result['top_language'])
+    conn.close()
+
+    return lang, top_lang</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e90d045249367-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e90d045249367-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f72e90d045249367-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e90d045249367-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f72e90d045249367-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e90d045249367-6">6</div><div class="crayon-num" data-line="crayon-5bcf82f72e90d045249367-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e90d045249367-8">8</div><div class="crayon-num" data-line="crayon-5bcf82f72e90d045249367-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e90d045249367-10">10</div><div class="crayon-num" data-line="crayon-5bcf82f72e90d045249367-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e90d045249367-12">12</div><div class="crayon-num" data-line="crayon-5bcf82f72e90d045249367-13">13</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e90d045249367-1"><span class="crayon-e">def </span><span class="crayon-e">get_lang</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e90d045249367-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5bcf82f72e90d045249367-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">conn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sqlite3</span><span class="crayon-sy">.</span><span class="crayon-e">connect</span><span class="crayon-sy">(</span><span class="crayon-v">db</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e90d045249367-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-v">row_factory</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sqlite3</span><span class="crayon-sy">.</span><span class="crayon-i">Row</span></div><div class="crayon-line" id="crayon-5bcf82f72e90d045249367-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">cursor</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e90d045249367-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-s">"SELECT * from lang_data ORDER BY datetime DESC LIMIT 1"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e90d045249367-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e90d045249367-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">result</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">fetchone</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e90d045249367-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">lang</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">ast</span><span class="crayon-sy">.</span><span class="crayon-e">literal_eval</span><span class="crayon-sy">(</span><span class="crayon-v">result</span><span class="crayon-sy">[</span><span class="crayon-s">'language'</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e90d045249367-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">top_lang</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">ast</span><span class="crayon-sy">.</span><span class="crayon-e">literal_eval</span><span class="crayon-sy">(</span><span class="crayon-v">result</span><span class="crayon-sy">[</span><span class="crayon-s">'top_language'</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e90d045249367-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e90d045249367-12">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f72e90d045249367-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">lang</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">top_lang</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0011 seconds] -->
+<p></p>
+<p>This time, we only read one value, as the data is in an array. Since SqLite can&#8217;t store Python lists, I had converted the list to a string. Here, I convert it back and return it.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e910555017408" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+@app.route("/")
+def main():
+    language_data = []
+    top_language_data = []
+
+    lang, top_lang = get_lang()
+    for l in lang:
+        language_data.append([l[0], l[1], l[1]])
+
+    for t in top_lang:
+        top_language_data.append([t[0], t[1], t[1]])
+    return render_template("lang1.html", language_data = language_data, top_language_data = top_language_data)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e910555017408-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e910555017408-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f72e910555017408-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e910555017408-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f72e910555017408-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e910555017408-6">6</div><div class="crayon-num" data-line="crayon-5bcf82f72e910555017408-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e910555017408-8">8</div><div class="crayon-num" data-line="crayon-5bcf82f72e910555017408-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e910555017408-10">10</div><div class="crayon-num" data-line="crayon-5bcf82f72e910555017408-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e910555017408-12">12</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e910555017408-1"><span class="crayon-sy">@</span><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">route</span><span class="crayon-sy">(</span><span class="crayon-s">"/"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e910555017408-2"><span class="crayon-e">def </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf82f72e910555017408-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">language_data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e910555017408-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">top_language_data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf82f72e910555017408-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e910555017408-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">lang</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">top_lang</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">get_lang</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e910555017408-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">l</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">lang</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e910555017408-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">language_data</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span><span class="crayon-v">l</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82f72e910555017408-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e910555017408-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">t</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">top_lang</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf82f72e910555017408-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">top_language_data</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span><span class="crayon-v">t</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">t</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">t</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e910555017408-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-e">render_template</span><span class="crayon-sy">(</span><span class="crayon-s">"lang1.html"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">language_data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">language_data</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">top_language_data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">top_language_data</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0014 seconds] -->
+<p></p>
+<p>This is where I&#8217;m using the data. I am re-shaping the data in a list. You may note that we are repeating the 2nd element twice. Like this:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e914670831332" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+    for l in lang:
+        language_data.append([l[0], l[1], l[1]])</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e914670831332-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e914670831332-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e914670831332-1"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">l</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">lang</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e914670831332-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">language_data</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span><span class="crayon-v">l</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>Why are we doing this? Because Google Charts wants us to send the data separately. So in the above, the first value is the language, the second is its percentage usage, and the third is the same thing repeated. It&#8217;s repeated because we need it for tooltips, and each item we use needs to be passed in, even if it is repeated.</p>
+<p>Let&#8217;s look at the <a href="https://github.com/shantnu/TwitterAnalyser/blob/master/Part6/templates/lang1.html">template (html)</a> file to see how the data is used.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e917685340084" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+{% extends "index.html" %}
+
+{% block graphs %}
+      &lt;!--Load the AJAX API--&gt;
+      &lt;script type="text/javascript" src="https://www.google.com/jsapi"&gt;&lt;/script&gt;
+      &lt;script type="text/javascript"&gt;// Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e917685340084-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e917685340084-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f72e917685340084-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e917685340084-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f72e917685340084-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e917685340084-6">6</div><div class="crayon-num" data-line="crayon-5bcf82f72e917685340084-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e917685340084-8">8</div><div class="crayon-num" data-line="crayon-5bcf82f72e917685340084-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e917685340084-1"><span class="crayon-sy">{</span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-r">extends</span><span class="crayon-h"> </span><span class="crayon-s">"index.html"</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e917685340084-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82f72e917685340084-3"><span class="crayon-sy">{</span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-e">block </span><span class="crayon-v">graphs</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e917685340084-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-o">!</span><span class="crayon-o">--</span><span class="crayon-e">Load</span><span class="crayon-h"> </span><span class="crayon-e">the</span><span class="crayon-h"> </span><span class="crayon-e">AJAX</span><span class="crayon-h"> </span><span class="crayon-e">API</span><span class="crayon-o">--</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5bcf82f72e917685340084-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;script </span><span class="crayon-e">type</span><span class="crayon-o">=</span><span class="crayon-s">"text/javascript"</span><span class="crayon-h"> </span><span class="crayon-e">src</span><span class="crayon-o">=</span><span class="crayon-s">"https://www.google.com/jsapi"</span><span class="crayon-o">&gt;</span><span class="crayon-ta">&lt;/script&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e917685340084-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;script </span><span class="crayon-e">type</span><span class="crayon-o">=</span><span class="crayon-s">"text/javascript"</span><span class="crayon-o">&gt;</span><span class="crayon-c">// Load the Visualization API and the piechart package.</span></div><div class="crayon-line" id="crayon-5bcf82f72e917685340084-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">google</span><span class="crayon-sy">.</span><span class="crayon-e">load</span><span class="crayon-sy">(</span><span class="crayon-s">'visualization'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'1.0'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'packages'</span><span class="crayon-o">:</span><span class="crayon-sy">[</span><span class="crayon-s">'corechart'</span><span class="crayon-sy">]</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e917685340084-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// Set a callback to run when the Google Visualization API is loaded.</span></div><div class="crayon-line" id="crayon-5bcf82f72e917685340084-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">google</span><span class="crayon-sy">.</span><span class="crayon-e">setOnLoadCallback</span><span class="crayon-sy">(</span><span class="crayon-v">drawChart</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></p>
+<p>All this is setup to run the Google Charts Javascript.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e91a125357235" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+function drawChart() {
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+                
+        data.addColumn('string', 'Languages');
+        data.addColumn('number', 'Usage');
+        data.addColumn({type: 'number', role: 'tooltip'});</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e91a125357235-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e91a125357235-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f72e91a125357235-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e91a125357235-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f72e91a125357235-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e91a125357235-6">6</div><div class="crayon-num" data-line="crayon-5bcf82f72e91a125357235-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e91a125357235-1"><span class="crayon-t">function</span><span class="crayon-h"> </span><span class="crayon-e">drawChart</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e91a125357235-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// Create the data table.</span></div><div class="crayon-line" id="crayon-5bcf82f72e91a125357235-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-v">google</span><span class="crayon-sy">.</span><span class="crayon-v">visualization</span><span class="crayon-sy">.</span><span class="crayon-e">DataTable</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e91a125357235-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5bcf82f72e91a125357235-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">addColumn</span><span class="crayon-sy">(</span><span class="crayon-s">'string'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'Languages'</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e91a125357235-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">addColumn</span><span class="crayon-sy">(</span><span class="crayon-s">'number'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'Usage'</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5bcf82f72e91a125357235-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">addColumn</span><span class="crayon-sy">(</span><span class="crayon-sy">{</span><span class="crayon-v">type</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">'number'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">role</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">'tooltip'</span><span class="crayon-sy">}</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0009 seconds] -->
+<p></p>
+<p>This is the function to draw the chart. As you can see, we are drawing 3 columns. The first is a <em>string</em> called <em>Languages</em>. Then a <em>number</em> called <em>Usage</em>. Finally, the tooltip data, which is the repeat of the previous value. Hopefully, now you can see why we needed to pass the data like this.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e91d668455641" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data.addRows( {{ language_data | safe }}  );</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e91d668455641-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e91d668455641-1"><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">addRows</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-v">language_data</span><span class="crayon-h"> </span><span class="crayon-o">|</span><span class="crayon-h"> </span><span class="crayon-i">safe</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">}</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>Here, we pass in the data we read. Again <em>{{ }}</em> is a Jinja command, and the data in here will be replaced by what our Flask server sent it. We&#8217;ve already talked about <em>safe</em>: Google doesn&#8217;t like it, like Twitter.</p>
+<p>Here is an example of how the above field will be filled in real time:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e920722310919" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+ data2.addRows( [['English', 6, 6], ['Japanese', 1, 1], ['Thai', 5, 5]]  );</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e920722310919-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e920722310919-1"><span class="crayon-h"> </span><span class="crayon-v">data2</span><span class="crayon-sy">.</span><span class="crayon-e">addRows</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">[</span><span class="crayon-s">'English'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">6</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">6</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">'Japanese'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">'Thai'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">5</span><span class="crayon-sy">]</span><span class="crayon-sy">]</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82f72e923376232418" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+        // Set chart options
+        var options = {'title':'Most used languages on Twitter: All Tweets',
+                       'width':800,
+                       'height':600,
+                       sliceVisibilityThreshold: .01,
+                       is3D: true};
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82f72e923376232418-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e923376232418-2">2</div><div class="crayon-num" data-line="crayon-5bcf82f72e923376232418-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e923376232418-4">4</div><div class="crayon-num" data-line="crayon-5bcf82f72e923376232418-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e923376232418-6">6</div><div class="crayon-num" data-line="crayon-5bcf82f72e923376232418-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82f72e923376232418-8">8</div><div class="crayon-num" data-line="crayon-5bcf82f72e923376232418-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82f72e923376232418-1"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// Set chart options</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e923376232418-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">options</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-s">'title'</span><span class="crayon-o">:</span><span class="crayon-s">'Most used languages on Twitter: All Tweets'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf82f72e923376232418-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-s">'width'</span><span class="crayon-o">:</span><span class="crayon-cn">800</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e923376232418-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-s">'height'</span><span class="crayon-o">:</span><span class="crayon-cn">600</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf82f72e923376232418-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">sliceVisibilityThreshold</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-cn">01</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e923376232418-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">is3D</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">true</span><span class="crayon-sy">}</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5bcf82f72e923376232418-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// Instantiate and draw our chart, passing in some options.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82f72e923376232418-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">var</span><span class="crayon-h"> </span><span class="crayon-v">chart</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-v">google</span><span class="crayon-sy">.</span><span class="crayon-v">visualization</span><span class="crayon-sy">.</span><span class="crayon-e">PieChart</span><span class="crayon-sy">(</span><span class="crayon-v">document</span><span class="crayon-sy">.</span><span class="crayon-e">getElementById</span><span class="crayon-sy">(</span><span class="crayon-s">'chart_div'</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5bcf82f72e923376232418-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">chart</span><span class="crayon-sy">.</span><span class="crayon-e">draw</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">options</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0010 seconds] -->
+<p></p>
+<p>Finally, we set some options and draw the graph. The main option is the <em>is3D</em> flag, which just makes the graph look cool 🙂</p>
+<p>And there you go. A basic version of our app, running on our machine. Have a play with it.</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

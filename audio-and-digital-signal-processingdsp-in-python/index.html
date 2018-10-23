@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Audio and Digital Signal Processing(DSP) in Python &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/audio-and-digital-signal-processingdsp-in-python/" />
+<link rel='shortlink' href='/?p=3018' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Faudio-and-digital-signal-processingdsp-in-python%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Faudio-and-digital-signal-processingdsp-in-python%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-3018">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-3018" class="post-3018 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Audio and Digital Signal Processing(DSP) in Python</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p><a href="/python-for-scientists-and-engineers/"><strong>Intro: Start here</strong></a></p>
+<p><a href="/installing-the-libraries-required-for-the-book/"><strong>Installing the libraries required for the book</strong></a></p>
+<p><strong>Beginners Start Here:</strong><a href="/create-a-word-counter-in-python/"><strong> </strong></a></p>
+<p style="padding-left: 30px;"><a href="/create-a-word-counter-in-python/"><strong>Create a Word Counter in Python</strong></a></p>
+<p style="padding-left: 30px;"><a href="/an-introduction-to-numpy-and-matplotlib/"><strong>An introduction to Numpy and Matplotlib</strong></a></p>
+<p style="padding-left: 30px;"><a href="/introduction-to-pandas/" target="_blank"><strong>Introduction to Pandas with Practical Examples (New)</strong></a></p>
+<p><strong>Main Book</strong></p>
+<p><a href="/image-and-video-processing-in-python/"><strong>Image and Video Processing in Python</strong></a></p>
+<p><a href="/data-analysis-with-pandas/"><strong>Data Analysis with Pandas</strong></a></p>
+<p><a href="/audio-and-digital-signal-processingdsp-in-python/"><strong>Audio and Digital Signal Processing (DSP)</strong></a></p>
+<p><a href="/control-your-raspberry-pi-from-your-phone-tablet/"><strong>Control Your Raspberry Pi From Your Phone / Tablet</strong></a></p>
+<p><strong>Machine Learning Section</strong></p>
+<p style="padding-left: 30px;"><a href="/machine-learning-with-an-amazon-like-recommendation-engine/"><strong>Machine Learning with an Amazon like Recommendation Engine</strong></a></p>
+<p><strong>Machine Learning New Stuff<br /></strong></p>
+<p style="padding-left: 30px;"><strong> <a href="/machine-learning-for-complete-beginners/" target="_blank">Machine Learning For Complete Beginners:</a> </strong>Learn how to predict how many Titanic survivors using machine learning. No previous knowledge needed!</p>
+<p style="padding-left: 30px;"><a href="/cross-validation-and-model-selection/" target="_blank"><strong>Cross Validation and Model Selection</strong></a>: In which we look at cross validation, and how to choose between different machine learning algorithms. Working with the Iris flower dataset and the Pima diabetes dataset.</p>
+<p style="padding-left: 30px;"><strong>Natural Language Processing</strong></p>
+<p style="padding-left: 30px;"><a href="/natural-language-processing-and-sentiment-analysis-with-python/"   target="_blank"><strong>0. Introduction to NLP and Sentiment Analysis</strong></a></p>
+<p style="padding-left: 30px;"><strong><a href="/introduction-to-nltk-natural-language-processing-with-python/" target="_blank">1. Natural Language Processing with NTLK</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/intro-to-nltk-part-2/" target="_blank">2. Intro to NTLK, Part 2</a></strong></p>
+<p style="padding-left: 30px;"><a href="/build-a-sentiment-analysis-app-with-movie-reviews/" target="_blank"><strong>3. Build a sentiment analysis program</strong></a></p>
+<p style="padding-left: 30px;"><strong><a href="/practice-session-sentiment-analysis-with-twitter/" target="_blank">4. Sentiment Analysis with Twitter</a></strong></p>
+<p style="padding-left: 30px;"><strong><span class="trail-end"><a href="/analysing-the-enron-email-corpus/"   target="_blank">5. Analysing the Enron Email Corpus</a></span></strong>: The Enron Email corpus has half a million files spread over 2.5 GB. When looking at data this size, the question is, where do you even start?</p>
+<p style="padding-left: 30px;"><a href="/build-a-spam-filter/" target="_blank"><strong>6. Build a Spam Filter using the Enron Corpus</strong></a></p>
+<hr /><hr />
+<p style="padding-left: 30px;"></p>
+<h2>Create a sine wave</h2>
+<p>In this project, we are going to create a sine wave, and save it as a wav file.</p>
+<p>But before that, some theory you should know.</p>
+<p><strong>Frequency</strong>: The frequency is the number of times a sine wave repeats a second. I will use a frequency of 1KHz.</p>
+<p><strong>Sampling rate</strong>: Most real world signals are analog, while computers are digital. So we need a analog to digital converter to convert our analog signal to digital. Details of how the converter work are beyond the scope of this book. The key thing is the sampling rate, which is the number of times a second the converter takes a sample of the analog signal.</p>
+<p>Now, the sampling rate doesn’t really matter for us, as we are doing everything digitally, but it’s needed for our sine wave formula. I will use a value of 48000, which is the value used in professional audio equipment.</p>
+<p><strong>Sine Wave formula</strong>: If you forgot the formula, don’t worry. I had to check Wikipedia as well.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520c62104099711" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+y(t) = A * sin(2 * pi * f * t)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520c62104099711-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520c62104099711-1"><span class="crayon-e">y</span><span class="crayon-sy">(</span><span class="crayon-v">t</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">A *</span><span class="crayon-h"> </span><span class="crayon-e">sin</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-e">pi *</span><span class="crayon-h"> </span><span class="crayon-e">f *</span><span class="crayon-h"> </span><span class="crayon-v">t</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p><em>y(t)</em> is the y axis sample we want to calculate for x axis sample <em>t</em>.</p>
+<p><em>A</em> is the amplitude. We’ll come to that.</p>
+<p><em>pi</em> is our old friend 3.14159.</p>
+<p><em>f</em> is the frequency.</p>
+<p><em>t</em> is our sample. Since we need to convert it to digital, we will divide it by the sampling rate.</p>
+<p><strong>Amplitude</strong></p>
+<p>I mentioned the amplitude <em>A</em>. In most books, they just choose a random value for A, usually 1. But that won’t work for us. The sine wave we generate will be in floating point, and while that will be good enough for drawing a graph, it won’t work when we write to a file. The reason being that we are dealing with integers. If you look at wave files, they are written as 16 bit short integers. If we write a floating point number, it will not be represented right.</p>
+<p>To get around this, we have to convert our floating point number to fixed point. One of the ways to do so is to multiply it with a fixed constant. How do we calculate this constant? Well, the maximum value of signed 16 bit number is 32767 (2^15 &#8211; 1). (Because the left most bit is reserved for the sign, leaving 15 bits. We raise 2 to the power of 15 and then subtract one, as computers count from 0).</p>
+<p>So we want full scale audio, we’d multiply it with 32767. But I want an audio signal that is half as loud as full scale, so I will use an amplitude of 16000.</p>
+<p>To the code:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520c72667643508" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+import numpy as np
+
+import wave
+
+import struct
+
+import matplotlib.pyplot as plt
+
+# frequency is the number of times a wave repeats a second
+
+frequency = 1000
+
+num_samples = 48000
+
+# The sampling rate of the analog to digital convert
+
+sampling_rate = 48000.0
+
+amplitude = 16000
+
+file = "test.wav"</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520c72667643508-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c72667643508-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520c72667643508-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c72667643508-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520c72667643508-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c72667643508-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520c72667643508-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c72667643508-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520c72667643508-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c72667643508-10">10</div><div class="crayon-num" data-line="crayon-5bcf831520c72667643508-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c72667643508-12">12</div><div class="crayon-num" data-line="crayon-5bcf831520c72667643508-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c72667643508-14">14</div><div class="crayon-num" data-line="crayon-5bcf831520c72667643508-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c72667643508-16">16</div><div class="crayon-num" data-line="crayon-5bcf831520c72667643508-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c72667643508-18">18</div><div class="crayon-num" data-line="crayon-5bcf831520c72667643508-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c72667643508-20">20</div><div class="crayon-num" data-line="crayon-5bcf831520c72667643508-21">21</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520c72667643508-1"><span class="crayon-e">import </span><span class="crayon-e">numpy </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-e">np</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c72667643508-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c72667643508-3"><span class="crayon-e">import </span><span class="crayon-e">wave</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c72667643508-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c72667643508-5"><span class="crayon-e">import </span><span class="crayon-t">struct</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c72667643508-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c72667643508-7"><span class="crayon-e">import </span><span class="crayon-v">matplotlib</span><span class="crayon-sy">.</span><span class="crayon-e">pyplot </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-v">plt</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c72667643508-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c72667643508-9"><span class="crayon-p"># frequency is the number of times a wave repeats a second</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c72667643508-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c72667643508-11"><span class="crayon-v">frequency</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">1000</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c72667643508-12">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c72667643508-13"><span class="crayon-v">num_samples</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">48000</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c72667643508-14">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c72667643508-15"><span class="crayon-p"># The sampling rate of the analog to digital convert</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c72667643508-16">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c72667643508-17"><span class="crayon-v">sampling_rate</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">48000.0</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c72667643508-18">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c72667643508-19"><span class="crayon-v">amplitude</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">16000</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c72667643508-20">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c72667643508-21"><span class="crayon-v">file</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"test.wav"</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>I just setup the variables I have declared.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520c79344040359" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+sine_wave = [np.sin(2 * np.pi * frequency * x/sampling_rate) for x in range(num_samples)]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520c79344040359-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520c79344040359-1"><span class="crayon-v">sine_wave</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">sin</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">pi *</span><span class="crayon-h"> </span><span class="crayon-e">frequency *</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-o">/</span><span class="crayon-v">sampling_rate</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">x</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-v">num_samples</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>Half of you are going to quit the book right now. Go on, you want to. That’s one killer equation, isn’t it?</p>
+<p>But if you remembered what I said, list comprehensions are the most powerful features of Python. I could have written the above as a normal for loop, but I wanted to show you the power of list comprehensions. The above code is quite simple if you understand it. Let’s break it down, shall we? It will be easier if you have the source code open as well.</p>
+<p>The first thing is that the equation is in <em>[]</em>, which means the final answer will be converted to a list.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520c7f386457547" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+[ for x in range(num_samples)]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520c7f386457547-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520c7f386457547-1"><span class="crayon-sy">[</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">x</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-v">num_samples</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>The <em>range()</em> function generates a list of numbers from 0 to <em>num_samples</em>. So we are saying loop over a variable <em>x</em> from 0 to 48000, the number of samples we have.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520c85224655771" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+[np.sin(2 * np.pi * frequency * x/sampling_rate)]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520c85224655771-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520c85224655771-1"><span class="crayon-sy">[</span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">sin</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">pi *</span><span class="crayon-h"> </span><span class="crayon-e">frequency *</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-o">/</span><span class="crayon-v">sampling_rate</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>This says that for each <em>x</em> that we generated, run it through the formula for the sine wave,</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520c8a379914158" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+2 * pi * f * t.</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520c8a379914158-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520c8a379914158-1"><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-e">pi *</span><span class="crayon-h"> </span><span class="crayon-e">f *</span><span class="crayon-h"> </span><span class="crayon-v">t</span><span class="crayon-sy">.</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>So if we look at the code again:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520c90334314395" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+sine_wave = [np.sin(2 * np.pi * frequency * x/sampling_rate) for x in range(num_samples)]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520c90334314395-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520c90334314395-1"><span class="crayon-v">sine_wave</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">sin</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">pi *</span><span class="crayon-h"> </span><span class="crayon-e">frequency *</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-o">/</span><span class="crayon-v">sampling_rate</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">x</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-v">num_samples</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>It says generate x in the range of 0 to num_samples, and for each of that <em>x</em> value, generate a value that is the sine of that. You can think of this value as the <em>y</em> axis values. All these values are then put in a list. Easy peasy.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520c96581204138" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+nframes=num_samples
+
+comptype="NONE"
+
+compname="not compressed"
+
+nchannels=1
+
+sampwidth=2</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520c96581204138-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c96581204138-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520c96581204138-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c96581204138-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520c96581204138-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c96581204138-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520c96581204138-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c96581204138-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520c96581204138-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520c96581204138-1"><span class="crayon-v">nframes</span><span class="crayon-o">=</span><span class="crayon-e">num_samples</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c96581204138-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c96581204138-3"><span class="crayon-v">comptype</span><span class="crayon-o">=</span><span class="crayon-s">"NONE"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c96581204138-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c96581204138-5"><span class="crayon-v">compname</span><span class="crayon-o">=</span><span class="crayon-s">"not compressed"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c96581204138-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c96581204138-7"><span class="crayon-v">nchannels</span><span class="crayon-o">=</span><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c96581204138-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c96581204138-9"><span class="crayon-v">sampwidth</span><span class="crayon-o">=</span><span class="crayon-cn">2</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>Okay, now it’s time to write the sine wave to a file. We are going to use Python’s inbuilt wave library. Here we set the paramerters. <em>nframes</em> is the number of frames or samples.</p>
+<p><em>comptype</em> and <em>compname</em> both signal the same thing: The data isn’t compressed. <em>nchannels</em> is the number of channels, which is 1. <em>sampwidth</em> is the sample width in bytes. As I mentioned earlier, wave files are usually 16 bits or 2 bytes per sample.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520c9b520483667" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+wav_file=wave.open(file, 'w')
+
+wav_file.setparams((nchannels, sampwidth, int(sampling_rate), nframes, comptype, compname))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520c9b520483667-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520c9b520483667-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520c9b520483667-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520c9b520483667-1"><span class="crayon-v">wav_file</span><span class="crayon-o">=</span><span class="crayon-v">wave</span><span class="crayon-sy">.</span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-v">file</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'w'</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520c9b520483667-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520c9b520483667-3"><span class="crayon-v">wav_file</span><span class="crayon-sy">.</span><span class="crayon-e">setparams</span><span class="crayon-sy">(</span><span class="crayon-sy">(</span><span class="crayon-v">nchannels</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">sampwidth</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-sy">(</span><span class="crayon-v">sampling_rate</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">nframes</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">comptype</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">compname</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>We open the file and set the parameters.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520ca1535200017" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+for s in sine_wave:
+   wav_file.writeframes(struct.pack('h', int(s*amplitude)))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520ca1535200017-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520ca1535200017-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520ca1535200017-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">s</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">sine_wave</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520ca1535200017-2"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">wav_file</span><span class="crayon-sy">.</span><span class="crayon-e">writeframes</span><span class="crayon-sy">(</span><span class="crayon-t">struct</span><span class="crayon-sy">.</span><span class="crayon-e">pack</span><span class="crayon-sy">(</span><span class="crayon-s">'h'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-sy">(</span><span class="crayon-e">s*</span><span class="crayon-v">amplitude</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>This might require some explanation. We are writing the sine_wave sample by sample. <em>writeframes</em> is the function that writes a sine wave. All that is simple. This might confuse you:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520ca6615764780" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+struct.pack('h', int(s*amplitude))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520ca6615764780-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520ca6615764780-1"><span class="crayon-t">struct</span><span class="crayon-sy">.</span><span class="crayon-e">pack</span><span class="crayon-sy">(</span><span class="crayon-s">'h'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-sy">(</span><span class="crayon-e">s*</span><span class="crayon-v">amplitude</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>So let’s break it down into parts.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520cac549372054" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+int(s*amplitude)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520cac549372054-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520cac549372054-1"><span class="crayon-t">int</span><span class="crayon-sy">(</span><span class="crayon-e">s*</span><span class="crayon-v">amplitude</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<p><em>s</em> is the single sample of the sine_wave we are writing. I am multiplying it with the amplitude here (to convert to fixed point). We could have done it earlier, but I’m doing it here, as this is where it matters, when we are writing to a file.</p>
+<p>Now,the data we have is just a list of numbers. If we write it to a file, it will not be readable by an audio player.</p>
+<p>Struct is a Python library that takes our data and packs it as binary data. The <em>h</em> in the code means 16 bit number.</p>
+<p>To understand what packing does, let’s look at an example in IPython.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520cb1489155393" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+In [1]: import numpy as np
+
+In [2]: np.sin(0.5)
+
+Out[2]: 0.47942553860420301
+
+In [5]: 0.479*16000
+
+Out[5]: 7664.0</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520cb1489155393-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cb1489155393-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520cb1489155393-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cb1489155393-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520cb1489155393-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cb1489155393-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520cb1489155393-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cb1489155393-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520cb1489155393-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520cb1489155393-1"><span class="crayon-st">In</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">import </span><span class="crayon-e">numpy </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-e">np</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cb1489155393-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cb1489155393-3"><span class="crayon-st">In</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">sin</span><span class="crayon-sy">(</span><span class="crayon-cn">0.5</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cb1489155393-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cb1489155393-5"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.47942553860420301</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cb1489155393-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cb1489155393-7"><span class="crayon-st">In</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">5</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">0.479</span><span class="crayon-o">*</span><span class="crayon-cn">16000</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cb1489155393-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cb1489155393-9"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">5</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">7664.0</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>I am using <em>0.5</em> as an example above.</p>
+<p>So we take the sin of 0.5, and convert it to a fixed point number by multiplying it by 16000. Now if we were to write this to file, it would just write 7664 as a string, which would be wrong. Let’s look at what struct does:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520cb7661631774" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+In [6]: struct.pack('h', 7664)
+
+Out[6]: 'xf0x1d'</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520cb7661631774-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cb7661631774-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520cb7661631774-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520cb7661631774-1"><span class="crayon-st">In</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">6</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">struct</span><span class="crayon-sy">.</span><span class="crayon-e">pack</span><span class="crayon-sy">(</span><span class="crayon-s">'h'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">7664</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cb7661631774-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cb7661631774-3"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">6</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">'xf0x1d'</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p><em>x</em> means the number is a hexadecimal. As you can see, struct has turned our number 7664 into 2 hex values: 0xf0 and 0x1d.</p>
+<p>Why 0xf0 0x1d? Well, if you convert 7664 to hex, you will get 0xf01d.</p>
+<p>Why two values? Because we are using 16 bit values and our number can’t fit in one. So struct broke it into two numbers.</p>
+<p>Since the numbers are now in hex, they can be read by other programs, including our audio players.</p>
+<p>Coming back to our code:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520cbd658131965" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+for s in sine_wave:
+   wav_file.writeframes(struct.pack('h', int(s*amplitude)))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520cbd658131965-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cbd658131965-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520cbd658131965-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">s</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">sine_wave</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cbd658131965-2"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">wav_file</span><span class="crayon-sy">.</span><span class="crayon-e">writeframes</span><span class="crayon-sy">(</span><span class="crayon-t">struct</span><span class="crayon-sy">.</span><span class="crayon-e">pack</span><span class="crayon-sy">(</span><span class="crayon-s">'h'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">int</span><span class="crayon-sy">(</span><span class="crayon-e">s*</span><span class="crayon-v">amplitude</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>This will take our sine wave samples and write it to our file, <em>test.wav</em>, packed as 16 bit audio.</p>
+<p>Play the file in any audio player you have- Windows Media player, VLC etc. You should hear a very short tone.</p>
+<p>Now, we need to check if the frequency of the tone is correct. I am going to use Audacity, a open source audio player with a ton of features. One of them is that we can find the frequency of audio files. Let’s open up Audacity.</p>
+<p><img src="/wp-content/uploads/2017/04/audacity.jpg" alt="" class="aligncenter size-full wp-image-3022" width="1358" height="313" srcset="/wp-content/uploads/2017/04/audacity.jpg 1358w, /wp-content/uploads/2017/04/audacity-300x69.jpg 300w, /wp-content/uploads/2017/04/audacity-768x177.jpg 768w, /wp-content/uploads/2017/04/audacity-1024x236.jpg 1024w, /wp-content/uploads/2017/04/audacity-1200x277.jpg 1200w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></p>
+<p>So we have a sine wave. Note that the wave goes as high as 0.5, while 1.0 is the maximum value. Remember we multiplied by 16000, which was half of 36767, which was full scale?</p>
+<p>Now to find the frequency. Go to Edit-&gt; Select All (or press Ctrl A), then Analyse-&gt; Plot Spectrum.</p>
+<p><img src="/wp-content/uploads/2017/04/audacity_spectrum.jpg" alt="" class="aligncenter size-full wp-image-3023" width="942" height="701" srcset="/wp-content/uploads/2017/04/audacity_spectrum.jpg 942w, /wp-content/uploads/2017/04/audacity_spectrum-300x223.jpg 300w, /wp-content/uploads/2017/04/audacity_spectrum-768x572.jpg 768w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></p>
+<p>You can see that the peak is at around a 1000 Hz, which is how we created our wave file.</p>
+<h2>Calculate the frequency of a sine wave</h2>
+<p>I took one course in signal processing in my degree, and didn&#8217;t understand a thing. We were asked to derive a hundred equations, with no sense or logic. I found the subject boring and pedantic.</p>
+<p>Which is why I wasn&#8217;t happy when I had to study it again for my Masters. But I was in luck.</p>
+<p>This time, the teacher was a practising engineer. He ran his own company and taught part time. Unlike the university teachers, he actually knew what the equations were for.</p>
+<p>He started us with the Discrete Fourier Transform (DFT). I had heard of the DFT, and had no idea what it did. I could derive the equation, though fat lot of good it did me.</p>
+<p>But this teacher (I forgot his name, he was a Danish guy) showed us a noisy signal, and then took the DFT of it. He then showed the results in a graphical window. We clearly saw the original sine wave and the noise frequency, and I understood for the first time what a DFT does.</p>
+<p><strong>Use the DFT to get frequencies</strong></p>
+<p>To get the frequency of a sine wave, you need to get its Discrete Fourier Transform(DFT). Contrary to what every book written by Phd types may have told you, you don&#8217;t need to understand how to derive the transform. You just need to know how to use it.</p>
+<p>In its simplest terms, the DFT takes a signal and calculates which frequencies are present in it. In more technical terms, the DFT converts a time domain signal to a frequency domain. What does that mean? Let&#8217;s look at our sine wave.</p>
+<p><img src="/wp-content/uploads/2017/04/figure_1-1.png" alt="" class="aligncenter size-full wp-image-3024" width="800" height="597" srcset="/wp-content/uploads/2017/04/figure_1-1.png 800w, /wp-content/uploads/2017/04/figure_1-1-300x224.png 300w, /wp-content/uploads/2017/04/figure_1-1-768x573.png 768w" sizes="(max-width: 800px) 85vw, 800px" /></p>
+<p>The wave is changing with time. If this was an audio file, you could imagine the player moving right as the file plays.</p>
+<p>In the frequency domain, you see the frequency part of the signal. This image is taken from later on in the chapter to show you what the frequency domain looks like:</p>
+<p><img src="/wp-content/uploads/2017/04/noisy2.png" alt="" class="aligncenter size-full wp-image-3025" width="800" height="597" srcset="/wp-content/uploads/2017/04/noisy2.png 800w, /wp-content/uploads/2017/04/noisy2-300x224.png 300w, /wp-content/uploads/2017/04/noisy2-768x573.png 768w" sizes="(max-width: 800px) 85vw, 800px" /></p>
+<p>The signal will change if you add or remove frequencies, but will not change in time. For example, if you take a 1000 Hz audio tone and take its frequency, the frequency will remain the same no matter how long you look at it. But if you look at it in the time domain, you will see the signal moving.</p>
+<p>The DFT was really slow to run on computers (back in the 70s), so the Fast Fourier Transform (FFT) was invented. The FFT is what is normally used nowadays.</p>
+<p>The way it works is, you take a signal and run the FFT on it, and you get the frequency of the signal back.</p>
+<p>If you have never used (or even heard of) a FFT, don&#8217;t worry. I&#8217;ll teach you how to start using it, and you can read more online if you want. Most tutorials or books won&#8217;t teach you much anyway. They&#8217;ll usually blat you with equations, without showing you what to do with them.</p>
+<p>On to the code. Open up <em>get_freq.py</em>,</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520cc5953574967" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+frame_rate = 48000.0
+
+infile = "test.wav"
+
+num_samples = 48000
+
+wav_file = wave.open(infile, 'r')
+
+data = wav_file.readframes(num_samples)
+
+wav_file.close()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520cc5953574967-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cc5953574967-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520cc5953574967-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cc5953574967-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520cc5953574967-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cc5953574967-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520cc5953574967-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cc5953574967-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520cc5953574967-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cc5953574967-10">10</div><div class="crayon-num" data-line="crayon-5bcf831520cc5953574967-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520cc5953574967-1"><span class="crayon-v">frame_rate</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">48000.0</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cc5953574967-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cc5953574967-3"><span class="crayon-v">infile</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"test.wav"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cc5953574967-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cc5953574967-5"><span class="crayon-v">num_samples</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">48000</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cc5953574967-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cc5953574967-7"><span class="crayon-v">wav_file</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">wave</span><span class="crayon-sy">.</span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-v">infile</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'r'</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cc5953574967-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cc5953574967-9"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">wav_file</span><span class="crayon-sy">.</span><span class="crayon-e">readframes</span><span class="crayon-sy">(</span><span class="crayon-v">num_samples</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cc5953574967-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cc5953574967-11"><span class="crayon-v">wav_file</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>We are reading the wave file we generated in the last example. This code should be clear enough. The <em>wave readframes()</em> function reads all the audio frames from a wave file.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520ccb479372764" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data = struct.unpack('{n}h'.format(n=num_samples), data)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520ccb479372764-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520ccb479372764-1"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">struct</span><span class="crayon-sy">.</span><span class="crayon-e">unpack</span><span class="crayon-sy">(</span><span class="crayon-s">'{n}h'</span><span class="crayon-sy">.</span><span class="crayon-e">format</span><span class="crayon-sy">(</span><span class="crayon-v">n</span><span class="crayon-o">=</span><span class="crayon-v">num_samples</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>Remember we had to pack the data to make it readable in binary format? Well, we do the opposite now. The first parameter to the function is a format string, which is the same thing you use when you do a <em>print()</em>. You are telling the unpacker to unpack <em>num_samples</em> 16 bit words (remember the <em>h</em> means 16 bits).</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520cd1496075847" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data = np.array(data)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520cd1496075847-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520cd1496075847-1"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-t">array</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>We then convert the data to a numpy array.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520cd6835140022" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data_fft = np.fft.fft(data)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520cd6835140022-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520cd6835140022-1"><span class="crayon-v">data_fft</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-v">fft</span><span class="crayon-sy">.</span><span class="crayon-e">fft</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>We take the <em>fft</em> of the data. This will create an array with all the frequencies present in the signal.</p>
+<p>Now, here&#8217;s the problem. The <em>fft</em> returns an array of complex numbers that doesn&#8217;t tell us anything. If I print out the first 8 values of the fft, I get:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520cdc185814452" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+In [3]: data_fft[:8]
+
+Out[3]:
+
+array([ 13.00000000 +0.j        ,   8.44107682 -4.55121351j,
+
+6.24696630-11.98027552j,   4.09513760 -2.63009999j,
+
+-0.87934285 +9.52378503j,   2.62608334 +3.58733642j,
+
+4.89671762 -3.36196984j,  -1.26176048 +3.0234555j ])</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520cdc185814452-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cdc185814452-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520cdc185814452-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cdc185814452-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520cdc185814452-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cdc185814452-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520cdc185814452-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cdc185814452-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520cdc185814452-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cdc185814452-10">10</div><div class="crayon-num" data-line="crayon-5bcf831520cdc185814452-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520cdc185814452-1"><span class="crayon-st">In</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">3</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-v">data_fft</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-cn">8</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cdc185814452-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cdc185814452-3"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">3</span><span class="crayon-sy">]</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cdc185814452-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cdc185814452-5"><span class="crayon-t">array</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span><span class="crayon-h"> </span><span class="crayon-cn">13.00000000</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-cn">0.j</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">,</span><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-cn">8.44107682</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">4.55121351j</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cdc185814452-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cdc185814452-7"><span class="crayon-cn">6.24696630</span><span class="crayon-o">-</span><span class="crayon-cn">11.98027552j</span><span class="crayon-sy">,</span><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-cn">4.09513760</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">2.63009999j</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cdc185814452-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cdc185814452-9"><span class="crayon-o">-</span><span class="crayon-cn">0.87934285</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-cn">9.52378503j</span><span class="crayon-sy">,</span><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-cn">2.62608334</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-cn">3.58733642j</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cdc185814452-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cdc185814452-11"><span class="crayon-cn">4.89671762</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-cn">3.36196984j</span><span class="crayon-sy">,</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-o">-</span><span class="crayon-cn">1.26176048</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-cn">3.0234555j</span><span class="crayon-h"> </span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0009 seconds] -->
+<p></p>
+<p>If only there was a way to convert the complex numbers to real values we can use. Let&#8217;s try to remember our high school formulas for converting complex numbers to real&#8230;</p>
+<p>Wait. Numpy can do that for us.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520ce2560146049" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# This will give us the frequency we want
+
+frequencies = np.abs(data_fft)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520ce2560146049-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520ce2560146049-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520ce2560146049-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520ce2560146049-1"><span class="crayon-p"># This will give us the frequency we want</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520ce2560146049-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520ce2560146049-3"><span class="crayon-v">frequencies</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">abs</span><span class="crayon-sy">(</span><span class="crayon-v">data_fft</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>The <em>numpy abs()</em> function will take our complex signal and generate the real part of it.</p>
+<p><strong>Side Detour</strong></p>
+<p>A bit of a detour to explain how the FFT returns its results.</p>
+<p>The FFT returns all possible frequencies in the signal. And the way it returns is that each index contains a frequency element. Say you store the FFT results in an array called <em>data_fft</em>. Then:</p>
+<p><em>data_fft[1]</em> will contain frequency part of 1 Hz.</p>
+<p><em>data_fft[2]</em> will contain frequency part of 2 Hz.</p>
+<p>&#8230;</p>
+<p><em>data_fft[8]</em> will contain frequency part of 8 Hz.</p>
+<p>&#8230;</p>
+<p><em>data_fft[1000]</em> will contain frequency part of 1000 Hz.</p>
+<p>Now what if you have no 1Hz frequency in your signal? You will still get a value at <em>data_fft[1]</em>, but it will be minuscule. To give you an example, I will take the real fft of a 1000 Hz wave:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520ce9825285844" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data_fft = np.fft.fft(sine_wave)
+
+abs(data_fft[0])
+
+Out[7]: 8.1289678326462086e-13
+
+abs(data_fft[1])
+
+Out[8]: 9.9475299243014428e-12
+
+abs(data_fft[1000])
+
+Out[11]: 24000.0</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520ce9825285844-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520ce9825285844-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520ce9825285844-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520ce9825285844-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520ce9825285844-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520ce9825285844-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520ce9825285844-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520ce9825285844-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520ce9825285844-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520ce9825285844-10">10</div><div class="crayon-num" data-line="crayon-5bcf831520ce9825285844-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520ce9825285844-12">12</div><div class="crayon-num" data-line="crayon-5bcf831520ce9825285844-13">13</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520ce9825285844-1"><span class="crayon-v">data_fft</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-v">fft</span><span class="crayon-sy">.</span><span class="crayon-e">fft</span><span class="crayon-sy">(</span><span class="crayon-v">sine_wave</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520ce9825285844-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520ce9825285844-3"><span class="crayon-e">abs</span><span class="crayon-sy">(</span><span class="crayon-v">data_fft</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520ce9825285844-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520ce9825285844-5"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">7</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">8.1289678326462086e</span><span class="crayon-o">-</span><span class="crayon-cn">13</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520ce9825285844-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520ce9825285844-7"><span class="crayon-e">abs</span><span class="crayon-sy">(</span><span class="crayon-v">data_fft</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520ce9825285844-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520ce9825285844-9"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">8</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">9.9475299243014428e</span><span class="crayon-o">-</span><span class="crayon-cn">12</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520ce9825285844-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520ce9825285844-11"><span class="crayon-e">abs</span><span class="crayon-sy">(</span><span class="crayon-v">data_fft</span><span class="crayon-sy">[</span><span class="crayon-cn">1000</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520ce9825285844-12">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520ce9825285844-13"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">11</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-cn">24000.0</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>If you look at the absolute values for <em>data_fft[0]</em> or <em>data_fft[1]</em>, you will see they are tiny. The <em>e-12</em> at the end means they are raised to a power of -12, so something like <em>0.00000000000812</em> for <em>data_fft[0]</em>. But if you look at <em>data_fft[1000]</em>, the value is a hue <em>24000</em>. This can easily be plotted.</p>
+<p>If we want to find the array element with the highest value, we can find it by:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520cef267519272" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+print("The frequency is {} Hz".format(np.argmax(frequencies)))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520cef267519272-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520cef267519272-1"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The frequency is {} Hz"</span><span class="crayon-sy">.</span><span class="crayon-e">format</span><span class="crayon-sy">(</span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">argmax</span><span class="crayon-sy">(</span><span class="crayon-v">frequencies</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p><em>np.argmax</em> will return the highest frequency in our signal, which it will then print. As we have seen manually, this is at a 1000Hz (or the value stored at <em>data_fft[1000]</em>). And now we can plot the data too.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520cf5212476955" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+plt.subplot(2,1,1)
+
+plt.plot(data[:300])
+
+plt.title("Original audio wave")
+
+plt.subplot(2,1,2)
+
+plt.plot(frequencies)
+
+plt.title("Frequencies found")
+
+plt.xlim(0,1200)
+
+plt.show()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520cf5212476955-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cf5212476955-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520cf5212476955-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cf5212476955-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520cf5212476955-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cf5212476955-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520cf5212476955-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cf5212476955-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520cf5212476955-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cf5212476955-10">10</div><div class="crayon-num" data-line="crayon-5bcf831520cf5212476955-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cf5212476955-12">12</div><div class="crayon-num" data-line="crayon-5bcf831520cf5212476955-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cf5212476955-14">14</div><div class="crayon-num" data-line="crayon-5bcf831520cf5212476955-15">15</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520cf5212476955-1"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">subplot</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cf5212476955-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cf5212476955-3"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">plot</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-cn">300</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cf5212476955-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cf5212476955-5"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">title</span><span class="crayon-sy">(</span><span class="crayon-s">"Original audio wave"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cf5212476955-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cf5212476955-7"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">subplot</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cf5212476955-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cf5212476955-9"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">plot</span><span class="crayon-sy">(</span><span class="crayon-v">frequencies</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cf5212476955-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cf5212476955-11"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">title</span><span class="crayon-sy">(</span><span class="crayon-s">"Frequencies found"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cf5212476955-12">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cf5212476955-13"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">xlim</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-cn">1200</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cf5212476955-14">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cf5212476955-15"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">show</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>This should be known to you. The only new thing is the <em>subplot</em> function, which allows you to draw multiple plots on the same window.</p>
+<p><em>subplot(2,1,1)</em> means that we are plotting a 2&#215;1 grid. The 3rd number is the plot number, and the only one that will change. It will become clearer when you see the graph.</p>
+<p><img src="/wp-content/uploads/2017/04/get_freq.png" alt="" class="aligncenter size-full wp-image-3026" width="800" height="597" srcset="/wp-content/uploads/2017/04/get_freq.png 800w, /wp-content/uploads/2017/04/get_freq-300x224.png 300w, /wp-content/uploads/2017/04/get_freq-768x573.png 768w" sizes="(max-width: 800px) 85vw, 800px" /></p>
+<p>And that&#8217;s it, folks. We took our audio file and calculated the frequency of it. Next, we will add noise to our plot and then try to clean it.</p>
+<h2>Cleaning a noisy sine wave</h2>
+<p>In this example, I&#8217;ll recreate the same example my teacher showed me. We&#8217;ll generate a sine wave, add noise to it, and then filter the noise. Let&#8217;s start with the code.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520cfb130317932" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# frequency is the number of times a wave repeats a second
+
+frequency = 1000
+
+noisy_freq = 50
+
+num_samples = 48000
+
+# The sampling rate of the analog to digital convert
+
+sampling_rate = 48000.0</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520cfb130317932-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cfb130317932-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520cfb130317932-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cfb130317932-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520cfb130317932-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cfb130317932-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520cfb130317932-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cfb130317932-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520cfb130317932-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520cfb130317932-10">10</div><div class="crayon-num" data-line="crayon-5bcf831520cfb130317932-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520cfb130317932-1"><span class="crayon-p"># frequency is the number of times a wave repeats a second</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cfb130317932-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cfb130317932-3"><span class="crayon-v">frequency</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">1000</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cfb130317932-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cfb130317932-5"><span class="crayon-v">noisy_freq</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">50</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cfb130317932-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cfb130317932-7"><span class="crayon-v">num_samples</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">48000</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cfb130317932-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cfb130317932-9"><span class="crayon-p"># The sampling rate of the analog to digital convert</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520cfb130317932-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520cfb130317932-11"><span class="crayon-v">sampling_rate</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">48000.0</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>The main frequency is a 1000Hz, and we will add a noise of 50Hz to it.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d01960183531" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+#Create the sine wave and noise
+
+sine_wave = [np.sin(2 * np.pi * frequency * x1 / sampling_rate) for x1 in range(num_samples)]
+
+sine_noise = [np.sin(2 * np.pi * noisy_freq * x1/  sampling_rate) for x1 in range(num_samples)]
+
+#Convert them to numpy arrays
+
+sine_wave = np.array(sine_wave)
+
+sine_noise = np.array(sine_noise)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d01960183531-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d01960183531-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d01960183531-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d01960183531-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520d01960183531-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d01960183531-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520d01960183531-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d01960183531-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520d01960183531-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d01960183531-10">10</div><div class="crayon-num" data-line="crayon-5bcf831520d01960183531-11">11</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d01960183531-1"><span class="crayon-p">#Create the sine wave and noise</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d01960183531-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d01960183531-3"><span class="crayon-v">sine_wave</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">sin</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">pi *</span><span class="crayon-h"> </span><span class="crayon-e">frequency *</span><span class="crayon-h"> </span><span class="crayon-v">x1</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-h"> </span><span class="crayon-v">sampling_rate</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">x1 </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-v">num_samples</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d01960183531-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d01960183531-5"><span class="crayon-v">sine_noise</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">sin</span><span class="crayon-sy">(</span><span class="crayon-cn">2</span><span class="crayon-h"> </span><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">pi *</span><span class="crayon-h"> </span><span class="crayon-e">noisy_freq *</span><span class="crayon-h"> </span><span class="crayon-v">x1</span><span class="crayon-o">/</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">sampling_rate</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">x1 </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-v">num_samples</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d01960183531-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d01960183531-7"><span class="crayon-p">#Convert them to numpy arrays</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d01960183531-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d01960183531-9"><span class="crayon-v">sine_wave</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-t">array</span><span class="crayon-sy">(</span><span class="crayon-v">sine_wave</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d01960183531-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d01960183531-11"><span class="crayon-v">sine_noise</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-t">array</span><span class="crayon-sy">(</span><span class="crayon-v">sine_noise</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0011 seconds] -->
+<p></p>
+<p>I hope the above isn&#8217;t scary to you anymore, as it&#8217;s the same code as before. We generate two sine waves, one for the signal and one for the noise, and convert them to numpy arrays.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d07466022303" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Add them to create a noisy signal
+
+combined_signal = sine_wave + sine_noise</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d07466022303-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d07466022303-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d07466022303-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d07466022303-1"><span class="crayon-p"># Add them to create a noisy signal</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d07466022303-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d07466022303-3"><span class="crayon-v">combined_signal</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sine_wave</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-v">sine_noise</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>I am adding the noise to the signal. As I mentioned earlier, this is possible only with numpy. With normal Python, you&#8217;d have to for loop or use list comprehensions. Messy. With numpy, you can add two arrays like they were normal numbers, and numpy takes care of the low level detail for you.</p>
+<p>On to some graphing of what we have till now.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d0d610479102" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+plt.subplot(3,1,1)
+
+plt.title("Original sine wave")
+
+# Need to add empty space, else everything looks scrunched up!
+
+plt.subplots_adjust(hspace=.5)
+
+plt.plot(sine_wave[:500])
+
+plt.subplot(3,1,2)
+
+plt.title("Noisy wave")
+
+plt.plot(sine_noise[:4000])
+
+plt.subplot(3,1,3)
+
+plt.title("Original + Noise")
+
+plt.plot(combined_signal[:3000])
+
+plt.show()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d0d610479102-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d0d610479102-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d0d610479102-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d0d610479102-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d0d610479102-10">10</div><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d0d610479102-12">12</div><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d0d610479102-14">14</div><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d0d610479102-16">16</div><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d0d610479102-18">18</div><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d0d610479102-20">20</div><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d0d610479102-22">22</div><div class="crayon-num" data-line="crayon-5bcf831520d0d610479102-23">23</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d0d610479102-1"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">subplot</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d0d610479102-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d0d610479102-3"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">title</span><span class="crayon-sy">(</span><span class="crayon-s">"Original sine wave"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d0d610479102-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d0d610479102-5"><span class="crayon-p"># Need to add empty space, else everything looks scrunched up!</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d0d610479102-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d0d610479102-7"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">subplots_adjust</span><span class="crayon-sy">(</span><span class="crayon-v">hspace</span><span class="crayon-o">=</span><span class="crayon-sy">.</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d0d610479102-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d0d610479102-9"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">plot</span><span class="crayon-sy">(</span><span class="crayon-v">sine_wave</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-cn">500</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d0d610479102-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d0d610479102-11"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">subplot</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d0d610479102-12">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d0d610479102-13"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">title</span><span class="crayon-sy">(</span><span class="crayon-s">"Noisy wave"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d0d610479102-14">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d0d610479102-15"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">plot</span><span class="crayon-sy">(</span><span class="crayon-v">sine_noise</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-cn">4000</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d0d610479102-16">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d0d610479102-17"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">subplot</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d0d610479102-18">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d0d610479102-19"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">title</span><span class="crayon-sy">(</span><span class="crayon-s">"Original + Noise"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d0d610479102-20">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d0d610479102-21"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">plot</span><span class="crayon-sy">(</span><span class="crayon-v">combined_signal</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-cn">3000</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d0d610479102-22">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d0d610479102-23"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">show</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></p>
+<p>Nothing shocking here.</p>
+<p><img src="/wp-content/uploads/2017/04/noisy1.png" alt="" class="aligncenter size-full wp-image-3027" width="800" height="597" srcset="/wp-content/uploads/2017/04/noisy1.png 800w, /wp-content/uploads/2017/04/noisy1-300x224.png 300w, /wp-content/uploads/2017/04/noisy1-768x573.png 768w" sizes="(max-width: 800px) 85vw, 800px" /></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d13541847985" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data_fft = np.fft.fft(combined_signal)
+
+freq = (np.abs(data_fft[:len(data_fft)]))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d13541847985-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d13541847985-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d13541847985-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d13541847985-1"><span class="crayon-v">data_fft</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-v">fft</span><span class="crayon-sy">.</span><span class="crayon-e">fft</span><span class="crayon-sy">(</span><span class="crayon-v">combined_signal</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d13541847985-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d13541847985-3"><span class="crayon-v">freq</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">abs</span><span class="crayon-sy">(</span><span class="crayon-v">data_fft</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">data_fft</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p><em>data_fft</em> contains the fft of the combined noise+signal wave. <em>freq</em> contains the absolute of the frequencies found in it.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d19256212467" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+plt.plot(freq)
+
+plt.title("Before filtering: Will have main signal (1000Hz) + noise frequency (50Hz)")
+
+plt.xlim(0,1200)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d19256212467-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d19256212467-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d19256212467-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d19256212467-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520d19256212467-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d19256212467-1"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">plot</span><span class="crayon-sy">(</span><span class="crayon-v">freq</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d19256212467-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d19256212467-3"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">title</span><span class="crayon-sy">(</span><span class="crayon-s">"Before filtering: Will have main signal (1000Hz) + noise frequency (50Hz)"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d19256212467-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d19256212467-5"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">xlim</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-cn">1200</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>We take the fft of the signal, as before, and plot it. This time, we get two signals: Our sine wave at 1000Hz and the noise at 50Hz.</p>
+<p><img src="/wp-content/uploads/2017/04/noisy2-1.png" alt="" class="aligncenter size-full wp-image-3028" width="800" height="597" srcset="/wp-content/uploads/2017/04/noisy2-1.png 800w, /wp-content/uploads/2017/04/noisy2-1-300x224.png 300w, /wp-content/uploads/2017/04/noisy2-1-768x573.png 768w" sizes="(max-width: 800px) 85vw, 800px" /></p>
+<p>Now, to filter the signal. I won&#8217;t cover filtering in any detail, as that can take a whole book. Instead, I will create a simple filter just using the fft. The goal is to get you comfortable with Numpy.</p>
+<p>First, here is the complete code:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d1e427431759" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+for f in freq:
+    # Filter between lower and upper limits
+    # Choosing 950, as closest to 1000. In real world, won't get exact numbers like these
+    if index &gt; 950 and index &lt; 1050:
+        # Has a real value. I'm choosing &gt;1, as many values are like 0.000000001 etc
+        if f &gt; 1:
+            filtered_freq.append(f)
+
+        else:
+            filtered_freq.append(0)
+    else:
+        filtered_freq.append(0)
+index += 1</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d1e427431759-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d1e427431759-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d1e427431759-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d1e427431759-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520d1e427431759-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d1e427431759-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520d1e427431759-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d1e427431759-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520d1e427431759-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d1e427431759-10">10</div><div class="crayon-num" data-line="crayon-5bcf831520d1e427431759-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d1e427431759-12">12</div><div class="crayon-num" data-line="crayon-5bcf831520d1e427431759-13">13</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d1e427431759-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">f</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">freq</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d1e427431759-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># Filter between lower and upper limits</span></div><div class="crayon-line" id="crayon-5bcf831520d1e427431759-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># Choosing 950, as closest to 1000. In real world, won't get exact numbers like these</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d1e427431759-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">index</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-cn">950</span><span class="crayon-h"> </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-v">index</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-cn">1050</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf831520d1e427431759-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># Has a real value. I'm choosing &gt;1, as many values are like 0.000000001 etc</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d1e427431759-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf831520d1e427431759-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">filtered_freq</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">f</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d1e427431759-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d1e427431759-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">else</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d1e427431759-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">filtered_freq</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf831520d1e427431759-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">else</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d1e427431759-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">filtered_freq</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf831520d1e427431759-13"><span class="crayon-v">index</span><span class="crayon-h"> </span><span class="crayon-o">+=</span><span class="crayon-h"> </span><span class="crayon-cn">1</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0010 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>Now let&#8217;s go over it line by line:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d24878717135" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+filtered_freq = []
+
+index = 0
+
+for f in freq:</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d24878717135-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d24878717135-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d24878717135-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d24878717135-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520d24878717135-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d24878717135-1"><span class="crayon-v">filtered_freq</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d24878717135-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d24878717135-3"><span class="crayon-v">index</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d24878717135-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d24878717135-5"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">f</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">freq</span><span class="crayon-o">:</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>We create an empty list called <em>filtered_freq</em>. If you remember, <em>freq</em> stores the absolute values of the fft, or the frequencies present.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d29780139360" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+if index &gt; 950 and index &lt; 1050:</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d29780139360-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d29780139360-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">index</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-cn">950</span><span class="crayon-h"> </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-v">index</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-cn">1050</span><span class="crayon-o">:</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p><em>index</em> is the current array element in the array <em>freq</em>. As I said, the <em>fft</em> returns all frequencies in the signal. These are stored in the array based on the index, so <em>freq[1]</em> will have the frequency of 1Hz, <em>freq[2]</em> will have 2Hz and so on.</p>
+<p>Since I know my frequency is 1000Hz, I will search around that. In the real world, we will never get the exact frequency, as noise means some data will be lost. So I&#8217;m using a lower limit of 950 and upper limit of 1050. I check if the frequency we are looping is within this range.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d2f385976125" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+ if f &gt; 1:
+
+    filtered_freq.append(f)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d2f385976125-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d2f385976125-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d2f385976125-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d2f385976125-1"><span class="crayon-h"> </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d2f385976125-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d2f385976125-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">filtered_freq</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">f</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>I mentioned this earlier as well: While all frequencies will be present, their absolute values will be minuscule, usually less than 1. So if we find a value greater than 1, we save it to our <em>filtered_freq</em> array.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d35904004073" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+else:
+
+   filtered_freq.append(0)
+
+else:
+
+   filtered_freq.append(0)
+
+index += 1</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d35904004073-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d35904004073-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d35904004073-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d35904004073-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520d35904004073-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d35904004073-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520d35904004073-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d35904004073-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520d35904004073-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d35904004073-1"><span class="crayon-st">else</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d35904004073-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d35904004073-3"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">filtered_freq</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d35904004073-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d35904004073-5"><span class="crayon-st">else</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d35904004073-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d35904004073-7"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">filtered_freq</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d35904004073-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d35904004073-9"><span class="crayon-v">index</span><span class="crayon-h"> </span><span class="crayon-o">+=</span><span class="crayon-h"> </span><span class="crayon-cn">1</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>If our frequency is not within the range we are looking for, or if the value is too low, we append a zero. This is to remove all frequencies we don&#8217;t want. And then we increment index.</p>
+<p><strong>Update</strong></p>
+<p><em>As reader <a href="https://gist.github.com/masasin">Jean Nassar </a>pointed out, the whole code above can be<a href="https://gist.github.com/masasin/e81e51b5ba109b3f2812f7961b781d28"> replaced by one line</a>.</em></p>
+<p><em>So:</em></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d3b030382295" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+for f in freq:
+    # Filter between lower and upper limits
+    # Choosing 950, as closest to 1000. In real world, won't get exact numbers like these
+    if index &gt; 950 and index &lt; 1050:
+        # Has a real value. I'm choosing &gt;1, as many values are like 0.000000001 etc
+        if f &gt; 1:
+            filtered_freq.append(f)
+
+        else:
+            filtered_freq.append(0)
+    else:
+        filtered_freq.append(0)
+index += 1</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d3b030382295-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d3b030382295-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d3b030382295-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d3b030382295-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520d3b030382295-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d3b030382295-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520d3b030382295-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d3b030382295-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520d3b030382295-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d3b030382295-10">10</div><div class="crayon-num" data-line="crayon-5bcf831520d3b030382295-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d3b030382295-12">12</div><div class="crayon-num" data-line="crayon-5bcf831520d3b030382295-13">13</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d3b030382295-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">f</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">freq</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d3b030382295-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># Filter between lower and upper limits</span></div><div class="crayon-line" id="crayon-5bcf831520d3b030382295-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># Choosing 950, as closest to 1000. In real world, won't get exact numbers like these</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d3b030382295-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">index</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-cn">950</span><span class="crayon-h"> </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-v">index</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-cn">1050</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf831520d3b030382295-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-p"># Has a real value. I'm choosing &gt;1, as many values are like 0.000000001 etc</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d3b030382295-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf831520d3b030382295-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">filtered_freq</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-v">f</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d3b030382295-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d3b030382295-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">else</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d3b030382295-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">filtered_freq</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf831520d3b030382295-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">else</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d3b030382295-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">filtered_freq</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf831520d3b030382295-13"><span class="crayon-v">index</span><span class="crayon-h"> </span><span class="crayon-o">+=</span><span class="crayon-h"> </span><span class="crayon-cn">1</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0010 seconds] -->
+<p></p>
+<p><em>can be replaced by:</em></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d41939039237" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+filtered_freq = [f if (950 &lt; index &lt; 1050 and f &gt; 1) else 0 for index, f in enumerate(freq)]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d41939039237-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d41939039237-1"><span class="crayon-v">filtered_freq</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-i">f</span><span class="crayon-h"> </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-cn">950</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-v">index</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-cn">1050</span><span class="crayon-h"> </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">else</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-v">index</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">f</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">enumerate</span><span class="crayon-sy">(</span><span class="crayon-v">freq</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p><em>Now back to the book&#8230;</em></p>
+<p>&nbsp;</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d46671309414" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+plt.plot(filtered_freq)
+
+plt.title("After filtering: Main signal only (1000Hz)")
+
+plt.xlim(0,1200)
+
+plt.show()
+
+plt.close()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d46671309414-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d46671309414-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d46671309414-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d46671309414-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520d46671309414-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d46671309414-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520d46671309414-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d46671309414-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520d46671309414-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d46671309414-1"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">plot</span><span class="crayon-sy">(</span><span class="crayon-v">filtered_freq</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d46671309414-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d46671309414-3"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">title</span><span class="crayon-sy">(</span><span class="crayon-s">"After filtering: Main signal only (1000Hz)"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d46671309414-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d46671309414-5"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">xlim</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-cn">1200</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d46671309414-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d46671309414-7"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">show</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d46671309414-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d46671309414-9"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>And we plot what we have.</p>
+<p><img src="/wp-content/uploads/2017/04/noisy3.png" alt="" class="aligncenter size-full wp-image-3029" width="800" height="597" srcset="/wp-content/uploads/2017/04/noisy3.png 800w, /wp-content/uploads/2017/04/noisy3-300x224.png 300w, /wp-content/uploads/2017/04/noisy3-768x573.png 768w" sizes="(max-width: 800px) 85vw, 800px" /></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d4c302348930" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+recovered_signal = np.fft.ifft(filtered_freq)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d4c302348930-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d4c302348930-1"><span class="crayon-v">recovered_signal</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-v">fft</span><span class="crayon-sy">.</span><span class="crayon-e">ifft</span><span class="crayon-sy">(</span><span class="crayon-v">filtered_freq</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>Now we take the <em>ifft</em>, which stands for Inverse FFT. This will take our signal and convert it back to time domain. We can now compare it with our original noisy signal. We do that with graphing:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d51972348011" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+plt.subplot(3,1,1)
+
+plt.title("Original sine wave")
+
+# Need to add empty space, else everything looks scrunched up!
+
+plt.subplots_adjust(hspace=.5)
+
+plt.plot(sine_wave[:500])
+
+plt.subplot(3,1,2)
+
+plt.title("Noisy wave")
+
+plt.plot(combined_signal[:4000])
+
+plt.subplot(3,1,3)
+
+plt.title("Sine wave after clean up")
+
+plt.plot((recovered_signal[:500]))
+
+plt.show()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d51972348011-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d51972348011-4">4</div><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d51972348011-6">6</div><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d51972348011-8">8</div><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d51972348011-10">10</div><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d51972348011-12">12</div><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d51972348011-14">14</div><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d51972348011-16">16</div><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d51972348011-18">18</div><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d51972348011-20">20</div><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d51972348011-22">22</div><div class="crayon-num" data-line="crayon-5bcf831520d51972348011-23">23</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d51972348011-1"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">subplot</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d51972348011-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d51972348011-3"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">title</span><span class="crayon-sy">(</span><span class="crayon-s">"Original sine wave"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d51972348011-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d51972348011-5"><span class="crayon-p"># Need to add empty space, else everything looks scrunched up!</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d51972348011-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d51972348011-7"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">subplots_adjust</span><span class="crayon-sy">(</span><span class="crayon-v">hspace</span><span class="crayon-o">=</span><span class="crayon-sy">.</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d51972348011-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d51972348011-9"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">plot</span><span class="crayon-sy">(</span><span class="crayon-v">sine_wave</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-cn">500</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d51972348011-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d51972348011-11"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">subplot</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-cn">2</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d51972348011-12">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d51972348011-13"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">title</span><span class="crayon-sy">(</span><span class="crayon-s">"Noisy wave"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d51972348011-14">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d51972348011-15"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">plot</span><span class="crayon-sy">(</span><span class="crayon-v">combined_signal</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-cn">4000</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d51972348011-16">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d51972348011-17"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">subplot</span><span class="crayon-sy">(</span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-cn">3</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d51972348011-18">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d51972348011-19"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">title</span><span class="crayon-sy">(</span><span class="crayon-s">"Sine wave after clean up"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d51972348011-20">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d51972348011-21"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">plot</span><span class="crayon-sy">(</span><span class="crayon-sy">(</span><span class="crayon-v">recovered_signal</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-cn">500</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d51972348011-22">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d51972348011-23"><span class="crayon-v">plt</span><span class="crayon-sy">.</span><span class="crayon-e">show</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></p>
+<p><img src="/wp-content/uploads/2017/04/noisy4.png" alt="" class="aligncenter size-full wp-image-3030" width="800" height="597" srcset="/wp-content/uploads/2017/04/noisy4.png 800w, /wp-content/uploads/2017/04/noisy4-300x224.png 300w, /wp-content/uploads/2017/04/noisy4-768x573.png 768w" sizes="(max-width: 800px) 85vw, 800px" /></p>
+<p>Note that we will receive a warning:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf831520d57059760861" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+ComplexWarning: Casting complex values to real discards the imaginary part
+
+return array(a, dtype, copy=False, order=order)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf831520d57059760861-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf831520d57059760861-2">2</div><div class="crayon-num" data-line="crayon-5bcf831520d57059760861-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf831520d57059760861-1"><span class="crayon-v">ComplexWarning</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">Casting </span><span class="crayon-e">complex </span><span class="crayon-e">values </span><span class="crayon-st">to</span><span class="crayon-h"> </span><span class="crayon-e">real </span><span class="crayon-e">discards </span><span class="crayon-e">the </span><span class="crayon-e">imaginary </span><span class="crayon-e">part</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf831520d57059760861-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf831520d57059760861-3"><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-t">array</span><span class="crayon-sy">(</span><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">dtype</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">copy</span><span class="crayon-o">=</span><span class="crayon-t">False</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">order</span><span class="crayon-o">=</span><span class="crayon-v">order</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>This is, again, because the <em>fft</em> returns an array of complex numbers. Luckily, like the warning says, the imaginary part will be discarded.</p>
+<p>And there you go. Using our very simplistic filter, we have cleaned a sine wave. And this brings us to the end of this chapter.</p>
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

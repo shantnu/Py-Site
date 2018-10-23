@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Machine Learning For Complete Beginners &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/machine-learning-for-complete-beginners/" />
+<link rel='shortlink' href='/?p=1851' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fmachine-learning-for-complete-beginners%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fmachine-learning-for-complete-beginners%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1851">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1851" class="post-1851 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Machine Learning For Complete Beginners</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p><strong>The problem</strong>: Many machine learning tutorials out there expect you have a PhD in Statistics or Mathematics. This tutorial is written for beginners, assuming no previous knowledge of machine learning.</p>
+<p><strong>Format</strong>: We will start off with an introduction to machine learning, followed by a machine learning script that tries to predict which people survived the Titanic. This is followed by two practice sessions for you: I will guide you on how to proceed, but you have to write the code yourself.</p>
+<p><strong>Prerequisite knowledge</strong>: A knowledge of Python is assumed. Also, basic knowledge of Pandas is expected. If you are new to Pandas, follow the basic lessons <a href="/introduction-to-pandas/">here</a>.</p>
+<p>The development is done using Ipython (<a href="/introduction-to-ipython-jupyter-notebooks/">intro here</a>, if you have never used it). I recommend you use Anaconda with Python 3, for reasons outlined <a href="/recommend-anaconda-python-now/">here</a>.</p>
+<p><em>Note: There are 5 videos + transcript in this series. The videos are mixed with the transcripts, so scroll down if you are only interested in the videos. Make sure you turn on HD.</em></p>
+<h2>Introduction to Machine Learning</h2>
+<p>To start off, here is an introduction to machine learning, a short presentation that goes over the basics.</p>
+<p><iframe width="800" height="450" src="https://player.vimeo.com/video/147934299?byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe></p>
+<p>There is no transcript, but the presentation is available on <a href="https://github.com/shantnu/Titanic-Machine-Learning">Github</a>. Though, if you are completely new to machine learning, I <strong>strongly recommend</strong> you watch the video, as I talk over several points that may not be obvious by just looking at the presentation.</p>
+<p>You have a task in the presentation.  Look at <em>titanic_train.csv</em> (can be opened in Excel or OpenOffice), and guess which fields would be useful for our machine learning algorithm. Eg, does age matter when predicting who would survive the Titanic? What about the port of boarding? Select 2-3 columns you feel are the most important.</p>
+<h2>Machine Learning with Python</h2>
+<p>The next video starts the actual coding. The code is available on <a href="https://github.com/shantnu/Titanic-Machine-Learning">Github</a>. You don&#8217;t need a Github account, as you can download the repo as a zip file. <span class="css-truncate css-truncate-target"><a href="https://github.com/shantnu/Titanic-Machine-Learning/blob/master/Titanic_Machine_Learning.ipynb" class="js-directory-link js-navigation-open" id="5dd4411a9136bd66590ab220c18cf58c-fc89650cef9247e22f31a7a48aeb112d1538218d" title="Titanic_Machine_Learning.ipynb">Titanic_Machine_Learning.ipynb</a></span> is the file we will be working on.</p>
+<p>&nbsp;</p>
+<p><iframe width="800" height="450" src="https://player.vimeo.com/video/147936544?byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe></p>
+<p>Transcript:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a87c499648920" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+import numpy as np
+import pandas as pd</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a87c499648920-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a87c499648920-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a87c499648920-1"><span class="crayon-e">import </span><span class="crayon-e">numpy </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-e">np</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a87c499648920-2"><span class="crayon-e">import </span><span class="crayon-e">pandas </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-v">pd</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>So we start by importing everything we need. Pandas and Numpy are obviously needed.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a886847594373" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+#The Machine learning alogorithm
+from sklearn.ensemble import RandomForestClassifier</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a886847594373-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a886847594373-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a886847594373-1"><span class="crayon-p">#The Machine learning alogorithm</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a886847594373-2"><span class="crayon-e">from </span><span class="crayon-v">sklearn</span><span class="crayon-sy">.</span><span class="crayon-e">ensemble </span><span class="crayon-e">import </span><span class="crayon-v">RandomForestClassifier</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>For machine learning, we are using the <a href="https://www.quora.com/Random-Forests/How-do-random-forests-work-in-laymans-terms">Random Forest</a> algorithm. You don&#8217;t need to know how it works internally (for this example), but you do need to know how to use it.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a88a188743440" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Test train split
+from sklearn.cross_validation import train_test_split</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a88a188743440-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a88a188743440-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a88a188743440-1"><span class="crayon-p"># Test train split</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a88a188743440-2"><span class="crayon-e">from </span><span class="crayon-v">sklearn</span><span class="crayon-sy">.</span><span class="crayon-e">cross_validation </span><span class="crayon-e">import </span><span class="crayon-v">train_test_split</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>If you watched the presentation (and you really should have, or you won&#8217;t follow half the code), you know we need to use test / train split to avoid overfitting. So we import the <em>train_test_split()</em> function.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a88d191397274" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Just to switch off pandas warning
+pd.options.mode.chained_assignment = None</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a88d191397274-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a88d191397274-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a88d191397274-1"><span class="crayon-p"># Just to switch off pandas warning</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a88d191397274-2"><span class="crayon-v">pd</span><span class="crayon-sy">.</span><span class="crayon-v">options</span><span class="crayon-sy">.</span><span class="crayon-v">mode</span><span class="crayon-sy">.</span><span class="crayon-v">chained_assignment</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">None</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>This is just switch off a Pandas warning.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a890935529606" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Used to write our model to a file
+from sklearn.externals import joblib</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a890935529606-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a890935529606-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a890935529606-1"><span class="crayon-p"># Used to write our model to a file</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a890935529606-2"><span class="crayon-e">from </span><span class="crayon-v">sklearn</span><span class="crayon-sy">.</span><span class="crayon-e">externals </span><span class="crayon-e">import </span><span class="crayon-v">joblib</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>Finally, we import the joblib function. This will be used to write our model to a file for reuse.</p>
+<p>We will now open our csv file in Pandas.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a893030559326" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data = pd.read_csv("titanic_train.csv")
+data.head()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a893030559326-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a893030559326-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a893030559326-1"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">pd</span><span class="crayon-sy">.</span><span class="crayon-e">read_csv</span><span class="crayon-sy">(</span><span class="crayon-s">"titanic_train.csv"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a893030559326-2"><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<table class="dataframe" border="1">
+<thead>
+<tr>
+<th></th>
+<th>Unnamed: 0</th>
+<th>row.names</th>
+<th>pclass</th>
+<th>survived</th>
+<th>name</th>
+<th>age</th>
+<th>embarked</th>
+<th>home.dest</th>
+<th>room</th>
+<th>ticket</th>
+<th>boat</th>
+<th>sex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>998</td>
+<td>999</td>
+<td>3rd</td>
+<td>1</td>
+<td>McCarthy, Miss Katie</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>female</td>
+</tr>
+<tr>
+<th>1</th>
+<td>179</td>
+<td>180</td>
+<td>1st</td>
+<td>0</td>
+<td>Millet, Mr Francis Davis</td>
+<td>65</td>
+<td>Southampton</td>
+<td>East Bridgewater, MA</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>(249)</td>
+<td>male</td>
+</tr>
+<tr>
+<th>2</th>
+<td>556</td>
+<td>557</td>
+<td>2nd</td>
+<td>0</td>
+<td>Sjostedt, Mr Ernst Adolf</td>
+<td>59</td>
+<td>Southampton</td>
+<td>Sault St Marie, ON</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>male</td>
+</tr>
+<tr>
+<th>3</th>
+<td>174</td>
+<td>175</td>
+<td>1st</td>
+<td>0</td>
+<td>McCaffry, Mr Thomas Francis</td>
+<td>46</td>
+<td>Cherbourg</td>
+<td>Vancouver, BC</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>(292)</td>
+<td>male</td>
+</tr>
+<tr>
+<th>4</th>
+<td>1232</td>
+<td>1233</td>
+<td>3rd</td>
+<td>0</td>
+<td>Strilic, Mr Ivan</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>male</td>
+</tr>
+</tbody>
+</table>
+<p>Look at the age. The first and last values are <em>NaN,</em> which means null, or empty. There are a lot of other <em>NaNs</em> in our code.</p>
+<p>In the first presentation, I gave you a task. To find out which columns in the table above would be suitable inputs for our machine learning algorithm. Remember, we need both inputs and expected output (if you don&#8217;t know what that is, look at the presentation video again).</p>
+<p>The expected output is the <em>survived</em> field. What about the input?</p>
+<p>If you remember the movie Titanic, you will know that the rich were more likely to survive. Also, the first preference was given to women and children.</p>
+<p>Based on this, we can say 3 things mattered the most to surviving the Titanic: How rich you were, your age, and your sex.</p>
+<p>Rich older women and children were the most likely to survive.</p>
+<p>Poor middle aged men were the least likely to survive. We know this just from the movie.</p>
+<p>Age and sex are directly visible in our table. What about wealth? While there are multiple columns (like ticket price), the most direct field is the passenger class. First class passengers were the most likely to survive, no matter what price they paid for their ticket.</p>
+<p>So these are the 3 inputs to our machine learning algorithm: Passenger class, age and sex</p>
+<p>The expected output is the <em>survived field</em>.</p>
+<p>Before we can extract these values, look at the csv file in Excel/Openoffice. Specifically, the age field. The age is missing for large parts of the data. It seems there is no age data for any of the 3rd class passengers, while it is there for first class.</p>
+<p>We can&#8217;t just throw away the empty fields, as we will be getting rid of most of the 3rd class passenger data.</p>
+<p>Our solution? Replace the empty fields with the median age.</p>
+<p>Before we go ahead, are you clear of the difference between <strong>mean, median and mode?</strong></p>
+<p>The mean is what we call the average.</p>
+<p>Median is the middle most value. For example, in</p>
+<p><em>1, 2 , 5,    10,    21, 33, 57</em></p>
+<p>10 is the median, because it is the middle value.</p>
+<p>Mode is the most common or repeated value.</p>
+<p>For this example, we will use the median for the age, though you can experiment with the others.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a897756852538" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+median_age = data['age'].median()
+print("Median age is {}".format(median_age))
+
+Median age is 29.0</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a897756852538-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a897756852538-2">2</div><div class="crayon-num" data-line="crayon-5bcf7f908a897756852538-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a897756852538-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a897756852538-1"><span class="crayon-v">median_age</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">[</span><span class="crayon-s">'age'</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-e">median</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a897756852538-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Median age is {}"</span><span class="crayon-sy">.</span><span class="crayon-e">format</span><span class="crayon-sy">(</span><span class="crayon-v">median_age</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf7f908a897756852538-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a897756852538-4"><span class="crayon-e">Median </span><span class="crayon-e">age </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-cn">29.0</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>We can calculate the median using the Pandas <em>median()</em> function. In the example above, we see it is 29.</p>
+<p>We now replace the empty values for age with the median, using the Panas <em>fillna()</em> function.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a89a184353712" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data['age'].fillna(median_age, inplace = True)
+data['age'].head()
+
+0    29
+1    65
+2    59
+3    46
+4    29</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a89a184353712-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a89a184353712-2">2</div><div class="crayon-num" data-line="crayon-5bcf7f908a89a184353712-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a89a184353712-4">4</div><div class="crayon-num" data-line="crayon-5bcf7f908a89a184353712-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a89a184353712-6">6</div><div class="crayon-num" data-line="crayon-5bcf7f908a89a184353712-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a89a184353712-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a89a184353712-1"><span class="crayon-v">data</span><span class="crayon-sy">[</span><span class="crayon-s">'age'</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-e">fillna</span><span class="crayon-sy">(</span><span class="crayon-v">median_age</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">inplace</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a89a184353712-2"><span class="crayon-v">data</span><span class="crayon-sy">[</span><span class="crayon-s">'age'</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf7f908a89a184353712-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a89a184353712-4"><span class="crayon-cn">0</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-cn">29</span></div><div class="crayon-line" id="crayon-5bcf7f908a89a184353712-5"><span class="crayon-cn">1</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-cn">65</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a89a184353712-6"><span class="crayon-cn">2</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-cn">59</span></div><div class="crayon-line" id="crayon-5bcf7f908a89a184353712-7"><span class="crayon-cn">3</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-cn">46</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a89a184353712-8"><span class="crayon-cn">4</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-cn">29</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>If you remember, the 1st and 5th values were <em>NaNs</em>. They have been replaced with <em>29</em> now.</p>
+<p>Let&#8217;s now extract the 3 fields we need: Class, age and sex.</p>
+<p>Why do we need to extract these 3 into  new Pandas dataframe object?</p>
+<p>So as not to confuse our machine learning algorithm. If we pass in everything, we will have a lot of noise, with the result the algorithm will give a very poor prediction.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a89d154475006" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data_inputs = data[["pclass", "age", "sex"]]
+data_inputs.head()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a89d154475006-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a89d154475006-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a89d154475006-1"><span class="crayon-v">data_inputs</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">[</span><span class="crayon-sy">[</span><span class="crayon-s">"pclass"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"age"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"sex"</span><span class="crayon-sy">]</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a89d154475006-2"><span class="crayon-v">data_inputs</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<table class="dataframe" border="1">
+<thead>
+<tr>
+<th></th>
+<th>pclass</th>
+<th>age</th>
+<th>sex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>3rd</td>
+<td>29</td>
+<td>female</td>
+</tr>
+<tr>
+<th>1</th>
+<td>1st</td>
+<td>65</td>
+<td>male</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2nd</td>
+<td>59</td>
+<td>male</td>
+</tr>
+<tr>
+<th>3</th>
+<td>1st</td>
+<td>46</td>
+<td>male</td>
+</tr>
+<tr>
+<th>4</th>
+<td>3rd</td>
+<td>29</td>
+<td>male</td>
+</tr>
+</tbody>
+</table>
+<p>And the expected output is:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a8a0994768516" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+expected_output = data[["survived"]]
+expected_output.head()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a8a0994768516-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8a0994768516-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a8a0994768516-1"><span class="crayon-v">expected_output</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">[</span><span class="crayon-sy">[</span><span class="crayon-s">"survived"</span><span class="crayon-sy">]</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8a0994768516-2"><span class="crayon-v">expected_output</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<table class="dataframe" border="1">
+<thead>
+<tr>
+<th></th>
+<th>survived</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>1</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0</td>
+</tr>
+<tr>
+<th>3</th>
+<td>0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Now, we have a problem. The algorithms in Scikit, the library we are using, only work with numbers. That means we can&#8217;t pass in the sex as male or female, or the class as 1st or 3rd.</p>
+<p>Let&#8217;s fix the class first, as it&#8217;s easy. We&#8217;ll simply replace <em>1st</em> by <em>1</em>, <em>2nd</em> by <em>2 </em> and <em>3rd</em> by <em>3</em>:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a8a3020899743" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data_inputs["pclass"].replace("3rd", 3, inplace = True)
+data_inputs["pclass"].replace("2nd", 2, inplace = True)
+data_inputs["pclass"].replace("1st", 1, inplace = True)
+data_inputs.head()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a8a3020899743-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8a3020899743-2">2</div><div class="crayon-num" data-line="crayon-5bcf7f908a8a3020899743-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8a3020899743-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a8a3020899743-1"><span class="crayon-v">data_inputs</span><span class="crayon-sy">[</span><span class="crayon-s">"pclass"</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-e">replace</span><span class="crayon-sy">(</span><span class="crayon-s">"3rd"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">inplace</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8a3020899743-2"><span class="crayon-v">data_inputs</span><span class="crayon-sy">[</span><span class="crayon-s">"pclass"</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-e">replace</span><span class="crayon-sy">(</span><span class="crayon-s">"2nd"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">inplace</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf7f908a8a3020899743-3"><span class="crayon-v">data_inputs</span><span class="crayon-sy">[</span><span class="crayon-s">"pclass"</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-e">replace</span><span class="crayon-sy">(</span><span class="crayon-s">"1st"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">inplace</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8a3020899743-4"><span class="crayon-v">data_inputs</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<table class="dataframe" border="1">
+<thead>
+<tr>
+<th></th>
+<th>pclass</th>
+<th>age</th>
+<th>sex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>3</td>
+<td>29</td>
+<td>female</td>
+</tr>
+<tr>
+<th>1</th>
+<td>1</td>
+<td>65</td>
+<td>male</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2</td>
+<td>59</td>
+<td>male</td>
+</tr>
+<tr>
+<th>3</th>
+<td>1</td>
+<td>46</td>
+<td>male</td>
+</tr>
+<tr>
+<th>4</th>
+<td>3</td>
+<td>29</td>
+<td>male</td>
+</tr>
+</tbody>
+</table>
+<p>There, we have fixed the class. The age is correct, just the sex is left now (don&#8217;t say the last sentence out loud, people will stare at you like you are a creep!).</p>
+<p>We will be using the <em>np.where()</em> function, which is not intuitive. I forget how to use it everytime, and have to Google for it.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a8a6833229111" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data_inputs["sex"] = np.where(data_inputs["sex"] == "female", 0, 1)
+data_inputs.head()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a8a6833229111-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8a6833229111-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a8a6833229111-1"><span class="crayon-v">data_inputs</span><span class="crayon-sy">[</span><span class="crayon-s">"sex"</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">np</span><span class="crayon-sy">.</span><span class="crayon-e">where</span><span class="crayon-sy">(</span><span class="crayon-v">data_inputs</span><span class="crayon-sy">[</span><span class="crayon-s">"sex"</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-s">"female"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8a6833229111-2"><span class="crayon-v">data_inputs</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<table class="dataframe" border="1">
+<thead>
+<tr>
+<th></th>
+<th>pclass</th>
+<th>age</th>
+<th>sex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>3</td>
+<td>29</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>1</td>
+<td>65</td>
+<td>1</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2</td>
+<td>59</td>
+<td>1</td>
+</tr>
+<tr>
+<th>3</th>
+<td>1</td>
+<td>46</td>
+<td>1</td>
+</tr>
+<tr>
+<th>4</th>
+<td>3</td>
+<td>29</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>The way the function works is, if the input sex is female, it is replaced by 0, otherwise 1. Like I said, the function is non-intuitive.</p>
+<p><strong>Test / Train Split to prevent overfitting</strong></p>
+<p>If you remember from the presentation, we split our data into a train set and test set. The training set is used to train the machine learning algorithm, while the test set is used to find the accuracy (since we still have the expected output for the test set, we can compare the actual output with the predicted output, and calculate our error).</p>
+<p>Time to create the test / train split. While we can do it manually, it&#8217;s better to use the inbuilt function, as it will do other things like shuffle the data for us.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a8a9170115090" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+inputs_train, inputs_test, expected_output_train, expected_output_test   = 
+train_test_split (data_inputs, expected_output, test_size = 0.33, random_state = 42)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a8a9170115090-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8a9170115090-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a8a9170115090-1"><span class="crayon-v">inputs_train</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">inputs_test</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">expected_output_train</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">expected_output_test</span><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-o">=</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8a9170115090-2"><span class="crayon-e">train_test_split</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">data_inputs</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">expected_output</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">test_size</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0.33</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">random_state</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">42</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>The function returns the training input and output, as well as the output set.</p>
+<p><em>test_size=0.33</em> means 33% of the sample is to be used for testing, the other for training. <em>random_state</em> is used to initialise the inbuilt randomiser, so we get the same result from the randomiser each time.</p>
+<p>Let&#8217;s print a few values:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a8ac665142511" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+print(inputs_train.head())
+print(expected_output_train.head())
+
+     pclass  age  sex
+618       3   19    1
+169       3   29    1
+830       1   54    1
+140       3   29    1
+173       2   28    1
+     survived
+618         0
+169         0
+830         1
+140         0
+173         0</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a8ac665142511-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8ac665142511-2">2</div><div class="crayon-num" data-line="crayon-5bcf7f908a8ac665142511-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8ac665142511-4">4</div><div class="crayon-num" data-line="crayon-5bcf7f908a8ac665142511-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8ac665142511-6">6</div><div class="crayon-num" data-line="crayon-5bcf7f908a8ac665142511-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8ac665142511-8">8</div><div class="crayon-num" data-line="crayon-5bcf7f908a8ac665142511-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8ac665142511-10">10</div><div class="crayon-num" data-line="crayon-5bcf7f908a8ac665142511-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8ac665142511-12">12</div><div class="crayon-num" data-line="crayon-5bcf7f908a8ac665142511-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8ac665142511-14">14</div><div class="crayon-num" data-line="crayon-5bcf7f908a8ac665142511-15">15</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a8ac665142511-1"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">inputs_train</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8ac665142511-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">expected_output_train</span><span class="crayon-sy">.</span><span class="crayon-e">head</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf7f908a8ac665142511-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8ac665142511-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-e">pclass&nbsp;&nbsp;</span><span class="crayon-e">age&nbsp;&nbsp;</span><span class="crayon-i">sex</span></div><div class="crayon-line" id="crayon-5bcf7f908a8ac665142511-5"><span class="crayon-cn">618</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-cn">3</span><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-cn">19</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8ac665142511-6"><span class="crayon-cn">169</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-cn">3</span><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-cn">29</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-cn">1</span></div><div class="crayon-line" id="crayon-5bcf7f908a8ac665142511-7"><span class="crayon-cn">830</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-cn">1</span><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-cn">54</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8ac665142511-8"><span class="crayon-cn">140</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-cn">3</span><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-cn">29</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-cn">1</span></div><div class="crayon-line" id="crayon-5bcf7f908a8ac665142511-9"><span class="crayon-cn">173</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-cn">2</span><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-cn">28</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8ac665142511-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-i">survived</span></div><div class="crayon-line" id="crayon-5bcf7f908a8ac665142511-11"><span class="crayon-cn">618</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-cn">0</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8ac665142511-12"><span class="crayon-cn">169</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-cn">0</span></div><div class="crayon-line" id="crayon-5bcf7f908a8ac665142511-13"><span class="crayon-cn">830</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8ac665142511-14"><span class="crayon-cn">140</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-cn">0</span></div><div class="crayon-line" id="crayon-5bcf7f908a8ac665142511-15"><span class="crayon-cn">173</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-cn">0</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0009 seconds] -->
+<p></p>
+<p>Time to start machine learning.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a8af630635352" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+rf = RandomForestClassifier (n_estimators=100)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a8af630635352-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a8af630635352-1"><span class="crayon-v">rf</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">RandomForestClassifier</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">n_estimators</span><span class="crayon-o">=</span><span class="crayon-cn">100</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>We create our Random Forest machine learning algorithm instance.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a8b2359041968" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+rf.fit(inputs_train, expected_output_train)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a8b2359041968-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a8b2359041968-1"><span class="crayon-v">rf</span><span class="crayon-sy">.</span><span class="crayon-e">fit</span><span class="crayon-sy">(</span><span class="crayon-v">inputs_train</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">expected_output_train</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>The <em>fit()</em> function is used to train our algorithm. It takes our input dataframe and tries to fit it to the expected output. That&#8217;s why we narrowed down the fields we pass in, so that the algorithm is not confused by noise.</p>
+<p>If this works, the instance will now have &#8220;learnt&#8221; how to predict Titanic survivors. Let&#8217;s see how accurate our algorithm is:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a8b4215301157" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+accuracy = rf.score(inputs_test, expected_output_test)
+print("Accuracy = {}%".format(accuracy * 100))
+
+Accuracy = 79.60526315789474%</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a8b4215301157-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8b4215301157-2">2</div><div class="crayon-num" data-line="crayon-5bcf7f908a8b4215301157-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf7f908a8b4215301157-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a8b4215301157-1"><span class="crayon-v">accuracy</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">rf</span><span class="crayon-sy">.</span><span class="crayon-e">score</span><span class="crayon-sy">(</span><span class="crayon-v">inputs_test</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">expected_output_test</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8b4215301157-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Accuracy = {}%"</span><span class="crayon-sy">.</span><span class="crayon-e">format</span><span class="crayon-sy">(</span><span class="crayon-e">accuracy *</span><span class="crayon-h"> </span><span class="crayon-cn">100</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf7f908a8b4215301157-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf7f908a8b4215301157-4"><span class="crayon-v">Accuracy</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">79.60526315789474</span><span class="crayon-o">%</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>The <em>score()</em> function takes the test input, and finds out how accurate the prediction is based on the known test outputs.</p>
+<p>In the example above, we get an accuracy of 79%. Is that good? We won&#8217;t know until we compare it to something (which we&#8217;ll do in the practice sessions).</p>
+<p>There is one final thing to do. We spent all this time training our algorithm. We don&#8217;t want to repeat this process everytime. This example is fairly fast, as the dataset is small, but for large datasets, it can take tens of minutes, if not hours.</p>
+<p>To save time, we can write our machine learning model to a file, so we can reuse it in the future.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a8b7019148564" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+joblib.dump(rf, "titanic_model1", compress=9)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a8b7019148564-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a8b7019148564-1"><span class="crayon-v">joblib</span><span class="crayon-sy">.</span><span class="crayon-e">dump</span><span class="crayon-sy">(</span><span class="crayon-v">rf</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"titanic_model1"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">compress</span><span class="crayon-o">=</span><span class="crayon-cn">9</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>Pickle was the library originally used for this, but joblib.dump is a much more simpler function, so I recommend you use it. <em>compress = 9</em> is needed, otherwise it will create dozens of files.</p>
+<p>If you look in your code folder, you will see a file <em>titanic_model1</em>, that will contain our model.</p>
+<h2>Why Programming Practice is Needed</h2>
+<p>Okay, before we go ahead, here is a video on why practice is necessary:</p>
+<p>&nbsp;</p>
+<p><iframe width="800" height="450" src="https://player.vimeo.com/video/147326379?title=0&amp;byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe></p>
+<h2>Titanic Practice Sessions</h2>
+<p>If you were convinced, here is the first of the practice videos. The worksheet is <em>Titanic Practice 1.ipynb</em> in the repo.</p>
+<p>&nbsp;</p>
+<p><iframe width="800" height="450" src="https://player.vimeo.com/video/147943696?title=0&amp;byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe></p>
+<p>The first practice session is to repeat what we did in the previous example, except this time we will only extract 2 fields: Class and sex (ignoring age). Just follow the instructions in the Notebook.</p>
+<p>The video contains hints, but the main hint is: If you get stuck, look at the previous example. Everything in the practice session builds on that.</p>
+<p>And here is practice video 2 (<em>Titanic Practice 2.ipynb</em> is the file) :</p>
+<p>&nbsp;</p>
+<p><iframe width="800" height="450" src="https://player.vimeo.com/video/147944345?title=0&amp;byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe></p>
+<p>In this practice session, we will load the machine learning algorithm you created and run it on a new file.</p>
+<p>For this session, we will be working with a new file we have not touched till now, <em>titanic_test.csv</em>. I created this file by taking the original data and breaking off 30% of it.</p>
+<p>Since this is new data, we can use it to measure the accuracy of our algorithm.</p>
+<p>Extract the class and sex data from this file, as you did for the first practice session.</p>
+<p>I already give you the code to load your saved model (again, from 1st practice session).</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a8bb855727263" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+rf = joblib.load("titanic_model2")</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a8bb855727263-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a8bb855727263-1"><span class="crayon-v">rf</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">joblib</span><span class="crayon-sy">.</span><span class="crayon-e">load</span><span class="crayon-sy">(</span><span class="crayon-s">"titanic_model2"</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>You need to take your input dataframe and pass it to the predict function:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf7f908a8be266714079" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+pred = rf.predict()# ADD YOUR DATA VARIABLE HERE)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf7f908a8be266714079-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf7f908a8be266714079-1"><span class="crayon-v">pred</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">rf</span><span class="crayon-sy">.</span><span class="crayon-e">predict</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-p"># ADD YOUR DATA VARIABLE HERE)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>The above example has an empty <em>predict()</em>. You need to do something like <em>predict(data)</em>.</p>
+<p>At the end, I have written a small function to find the accuracy of your algorithm vs the actual result. You don&#8217;t need to write anything, just run this code. I am getting an accuracy of 82%. Can you do better?</p>
+<p>And there you go. That was your first machine learning example using Python.</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Writing Great Code &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Writing Great Code Comments Feed" href="/writing-great-code/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/writing-great-code/" />
+<link rel='shortlink' href='/?p=1709' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fwriting-great-code%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fwriting-great-code%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1709">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1709" class="post-1709 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Writing Great Code</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<h4><strong>Build a Twitter Analytics App</strong></h4>
+<p style="padding-left: 30px;"><strong><a href="/build-a-twitter-analytics-app-using-python/"> 1 Introduction: Start Here</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/the-first-step-design-your-solution/">2 The First Step: Design Your Solution</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/in-which-i-rant-a-little/">3 In Which I Rant a Little</a></strong></p>
+<p style="padding-left: 30px;"><a href="/twitter-analyser-my-design/"><strong>4  Design Solution</strong> </a></p>
+<p style="padding-left: 30px;"><strong><a href="/writing-great-code/">5 Writing Great Code</a></strong></p>
+<p style="padding-left: 30px;"><strong>6 Writing the Backend Twitter Server</strong></p>
+<p style="padding-left: 60px;"><a href="/writing-the-code-in-small-parts-part-1-the-basic-app/"><strong>Writing the Code in Small Parts: Part 1, The Basic App</strong> </a></p>
+<p style="padding-left: 60px;"><strong><a href="/part-2-adding-a-counter-to-exit/">Part 2: Adding a Counter to Exit</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/part-3-adding-language-and-retweet-count/">Part 3: Adding Language and Retweet Count</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/organising-our-code/">Part 4: Organising Our Code</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/adding-the-data-to-a-database/">7 Adding the Data to a Database</a></strong></p>
+<p style="padding-left: 30px;"><a href="/testing-what-and-how-to-test/"><strong>8 <span class="trail-end">Testing: What and How to Test</span></strong></a></p>
+<p style="padding-left: 60px;"><strong><a href="/testing-our-frontend/">8.1 Testing Our Frontend</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/testing-our-backend/">8.2 Testing Our Backend</a></strong></p>
+<p style="padding-left: 30px;"><strong>9 Displaying our Data using the Flask Webserver</strong></p>
+<p style="padding-left: 60px;"><strong><a href="/introduction-to-flask-for-python/">9.1 Introduction to Flask</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/adding-templates-to-our-flask-app/">9.2 Adding templates to our Flask app</a></strong></p>
+<p style="padding-left: 60px;"><strong><a href="/displaying-our-tweets-in-the-flask-web-server/">9.3 Displaying our Tweets in the Flask Web Server</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/future-work-and-improvements/">10 Future Work and Improvements</a></strong></p>
+<p>Writing code is an art as much as a science. And that&#8217;s why you have so many debates and arguments about what the best way to write code is. Most of these arguments boil down to <em>My Way is the Right Way (TM).</em></p>
+<p>I&#8217;ve had these arguments too, and am not on speaking terms with many people now. I live in the UK, where guns are rare. If I had been in the USA, I&#8217;m sure someone would have been shot.</p>
+<p><img class="aligncenter" src="http://funny.desivalley.com/wp-content/uploads/2011/03/shooting-a-kitten-funny-picture.jpg" alt="" width="450" height="338" /></p>
+<p>That said, there are a few principles that will help you write great code:</p>
+<p><strong>1. Code is read a million times, written once</strong></p>
+<p>If you forget everything else, remember this: That hacky, crappy piece of throwaway code you write today might be the running the most critical system in five years. Which is why I say, change your job often, so you can&#8217;t get blamed when it all fails.</p>
+<p><img class="aligncenter" src="http://zdnet3.cbsistatic.com/hub/i/2014/10/03/ce56b181-4b56-11e4-b6a0-d4ae52e95e57/8967d61b8f3f53f9f66ce7a2d2c92983/blame.jpg" alt="" width="402" height="337" /></p>
+<p>Code is read more often than it is written. Remember that. So try to write clean code. Clean code is <em>self documenting</em>.</p>
+<p>So no:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82ed19595370952492" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Init a &amp;amp; b to 0
+a=0
+b=0
+
+# Read a &amp;amp; b
+a,b = readvalues()
+
+# Add a and b, and divide by 2
+c=a+b
+
+#Divide c by 2
+d = c / 2
+
+# print c
+print(c)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82ed19595370952492-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed19595370952492-2">2</div><div class="crayon-num" data-line="crayon-5bcf82ed19595370952492-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed19595370952492-4">4</div><div class="crayon-num" data-line="crayon-5bcf82ed19595370952492-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed19595370952492-6">6</div><div class="crayon-num" data-line="crayon-5bcf82ed19595370952492-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed19595370952492-8">8</div><div class="crayon-num" data-line="crayon-5bcf82ed19595370952492-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed19595370952492-10">10</div><div class="crayon-num" data-line="crayon-5bcf82ed19595370952492-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed19595370952492-12">12</div><div class="crayon-num" data-line="crayon-5bcf82ed19595370952492-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed19595370952492-14">14</div><div class="crayon-num" data-line="crayon-5bcf82ed19595370952492-15">15</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82ed19595370952492-1"><span class="crayon-p"># Init a &amp;amp; b to 0</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed19595370952492-2"><span class="crayon-v">a</span><span class="crayon-o">=</span><span class="crayon-cn">0</span></div><div class="crayon-line" id="crayon-5bcf82ed19595370952492-3"><span class="crayon-v">b</span><span class="crayon-o">=</span><span class="crayon-cn">0</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed19595370952492-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82ed19595370952492-5"><span class="crayon-p"># Read a &amp;amp; b</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed19595370952492-6"><span class="crayon-v">a</span><span class="crayon-sy">,</span><span class="crayon-v">b</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">readvalues</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82ed19595370952492-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed19595370952492-8"><span class="crayon-p"># Add a and b, and divide by 2</span></div><div class="crayon-line" id="crayon-5bcf82ed19595370952492-9"><span class="crayon-v">c</span><span class="crayon-o">=</span><span class="crayon-v">a</span><span class="crayon-o">+</span><span class="crayon-v">b</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed19595370952492-10">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82ed19595370952492-11"><span class="crayon-p">#Divide c by 2</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed19595370952492-12"><span class="crayon-v">d</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-h"> </span><span class="crayon-cn">2</span></div><div class="crayon-line" id="crayon-5bcf82ed19595370952492-13">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed19595370952492-14"><span class="crayon-p"># print c</span></div><div class="crayon-line" id="crayon-5bcf82ed19595370952492-15"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">c</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p>The code above has a lot of comments, yet is hard to read. The comments have a WTF quality.</p>
+<p>Here&#8217;s the same code written without a single comment:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82ed195a1539671242" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+number1 = 0
+number2 = 0
+
+number1, number2  = readvalues()
+
+sum = number1  + number2
+
+average = sum / 2
+
+print(average)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82ed195a1539671242-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed195a1539671242-2">2</div><div class="crayon-num" data-line="crayon-5bcf82ed195a1539671242-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed195a1539671242-4">4</div><div class="crayon-num" data-line="crayon-5bcf82ed195a1539671242-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed195a1539671242-6">6</div><div class="crayon-num" data-line="crayon-5bcf82ed195a1539671242-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed195a1539671242-8">8</div><div class="crayon-num" data-line="crayon-5bcf82ed195a1539671242-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed195a1539671242-10">10</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82ed195a1539671242-1"><span class="crayon-v">number1</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed195a1539671242-2"><span class="crayon-v">number2</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">0</span></div><div class="crayon-line" id="crayon-5bcf82ed195a1539671242-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed195a1539671242-4"><span class="crayon-v">number1</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">number2</span> <span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">readvalues</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82ed195a1539671242-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed195a1539671242-6"><span class="crayon-v">sum</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-i">number1</span> <span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-e">number2</span></div><div class="crayon-line" id="crayon-5bcf82ed195a1539671242-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed195a1539671242-8"><span class="crayon-v">average</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sum</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-h"> </span><span class="crayon-cn">2</span></div><div class="crayon-line" id="crayon-5bcf82ed195a1539671242-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed195a1539671242-10"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">average</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></p>
+<p>No comments, but it&#8217;s clear what I am doing. Everyone knows what an average is, you don&#8217;t have to tell them you are adding two numbers and dividing by 2.</p>
+<p>So when should you use comments? When it&#8217;s not clear from the code, or when the reader may be confused. Remember, there is always someone reading the code. Here is a useful comment:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82ed195a4960870836" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Our code doesn't work correctly when using a usb, so we have to add this extra checks
+if (special_case_usb):
+    Do_something_special</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82ed195a4960870836-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed195a4960870836-2">2</div><div class="crayon-num" data-line="crayon-5bcf82ed195a4960870836-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82ed195a4960870836-1"><span class="crayon-p"># Our code doesn't work correctly when using a usb, so we have to add this extra checks</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed195a4960870836-2"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">special_case_usb</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf82ed195a4960870836-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">Do_something_special</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>This comment is useful because 6 months from now, you&#8217;ll forget why you wrote this code.</p>
+<p>Another example:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82ed195aa210262332" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Read the header field, which is the lower 7 bits, as described in the MPEG spec (link here)
+sync = header &amp;amp; 0x7</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82ed195aa210262332-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82ed195aa210262332-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82ed195aa210262332-1"><span class="crayon-p"># Read the header field, which is the lower 7 bits, as described in the MPEG spec (link here)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82ed195aa210262332-2"><span class="crayon-v">sync</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">header</span><span class="crayon-h"> </span><span class="crayon-o">&amp;</span><span class="crayon-v">amp</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-cn">0x7</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>Here, even though you can see what is going on, you may not know <strong>why</strong>. This is another reason to write comments. In this case, we are telling the reader <em>why</em> we are doing it this way, and linking to the spec document, so they can check for themselves.</p>
+<p><strong>2. Follow a coding standard</strong></p>
+<p>It doesn&#8217;t matter what the standard is, follow one.</p>
+<p>This makes it easy for people who come into the project later to write code exactly the same way as you wrote it. It also makes code easier to read, as the variable/function names  are consistent, as is the formatting / layout of code.</p>
+<p>Python has pep8, but don&#8217;t <a href="https://www.python.org/dev/peps/pep-0008/#a-foolish-consistency-is-the-hobgoblin-of-little-minds">become fanatic about it</a>.</p>
+<p><strong>3. Your code should be modular / independent</strong></p>
+<p>What I mean is: Each part of the code should do one &amp; one thing only. This means: No global variables, no code spread all over the place. Use classes / functions as appropriate.</p>
+<p>Modular code is easy to test, easy to debug, easy to extend. That&#8217;s because if a part of the code goes out of date, you can update that, without worrying about breaking a million other things.</p>
+<p><strong>4. Easily testable</strong></p>
+<p>Related to above. If your code is independent, you can test each part by itself. We will cover testing in more detail later on.</p>
+<p><strong>5. Follow KISS, or Keep It Simple, Stupid</strong></p>
+<p>One of the problem I have with most tutorials is that they overcomplicate everything. To do the simplest thing, like print <em>hello world</em> on the screen, they&#8217;ll have a dozen classes calling each other. It seems many Python bloggers come from Java!</p>
+<p>In Python, using classes for no reason is considered an anti-pattern.</p>
+<p>Later on, we&#8217;ll see when to use classes. Always start the code simple&#8211; just procedural code. Later on, use functions for repeated code. If you have a fair number of functions, put them in a class. But don&#8217;t start with a class; start simple, and add complexity later on. Don&#8217;t worry, this will become clear when we look at examples.</p>
+<p><strong>6. Code should be resilient</strong></p>
+<p>You will have bugs; there is no avoiding that.</p>
+<p>What you want to avoid is when a bug in the code that displays <em>LolCat</em> images on your screen destroys your database.</p>
+<p>Errors should be handled as early as possible. Errors in one part of the code should not corrupt other parts. This is hard in practice, and requires some critical thinking and code reviews to get right.</p>
+<p><strong>7. Manage version  hell / system dependencies<br />
+</strong></p>
+<p>Version hell happens when code works on one machine, but not another. I have written a <a href="/stop-the-works-on-my-machine-syndrome/">whole blog on this topic</a>, so I won&#8217;t repeat that.</p>
+<p><strong>Next:</strong> <a href="/writing-the-code-in-small-parts-part-1-the-basic-app/">Let&#8217;s start coding</a>!</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/writing-great-code/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='1709' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="7da860b223" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="145"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

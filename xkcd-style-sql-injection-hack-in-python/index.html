@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Xkcd Style Sql Injection Hack in Python &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Xkcd Style Sql Injection Hack in Python Comments Feed" href="/xkcd-style-sql-injection-hack-in-python/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/xkcd-style-sql-injection-hack-in-python/" />
+<link rel='shortlink' href='/?p=1604' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fxkcd-style-sql-injection-hack-in-python%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fxkcd-style-sql-injection-hack-in-python%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1604">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1604" class="post-1604 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Xkcd Style Sql Injection Hack in Python</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p>You must have seen this XKCD comic:</p>
+<p><img class="aligncenter" src="http://imgs.xkcd.com/comics/exploits_of_a_mom.png" alt="" width="666" height="205" /></p>
+<p style="text-align: center;">Source: https://xkcd.com/327/</p>
+<p>We are going to replicate this exact hack using Python and SQlite.</p>
+<p><strong>Learning Goal</strong>: To see how easy it is to destroy your database and all its data, if you don&#8217;t follow simple rules. Also, pay homage to Little Bobby Tables!</p>
+<p>Before we start, download the <a href="http://sqlitebrowser.org/">DB browser for SqLite</a>.</p>
+<p><strong>Create a simple database</strong></p>
+<p>Let&#8217;s create the database first:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aec7578284919" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+#!/usr/bin/python3
+import sqlite3
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aec7578284919-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aec7578284919-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aec7578284919-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aec7578284919-1"><span class="crayon-p">#!/usr/bin/python3</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aec7578284919-2"><span class="crayon-e">import </span><span class="crayon-i">sqlite3</span></div><div class="crayon-line" id="crayon-5bcf82fc0aec7578284919-3">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>We are using sqlite3, which comes inbuilt with Python.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aed2137314289" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+db = "./students.db"
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aed2137314289-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aed2137314289-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aed2137314289-1"><span class="crayon-v">db</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"./students.db"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aed2137314289-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<p>The name of our database is <em>students.db</em>.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aed5288154144" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+conn = sqlite3.connect(db)
+c = conn.cursor()
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aed5288154144-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aed5288154144-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aed5288154144-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aed5288154144-1"><span class="crayon-v">conn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sqlite3</span><span class="crayon-sy">.</span><span class="crayon-e">connect</span><span class="crayon-sy">(</span><span class="crayon-v">db</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aed5288154144-2"><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">cursor</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aed5288154144-3">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>We connect to our students database. SqLite will create a database file for you, if it doesn&#8217;t exist.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aed8993623662" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+cmd = "CREATE TABLE students (Name TEXT, Age INT)"
+c.execute(cmd)
+conn.commit()
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aed8993623662-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aed8993623662-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aed8993623662-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aed8993623662-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aed8993623662-1"><span class="crayon-v">cmd</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"CREATE TABLE students (Name TEXT, Age INT)"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aed8993623662-2"><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-v">cmd</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aed8993623662-3"><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">commit</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aed8993623662-4">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>We create a Table <em>students</em> with 2 values: Name and age.</p>
+<p>The <em>execute()</em> command runns the SQL instruction, while the <em>commit()</em> writes it to the database. You don&#8217;t need to commit after every instruction, you can do it at the end, if you want.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aedb353389842" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data = [("Robert", 10), ("Sally", 15), ("Matthew", 7)]
+
+c.executemany("INSERT INTO students VALUES (?,?)", data)
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aedb353389842-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aedb353389842-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aedb353389842-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aedb353389842-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aedb353389842-1"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">(</span><span class="crayon-s">"Robert"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">"Sally"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">15</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">"Matthew"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">7</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aedb353389842-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fc0aedb353389842-3"><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">executemany</span><span class="crayon-sy">(</span><span class="crayon-s">"INSERT INTO students VALUES (?,?)"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aedb353389842-4">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0009 seconds] -->
+<p></p>
+<p>We create some dummy data, and write it into our database. The <em>executemany()</em> function allows you to add multiple values in one go.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aede999500310" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+conn.commit()
+
+conn.close()
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aede999500310-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aede999500310-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aede999500310-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aede999500310-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aede999500310-1"><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">commit</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aede999500310-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fc0aede999500310-3"><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aede999500310-4">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>And we commit the database, and close it.</p>
+<p>Open up the DB browser you downloaded, and open the database we just created.</p>
+<p>On the main tab, you should see our table:</p>
+<p><a href="/wp-content/uploads/2015/07/sqli_15.png"><img class="aligncenter size-large wp-image-1610" src="/wp-content/uploads/2015/07/sqli_15-1024x650.png" alt="sqli_15" width="1024" height="650" srcset="/wp-content/uploads/2015/07/sqli_15-1024x650.png 1024w, /wp-content/uploads/2015/07/sqli_15-300x190.png 300w, /wp-content/uploads/2015/07/sqli_15.png 1053w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></a></p>
+<p>And if you go to the <em>Browse Data</em> tab, you should see our data too:</p>
+<p><a href="/wp-content/uploads/2015/07/sqli_16.png"><img class="aligncenter wp-image-1610 size-large" src="/wp-content/uploads/2015/07/sqli_16-1024x650.png" alt="sqli_15" width="1024" height="650" /></a></p>
+<p>So far, so good. We have created a simple database. Now let&#8217;s hack it.</p>
+<p><strong>Xkcd style hack on our database</strong></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aee1439286125" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+#!/usr/bin/python3
+import sqlite3
+
+db = "./students.db"
+conn = sqlite3.connect(db)
+c = conn.cursor()
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aee1439286125-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aee1439286125-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aee1439286125-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aee1439286125-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fc0aee1439286125-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aee1439286125-6">6</div><div class="crayon-num" data-line="crayon-5bcf82fc0aee1439286125-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aee1439286125-1"><span class="crayon-p">#!/usr/bin/python3</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aee1439286125-2"><span class="crayon-e">import </span><span class="crayon-e">sqlite3</span></div><div class="crayon-line" id="crayon-5bcf82fc0aee1439286125-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aee1439286125-4"><span class="crayon-v">db</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"./students.db"</span></div><div class="crayon-line" id="crayon-5bcf82fc0aee1439286125-5"><span class="crayon-v">conn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sqlite3</span><span class="crayon-sy">.</span><span class="crayon-e">connect</span><span class="crayon-sy">(</span><span class="crayon-v">db</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aee1439286125-6"><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">cursor</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aee1439286125-7">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>We are just opening the database we created.</p>
+<p>First, we will do a normal read:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aee4291136232" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+print("Without Hack: \n")
+
+c.execute("SELECT * from students WHERE Name='Robert'")
+result = c.fetchall()
+print(result)
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aee4291136232-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aee4291136232-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aee4291136232-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aee4291136232-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fc0aee4291136232-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aee4291136232-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aee4291136232-1"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Without Hack: \n"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aee4291136232-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fc0aee4291136232-3"><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-s">"SELECT * from students WHERE Name='Robert'"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aee4291136232-4"><span class="crayon-v">result</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">fetchall</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aee4291136232-5"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">result</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aee4291136232-6">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p>We select all students whose name is Robert, and fetch the results, and print them.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aee7433482684" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+Without Hack:
+[('Robert', 10)]
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aee7433482684-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aee7433482684-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aee7433482684-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aee7433482684-1"><span class="crayon-e">Without </span><span class="crayon-v">Hack</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aee7433482684-2"><span class="crayon-sy">[</span><span class="crayon-sy">(</span><span class="crayon-s">'Robert'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf82fc0aee7433482684-3">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>We got the correct result- remember, this was the data we entered. So far, our code is working as expected.</p>
+<p>Now, let&#8217;s hack it.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aee9510436329" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+print("With Hack: \n")
+Name = "Robert'; DROP TABLE students;--"
+print("SELECT * from students WHERE Name='%s'" % Name)
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aee9510436329-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aee9510436329-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aee9510436329-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aee9510436329-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aee9510436329-1"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"With Hack: \n"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aee9510436329-2"><span class="crayon-v">Name</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"Robert'; DROP TABLE students;--"</span></div><div class="crayon-line" id="crayon-5bcf82fc0aee9510436329-3"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"SELECT * from students WHERE Name='%s'"</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-v">Name</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aee9510436329-4">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>We have created the name exactly as per the xkcd script. To see why it works, we also print the exact SQL statement that will be executed.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aeec713729549" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+SELECT * from students WHERE Name='Robert'; DROP TABLE students;--'
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aeec713729549-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aeec713729549-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aeec713729549-1"><span class="crayon-e">SELECT *</span><span class="crayon-h"> </span><span class="crayon-e">from </span><span class="crayon-e">students </span><span class="crayon-e">WHERE </span><span class="crayon-v">Name</span><span class="crayon-o">=</span><span class="crayon-s">'Robert'</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-e">DROP </span><span class="crayon-e">TABLE </span><span class="crayon-v">students</span><span class="crayon-sy">;</span><span class="crayon-o">--</span>'</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aeec713729549-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>If you look at the SQL command above, you see we end the SQL instruction with a <em>;</em>. That means that <em>DROP TABLE students;</em> is now a new instruction. The <em>drop</em> command will delete our table. The <em>&#8211; &#8211;</em>  is a comment in SQL, and is needed to comment out the last quote symbol <em>&#8216;</em> in our instruction.</p>
+<p>Now that we know how the instruction works, let&#8217;s run it:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aeef712956566" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+c.executescript("SELECT * from students WHERE Name='%s'" % Name)
+
+result = c.fetchall()
+print(result)
+
+[]
+
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aeef712956566-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aeef712956566-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aeef712956566-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aeef712956566-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fc0aeef712956566-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aeef712956566-6">6</div><div class="crayon-num" data-line="crayon-5bcf82fc0aeef712956566-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aeef712956566-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aeef712956566-1"><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">executescript</span><span class="crayon-sy">(</span><span class="crayon-s">"SELECT * from students WHERE Name='%s'"</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-v">Name</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aeef712956566-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fc0aeef712956566-3"><span class="crayon-v">result</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">fetchall</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aeef712956566-4"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">result</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aeef712956566-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aeef712956566-6"><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf82fc0aeef712956566-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aeef712956566-8">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p>This time we get an empty result. Why is that? Open up our database in the browser.</p>
+<p><a href="/wp-content/uploads/2015/07/sqli_17.png"><img class="aligncenter size-large wp-image-1610" src="/wp-content/uploads/2015/07/sqli_17-1024x650.png" alt="sqli_15" width="1024" height="650" /></a></p>
+<p><a href="/wp-content/uploads/2015/07/sqli_18.png"><img class="aligncenter size-large wp-image-1610" src="/wp-content/uploads/2015/07/sqli_18-1024x650.png" alt="sqli_15" width="1024" height="650" /></a></p>
+<p>We see the database is empty! Our hack has deleted everything.</p>
+<p>I hope <strong>you</strong> learnt to sanitise <strong>your</strong> database input, little Bobby Tables!</p>
+<p><strong>Fixing our hack</strong></p>
+<p>Create the database again, and check it exists by opening it in the browser.</p>
+<p><a href="/wp-content/uploads/2015/07/sqli_15.png"><img class="aligncenter size-large wp-image-1610" src="/wp-content/uploads/2015/07/sqli_15-1024x650.png" alt="sqli_15" width="1024" height="650" srcset="/wp-content/uploads/2015/07/sqli_15-1024x650.png 1024w, /wp-content/uploads/2015/07/sqli_15-300x190.png 300w, /wp-content/uploads/2015/07/sqli_15.png 1053w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></a></p>
+<p>So how do you prevent SQL injection hacks?</p>
+<p>Well, you read the bloody documentation, don&#8217;t you?</p>
+<p>Right in the <a href="https://docs.python.org/2/library/sqlite3.html">documentation</a>, it tells you what not to do:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aef2419251678" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# Never do this -- insecure!
+symbol = 'RHAT'
+c.execute("SELECT * FROM stocks WHERE symbol = '%s'" % symbol)
+
+# Do this instead
+t = ('RHAT',)
+c.execute('SELECT * FROM stocks WHERE symbol=?', t)
+print(c.fetchone())
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aef2419251678-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef2419251678-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef2419251678-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef2419251678-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef2419251678-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef2419251678-6">6</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef2419251678-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef2419251678-8">8</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef2419251678-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aef2419251678-1"><span class="crayon-p"># Never do this -- insecure!</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef2419251678-2"><span class="crayon-v">symbol</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'RHAT'</span></div><div class="crayon-line" id="crayon-5bcf82fc0aef2419251678-3"><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-s">"SELECT * FROM stocks WHERE symbol = '%s'"</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-v">symbol</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef2419251678-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fc0aef2419251678-5"><span class="crayon-p"># Do this instead</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef2419251678-6"><span class="crayon-v">t</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'RHAT'</span><span class="crayon-sy">,</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aef2419251678-7"><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-s">'SELECT * FROM stocks WHERE symbol=?'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">t</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef2419251678-8"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">fetchone</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aef2419251678-9">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></p>
+<p>What is the difference? In the first one, we are using the Python <em>%s</em> formatter to create the SQL instruction. That is because Python doesn&#8217;t know about SQL injection, and that allows our hack to work.</p>
+<p>SqLite does. Which is why you use the <em>?</em> character (instead of <em>%s</em>) to pass in values. This way, SqLite will escape any special characters we put in.</p>
+<p>Let&#8217;s give it a roll, and write the fixed code. The first half of the code is the same as before:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aef5287773008" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+#!/usr/bin/python3
+import sqlite3
+
+db = "./students.db"
+conn = sqlite3.connect(db)
+c = conn.cursor()
+
+print("Without Hack: \n")
+
+c.execute("SELECT * from students WHERE Name='Robert'")
+result = c.fetchall()
+print(result)
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aef5287773008-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef5287773008-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef5287773008-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef5287773008-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef5287773008-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef5287773008-6">6</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef5287773008-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef5287773008-8">8</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef5287773008-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef5287773008-10">10</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef5287773008-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef5287773008-12">12</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef5287773008-13">13</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aef5287773008-1"><span class="crayon-p">#!/usr/bin/python3</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef5287773008-2"><span class="crayon-e">import </span><span class="crayon-e">sqlite3</span></div><div class="crayon-line" id="crayon-5bcf82fc0aef5287773008-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef5287773008-4"><span class="crayon-v">db</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"./students.db"</span></div><div class="crayon-line" id="crayon-5bcf82fc0aef5287773008-5"><span class="crayon-v">conn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sqlite3</span><span class="crayon-sy">.</span><span class="crayon-e">connect</span><span class="crayon-sy">(</span><span class="crayon-v">db</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef5287773008-6"><span class="crayon-v">c</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">cursor</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aef5287773008-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef5287773008-8"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Without Hack: \n"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aef5287773008-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef5287773008-10"><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-s">"SELECT * from students WHERE Name='Robert'"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aef5287773008-11"><span class="crayon-v">result</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">fetchall</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef5287773008-12"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">result</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aef5287773008-13">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0009 seconds] -->
+<p></p>
+<p>Now to the relevant part:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aef8894841180" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+Name = "Robert'; DROP TABLE students;--"
+Name_to_use = (Name,)
+print("Name to use:", Name_to_use)
+
+Name to use: ("Robert'; DROP TABLE students;--",)
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aef8894841180-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef8894841180-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef8894841180-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef8894841180-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fc0aef8894841180-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aef8894841180-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aef8894841180-1"><span class="crayon-v">Name</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"Robert'; DROP TABLE students;--"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef8894841180-2"><span class="crayon-v">Name_to_use</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">Name</span><span class="crayon-sy">,</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aef8894841180-3"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Name to use:"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Name_to_use</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef8894841180-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fc0aef8894841180-5"><span class="crayon-e">Name </span><span class="crayon-st">to</span><span class="crayon-h"> </span><span class="crayon-st">use</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">"Robert'; DROP TABLE students;--"</span><span class="crayon-sy">,</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aef8894841180-6">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>And this time, we will use the syntax recommended by the SqLite documentation:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aefb078198196" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+c.execute("SELECT * from students WHERE Name=(?)" , Name_to_use)
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aefb078198196-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aefb078198196-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aefb078198196-1"><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">execute</span><span class="crayon-sy">(</span><span class="crayon-s">"SELECT * from students WHERE Name=(?)"</span><span class="crayon-h"> </span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">Name_to_use</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aefb078198196-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>If this works, our database should not be deleted. Open up the browser to check:</p>
+<p><a href="/wp-content/uploads/2015/07/sqli_16.png"><img class="aligncenter size-large wp-image-1610" src="/wp-content/uploads/2015/07/sqli_16-1024x650.png" alt="sqli_15" width="1024" height="650" /></a></p>
+<p>Nope, still there. SqLite escaped the name, so it no longer runs as a SQL instruction.</p>
+<p>To see why this works, let&#8217;s try to add this name to our database:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fc0aefe062923441" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+data = [("Robert'; DROP TABLE students;--", 10)]
+c.executemany("INSERT INTO students VALUES (?,?)", data)
+conn.commit()
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fc0aefe062923441-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aefe062923441-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fc0aefe062923441-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fc0aefe062923441-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fc0aefe062923441-1"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">(</span><span class="crayon-s">"Robert'; DROP TABLE students;--"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">10</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aefe062923441-2"><span class="crayon-v">c</span><span class="crayon-sy">.</span><span class="crayon-e">executemany</span><span class="crayon-sy">(</span><span class="crayon-s">"INSERT INTO students VALUES (?,?)"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fc0aefe062923441-3"><span class="crayon-v">conn</span><span class="crayon-sy">.</span><span class="crayon-e">commit</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fc0aefe062923441-4">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>This is the same code as the one we used earlier, except we are using our hacky name now. Run this code, and open the DB browser:</p>
+<p><a href="/wp-content/uploads/2015/07/sqli_19.png"><img class="aligncenter size-full wp-image-1614" src="/wp-content/uploads/2015/07/sqli_19.png" alt="sqli_19" width="615" height="319" srcset="/wp-content/uploads/2015/07/sqli_19.png 615w, /wp-content/uploads/2015/07/sqli_19-300x156.png 300w" sizes="(max-width: 615px) 85vw, 615px" /></a></p>
+<p>As you can see, our injection code is now just treated as a normal string.</p>
+<p>Which means Bobby Tables will be bullied at school for having such a loser name.</p>
+<p><em>This is an extract from my book, <a href="/python-for-hackers/">Python For Hackers</a>.<br />
+</em></p>
+<div id="mc_embed_signup"><form id="mc-embedded-subscribe-form" class="validate" action="//shantnutiwari.us5.list-manage.com/subscribe/post?u=a930a73bbd5d0d0249d5a6166&amp;id=1df662b649" method="post" name="mc-embedded-subscribe-form" novalidate="" target="_blank">
+<div class="indicates-required"></div>
+<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+<div class="mc-field-group"><label for="mce-FNAME">First Name <span class="asterisk">*</span>
+</label>
+<input id="mce-FNAME" class="required" name="FNAME" type="text" value="" /></div>
+<div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span>
+</label>
+<input id="mce-EMAIL" class="required email" name="EMAIL" type="email" value="" /></div>
+<div id="mce-responses" class="clear"></div>
+<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+<div style="position: absolute; left: -5000px;"><input tabindex="-1" name="b_a930a73bbd5d0d0249d5a6166_1df662b649" type="text" value="" /></div>
+<div class="clear"><input id="mc-embedded-subscribe" class="button" name="subscribe" type="submit" value="Keep me updated" /></div>
+</form></div>
+<!--End mc_embed_signup-->
+<em>I will never spam you. Unsubscribe anytime.
+</em>
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			2 thoughts on &ldquo;Xkcd Style Sql Injection Hack in Python&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-19122" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-19122" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/36d585a097691c4f4472b5c64abc3b2a?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/36d585a097691c4f4472b5c64abc3b2a?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">M P</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/xkcd-style-sql-injection-hack-in-python/#comment-19122">
+							<time datetime="2016-10-11T02:46:36+00:00">
+								October 11, 2016 at 2:46 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi! There&#8217;s a couple of Python 2 &#8220;print&#8221; statements that won&#8217;t work in Python 3:<br />
+print result<br />
+should be<br />
+print(result)</p>
+<p>print c.fetchone()<br />
+should be<br />
+print(c.fetchone())</p>
+<p>Nice tutorial!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/xkcd-style-sql-injection-hack-in-python/?replytocom=19122#respond' onclick='return addComment.moveForm( "div-comment-19122", "19122", "respond", "1604" )' aria-label='Reply to M P'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19126" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-19126" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/xkcd-style-sql-injection-hack-in-python/#comment-19126">
+							<time datetime="2016-10-11T12:48:21+00:00">
+								October 11, 2016 at 12:48 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks, I&#8217;ll fix it</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/xkcd-style-sql-injection-hack-in-python/?replytocom=19126#respond' onclick='return addComment.moveForm( "div-comment-19126", "19126", "respond", "1604" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/xkcd-style-sql-injection-hack-in-python/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='1604' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="3391342c1f" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="250"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>The Programming Interview from Hell &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/the-programming-interview-from-hell/" />
+<link rel='shortlink' href='/?p=2788' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fthe-programming-interview-from-hell%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fthe-programming-interview-from-hell%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-2788">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-2788" class="post-2788 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">The Programming Interview from Hell</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p><em>Interviewer</em>: Welcome, Mr X. Thanks for dropping by. We like to keep our interviews informal. And even though I have all the power here, and you are nothing but a cretin, let&#8217;s pretend we are going to have fun here.</p>
+<p><em>Mr X</em>: Sure, man, whatever.</p>
+<p><img src="https://s-media-cache-ak0.pinimg.com/736x/9e/df/5a/9edf5ab5c76e3dd92021d64db38931c1.jpg" class="size-full aligncenter" width="320" height="223" /></p>
+<p><em>I:</em> Let&#8217;s start with the technical stuff, shall we? Do you know what a linked list is?</p>
+<p><em>X:</em> (Tells what it is).</p>
+<p><em>I:</em> Great. Can you tell me where linked lists are used?</p>
+<p><em>X:</em>: Sure. In interview questions.</p>
+<p><em>I:</em> What?</p>
+<p><em>X:</em> The only time linked lists come up is in interview questions.</p>
+<p><em>I:</em>: That&#8217;s not true. They have lots of real world applications. Like, like&#8230;. (fumbles)</p>
+<p><em>X:</em>: Like to implement memory allocation in operating systems. But you don&#8217;t sell operating systems, do you?</p>
+<p><em>I:</em>: Well&#8230; moving on. Do you know what the Big O notation is?</p>
+<p><em>X:</em> Sure. It&#8217;s another thing used only in interviews.</p>
+<p><em>I:</em> What?! Not true at all. What if you want to sort a billion records a minute, like Google has to?</p>
+<p><em>X:</em> But you are not Google, are you? You are hiring me to work with 5 year old PHP code, and most of the tasks will be hacking HTML/CSS. Why don&#8217;t you ask me something I will actually be doing?</p>
+<p><em>I: (Getting a bit frustrated)</em>  Fine. How would you do FooBar in version X of PHP?</p>
+<p><em>X:</em> I would, er, Google that.</p>
+<p><em>I:</em> And how do you call library ABC in PHP?</p>
+<p><em>X:</em> Google?</p>
+<p><img src="http://www.quickmeme.com/img/3a/3a725b14f1469e157b5e3263b7fe031a0853bad94247b928a84b6bf0b2045638.jpg" class="aligncenter" width="406" height="336" /></p>
+<p><em>I: (shocked)</em> OMG. You mean you don&#8217;t remember all the 97 million PHP functions, and have to actually Google stuff? What if the Internet goes down?</p>
+<p><em>X:</em> Does it? We&#8217;re in the 1st world, aren&#8217;t we?</p>
+<p><em>I:</em> Tut, tut. Kids these days. Anyway,looking at your resume, we need at least 7 years of ReactJS. You don&#8217;t have that.</p>
+<p><em>X:</em> That&#8217;s great, because React came out last year.</p>
+<p><em>I:</em> Excuses, excuses. Let&#8217;s ask some lateral thinking questions. How would you go about finding how many piano tuners there are in San Francisco?</p>
+<p><em>X:</em> 37.</p>
+<p><em>I:</em> What?!</p>
+<p><em>X:</em> 37. I googled before coming here. Also Googled other puzzle questions. You can fit 7,895,345 balls in a Boeing 747. Manholes covers are round because that is the shape that won&#8217;t fall in. You ask the guard what the other guard would say. You then take the fox across the bridge first, and eat the chicken. As for how to move Mount Fuji, you tell it a sad story. [<a href="/stupid-answers-stupid-puzzle-interview-questions/">Source</a>]</p>
+<p><em>I:</em> Ooooooooookkkkkaaaayyyyyyy. Right, tell me a bit about yourself.</p>
+<p><em>X:</em> Everything is there in the resume.</p>
+<p><em>I:</em> I mean other than that. What sort of a person are you? What are your hobbies?</p>
+<p><img src="https://media.makeameme.org/created/tell-me-now-qqm6t8.jpg" class="aligncenter" width="501" height="285" /></p>
+<p><em>X:</em> Japanese culture.</p>
+<p><em>I:</em> Interesting. What specifically?</p>
+<p><em>X:</em> Hentai.</p>
+<p><em>I:</em> What&#8217;s hentai?</p>
+<p><em>X:</em> It&#8217;s an televised art form.</p>
+<p><em>I:</em> Ok. Now, can you give me an example of a time when you were really challenged?</p>
+<p><em>X:</em> Well, just the other day, a few pennies from my pocket fell behind the sofa. Took me an hour to take them out. Boy was it challenging.</p>
+<p><img src="https://s-media-cache-ak0.pinimg.com/originals/2b/1c/f2/2b1cf241b984904c77bf2cf7989282b8.jpg" class="aligncenter" width="461" height="307" /></p>
+<p><em>I:</em> I meant technical challenge.</p>
+<p><em>X:</em> I once spent 10 hours installing Windows 10 on a Mac.</p>
+<p><em>I:</em> Why did you do that?</p>
+<p><em>X:</em> I had nothing better to do.</p>
+<p><em>I:</em> Why did you decide to apply to us?</p>
+<p><em>X:</em> The voices in my head told me.</p>
+<p><em>I</em>: What?</p>
+<p><em>X:</em> You advertised a job, so I applied.</p>
+<p><em>I:</em> And why do you want to change your job?</p>
+<p><em>X:</em> Money, baby!</p>
+<p><img src="https://www.askideas.com/media/46/Wheres-My-Money-Where-Is-It-Very-Funny-Money-Meme-Picture-For-Facebook.jpg" class="aligncenter" width="395" height="296" /></p>
+<p><em>I:</em> (shocked)</p>
+<p><em>X:</em> I mean, I am looking for more lateral changes in a fast moving cloud connected social media agile web 2.0 company.</p>
+<p><em>I:</em> Great. That&#8217;s the answer we were looking for.  What do you feel about constant overtime?</p>
+<p><em>X:</em> I don&#8217;t know. What do you feel about overtime pay?</p>
+<p><em>I:</em> What is your biggest weakness?</p>
+<p><em>X:</em> Kryptonite. Also, ice cream.</p>
+<p><em>I:</em> What are your salary expectations?</p>
+<p><em>X:</em> A million dollars a year, three months paid vacation on the beach, stock options, the lot. Failing that, whatever you have.</p>
+<p><em>I:</em> Great. Any questions for me?</p>
+<p><em>X:</em> No.</p>
+<p><em>I:</em> No? You are supposed to ask me a question, to impress me with your knowledge. I&#8217;ll ask you one. Where do you see yourself in 5 years?</p>
+<p><em>X:</em> Doing your job, minus the stupid questions.</p>
+<p><em>I:</em> Get out. Don&#8217;t call us, we&#8217;ll call you.</p>
+<p><strong>Related</strong>:</p>
+<p><strong><a href="/favorite-programming-language-sucks/">Your Favorite Programming Language Sucks</a></strong></p>
+<p><strong><a title="Stupid answers to stupid puzzle interview questions" href="/stupid-answers-stupid-puzzle-interview-questions/">Stupid answers to stupid puzzle interview questions</a></strong></p>
+
+
+
+<p>&nbsp;</p>
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

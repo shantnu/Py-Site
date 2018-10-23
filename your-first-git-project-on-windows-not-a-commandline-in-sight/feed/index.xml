@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Your first Git project on Windows using the Github GUI client</title>
+	<atom:link href="/your-first-git-project-on-windows-not-a-commandline-in-sight/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: SheThrives11</title>
+		<link>/your-first-git-project-on-windows-not-a-commandline-in-sight/#comment-12268</link>
+		<dc:creator><![CDATA[SheThrives11]]></dc:creator>
+		<pubDate>Wed, 17 Dec 2014 03:56:45 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=92#comment-12268</guid>
+		<description><![CDATA[Yes, I finally started an account tonight and published my first test repo.  You can find me at &lt;a href=&quot;https://github.com/SheThrives11&quot; rel=&quot;nofollow&quot;&gt;@SheThrives11&lt;/a&gt;. Once again, thank you for the tutorial]]></description>
+		<content:encoded><![CDATA[<p>Yes, I finally started an account tonight and published my first test repo.  You can find me at <a href="https://github.com/SheThrives11" rel="nofollow">@SheThrives11</a>. Once again, thank you for the tutorial</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/your-first-git-project-on-windows-not-a-commandline-in-sight/#comment-12062</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Mon, 15 Dec 2014 11:30:54 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=92#comment-12062</guid>
+		<description><![CDATA[Thanks. Yes, it&#039;s quite easy once you start using it]]></description>
+		<content:encoded><![CDATA[<p>Thanks. Yes, it&#8217;s quite easy once you start using it</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: SheThrives11</title>
+		<link>/your-first-git-project-on-windows-not-a-commandline-in-sight/#comment-12017</link>
+		<dc:creator><![CDATA[SheThrives11]]></dc:creator>
+		<pubDate>Mon, 15 Dec 2014 01:35:27 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=92#comment-12017</guid>
+		<description><![CDATA[Great intro video! At first, I was intimidated by the service, but I now understand how to install and use github.]]></description>
+		<content:encoded><![CDATA[<p>Great intro video! At first, I was intimidated by the service, but I now understand how to install and use github.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

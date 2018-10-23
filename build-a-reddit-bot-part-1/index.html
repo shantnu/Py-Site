@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Build a Reddit Bot Part 1 &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Build a Reddit Bot Part 1 Comments Feed" href="/build-a-reddit-bot-part-1/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/build-a-reddit-bot-part-1/" />
+<link rel='shortlink' href='/?p=143' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fbuild-a-reddit-bot-part-1%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fbuild-a-reddit-bot-part-1%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-143">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-143" class="post-143 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Build a Reddit Bot Part 1</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<h4><strong>Build a Reddit Bot Series</strong></h4>
+<p style="padding-left: 30px;"><a href="/build-a-reddit-bot-part-1/">Part 1: Read posts from reddit</a></p>
+<p style="padding-left: 30px;"><a href="/build-a-reddit-bot-part-2-reply-to-posts/">Part 2: Reply to posts</a></p>
+<p style="padding-left: 30px;"><a title="Build a Reddit Bot Part 3: Automate your bot" href="/build-a-reddit-bot-part-3-automate-your-bot/">Part 3: Automate our Bot</a></p>
+<p style="padding-left: 30px;"><a href="/build-marvin-the-depressed-reddit-bot-in-python/">Part 4: Marvin the Depressed Bot</a></p>
+<p><strong>Introduction</strong></p>
+<p>So we are going to build a simple Reddit Bot that will do two things:</p>
+<ol>
+<li>It will monitor a particular subreddit for new posts, and when someone posts &#8220;I love Python&#8221;, it will reply &#8220;Me too!&#8221;.</p>
+</li>
+<li>
+<p>It will also monitor all comments to recent posts, and if it finds one that says &#8220;I hate Python&#8221;, it will post a link to /r/learnpython and ask the commenter to ask a question there.</p>
+</li>
+</ol>
+<p><strong>Prerequisite knowledge</strong></p>
+<p>Only a basic knowledge of Python is required, as building bots is fairly easy.</p>
+<p><strong>Part 1</strong></p>
+<p>In part one, we will see how we can read data from Reddit using the Reddit API. The source code is available at <a href="https://github.com/shantnu/RedditBot/blob/master/Part1/bot_read.py">Github</a>:</p>
+<p>&nbsp;</p>
+<p><strong>Edit: Based on comment by reader Farid:</strong></p>
+<p>&nbsp;</p>
+<p><em>Reddit has updated it&#8217;s website to a new look. If you come across a link above that does not work, then you will have to change the url.</em></p>
+<p><em>Here is an example:</em><br />
+<em>Above we have the link http://www.reddit.com/dev/api</em><br />
+<em>Yet, it says not found. If we change the link to http://old.reddit.com/dev/api then the link should work.</em></p>
+<p><em>In short, if a reddit link does not work change the &#8220;www&#8221; to &#8220;old&#8221;, so the link looks like &#8220;old.reddit.com&#8221;</em></p>
+<p><strong>Software bot</strong></p>
+<p>A software bot is a program that can interact with websites autonomously. They can be as simple or as complex as you want them to be.</p>
+<p>The bot runs in the background and monitors a website. When it sees a change (like a post on Reddit), it can reply to it, upvote, or do any other task it was programmed to.</p>
+<p><strong>Monitoring websites</strong></p>
+<p>There are many ways to monitor websites. You can use web scraping tools like urllib or Beautifulsoup any anything similar. There is a slight problem with this, though. Bots can make thousands of requests a second, and this can overload servers. So most big websites ban bots. <em>Ignore this at your own risk</em>. I have been banned from Google for hours, had my Gmail locked till I entered a dozen captachas, my mobile and the name of my first cat.</p>
+<p>If you want to do this properly, stick to any rules the website has.</p>
+<p><strong>Reddit API</strong></p>
+<p>Reddit provides an API, and unlike some websites, it&#8217;s actually quite easy to use. It&#8217;s based on REST and json, so in theory doesn&#8217;t require any fancy setup.</p>
+<p><a href="http://www.reddit.com/dev/api">http://www.reddit.com/dev/api</a></p>
+<p>The important thing is to follow the rules they set. Two of the most important ones are:</p>
+<ul>
+<li> You can&#8217;t make more than 1 request every 2 seconds (or 30 a minute)</li>
+<li>You must not lie about your user agent</li>
+</ul>
+<p>Read the rest <a href="https://github.com/reddit/reddit/wiki/API">here</a>.</p>
+<p>The user agent is what identifies your browser. Libraries like Python&#8217;s urllib are severely restricted by Reddit to prevent abuse. Reddit recommends you use your own special user agent, and that&#8217;s what we&#8217;ll do.</p>
+<p><strong>Using the API</strong></p>
+<p>The API is quite easy to use, like I said. You make a REST request, and this can be done via urllib2 (as long as you set the user agent properly). This is how you would do it. I have put two links below. Open both in a new tab:</p>
+<p><a href="http://www.reddit.com/r/learnPython/">http://www.reddit.com/r/learnPython/</a></p>
+<p><a href="http://www.reddit.com/r/learnPython/hot/.json">http://www.reddit.com/r/learnPython/hot/.json</a></p>
+<p>The first is how a human would see it. The second is how your code sees it. As you can see, getting the json is fairly easy.</p>
+<p>The problem with this approach is that you still have to make sure you rate limit your requests. You also have to parse the json yourself. Json is easy to parse in Python, as it&#8217;s essentially a Python dictionary, but if you actually look at the json, there is a lot of data.</p>
+<p><strong>Introducing Praw</strong></p>
+<p>[<em>Update Dec 2016: Reddit and Praw now force you to use Oauth. I&#8217;ve updated the article to use that</em>]</p>
+<p>Praw is a library that fixes many of these problems for you. It limits how many requests you can make, and makes it easy to extract the json. Install it by:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf76d565b00979401088" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+ pip install praw</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf76d565b00979401088-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf76d565b00979401088-1"> <span class="crayon-e">pip </span><span class="crayon-e">install </span><span class="crayon-v">praw</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>You need to do some setup first.</p>
+<p><strong>Create Reddit App</strong></p>
+<p>Go to: <a href="https://www.reddit.com/prefs/apps/">https://www.reddit.com/prefs/apps/</a></p>
+<p>And select <em>Create App</em>:</p>
+<p><a href="/wp-content/uploads/2014/11/redditbot1.jpg"><img src="/wp-content/uploads/2014/11/redditbot1.jpg" alt="" class="aligncenter size-full wp-image-2738" width="1488" height="552" srcset="/wp-content/uploads/2014/11/redditbot1.jpg 1488w, /wp-content/uploads/2014/11/redditbot1-300x111.jpg 300w, /wp-content/uploads/2014/11/redditbot1-768x285.jpg 768w, /wp-content/uploads/2014/11/redditbot1-1024x380.jpg 1024w, /wp-content/uploads/2014/11/redditbot1-1200x445.jpg 1200w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></a>Give it a name. You have to choose a redirect uri (for some stupid reason, stupid because Im building a bot, not a webapp, but whatever). I chose http://127.0.0.1</p>
+<p>You will now get a client_id (red box below) and secret (blue box below). Note it down, but keep it secret.</p>
+<p><a href="/wp-content/uploads/2014/11/redditbot2.jpg"><img src="/wp-content/uploads/2014/11/redditbot2.jpg" alt="" class="aligncenter size-full wp-image-2739" width="1444" height="644" srcset="/wp-content/uploads/2014/11/redditbot2.jpg 1444w, /wp-content/uploads/2014/11/redditbot2-300x134.jpg 300w, /wp-content/uploads/2014/11/redditbot2-768x343.jpg 768w, /wp-content/uploads/2014/11/redditbot2-1024x457.jpg 1024w, /wp-content/uploads/2014/11/redditbot2-1200x535.jpg 1200w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></a>Now, you need to update your praw ini file to remember these settings. Otherwise, you&#8217;ll have to put them in your script and thats dangerous (as others might see them).</p>
+<p>This page describes how to change praw.ini files: <a href="https://praw.readthedocs.io/en/v4.0.0/getting_started/configuration/prawini.html">https://praw.readthedocs.io/en/v4.0.0/getting_started/configuration/prawini.html</a></p>
+<p>You will find the file in your Python install folder, under <em>Lib\Site-Packages\praw\praw.ini</em></p>
+<p><strong>Update</strong>: As Bryce points out in the comments:</p>
+<p><em>I don’t recommend modifying the package-level <code>praw.ini</code> as those changes will be overwritten every time the package is updated. Instead <code>praw.ini</code> should be placed in the directory that the program is run from (often the same directory as the file).</em></p>
+<p><em>Other options are specified here: <a href="https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html#praw-ini-files" rel="nofollow">https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html#praw-ini-files</a></em></p>
+<p><strong>I recommend following Bryce&#8217;s advice</strong>.</p>
+<p>Add the values we noted down:</p>
+<p><a href="/wp-content/uploads/2014/11/redditbot3.jpg"><img src="/wp-content/uploads/2014/11/redditbot3.jpg" alt="" class="aligncenter size-full wp-image-2740" width="1067" height="975" srcset="/wp-content/uploads/2014/11/redditbot3.jpg 1067w, /wp-content/uploads/2014/11/redditbot3-300x274.jpg 300w, /wp-content/uploads/2014/11/redditbot3-768x702.jpg 768w, /wp-content/uploads/2014/11/redditbot3-1024x936.jpg 1024w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></a>client_id and client_secret are what you wrote down. Username and password are your account details (and optional if you only want read only access).</p>
+<p>There is a new field: user_agent.</p>
+<p>Remember I said the Reddit rules say you have to have a specific user agent? I&#8217;m choosing the name <em>PyEng Bot. </em>The number at the end is the version. This is recommended, because once your code is out there, people might abuse it. If someone spams Reddit with your code, Reddit will ban that user agent.</p>
+<p>In that case, you just move the version up. Not ideal, but you have to accept that your code may be misused by spammers.</p>
+<p>Let&#8217;s go over the code now. Download it at <a href="https://github.com/shantnu/RedditBot/blob/master/Part1/bot_read.py">Github</a>.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf76d565b0d006676228" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+import praw</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf76d565b0d006676228-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf76d565b0d006676228-1"><span class="crayon-e">import </span><span class="crayon-v">praw</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<p>We import praw.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf76d565b10661372932" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+reddit = praw.Reddit('bot1')
+
+subreddit = r.subreddit("learnpython")</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf76d565b10661372932-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b10661372932-2">2</div><div class="crayon-num" data-line="crayon-5bcf76d565b10661372932-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf76d565b10661372932-1"><span class="crayon-v">reddit</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">praw</span><span class="crayon-sy">.</span><span class="crayon-e">Reddit</span><span class="crayon-sy">(</span><span class="crayon-s">'bot1'</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b10661372932-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf76d565b10661372932-3"><span class="crayon-v">subreddit</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">r</span><span class="crayon-sy">.</span><span class="crayon-e">subreddit</span><span class="crayon-sy">(</span><span class="crayon-s">"learnpython"</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>We create a Reddit instance using the values we saved under <em>bot1</em>.</p>
+<p>Then we get the subreddit <em>learnpython</em>.</p>
+<p>Now, if you look on the subreddit, you can see that there is a <em>hot</em> tab. This does not indicate the temperature there is high or that there are racy swimsuit models. It means the most popular posts. That&#8217;s what we are going to read now. The function to do so is <em>get_hot()</em>.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf76d565b14438331743" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+for submission in subreddit.hot(limit=5):</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf76d565b14438331743-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf76d565b14438331743-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">submission </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">subreddit</span><span class="crayon-sy">.</span><span class="crayon-e">hot</span><span class="crayon-sy">(</span><span class="crayon-v">limit</span><span class="crayon-o">=</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>We get the top 5 hot submissions. At this stage, you can do this to see which functions are available (you can do that at any stage, or look at Praw&#8217;s documentation).</p>
+<p>Seeing a snipped list:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf76d565b17864476309" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+ dir(submission)
+
+['approve',
+'approved_by',
+'author',
+
+'domain',
+'downs',
+'downvote',
+'edit',
+'edited',
+
+'saved',
+
+'score',
+'secure_media',
+'secure_media_embed',
+'selftext',
+'selftext_html',
+
+'title',
+
+'ups',
+'upvote',
+'url',
+'user_reports',
+'visited',
+'vote']</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-2">2</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-4">4</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-6">6</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-8">8</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-10">10</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-12">12</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-14">14</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-16">16</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-18">18</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-20">20</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-21">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-22">22</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-23">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-24">24</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-25">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-26">26</div><div class="crayon-num" data-line="crayon-5bcf76d565b17864476309-27">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b17864476309-28">28</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf76d565b17864476309-1"> <span class="crayon-e">dir</span><span class="crayon-sy">(</span><span class="crayon-v">submission</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-3"><span class="crayon-sy">[</span><span class="crayon-s">'approve'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-4"><span class="crayon-s">'approved_by'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-5"><span class="crayon-s">'author'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-7"><span class="crayon-s">'domain'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-8"><span class="crayon-s">'downs'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-9"><span class="crayon-s">'downvote'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-10"><span class="crayon-s">'edit'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-11"><span class="crayon-s">'edited'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-12">&nbsp;</div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-13"><span class="crayon-s">'saved'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-14">&nbsp;</div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-15"><span class="crayon-s">'score'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-16"><span class="crayon-s">'secure_media'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-17"><span class="crayon-s">'secure_media_embed'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-18"><span class="crayon-s">'selftext'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-19"><span class="crayon-s">'selftext_html'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-20">&nbsp;</div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-21"><span class="crayon-s">'title'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-22">&nbsp;</div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-23"><span class="crayon-s">'ups'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-24"><span class="crayon-s">'upvote'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-25"><span class="crayon-s">'url'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-26"><span class="crayon-s">'user_reports'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf76d565b17864476309-27"><span class="crayon-s">'visited'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b17864476309-28"><span class="crayon-s">'vote'</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>I&#8217;ll point out a few important ones. <em>Title</em> is the title, as it appears on Reddit&#8217;s main page. <em>Selftext</em> is the optional text you can put on posts- most posts don&#8217;t have these. <em>learnpython</em> is unique in that most posts do have text (usually the poster asking their question), which is why I&#8217;ve chosen it. <em>score</em> is the total score, adding upvotes and downvotes (both of which are also available).</p>
+<p>These are the three we will print:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf76d565b1a016274826" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-mac print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+for submission in subreddit.hot(limit=5):
+    print("Title: ", submission.title)
+    print("Text: ", submission.selftext)
+    print("Score: ", submission.score)
+    print("---------------------------------\n")</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf76d565b1a016274826-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b1a016274826-2">2</div><div class="crayon-num" data-line="crayon-5bcf76d565b1a016274826-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf76d565b1a016274826-4">4</div><div class="crayon-num" data-line="crayon-5bcf76d565b1a016274826-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf76d565b1a016274826-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">submission </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">subreddit</span><span class="crayon-sy">.</span><span class="crayon-e">hot</span><span class="crayon-sy">(</span><span class="crayon-v">limit</span><span class="crayon-o">=</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b1a016274826-2">   <span class="crayon-h"> </span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Title: "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">submission</span><span class="crayon-sy">.</span><span class="crayon-v">title</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf76d565b1a016274826-3">   <span class="crayon-h"> </span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Text: "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">submission</span><span class="crayon-sy">.</span><span class="crayon-v">selftext</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf76d565b1a016274826-4">   <span class="crayon-h"> </span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Score: "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">submission</span><span class="crayon-sy">.</span><span class="crayon-v">score</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf76d565b1a016274826-5">   <span class="crayon-h"> </span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"---------------------------------\n"</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>That&#8217;s it. Run the script, and open Reddit in a browser at the same time. Check that you are getting the right results.</p>
+<p><strong>Next time</strong></p>
+<p>Next time we will look at how to send a reply to a post on Reddit. <a title="Build a Reddit Bot Part 2: Reply to posts" href="/build-a-reddit-bot-part-2-reply-to-posts/">Next Part</a></p>
+<p>&nbsp;</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			63 thoughts on &ldquo;Build a Reddit Bot Part 1&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-18797" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-18797" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/3a1221da1c722aed9b3258ebbba84f3b?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/3a1221da1c722aed9b3258ebbba84f3b?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Richard Gautier</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-18797">
+							<time datetime="2016-08-14T15:04:28+00:00">
+								August 14, 2016 at 3:04 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>How do I install praw on a Windows platform?  I have Python27 installed, but no pip command&#8230;</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=18797#respond' onclick='return addComment.moveForm( "div-comment-18797", "18797", "respond", "143" )' aria-label='Reply to Richard Gautier'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-18798" class="comment odd alt depth-2">
+			<article id="div-comment-18798" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/3a1221da1c722aed9b3258ebbba84f3b?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/3a1221da1c722aed9b3258ebbba84f3b?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Richard Gautier</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-18798">
+							<time datetime="2016-08-14T15:13:05+00:00">
+								August 14, 2016 at 3:13 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>From the Answer-Your-Own-Question Dept.<br />
+ Instructions here: <a href="https://github.com/BurntSushi/nfldb/wiki/Python-&#038;-pip-Windows-installation" rel="nofollow">https://github.com/BurntSushi/nfldb/wiki/Python-&#038;-pip-Windows-installation</a></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=18798#respond' onclick='return addComment.moveForm( "div-comment-18798", "18798", "respond", "143" )' aria-label='Reply to Richard Gautier'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-18799" class="comment byuser comment-author-shantnu bypostauthor even depth-2">
+			<article id="div-comment-18799" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-18799">
+							<time datetime="2016-08-14T20:50:22+00:00">
+								August 14, 2016 at 8:50 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I recommend people install Anaconda Python- it comes with 90% of what you need. <a href="https://www.continuum.io/downloads" rel="nofollow">https://www.continuum.io/downloads</a></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=18799#respond' onclick='return addComment.moveForm( "div-comment-18799", "18799", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-19529" class="comment odd alt depth-2">
+			<article id="div-comment-19529" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/ba5bf0c5209cd0a91fca5de907071487?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/ba5bf0c5209cd0a91fca5de907071487?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://actionjacksonweb.wordpress.com/' rel='external nofollow' class='url'>jacksonelo</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19529">
+							<time datetime="2016-12-17T21:09:23+00:00">
+								December 17, 2016 at 9:09 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You have to install it from the command line, not the python interpreter.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19529#respond' onclick='return addComment.moveForm( "div-comment-19529", "19529", "respond", "143" )' aria-label='Reply to jacksonelo'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-21909" class="comment even depth-2">
+			<article id="div-comment-21909" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/a8dd70c3aeff3f4b227611fa1c506c6f?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/a8dd70c3aeff3f4b227611fa1c506c6f?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://gravatar.com/bogatabeav' rel='external nofollow' class='url'>bogatabeav</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-21909">
+							<time datetime="2017-10-03T19:40:03+00:00">
+								October 3, 2017 at 7:40 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Change your directory to the Python Scripts directory using &#8220;cd c:\Python27\Scripts&#8221; then run &#8220;pip install craw&#8221;.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=21909#respond' onclick='return addComment.moveForm( "div-comment-21909", "21909", "respond", "143" )' aria-label='Reply to bogatabeav'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-19198" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-19198" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/b35d451772d8b0dfeed237c940d8cd0d?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/b35d451772d8b0dfeed237c940d8cd0d?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Ren Bannon</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19198">
+							<time datetime="2016-10-23T14:59:06+00:00">
+								October 23, 2016 at 2:59 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Running the script returns the following error:</p>
+<p>File &#8220;bot_read.py&#8221;, line 11<br />
+print &#8220;Title: &#8220;, submission.title<br />
+                  ^<br />
+SyntaxError: Missing parenthesis  in call to &#8216;print&#8217;</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19198#respond' onclick='return addComment.moveForm( "div-comment-19198", "19198", "respond", "143" )' aria-label='Reply to Ren Bannon'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19206" class="comment byuser comment-author-shantnu bypostauthor even depth-2 parent">
+			<article id="div-comment-19206" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19206">
+							<time datetime="2016-10-25T09:04:15+00:00">
+								October 25, 2016 at 9:04 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>try:   print(&#8220;Title&#8221;)</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19206#respond' onclick='return addComment.moveForm( "div-comment-19206", "19206", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19411" class="comment odd alt depth-3">
+			<article id="div-comment-19411" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/963447d2e04d37f4a4fb96fb63ae2a88?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/963447d2e04d37f4a4fb96fb63ae2a88?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">ThomasUlrich</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19411">
+							<time datetime="2016-11-29T23:38:07+00:00">
+								November 29, 2016 at 11:38 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You need to use Python 3 syntax, which is print(&#8220;Title&#8221;) as Shantnu indicated.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19411#respond' onclick='return addComment.moveForm( "div-comment-19411", "19411", "respond", "143" )' aria-label='Reply to ThomasUlrich'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-19351" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-19351" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/ad7ffd9697a3587326183e0cbe41c7d7?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/ad7ffd9697a3587326183e0cbe41c7d7?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Gaurav Sharma</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19351">
+							<time datetime="2016-11-23T05:36:32+00:00">
+								November 23, 2016 at 5:36 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thank you for this amazing post. I am enjoying learning Python because of such build yourself tutorials. Watching your screen show the output and not an error is an amazing confidence booster. Keep up the awesome work.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19351#respond' onclick='return addComment.moveForm( "div-comment-19351", "19351", "respond", "143" )' aria-label='Reply to Gaurav Sharma'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19355" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-19355" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19355">
+							<time datetime="2016-11-23T20:32:04+00:00">
+								November 23, 2016 at 8:32 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thank you for the kind words 🙂</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19355#respond' onclick='return addComment.moveForm( "div-comment-19355", "19355", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-19397" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-19397" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/13ac2205401a8fb6de8a7c2341bf3de0?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/13ac2205401a8fb6de8a7c2341bf3de0?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Ctrl-Alt-Tab</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19397">
+							<time datetime="2016-11-28T22:01:11+00:00">
+								November 28, 2016 at 10:01 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hey man. This bot has helped me massively. I am so close to completing a project I have been working on. I have been trying to find out how to extract the comments from submissions and this has helped.</p>
+<p>However when I edited the code I got this error:</p>
+<p>    posts_replied_to.append(submission.id)<br />
+AttributeError: &#8216;filter&#8217; object has no attribute &#8216;append&#8217;</p>
+<p>I can&#8217;t see why it is suddenly not working, when it worked before</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19397#respond' onclick='return addComment.moveForm( "div-comment-19397", "19397", "respond", "143" )' aria-label='Reply to Ctrl-Alt-Tab'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19402" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2 parent">
+			<article id="div-comment-19402" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19402">
+							<time datetime="2016-11-29T10:36:06+00:00">
+								November 29, 2016 at 10:36 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>you&#8217;re welcome.</p>
+<p>The error most likely means <em>posts_replied_to</em> has not been initialised correctly. Put a break point right before that line and check what it&#8217;s been set to.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19402#respond' onclick='return addComment.moveForm( "div-comment-19402", "19402", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19444" class="comment even depth-3">
+			<article id="div-comment-19444" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/13ac2205401a8fb6de8a7c2341bf3de0?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/13ac2205401a8fb6de8a7c2341bf3de0?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Ctrl-Alt-Tab</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19444">
+							<time datetime="2016-12-04T20:16:04+00:00">
+								December 4, 2016 at 8:16 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks I read somewhere that it was a python 2 vs python 3 problem with the use of the term &#8220;append&#8221;</p>
+<p>I solved it with this code instead:</p>
+<p>with open(&#8220;posts_replied_to.txt&#8221;, &#8220;a&#8221;) as myfile:<br />
+                myfile.write(submission.id + &#8220;\n&#8221;)</p>
+<p>Thanks again</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19444#respond' onclick='return addComment.moveForm( "div-comment-19444", "19444", "respond", "143" )' aria-label='Reply to Ctrl-Alt-Tab'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-19514" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-19514" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/e713496f5d7bf6c413ac9913b05d4bee?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/e713496f5d7bf6c413ac9913b05d4bee?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Jeff</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19514">
+							<time datetime="2016-12-15T23:37:06+00:00">
+								December 15, 2016 at 11:37 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hello there, and thank-you for this awesome tutorial! Sadly though, when I run this script, it returns the following:</p>
+<p>Traceback (most recent call last):<br />
+  File &#8220;untitled0.py&#8221;, line 6, in<br />
+    r = praw.Reddit(user_agent = user_agent)<br />
+  File &#8220;/anaconda/lib/python3.5/site-packages/praw/reddit.py&#8221;, line 114, in __init__<br />
+    raise ClientException(required_message.format(attribute))<br />
+praw.exceptions.ClientException: Required configuration setting &#8216;client_id&#8217; missing.<br />
+This setting can be provided in a praw.ini file, as a keyword argument to the <code>Reddit</code> class constructor, or as an environment variable.</p>
+<p>Any help would be greatly appreciated. Thank-you again!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19514#respond' onclick='return addComment.moveForm( "div-comment-19514", "19514", "respond", "143" )' aria-label='Reply to Jeff'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19520" class="comment byuser comment-author-shantnu bypostauthor even depth-2 parent">
+			<article id="div-comment-19520" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19520">
+							<time datetime="2016-12-16T10:17:56+00:00">
+								December 16, 2016 at 10:17 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Jeff, it seems praw have updated their script (to keep up with reddit changes to Ouath).</p>
+<p>I&#8217;ll have to update the article. Thanks for letting me know, I&#8217;ll get back to you soon.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19520#respond' onclick='return addComment.moveForm( "div-comment-19520", "19520", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19521" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-3">
+			<article id="div-comment-19521" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19521">
+							<time datetime="2016-12-16T13:00:08+00:00">
+								December 16, 2016 at 1:00 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Okay, I&#8217;ve updated the script. It should work now.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19521#respond' onclick='return addComment.moveForm( "div-comment-19521", "19521", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-19647" class="comment even thread-odd thread-alt depth-1">
+			<article id="div-comment-19647" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/69aaed367989e90cf953fc6b7a985f73?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/69aaed367989e90cf953fc6b7a985f73?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Taylor</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19647">
+							<time datetime="2017-01-04T05:51:30+00:00">
+								January 4, 2017 at 5:51 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for the post! Everything worked for me except that apparently reddit.get_subreddit() has been deprecated in favor of reddit.subreddit()</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19647#respond' onclick='return addComment.moveForm( "div-comment-19647", "19647", "respond", "143" )' aria-label='Reply to Taylor'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-19680" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-19680" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/9fe26ac49f4f73797937cf080d4da360?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/9fe26ac49f4f73797937cf080d4da360?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">max</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19680">
+							<time datetime="2017-01-13T20:08:49+00:00">
+								January 13, 2017 at 8:08 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>hi. first of all, this is a great tutorial. but i&#8217;m having a problem. when i try to install praw i get this error: File &#8220;&#8221;, line 1 pip install praw SyntaxError: invalid syntax. i&#8217;ve been stuck on this for a while now and would really appriciate your help.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19680#respond' onclick='return addComment.moveForm( "div-comment-19680", "19680", "respond", "143" )' aria-label='Reply to max'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19709" class="comment byuser comment-author-shantnu bypostauthor even depth-2 parent">
+			<article id="div-comment-19709" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19709">
+							<time datetime="2017-01-17T08:52:43+00:00">
+								January 17, 2017 at 8:52 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>How are you installing it? Post the exact command and error message</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19709#respond' onclick='return addComment.moveForm( "div-comment-19709", "19709", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19936" class="comment odd alt depth-3 parent">
+			<article id="div-comment-19936" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/9fe26ac49f4f73797937cf080d4da360?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/9fe26ac49f4f73797937cf080d4da360?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">max</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19936">
+							<time datetime="2017-02-10T15:12:42+00:00">
+								February 10, 2017 at 3:12 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>the command is pip install praw and the error says File&#8221;&#8221;, line 1 pip install praw ^ SyntaxError: invalid syntax<br />
+I am trying to install it through the python command line.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19936#respond' onclick='return addComment.moveForm( "div-comment-19936", "19936", "respond", "143" )' aria-label='Reply to max'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19937" class="comment even depth-4">
+			<article id="div-comment-19937" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/9fe26ac49f4f73797937cf080d4da360?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/9fe26ac49f4f73797937cf080d4da360?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">max</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19937">
+							<time datetime="2017-02-10T15:14:29+00:00">
+								February 10, 2017 at 3:14 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>there should be a stdin in arrow brackets (like this: &lt;) inside the parenthises</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19937#respond' onclick='return addComment.moveForm( "div-comment-19937", "19937", "respond", "143" )' aria-label='Reply to max'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-19769" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-19769" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/06d49dbb169d6a26623fc20722441e81?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/06d49dbb169d6a26623fc20722441e81?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">help</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19769">
+							<time datetime="2017-01-28T02:16:03+00:00">
+								January 28, 2017 at 2:16 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>when I use python script.py, I get:</p>
+<p>prawcore.exceptions.OAuthException: unauthorized_client error processing request (Only script apps may use password auth)</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19769#respond' onclick='return addComment.moveForm( "div-comment-19769", "19769", "respond", "143" )' aria-label='Reply to help'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19795" class="comment byuser comment-author-shantnu bypostauthor even depth-2 parent">
+			<article id="div-comment-19795" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19795">
+							<time datetime="2017-01-30T12:56:07+00:00">
+								January 30, 2017 at 12:56 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Did you create the Reddit app correctly? That error says Reddit doesnt like your login</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19795#respond' onclick='return addComment.moveForm( "div-comment-19795", "19795", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-20552" class="comment odd alt depth-3 parent">
+			<article id="div-comment-20552" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/e95f306c47a4e8b3d90b941d6f1d648b?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/e95f306c47a4e8b3d90b941d6f1d648b?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://drewmartin.ninja/' rel='external nofollow' class='url'>Drew Martin</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20552">
+							<time datetime="2017-04-13T17:16:22+00:00">
+								April 13, 2017 at 5:16 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hey guys! Make sure the app (On reddit side) is a script app rather than a web app. This is what did it for me.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20552#respond' onclick='return addComment.moveForm( "div-comment-20552", "20552", "respond", "143" )' aria-label='Reply to Drew Martin'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-20554" class="comment byuser comment-author-shantnu bypostauthor even depth-4">
+			<article id="div-comment-20554" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20554">
+							<time datetime="2017-04-13T20:10:52+00:00">
+								April 13, 2017 at 8:10 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Great tip! Thanks.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20554#respond' onclick='return addComment.moveForm( "div-comment-20554", "20554", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-19860" class="comment byuser comment-author-shantnu bypostauthor odd alt thread-even depth-1">
+			<article id="div-comment-19860" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19860">
+							<time datetime="2017-02-05T16:50:32+00:00">
+								February 5, 2017 at 4:50 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Sent you a link to Gitter chat. Keep in mind I may not be there as the same time as you, but I will reply to messages.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19860#respond' onclick='return addComment.moveForm( "div-comment-19860", "19860", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-19862" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-19862" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/977c9a7d43817d65f70ec8736de07671?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/977c9a7d43817d65f70ec8736de07671?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://gravatar.com/bbzbryce' rel='external nofollow' class='url'>Bryce Boe</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19862">
+							<time datetime="2017-02-05T22:17:55+00:00">
+								February 5, 2017 at 10:17 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Great tutorial! One suggestion, however, pertains to this line:</p>
+<p>&gt; You will find the file in your Python install folder, under Lib\Site-Packages\praw\praw.ini</p>
+<p>I don&#8217;t recommend modifying the package-level <code>praw.ini</code> as those changes will be overwritten every time the package is updated. Instead <code>praw.ini</code> should be placed in the directory that the program is run from (often the same directory as the file).</p>
+<p>Other options are specified here: <a href="https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html#praw-ini-files" rel="nofollow">https://praw.readthedocs.io/en/latest/getting_started/configuration/prawini.html#praw-ini-files</a></p>
+<p>One other comment is that for PRAW4 the following line:</p>
+<p>    subreddit = r.get_subreddit(&#8220;learnpython&#8221;)</p>
+<p>should now be:</p>
+<p>    subreddit = r.subreddit(&#8220;learnpython&#8221;)</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19862#respond' onclick='return addComment.moveForm( "div-comment-19862", "19862", "respond", "143" )' aria-label='Reply to Bryce Boe'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19868" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-19868" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19868">
+							<time datetime="2017-02-06T16:41:46+00:00">
+								February 6, 2017 at 4:41 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks! I will update the blog</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19868#respond' onclick='return addComment.moveForm( "div-comment-19868", "19868", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-19873" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-19873" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/4752a4dda6bc9443ae9b61ff9fa4a2b6?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/4752a4dda6bc9443ae9b61ff9fa4a2b6?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Hugh</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19873">
+							<time datetime="2017-02-07T00:08:16+00:00">
+								February 7, 2017 at 12:08 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi, for whatever reason I&#8217;m getting an SSL error when I try to run the script. I&#8217;ve currently got Python 2.7.13.</p>
+<p>Here&#8217;s the error:<br />
+File &#8220;/home//.local/lib/python2.7/site-packages/prawcore/requestor.py&#8221;, line 48, in request<br />
+    raise RequestException(exc, args, kwargs)<br />
+prawcore.exceptions.RequestException: error with request Can&#8217;t connect to HTTPS URL because the SSL module is not available.</p>
+<p>I&#8217;ve tried to reinstall the SSL module using &#8220;pip install ssl&#8221;, but that doesn&#8217;t work because, according to the error message, it&#8217;s &#8220;already built in&#8221;.</p>
+<p>I&#8217;ve been googling for hours but to no avail, would really appreciate some help with this. No one else seems to be in my situation&#8230;</p>
+<p>Great tutorial otherwise!<br />
+-Hugh</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19873#respond' onclick='return addComment.moveForm( "div-comment-19873", "19873", "respond", "143" )' aria-label='Reply to Hugh'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19879" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-19879" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19879">
+							<time datetime="2017-02-07T08:59:14+00:00">
+								February 7, 2017 at 8:59 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Do you mind trying this with Python 3, which is what I used? I recommend Anaconda Python: <a href="https://www.continuum.io/downloads" rel="nofollow">https://www.continuum.io/downloads</a></p>
+<p>PS: Google is lying, when you search for that error message you get unrelated results, which is why you were struggling.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19879#respond' onclick='return addComment.moveForm( "div-comment-19879", "19879", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-19905" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-19905" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/15b6757ca0a63129fddaeb5930da2b18?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/15b6757ca0a63129fddaeb5930da2b18?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://gravatar.com/thobhanifreddy' rel='external nofollow' class='url'>thobhanifreddy</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19905">
+							<time datetime="2017-02-08T12:03:09+00:00">
+								February 8, 2017 at 12:03 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I am getting error &#8211;&gt; NoSectionError: No section: &#8216;bot1&#8217;</p>
+<p>I have updated my praw..ini file as follow:</p>
+<p>[bot1]<br />
+client_id: 6LuNIgq******Q<br />
+client_secret: xtbrrx********DGiv4GxFE<br />
+username: **********<br />
+password: **********<br />
+user_agent: python_bot 0.1</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19905#respond' onclick='return addComment.moveForm( "div-comment-19905", "19905", "respond", "143" )' aria-label='Reply to thobhanifreddy'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19906" class="comment odd alt depth-2 parent">
+			<article id="div-comment-19906" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/15b6757ca0a63129fddaeb5930da2b18?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/15b6757ca0a63129fddaeb5930da2b18?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://gravatar.com/thobhanifreddy' rel='external nofollow' class='url'>thobhanifreddy</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19906">
+							<time datetime="2017-02-08T12:18:42+00:00">
+								February 8, 2017 at 12:18 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I got it solved&#8230;it was because I was running code in other directory&#8230;</p>
+<p>But now I am getting following  &#8220;ClientException: Required configuration setting &#8216;user_agent&#8217; missing.&#8221;</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19906#respond' onclick='return addComment.moveForm( "div-comment-19906", "19906", "respond", "143" )' aria-label='Reply to thobhanifreddy'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19918" class="comment byuser comment-author-shantnu bypostauthor even depth-3">
+			<article id="div-comment-19918" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-19918">
+							<time datetime="2017-02-09T09:03:17+00:00">
+								February 9, 2017 at 9:03 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You have set the user agent. Is there a typo, or are you not setting the user agent correctly? What value are you using?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=19918#respond' onclick='return addComment.moveForm( "div-comment-19918", "19918", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-20382" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-20382" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/9430e4730e5851aafc22da8baedfcf99?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/9430e4730e5851aafc22da8baedfcf99?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shane</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20382">
+							<time datetime="2017-03-22T20:22:03+00:00">
+								March 22, 2017 at 8:22 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I noticed you have&#8230;</p>
+<p>reddit = praw.Reddit(&#8216;bot1&#8217;)<br />
+subreddit = r.subreddit(&#8220;learnpython&#8221;)</p>
+<p>&#8230;in the code example. Should be&#8230;</p>
+<p>r = praw.Reddit(&#8216;bot1&#8217;)<br />
+subreddit = r.subreddit(&#8220;learnpython&#8221;)</p>
+<p>&#8230;or&#8230;</p>
+<p>reddit = praw.Reddit(&#8216;bot1&#8217;)<br />
+subreddit = reddit.subreddit(&#8220;learnpython&#8221;)</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20382#respond' onclick='return addComment.moveForm( "div-comment-20382", "20382", "respond", "143" )' aria-label='Reply to Shane'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-20390" class="comment byuser comment-author-shantnu bypostauthor even depth-2">
+			<article id="div-comment-20390" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20390">
+							<time datetime="2017-03-23T15:01:46+00:00">
+								March 23, 2017 at 3:01 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for pointing that out! I had updated the code, but didnt update the article (at least, not properly).</p>
+<p>cheers!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20390#respond' onclick='return addComment.moveForm( "div-comment-20390", "20390", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-20485" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-20485" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Chris</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20485">
+							<time datetime="2017-04-05T03:01:32+00:00">
+								April 5, 2017 at 3:01 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hello I have installed praw successfully in my C:/Python folder and updated the praw.ini file to include the bot info.  When i run my script (located in a different dir, my cygwin dir ) I get the following error.  Any ideas?</p>
+<p>Traceback (most recent call last):<br />
+  File &#8220;first_script.py&#8221;, line 2, in<br />
+    import praw<br />
+ImportError: No module named praw</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20485#respond' onclick='return addComment.moveForm( "div-comment-20485", "20485", "respond", "143" )' aria-label='Reply to Chris'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-20486" class="comment even depth-2">
+			<article id="div-comment-20486" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Chris</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20486">
+							<time datetime="2017-04-05T03:02:10+00:00">
+								April 5, 2017 at 3:02 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>P.S. THANK YOU for this article, it is super helpful, I look forward to your reply</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20486#respond' onclick='return addComment.moveForm( "div-comment-20486", "20486", "respond", "143" )' aria-label='Reply to Chris'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-20493" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2 parent">
+			<article id="div-comment-20493" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20493">
+							<time datetime="2017-04-05T13:24:24+00:00">
+								April 5, 2017 at 1:24 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Is Python on the path? How did you install Python? I recommend Anaconda Python, as it comes with a lot of libraries, and also adds itself to the path for you.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20493#respond' onclick='return addComment.moveForm( "div-comment-20493", "20493", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-20498" class="comment even depth-3 parent">
+			<article id="div-comment-20498" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Chris</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20498">
+							<time datetime="2017-04-05T18:44:21+00:00">
+								April 5, 2017 at 6:44 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hey you must forgive me, I am very new to these environment variables.  I can execute python files from my python directory   but not in my cygwin directory, does that mean I need to add my home cygwin directory to the path?  any clarification or a point in the right direction would be super helpful.  I am sure I am overlooking something small.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20498#respond' onclick='return addComment.moveForm( "div-comment-20498", "20498", "respond", "143" )' aria-label='Reply to Chris'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-20499" class="comment odd alt depth-4">
+			<article id="div-comment-20499" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Chris</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20499">
+							<time datetime="2017-04-05T18:50:57+00:00">
+								April 5, 2017 at 6:50 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Another P.S lol I am able to run my hello world python program from that directory.  I went ahead and added the cygwin directory to the path as well, I am still experiencing the same issue.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20499#respond' onclick='return addComment.moveForm( "div-comment-20499", "20499", "respond", "143" )' aria-label='Reply to Chris'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-20500" class="comment even depth-3">
+			<article id="div-comment-20500" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Chris</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20500">
+							<time datetime="2017-04-05T19:21:55+00:00">
+								April 5, 2017 at 7:21 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Do i need to install python in the cygdrive/c/ folder?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20500#respond' onclick='return addComment.moveForm( "div-comment-20500", "20500", "respond", "143" )' aria-label='Reply to Chris'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-20501" class="comment odd alt depth-3">
+			<article id="div-comment-20501" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/f30ff24504f9aa3b8f7cf9384742f046?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Chris</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20501">
+							<time datetime="2017-04-05T19:28:39+00:00">
+								April 5, 2017 at 7:28 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Sorry for all of the replies/spam.  It looks like my problem is rooted with cygwin,  I have successfully ran it from the IDLE shell.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20501#respond' onclick='return addComment.moveForm( "div-comment-20501", "20501", "respond", "143" )' aria-label='Reply to Chris'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-20615" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-20615" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/76bd588621407df0272def2ac46915b2?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/76bd588621407df0272def2ac46915b2?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Louis</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20615">
+							<time datetime="2017-04-22T18:04:16+00:00">
+								April 22, 2017 at 6:04 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi, I&#8217;ve used your code but I keep getting a long error message that ends in &#8220;prawcore.exceptions.OAuthException: invalid_grant error processing request&#8221;. Apparently it&#8217;s something to do with the praw.ini file but I can&#8217;t make it work. Do you recognise the error and how can I fix it?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20615#respond' onclick='return addComment.moveForm( "div-comment-20615", "20615", "respond", "143" )' aria-label='Reply to Louis'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-20621" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2 parent">
+			<article id="div-comment-20621" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20621">
+							<time datetime="2017-04-23T10:23:21+00:00">
+								April 23, 2017 at 10:23 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>It usually happens if you didnt copy/paste app keys / password correctly. Double check it.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20621#respond' onclick='return addComment.moveForm( "div-comment-20621", "20621", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-20624" class="comment even depth-3">
+			<article id="div-comment-20624" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/76bd588621407df0272def2ac46915b2?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/76bd588621407df0272def2ac46915b2?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Louis</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-20624">
+							<time datetime="2017-04-23T21:48:12+00:00">
+								April 23, 2017 at 9:48 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I feel stupid &#8211; I had the bot&#8217;s username rather than my Reddit account&#8217;s. I put that in and it worked fine, thank you</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=20624#respond' onclick='return addComment.moveForm( "div-comment-20624", "20624", "respond", "143" )' aria-label='Reply to Louis'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-21001" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-21001" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/196c88edc2a81b9d3159fc6a2c311d44?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/196c88edc2a81b9d3159fc6a2c311d44?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Dima</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-21001">
+							<time datetime="2017-06-08T18:09:52+00:00">
+								June 8, 2017 at 6:09 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You say to put the praw.ini file in the program&#8217;s folder and not to use the file in the package directory. If I put the file in the new folder, don&#8217;t I have to point the script to use the new .ini file?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=21001#respond' onclick='return addComment.moveForm( "div-comment-21001", "21001", "respond", "143" )' aria-label='Reply to Dima'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-21024" class="comment even depth-2 parent">
+			<article id="div-comment-21024" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/196c88edc2a81b9d3159fc6a2c311d44?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/196c88edc2a81b9d3159fc6a2c311d44?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Dima</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-21024">
+							<time datetime="2017-06-10T04:53:21+00:00">
+								June 10, 2017 at 4:53 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Nevermind, I found out that it checks for the praw.ini file in the script&#8217;s folder first and only uses the one in the package directory if it did not find it anywhere else.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=21024#respond' onclick='return addComment.moveForm( "div-comment-21024", "21024", "respond", "143" )' aria-label='Reply to Dima'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-21315" class="comment odd alt depth-3">
+			<article id="div-comment-21315" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/8a59d157e0e6644ee565e9388adb53ba?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/8a59d157e0e6644ee565e9388adb53ba?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Aaron C</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-21315">
+							<time datetime="2017-07-07T00:26:07+00:00">
+								July 7, 2017 at 12:26 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for replying with the answer. I was wondering the same thing.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=21315#respond' onclick='return addComment.moveForm( "div-comment-21315", "21315", "respond", "143" )' aria-label='Reply to Aaron C'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-21496" class="comment even thread-even depth-1">
+			<article id="div-comment-21496" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/b8b4b93175cc636a68d49cdd467b877d?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/b8b4b93175cc636a68d49cdd467b877d?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">guy</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-21496">
+							<time datetime="2017-08-03T17:59:43+00:00">
+								August 3, 2017 at 5:59 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>what username and password should i input in the praw.ini file?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=21496#respond' onclick='return addComment.moveForm( "div-comment-21496", "21496", "respond", "143" )' aria-label='Reply to guy'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-21538" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-21538" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/dee41b98178f074be3968c3a90d97cfe?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/dee41b98178f074be3968c3a90d97cfe?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://gravatar.com/jarpokemon' rel='external nofollow' class='url'>John Smith</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-21538">
+							<time datetime="2017-08-13T20:21:52+00:00">
+								August 13, 2017 at 8:21 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hey, great tutorial. I&#8217;ve already run the code once and it worked perfectly. But, I ran it again and now I&#8217;m getting the error of </p>
+<p>Traceback (most recent call last):<br />
+  File &#8220;C:/Users/HSI/PycharmProjects/untitled2/Reddit Bot.py&#8221;, line 21, in<br />
+    if submission.id not in posts_replied_to:<br />
+NameError: name &#8216;posts_replied_to&#8217; is not defined</p>
+<p>what do I do?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=21538#respond' onclick='return addComment.moveForm( "div-comment-21538", "21538", "respond", "143" )' aria-label='Reply to John Smith'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-21539" class="comment byuser comment-author-shantnu bypostauthor even depth-2">
+			<article id="div-comment-21539" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-21539">
+							<time datetime="2017-08-14T08:53:55+00:00">
+								August 14, 2017 at 8:53 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Look at the other comments, someone has seen this problem before.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=21539#respond' onclick='return addComment.moveForm( "div-comment-21539", "21539", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-23161" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-23161" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/eb48e82a16df9b90e755d898377c6c17?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/eb48e82a16df9b90e755d898377c6c17?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Alan</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-23161">
+							<time datetime="2017-12-03T02:41:05+00:00">
+								December 3, 2017 at 2:41 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>$ python deebuggers.py<br />
+Traceback (most recent call last):<br />
+  File &#8220;deebuggers.py&#8221;, line 4, in<br />
+    reddit = praw.Reddit(&#8216;bot1&#8217;)<br />
+  File &#8220;C:\Python27\lib\site-packages\praw\reddit.py&#8221;, line 129, in __init__<br />
+    self.config = Config(config_section, **config_settings)<br />
+  File &#8220;C:\Python27\lib\site-packages\praw\config.py&#8221;, line 66, in __init__<br />
+    self.custom = dict(Config.CONFIG.items(site_name), **settings)<br />
+  File &#8220;C:\Python27\lib\ConfigParser.py&#8221;, line 347, in items<br />
+    raise NoSectionError(section)<br />
+ConfigParser.NoSectionError: No section: &#8216;bot1&#8217;<br />
+You provided the name of a praw.ini configuration which does not exist.</p>
+<p>For help with creating a Reddit instance, visit<br />
+<a href="https://praw.readthedocs.io/en/latest/code_overview/reddit_instance.html" rel="nofollow">https://praw.readthedocs.io/en/latest/code_overview/reddit_instance.html</a></p>
+<p>For help on configuring PRAW, visit<br />
+<a href="https://praw.readthedocs.io/en/latest/getting_started/configuration.html" rel="nofollow">https://praw.readthedocs.io/en/latest/getting_started/configuration.html</a></p>
+<p>CAN ANYONE TELL ME WHAT&#8217;S WRONG WITH THIS?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=23161#respond' onclick='return addComment.moveForm( "div-comment-23161", "23161", "respond", "143" )' aria-label='Reply to Alan'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-23466" class="comment byuser comment-author-shantnu bypostauthor even depth-2">
+			<article id="div-comment-23466" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-23466">
+							<time datetime="2017-12-18T13:18:51+00:00">
+								December 18, 2017 at 1:18 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Your error message tells you exactly what&#8217;s wrong. Read it carfully</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=23466#respond' onclick='return addComment.moveForm( "div-comment-23466", "23466", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-23457" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-23457" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/8a911406de4ea10c65d42c52e37da388?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/8a911406de4ea10c65d42c52e37da388?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='https://aroaminggeek.com/' rel='external nofollow' class='url'>A Roaming Geek</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-23457">
+							<time datetime="2017-12-17T19:57:48+00:00">
+								December 17, 2017 at 7:57 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for this tutorial. Your plain English explanation of both the python code AND the reddit API are top notch, man. </p>
+<p>[my bot is  &#8220;ARGbot&#8221; in the &#8220;I love python&#8221; posts]</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=23457#respond' onclick='return addComment.moveForm( "div-comment-23457", "23457", "respond", "143" )' aria-label='Reply to A Roaming Geek'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-23467" class="comment byuser comment-author-shantnu bypostauthor even depth-2">
+			<article id="div-comment-23467" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-23467">
+							<time datetime="2017-12-18T13:19:44+00:00">
+								December 18, 2017 at 1:19 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Cool, thanks!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=23467#respond' onclick='return addComment.moveForm( "div-comment-23467", "23467", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-26306" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-26306" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/17e4712ae22c1f33ebb0c5397cb8c25a?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/17e4712ae22c1f33ebb0c5397cb8c25a?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Logan Cuddy</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-26306">
+							<time datetime="2018-04-13T02:12:54+00:00">
+								April 13, 2018 at 2:12 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>when i run the script, it opens terminal and then closes immediately, is this supposed to happen?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=26306#respond' onclick='return addComment.moveForm( "div-comment-26306", "26306", "respond", "143" )' aria-label='Reply to Logan Cuddy'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-26312" class="comment byuser comment-author-shantnu bypostauthor even depth-2">
+			<article id="div-comment-26312" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-26312">
+							<time datetime="2018-04-13T08:01:41+00:00">
+								April 13, 2018 at 8:01 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>How r u running the script? Run it from the command line:</p>
+<p><code>python script.py</code></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=26312#respond' onclick='return addComment.moveForm( "div-comment-26312", "26312", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-28523" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-28523" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/cf15c3575f6f2d62fbc83151b977111f?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/cf15c3575f6f2d62fbc83151b977111f?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='https://websitetrafficjump.blogspot.com/' rel='external nofollow' class='url'>njibhu16</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-28523">
+							<time datetime="2018-05-23T23:53:14+00:00">
+								May 23, 2018 at 11:53 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>The part2 worked fine on pythonforengineers<br />
+but when I changed to another subreddit it didn&#8217;t work<br />
+ie: subreddit = reddit.subreddit(&#8216;SEO&#8217;)   # Also tried OnlineTrafficTeam but didn&#8217;t work !<br />
+Can you please help ?<br />
+Thanks</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=28523#respond' onclick='return addComment.moveForm( "div-comment-28523", "28523", "respond", "143" )' aria-label='Reply to njibhu16'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-28528" class="comment even depth-2">
+			<article id="div-comment-28528" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/cf15c3575f6f2d62fbc83151b977111f?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/cf15c3575f6f2d62fbc83151b977111f?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='https://websitetrafficjump.blogspot.com/' rel='external nofollow' class='url'>njibhu16</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-28528">
+							<time datetime="2018-05-24T01:48:59+00:00">
+								May 24, 2018 at 1:48 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I removed the condition<br />
+ # If we haven&#8217;t replied to this post before<br />
+    if submission.id not in posts_replied_to:<br />
+But it didn&#8217;t seem to work neither !</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=28528#respond' onclick='return addComment.moveForm( "div-comment-28528", "28528", "respond", "143" )' aria-label='Reply to njibhu16'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-28549" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-28549" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-28549">
+							<time datetime="2018-05-24T07:29:44+00:00">
+								May 24, 2018 at 7:29 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You have to ask permission from other sub Reddit! Many ban bots; it’s like spamming someone.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=28549#respond' onclick='return addComment.moveForm( "div-comment-28549", "28549", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-33838" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-33838" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/27cf57e15509629ce6b5fd6c9f24551a?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/27cf57e15509629ce6b5fd6c9f24551a?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://www.vanishedweb.com/' rel='external nofollow' class='url'>Farid Karadsheh</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-33838">
+							<time datetime="2018-08-06T03:40:18+00:00">
+								August 6, 2018 at 3:40 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Reddit has updated it&#8217;s website to a new look. If you come across a link above that does not work, then you will have to change the url.</p>
+<p>Here is an example:<br />
+Above we have the link <a href="http://www.reddit.com/dev/api" rel="nofollow">http://www.reddit.com/dev/api</a><br />
+Yet, it says not found. If we change the link to <a href="http://old.reddit.com/dev/api" rel="nofollow">http://old.reddit.com/dev/api</a> then the link should work.</p>
+<p>In short, if a reddit link does not work change the &#8220;www&#8221; to &#8220;old&#8221;, so the link looks like &#8220;old.reddit.com&#8221;</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=33838#respond' onclick='return addComment.moveForm( "div-comment-33838", "33838", "respond", "143" )' aria-label='Reply to Farid Karadsheh'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-33853" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-33853" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-33853">
+							<time datetime="2018-08-06T10:05:26+00:00">
+								August 6, 2018 at 10:05 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thats a great point, thanks!</p>
+<p>Updated the article with this.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=33853#respond' onclick='return addComment.moveForm( "div-comment-33853", "33853", "respond", "143" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-34461" class="comment even thread-odd thread-alt depth-1">
+			<article id="div-comment-34461" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/f5408022a4e417afade106bc342593eb?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/f5408022a4e417afade106bc342593eb?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='https://stevepython.wordpress.com/' rel='external nofollow' class='url'>Steve Shambles</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/build-a-reddit-bot-part-1/#comment-34461">
+							<time datetime="2018-08-17T00:41:20+00:00">
+								August 17, 2018 at 12:41 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Your comments about the praw,ini ended a nightmare day for me thank you.<br />
+Have a look at my reddit image grabber with GUI full source if anyone wants it.<br />
+<a href="https://stevepython.wordpress.com/2018/08/17/trouble-with-my-exes" rel="nofollow">https://stevepython.wordpress.com/2018/08/17/trouble-with-my-exes</a></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/build-a-reddit-bot-part-1/?replytocom=34461#respond' onclick='return addComment.moveForm( "div-comment-34461", "34461", "respond", "143" )' aria-label='Reply to Steve Shambles'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/build-a-reddit-bot-part-1/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='143' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="b9e73058b5" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="105"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>
