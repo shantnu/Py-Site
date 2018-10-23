@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Why IPython is the best thing since sliced bread</title>
+	<atom:link href="/why-ipython-is-the-best-thing-since-sliced-bread/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/why-ipython-is-the-best-thing-since-sliced-bread/#comment-19490</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Sun, 11 Dec 2016 14:33:17 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1575#comment-19490</guid>
+		<description><![CDATA[You are right. It did provide a link to iPython, but they must have changed it. I&#039;ll remove the link. Thanks,]]></description>
+		<content:encoded><![CDATA[<p>You are right. It did provide a link to iPython, but they must have changed it. I&#8217;ll remove the link. Thanks,</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: AstroFloyd</title>
+		<link>/why-ipython-is-the-best-thing-since-sliced-bread/#comment-19488</link>
+		<dc:creator><![CDATA[AstroFloyd]]></dc:creator>
+		<pubDate>Sun, 11 Dec 2016 11:05:20 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1575#comment-19488</guid>
+		<description><![CDATA[Thanks, very useful info.  Note that the online shell you link to provides a (bare) Python shell, not iPython.]]></description>
+		<content:encoded><![CDATA[<p>Thanks, very useful info.  Note that the online shell you link to provides a (bare) Python shell, not iPython.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Vivek Teega</title>
+		<link>/why-ipython-is-the-best-thing-since-sliced-bread/#comment-18944</link>
+		<dc:creator><![CDATA[Vivek Teega]]></dc:creator>
+		<pubDate>Tue, 06 Sep 2016 09:37:37 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1575#comment-18944</guid>
+		<description><![CDATA[Awesome!]]></description>
+		<content:encoded><![CDATA[<p>Awesome!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17406</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Sat, 06 Feb 2016 21:52:11 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1575#comment-17406</guid>
+		<description><![CDATA[You are welcome Jim.]]></description>
+		<content:encoded><![CDATA[<p>You are welcome Jim.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jim</title>
+		<link>/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17405</link>
+		<dc:creator><![CDATA[Jim]]></dc:creator>
+		<pubDate>Sat, 06 Feb 2016 09:43:26 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1575#comment-17405</guid>
+		<description><![CDATA[Thanks. This is excellent information. I used IDLE for a while and liked it until I began using IPython. No comparison. Your article has opened up even more capabilities. Thanks! Jim]]></description>
+		<content:encoded><![CDATA[<p>Thanks. This is excellent information. I used IDLE for a while and liked it until I began using IPython. No comparison. Your article has opened up even more capabilities. Thanks! Jim</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17167</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Tue, 17 Nov 2015 12:54:12 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1575#comment-17167</guid>
+		<description><![CDATA[Thanks. That looks great!]]></description>
+		<content:encoded><![CDATA[<p>Thanks. That looks great!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Michael</title>
+		<link>/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17166</link>
+		<dc:creator><![CDATA[Michael]]></dc:creator>
+		<pubDate>Tue, 17 Nov 2015 10:16:13 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1575#comment-17166</guid>
+		<description><![CDATA[For Mac users there is also a standalone frontend to IPython, called &quot;Pineapple&quot;.
+https://nwhitehead.github.io/pineapple/]]></description>
+		<content:encoded><![CDATA[<p>For Mac users there is also a standalone frontend to IPython, called &#8220;Pineapple&#8221;.<br />
+<a href="https://nwhitehead.github.io/pineapple/" rel="nofollow">https://nwhitehead.github.io/pineapple/</a></p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17012</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Wed, 30 Sep 2015 08:23:34 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1575#comment-17012</guid>
+		<description><![CDATA[That&#039;s a great link! Thanks for sharing. It&#039;ll go in the blog.]]></description>
+		<content:encoded><![CDATA[<p>That&#8217;s a great link! Thanks for sharing. It&#8217;ll go in the blog.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17011</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Wed, 30 Sep 2015 08:22:27 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1575#comment-17011</guid>
+		<description><![CDATA[Thanks for the link!]]></description>
+		<content:encoded><![CDATA[<p>Thanks for the link!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17010</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Wed, 30 Sep 2015 08:22:06 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1575#comment-17010</guid>
+		<description><![CDATA[True about the bloated monstrosities. I&#039;m looking at you, Eclipse.]]></description>
+		<content:encoded><![CDATA[<p>True about the bloated monstrosities. I&#8217;m looking at you, Eclipse.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

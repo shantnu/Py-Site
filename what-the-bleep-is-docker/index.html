@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>What the Bleep is Docker? &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; What the Bleep is Docker? Comments Feed" href="/what-the-bleep-is-docker/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/what-the-bleep-is-docker/" />
+<link rel='shortlink' href='/?p=1510' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fwhat-the-bleep-is-docker%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fwhat-the-bleep-is-docker%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1510">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1510" class="post-1510 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">What the Bleep is Docker?</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p><em>I wrote a blog on <a href="/stop-the-works-on-my-machine-syndrome/">how to isolate your Python code</a>, and briefly mentioned Docker at the end. My comments were that I hadn&#8217;t really used Docker, and wasn&#8217;t sure when to use it.</em></p>
+<p><em>Aaron wrote a great comment, in which he called Docker &#8220;VirtualEnv on crack&#8221;. This amused and intrigued me, so I asked him if he could expand on his comment. </em></p>
+<p><em>Note: Docker is not just limited to Python, but can be used to isolate anything on your system, from databases to webapps to multiple versions of the same programming language.</em></p>
+<h4>What is docker?</h4>
+<p>So if you&#8217;ve spent time hanging out on some of the super trendy internet message boards lately (I&#8217;m looking at you HN and Reddit) you&#8217;ll probably have heard about docker, and how it&#8217;s awesome, and how it&#8217;s going to change the world of programming and put all the sys-admins out of a job. But maybe you&#8217;ve been too busy playing with the latest bleeding edge version of Netflix&#8217;s latest open source product to find out more about docker.</p>
+<h4>So what is docker again?</h4>
+<p>Docker is a way of putting your apps in lightweight containers, built on top of some nifty tech in the Linux kernel (Sorry Windows, you can&#8217;t play for now). If you&#8217;ve ever built applications for OSX&#8217;s sandbox then this is a similar idea. You can control what your application has access to in terms of networking, resources, filesystems and so on.</p>
+<p>So you can have your MySql database in one container, your Django app in another, and a Redis in a third. The containers can talk to each other, and you can always make sure you have the exact version of MySql/Django/Whatever you need.</p>
+<p>Everything your app needs (above the kernel itself) is contained in your docker container. That includes the OS distro itself, all your libraries, environment variables, EVERYTHING.</p>
+<p>Docker containers are built on a copy-on-write filesystem, this means that several different containers can share the same base, but if you add different dependencies, libraries and so on, a new container is created for your app.</p>
+<h4>Great, but what the hell IS docker?</h4>
+<p>Docker runs as a daemon (on Linux, a daemon is a background process) on your workstation and coordinates building docker images, running the images as containers, pulling/pushing images from a docker repo and keeping track of which containers are currently running on your machine.</p>
+<p>Docker hub is a public repository (<em>think github for docker containers</em>) where you&#8217;ll find all sorts of useful pre-built images and can store your own. You can also host your own private docker repository to use within your organisation.</p>
+<h4>Why should I care?</h4>
+<p>So this all sounds great, but you&#8217;re probably thinking: how does this apply to me?</p>
+<h4>Contain all your dependencies (Not just the python ones)</h4>
+<p>Have you ever longed to have that other version of libx installed just for your app inside VirtualEnv without doing all that messy symlinking? With docker you can! Need to run your app on Ubuntu but you run RedHat in production? Dockerise it. Need to install different version of python for all your apps but you can&#8217;t mess with the production environment? Docker to the rescue. Have you written one of those really awesome tools for making sure every external application has its environment variables and libs managed as well as keeping everything up to date for your own internal applications? Well good on you, but Docker is probably a lot less work.</p>
+<h4> Speed</h4>
+<p>Docker isn&#8217;t a VM. You&#8217;re running on the host hardware, there&#8217;s no virtualisation layer. You don&#8217;t have to wait for a container to boot, it&#8217;s just there, waiting for you.</p>
+<h4>Immutable, (really) portable, apps and environments</h4>
+<p>When you create an application in a docker image, that app, all its dependencies and associated environment variables are now fixed in stone. It will run the same way on your machine as it does on a production machine, on a customer machine or on your laptop at home. (I&#8217;ll let that sink in for a second.)</p>
+<p>The application you&#8217;ve created is fixed, if you change the code, you build another container and you can deploy that. Doesn&#8217;t work? Immediately roll back to your previous image. There are ways to mount code from the host inside a container for testing and developing, so you can see how your latest changes will perform in production too, before deploying.</p>
+<p>With docker you don&#8217;t need a complicated deployment process, you just download an image from your repo and run it. Anywhere. And it&#8217;ll actually work, the same way it worked on your laptop.</p>
+<h4>Versioned environments</h4>
+<p>Docker allows you to write Dockerfiles to define your image builds, think of them as something between a makefile and a bash script, and they define everything about your application image. So you&#8217;ve probably just written a basic dockerfile and built the image, maybe you even put some code inside it. Now.. commit that dockerfile to git. Congratulations! You just created a completely reproducible, versioned environment that defines everything from your operating system up to your test code. Again, I&#8217;ll let that sink in for a second.</p>
+<h4>Containers are isolated</h4>
+<p>When you start building with containers, you have to start thinking modularly. I mean REALLY modularly. If you want to put something in a container closed off from the outside, it better have everything it needs in there. If your applications are already fantastically written, decoupled and modular then great, give yourself a pat on the back, download docker and carry on. However, if some of your applications are coupled, and rely on a bunch of other external factors being true in order to function, then Docker is a good cure. It&#8217;ll probably be hard at first to mentally break apart your systems and start thinking modularly, but it&#8217;s definitely a Good Thing. Remember the time you read those programming books about clean code and decoupled architectures and you thought &#8216;Damn this is brilliant, all our code should be like this&#8217;. Well working in containers encourages you to create plugable, modular applications (or if you want to be hip: microservices). Embrace it.. and your QA team will thank you.</p>
+<h4>Ok I&#8217;m sold, now what?</h4>
+<p>So hopefully you&#8217;re starting to see the power of docker, and that it might be useful. The best place to start is on the<a href="https://www.docker.com/tryit/"> docker website</a>, they have great documentation and getting started guides. The docker mailing list is also helpful and welcoming if you have questions or problems.</p>
+<p>And if you&#8217;re really feeling adventurous, have a look at some Cool New Things like <a href="https://coreos.com/">CoreOS</a>, <a href="http://mesos.apache.org/">Mesos </a>and <a href="http://kubernetes.io/">Kubernetes</a><em>:</em> soon your whole infrastructure could be decoupled from your hardware and running in distributed multi cloud hybrid datacentres across the globe (+10 points if they&#8217;re connected via inflatable WiFi balloons).</p>
+<p><em>Aaron is a Python/C++ developer with several years experience working in R&amp;D for VFX industry, find him on Twitter <a href="https://twitter.com/rncry">@rncry</a> if you want to heckle him or talk about Star Wars.</em></p>
+<p><em>Next Time:</em> <em>We will look at a practical example on how to get started with Docker, especially to replace VirtualEnv / Virtual Machines. Keep watching this space.<strong><br />
+</strong></em></p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			8 thoughts on &ldquo;What the Bleep is Docker?&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-16152" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-16152" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/b19b58aa6dd5e3fc79f5d44ed176d551?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/b19b58aa6dd5e3fc79f5d44ed176d551?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://ClarkMitchell.io/' rel='external nofollow' class='url'>Clark</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/what-the-bleep-is-docker/#comment-16152">
+							<time datetime="2015-03-27T00:52:47+00:00">
+								March 27, 2015 at 12:52 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Alright, now what the bleep is Vagrant?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/what-the-bleep-is-docker/?replytocom=16152#respond' onclick='return addComment.moveForm( "div-comment-16152", "16152", "respond", "1510" )' aria-label='Reply to Clark'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-16154" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2 parent">
+			<article id="div-comment-16154" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/what-the-bleep-is-docker/#comment-16154">
+							<time datetime="2015-03-27T11:34:22+00:00">
+								March 27, 2015 at 11:34 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Vagrant is a very easy way to run Virtual Machines. </p>
+<p><a href="https://www.vagrantup.com/" rel="nofollow">https://www.vagrantup.com/</a></p>
+<p>Nowadays, I would always use a Vagrant if I needed a VM.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/what-the-bleep-is-docker/?replytocom=16154#respond' onclick='return addComment.moveForm( "div-comment-16154", "16154", "respond", "1510" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-16156" class="comment even depth-3 parent">
+			<article id="div-comment-16156" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/b19b58aa6dd5e3fc79f5d44ed176d551?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/b19b58aa6dd5e3fc79f5d44ed176d551?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://ClarkMitchell.io/' rel='external nofollow' class='url'>Clark</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/what-the-bleep-is-docker/#comment-16156">
+							<time datetime="2015-03-27T16:17:56+00:00">
+								March 27, 2015 at 4:17 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>But it still needs to be run in something like virtualbox correct? So is it basically setting up your virtual machine and getting it to a development usable state?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/what-the-bleep-is-docker/?replytocom=16156#respond' onclick='return addComment.moveForm( "div-comment-16156", "16156", "respond", "1510" )' aria-label='Reply to Clark'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-16157" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-4">
+			<article id="div-comment-16157" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/what-the-bleep-is-docker/#comment-16157">
+							<time datetime="2015-03-27T22:33:37+00:00">
+								March 27, 2015 at 10:33 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Yes, it uses Virtualbox, but adds a lot of cool features. Like, you can script the Virtual machine bringup. So that all you need to do is type <i> vagrant up</i> and you will get the exact same VM as me.</p>
+<p>Also, if you are using, say Windows, you can continue using your favorite editor, while still developing in Linux.</p>
+<p>Vagrant has completely changed the VM game. Give it a try- it&#8217;s quiet easy to get started with.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/what-the-bleep-is-docker/?replytocom=16157#respond' onclick='return addComment.moveForm( "div-comment-16157", "16157", "respond", "1510" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-16153" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-16153" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/30c87cf1395db2d5ff1bd574f26a354c?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/30c87cf1395db2d5ff1bd574f26a354c?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">sebastian</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/what-the-bleep-is-docker/#comment-16153">
+							<time datetime="2015-03-27T11:01:46+00:00">
+								March 27, 2015 at 11:01 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hey, interesting writeup, do you have any experience dockerising apps like Maya or Nuke and their environments? Does it make sense?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/what-the-bleep-is-docker/?replytocom=16153#respond' onclick='return addComment.moveForm( "div-comment-16153", "16153", "respond", "1510" )' aria-label='Reply to sebastian'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-16155" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2 parent">
+			<article id="div-comment-16155" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/what-the-bleep-is-docker/#comment-16155">
+							<time datetime="2015-03-27T11:36:21+00:00">
+								March 27, 2015 at 11:36 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Depends. Are you compiling these apps from source, or are you just downloading them?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/what-the-bleep-is-docker/?replytocom=16155#respond' onclick='return addComment.moveForm( "div-comment-16155", "16155", "respond", "1510" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-16160" class="comment even depth-3">
+			<article id="div-comment-16160" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/30c87cf1395db2d5ff1bd574f26a354c?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/30c87cf1395db2d5ff1bd574f26a354c?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">sebastian</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/what-the-bleep-is-docker/#comment-16160">
+							<time datetime="2015-03-28T14:23:43+00:00">
+								March 28, 2015 at 2:23 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>they are closed source opengl heavy apps with command line interfaces for headless graphcs rendering</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/what-the-bleep-is-docker/?replytocom=16160#respond' onclick='return addComment.moveForm( "div-comment-16160", "16160", "respond", "1510" )' aria-label='Reply to sebastian'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-20751" class="pingback odd alt thread-even depth-1">
+			<div class="comment-body">
+				Pingback: <a href='http://learnpython.vip/7-15-docker/' rel='external nofollow' class='url'>7.15 Docker &#8211; 全栈Python</a> 			</div>
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/what-the-bleep-is-docker/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='1510' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="6254bff423" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="230"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

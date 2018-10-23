@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Python For Hackers</title>
+	<atom:link href="/python-for-hackers/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/python-for-hackers/#comment-22666</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 09 Nov 2017 16:18:17 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1555#comment-22666</guid>
+		<description><![CDATA[No]]></description>
+		<content:encoded><![CDATA[<p>No</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Harpreet</title>
+		<link>/python-for-hackers/#comment-22631</link>
+		<dc:creator><![CDATA[Harpreet]]></dc:creator>
+		<pubDate>Wed, 08 Nov 2017 11:03:03 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1555#comment-22631</guid>
+		<description><![CDATA[Does this book come hard back?]]></description>
+		<content:encoded><![CDATA[<p>Does this book come hard back?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Control Your Raspberry Pi From Your Phone / Tablet &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/control-your-raspberry-pi-from-your-phone-tablet/" />
+<link rel='shortlink' href='/?p=3065' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fcontrol-your-raspberry-pi-from-your-phone-tablet%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fcontrol-your-raspberry-pi-from-your-phone-tablet%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-3065">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-3065" class="post-3065 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Control Your Raspberry Pi From Your Phone / Tablet</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p><a href="/python-for-scientists-and-engineers/"><strong>Intro: Start here</strong></a></p>
+<p><a href="/installing-the-libraries-required-for-the-book/"><strong>Installing the libraries required for the book</strong></a></p>
+<p><strong>Beginners Start Here:</strong><a href="/create-a-word-counter-in-python/"><strong> </strong></a></p>
+<p style="padding-left: 30px;"><a href="/create-a-word-counter-in-python/"><strong>Create a Word Counter in Python</strong></a></p>
+<p style="padding-left: 30px;"><a href="/an-introduction-to-numpy-and-matplotlib/"><strong>An introduction to Numpy and Matplotlib</strong></a></p>
+<p style="padding-left: 30px;"><a href="/introduction-to-pandas/" target="_blank"><strong>Introduction to Pandas with Practical Examples (New)</strong></a></p>
+<p><strong>Main Book</strong></p>
+<p><a href="/image-and-video-processing-in-python/"><strong>Image and Video Processing in Python</strong></a></p>
+<p><a href="/data-analysis-with-pandas/"><strong>Data Analysis with Pandas</strong></a></p>
+<p><a href="/audio-and-digital-signal-processingdsp-in-python/"><strong>Audio and Digital Signal Processing (DSP)</strong></a></p>
+<p><a href="/control-your-raspberry-pi-from-your-phone-tablet/"><strong>Control Your Raspberry Pi From Your Phone / Tablet</strong></a></p>
+<p><strong>Machine Learning Section</strong></p>
+<p style="padding-left: 30px;"><a href="/machine-learning-with-an-amazon-like-recommendation-engine/"><strong>Machine Learning with an Amazon like Recommendation Engine</strong></a></p>
+<p><strong>Machine Learning New Stuff<br /></strong></p>
+<p style="padding-left: 30px;"><strong> <a href="/machine-learning-for-complete-beginners/" target="_blank">Machine Learning For Complete Beginners:</a> </strong>Learn how to predict how many Titanic survivors using machine learning. No previous knowledge needed!</p>
+<p style="padding-left: 30px;"><a href="/cross-validation-and-model-selection/" target="_blank"><strong>Cross Validation and Model Selection</strong></a>: In which we look at cross validation, and how to choose between different machine learning algorithms. Working with the Iris flower dataset and the Pima diabetes dataset.</p>
+<p style="padding-left: 30px;"><strong>Natural Language Processing</strong></p>
+<p style="padding-left: 30px;"><a href="/natural-language-processing-and-sentiment-analysis-with-python/"   target="_blank"><strong>0. Introduction to NLP and Sentiment Analysis</strong></a></p>
+<p style="padding-left: 30px;"><strong><a href="/introduction-to-nltk-natural-language-processing-with-python/" target="_blank">1. Natural Language Processing with NTLK</a></strong></p>
+<p style="padding-left: 30px;"><strong><a href="/intro-to-nltk-part-2/" target="_blank">2. Intro to NTLK, Part 2</a></strong></p>
+<p style="padding-left: 30px;"><a href="/build-a-sentiment-analysis-app-with-movie-reviews/" target="_blank"><strong>3. Build a sentiment analysis program</strong></a></p>
+<p style="padding-left: 30px;"><strong><a href="/practice-session-sentiment-analysis-with-twitter/" target="_blank">4. Sentiment Analysis with Twitter</a></strong></p>
+<p style="padding-left: 30px;"><strong><span class="trail-end"><a href="/analysing-the-enron-email-corpus/"   target="_blank">5. Analysing the Enron Email Corpus</a></span></strong>: The Enron Email corpus has half a million files spread over 2.5 GB. When looking at data this size, the question is, where do you even start?</p>
+<p style="padding-left: 30px;"><a href="/build-a-spam-filter/" target="_blank"><strong>6. Build a Spam Filter using the Enron Corpus</strong></a></p>
+<hr /><hr />
+<p style="padding-left: 30px;"></p>
+<p>When I was looking for projects for the Raspberry Pi(Rpi), I thought of various angles to cover it from. We could treat it an embedded device, but that would require knowledge of C. We could treat it as a normal learning computer, but that would be more for children.</p>
+<p>But then I was talking to a few people new to the Rpi, and what hit me most was that they didn&#8217;t realise that the Rpi is a full fledged Linux box. Everything that  a computer running Linux can do, Rpi can do, the only limitation being it has a much slower processor and limited RAM/disk.</p>
+<p>That said, since command line Linux doesn&#8217;t take much resources, you can do a lot with even limited hardware.</p>
+<p>With that in mind, we&#8217;ll go over how to turn your Rpi into a webserver, so that you can run commands on it from your browser, running on your laptop or iPad or anything.</p>
+<p>The webserver will be limited to your local Wifi, for security reasons.</p>
+<h2>Prerequisites</h2>
+<p>You must have an Rpi setup and running, and you must be able to log into it. The default documentation on how to setup is fairly good.</p>
+<p>I found that just plugging the Rpi into your Wifi router is good enough, as the Rpi can get an IP address via DHCP. If you have a spare keyboard, you can connect it to your Rpi. For the monitor, I just use my TV, as the Rpi has an HDMI input (as do most modern TVs).</p>
+<p>You can also connect your RPI via your laptop, but I found it hard  to get internet access this way. It may work for you though, and the way to do so is:</p>
+<p><a href="http://pihw.wordpress.com/guides/direct-network-connection/">http://pihw.wordpress.com/guides/direct-network-connection/</a></p>
+<p><strong>Writing code</strong></p>
+<p>You can write your code directly on the Rpi, if you love text based editors like vi or nano. If like me, you love your GUI, you can write your code on your PC and then copy it across. That&#8217;s what I did.</p>
+<p>Actually, you can do the entire development on your PC. If you are running Linux (or a VM), the code will work as is. Like I said earlier, the Rpi is just another Linux box.</p>
+<p>If you are running Windows, you can still run the examples, but will be need to enter Windows commands instead of Linux commands, like I do. So <em>dir</em> instead of <em>ls</em>.</p>
+<p>One thing you will need to know is the IP address of your Rpi. If you are connected with a keyboard, this is found by running <em>ifconfig</em></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d49270490766" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+ifconfig
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d49270490766-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d49270490766-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d49270490766-1"><span class="crayon-i">ifconfig</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d49270490766-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p><img src="/wp-content/uploads/2017/05/rpi2.jpg" alt="" class="aligncenter size-full wp-image-3068" width="777" height="454" srcset="/wp-content/uploads/2017/05/rpi2.jpg 777w, /wp-content/uploads/2017/05/rpi2-300x175.jpg 300w, /wp-content/uploads/2017/05/rpi2-768x449.jpg 768w" sizes="(max-width: 777px) 85vw, 777px" /></p>
+<p>Your router will usually have its own web page (Google for it, as it will depend on the manufacturer). You can also find the IP address for the Rpi from there.</p>
+<p><img src="/wp-content/uploads/2017/05/rpi1.jpg" alt="" class="aligncenter size-full wp-image-3069" width="1366" height="728" srcset="/wp-content/uploads/2017/05/rpi1.jpg 1366w, /wp-content/uploads/2017/05/rpi1-300x160.jpg 300w, /wp-content/uploads/2017/05/rpi1-768x409.jpg 768w, /wp-content/uploads/2017/05/rpi1-1024x546.jpg 1024w, /wp-content/uploads/2017/05/rpi1-1200x640.jpg 1200w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></p>
+<p><strong>Flask</strong></p>
+<p>There are several ways to run a web server on the Rpi. I am going to be using the Flask web server (http://flask.pocoo.org/). Flask is a great tiny webserver that is super easy and fun to learn. If you have never used Flask before, don&#8217;t worry, I&#8217;ll guide you through.</p>
+<p><strong>Installation</strong></p>
+<p>To start off, run</p>
+<p><em>pip3 install flask</em></p>
+<p>on the Rpi and local machine, if you are developing locally.</p>
+<p><strong>Hello world</strong></p>
+<p>Open up the file <em>hello.py</em>.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d59021321125" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+from flask import Flask
+
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d59021321125-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d59021321125-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3d59021321125-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d59021321125-1"><span class="crayon-e">from </span><span class="crayon-e">flask </span><span class="crayon-e">import </span><span class="crayon-i">Flask</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d59021321125-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8316b3d59021321125-3">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>We import Flask, and create an instance of it.</p>
+<p><strong>Routing in Flask</strong></p>
+<p>If you are new to webservers, the root path of a server is the default or main site. Eg, www.google.com is the root for the Google website. www.google.com/mail is a sub-site.</p>
+<p>The terminology of <em>root</em> is taken from Unix/Linux, where most of the early web work was done. On Linux, the root is the highest directory (equal to C:\ on Windows), and is signified by <em>/</em> .</p>
+<p>If you understand that, you will understand Flask&#8217;s routing better.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d5f202051476" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+@app.route("/")
+def home():
+   return "Hello World!"</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d5f202051476-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d5f202051476-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3d5f202051476-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d5f202051476-1"><span class="crayon-sy">@</span><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">route</span><span class="crayon-sy">(</span><span class="crayon-s">"/"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d5f202051476-2"><span class="crayon-e">def </span><span class="crayon-e">home</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8316b3d5f202051476-3"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-s">"Hello World!"</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p><em>@app.route()</em> is a Flask directive (a decorator, to be exact). It tells Flask to map the function below to the location given. So in the example above, <em>@app.route()</em> points to <em>/</em>, which remember is the root path.</p>
+<p>The actual function is:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d63766963519" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+def home():
+   return "Hello World!"</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d63766963519-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d63766963519-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d63766963519-1"><span class="crayon-e">def </span><span class="crayon-e">home</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d63766963519-2"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-s">"Hello World!"</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>That means if someone goes to the root of your webapp, (which could be <em>www.yoursite.com</em>, or in our case, the IP address of the Rpi), they will see &#8220;Hello World!&#8221;.</p>
+<p>Before we see the code running, we have one more routing example.</p>
+<p><string:name></string:name></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d68186567509" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+@app.route("/&lt;string:name&gt;")</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d68186567509-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d68186567509-1"><span class="crayon-sy">@</span><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">route</span><span class="crayon-sy">(</span><span class="crayon-s">"/&lt;string:name&gt;"</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>This time, I am adding an optional extra parameter. So the route will now be:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d6d443783335" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+www.yourwebsite.com/name
+
+or
+
+192.168.0.8/name
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d6d443783335-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d6d443783335-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3d6d443783335-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d6d443783335-4">4</div><div class="crayon-num" data-line="crayon-5bcf8316b3d6d443783335-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d6d443783335-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d6d443783335-1"><span class="crayon-v">www</span><span class="crayon-sy">.</span><span class="crayon-v">yourwebsite</span><span class="crayon-sy">.</span><span class="crayon-v">com</span><span class="crayon-o">/</span><span class="crayon-e">name</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d6d443783335-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8316b3d6d443783335-3"><span class="crayon-st">or</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d6d443783335-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8316b3d6d443783335-5"><span class="crayon-cn">192.168.0.8</span><span class="crayon-o">/</span><span class="crayon-i">name</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d6d443783335-6">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>The second example is how you would actually type it for the Rpi, as you will be giving the IP address.</p>
+<p>Anything within <em>&lt;&gt;</em> is a parameter. In this case <em>string:name</em> , we tell Flask that the value will be a string called name.</p>
+<p><string:name></string:name></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d71149438716" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+@app.route("/&lt;string:name&gt;")
+def hello_name(name):
+    hello = "Hello " +  name
+    return hello</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d71149438716-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d71149438716-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3d71149438716-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d71149438716-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d71149438716-1"><span class="crayon-sy">@</span><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">route</span><span class="crayon-sy">(</span><span class="crayon-s">"/&lt;string:name&gt;"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d71149438716-2"><span class="crayon-e">def </span><span class="crayon-e">hello_name</span><span class="crayon-sy">(</span><span class="crayon-v">name</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8316b3d71149438716-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">hello</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"Hello "</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-e">name</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d71149438716-4"><span class="crayon-e">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">hello</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>So now we define a function called <em>hello_name()</em> and pass it the <em>name</em> variable. This variable will be read by Flask and passed to our function. The way it will work is:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d76913443277" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+192.168.0.8/YourName</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d76913443277-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d76913443277-1"><span class="crayon-cn">192.168.0.8</span><span class="crayon-o">/</span><span class="crayon-v">YourName</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>Flask will take the string, <em>YourName</em> in the example above, and pass it to our function <em>hello_name()</em>.</p>
+<p>The function <em>hello_name()</em> will add <em>Hello</em> to the front of it, and display it on the browser.</p>
+<p>Finally, we need to run the code. There are two variations, depending if you are testing on your own machine or the Rpi. Comment out the other one:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d7a715746987" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# For the RPI
+#app.run(host='0.0.0.0', port=80, debug=True)
+
+# For testing on a normal Pc
+app.run(debug=True)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d7a715746987-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d7a715746987-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3d7a715746987-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d7a715746987-4">4</div><div class="crayon-num" data-line="crayon-5bcf8316b3d7a715746987-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d7a715746987-1"><span class="crayon-p"># For the RPI</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d7a715746987-2"><span class="crayon-p">#app.run(host='0.0.0.0', port=80, debug=True)</span></div><div class="crayon-line" id="crayon-5bcf8316b3d7a715746987-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d7a715746987-4"><span class="crayon-p"># For testing on a normal Pc</span></div><div class="crayon-line" id="crayon-5bcf8316b3d7a715746987-5"><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">run</span><span class="crayon-sy">(</span><span class="crayon-v">debug</span><span class="crayon-o">=</span><span class="crayon-t">True</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>If you developed your code on your PC, you need to copy it across to the Rpi. The easiest way to do so is using <em>scp</em>. On Windows, you need to download something like <a href="http://winscp.net/eng/download.php">WinScp</a>. WinScp is actually quite good as you can copy the files using a simple GUI interface.</p>
+<p><img src="/wp-content/uploads/2017/05/rpi15.jpg" alt="" class="aligncenter size-full wp-image-3071" width="1366" height="730" srcset="/wp-content/uploads/2017/05/rpi15.jpg 1366w, /wp-content/uploads/2017/05/rpi15-300x160.jpg 300w, /wp-content/uploads/2017/05/rpi15-768x410.jpg 768w, /wp-content/uploads/2017/05/rpi15-1024x547.jpg 1024w, /wp-content/uploads/2017/05/rpi15-1200x641.jpg 1200w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></p>
+<p>On Linux,</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d7e611569914" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+scp &lt;local file&gt; pi@&lt;ip address&gt; :</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d7e611569914-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d7e611569914-1"><span class="crayon-v">scp</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-e">local </span><span class="crayon-v">file</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-v">pi</span><span class="crayon-sy">@</span><span class="crayon-o">&lt;</span><span class="crayon-e">ip </span><span class="crayon-v">address</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-o">:</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>Make note of the <em>:</em> at the end. It is <strong>not</strong>  optional. You can give the remote directory after that <em>:</em></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d83308242483" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+scp hello_world.py pi@192.168.0.8:/home/pi/rpi/</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d83308242483-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d83308242483-1"><span class="crayon-e">scp </span><span class="crayon-v">hello_world</span><span class="crayon-sy">.</span><span class="crayon-e">py </span><span class="crayon-v">pi</span><span class="crayon-sy">@</span><span class="crayon-cn">192.168.0.8</span><span class="crayon-o">:</span><span class="crayon-o">/</span><span class="crayon-v">home</span><span class="crayon-o">/</span><span class="crayon-v">pi</span><span class="crayon-o">/</span><span class="crayon-v">rpi</span><span class="crayon-o">/</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>The above command will copy the local file <em>hello_world.py</em> to the remote directory <em>/home/pi/rpi/</em>.</p>
+<p>Make sure the code has this part uncommented:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d87921874900" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# For the RPI
+app.run(host='0.0.0.0', port=80, debug=True)
+
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d87921874900-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d87921874900-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3d87921874900-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d87921874900-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d87921874900-1"><span class="crayon-p"># For the RPI</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d87921874900-2"><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">run</span><span class="crayon-sy">(</span><span class="crayon-v">host</span><span class="crayon-o">=</span><span class="crayon-s">'0.0.0.0'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">port</span><span class="crayon-o">=</span><span class="crayon-cn">80</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">debug</span><span class="crayon-o">=</span><span class="crayon-t">True</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8316b3d87921874900-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d87921874900-4">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>You can check it using many ways on the Rpi, like using the <em>cat</em> command:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d8b978874332" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+pi@raspberrypi ~/rpi $ cat hello.py
+
+#!/usr/bin/python
+from __future__ import print_function
+
+&lt;&lt; ... snipped ... &gt;&gt;
+
+# app.run(debug= True)
+app.run(debug= True, host = '0.0.0.0', port = 80)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d8b978874332-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d8b978874332-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3d8b978874332-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d8b978874332-4">4</div><div class="crayon-num" data-line="crayon-5bcf8316b3d8b978874332-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d8b978874332-6">6</div><div class="crayon-num" data-line="crayon-5bcf8316b3d8b978874332-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d8b978874332-8">8</div><div class="crayon-num" data-line="crayon-5bcf8316b3d8b978874332-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d8b978874332-1"><span class="crayon-v">pi</span><span class="crayon-sy">@</span><span class="crayon-v">raspberrypi</span><span class="crayon-h"> </span><span class="crayon-o">~</span><span class="crayon-o">/</span><span class="crayon-i">rpi</span><span class="crayon-h"> </span><span class="crayon-sy">$</span><span class="crayon-h"> </span><span class="crayon-r">cat</span><span class="crayon-h"> </span><span class="crayon-v">hello</span><span class="crayon-e">.py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d8b978874332-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8316b3d8b978874332-3"><span class="crayon-c">#!/usr/bin/python</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d8b978874332-4"><span class="crayon-e">from </span><span class="crayon-e">__future__ </span><span class="crayon-e">import </span><span class="crayon-v">print_function</span></div><div class="crayon-line" id="crayon-5bcf8316b3d8b978874332-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d8b978874332-6"><span class="crayon-o">&lt;&lt;</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">.</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-i">snipped</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">.</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-o">&gt;&gt;</span></div><div class="crayon-line" id="crayon-5bcf8316b3d8b978874332-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d8b978874332-8"><span class="crayon-c"># app.run(debug= True)</span></div><div class="crayon-line" id="crayon-5bcf8316b3d8b978874332-9"><span class="crayon-v">app</span><span class="crayon-e">.run</span><span class="crayon-sy">(</span><span class="crayon-v">debug</span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">host</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">'0.0.0.0'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">port</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-cn">80</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0014 seconds] -->
+<p></p>
+<p>To run the code, you need to use <em>sudo</em>:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d8f820275497" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+pi@raspberrypi ~/rpi $   sudo ./hello.py
+
+* Running on http://0.0.0.0:80/
+* Restarting with reloader
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d8f820275497-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d8f820275497-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3d8f820275497-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d8f820275497-4">4</div><div class="crayon-num" data-line="crayon-5bcf8316b3d8f820275497-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d8f820275497-1"><span class="crayon-v">pi</span><span class="crayon-sy">@</span><span class="crayon-v">raspberrypi</span><span class="crayon-h"> </span><span class="crayon-o">~</span><span class="crayon-o">/</span><span class="crayon-i">rpi</span><span class="crayon-h"> </span><span class="crayon-sy">$</span>  <span class="crayon-h"> </span><span class="crayon-i">sudo</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-o">/</span><span class="crayon-v">hello</span><span class="crayon-sy">.</span><span class="crayon-e">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d8f820275497-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8316b3d8f820275497-3"><span class="crayon-e">*</span><span class="crayon-h"> </span><span class="crayon-e">Running </span><span class="crayon-e">on </span><span class="crayon-v">http</span><span class="crayon-o">:</span><span class="crayon-c">//0.0.0.0:80/</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d8f820275497-4"><span class="crayon-o">*</span><span class="crayon-h"> </span><span class="crayon-e">Restarting </span><span class="crayon-e">with </span><span class="crayon-i">reloader</span></div><div class="crayon-line" id="crayon-5bcf8316b3d8f820275497-5">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p>If you get the  output above, that means the code is running on the Rpi. You can now test the webserver. On your PC (or VM), open Firefox (or any other browser), and type in the IP address of the RPI. This is the one we got earlier. For example, 192.168.0.8 in my case.</p>
+<p>First, on my PC:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi3.jpg" alt="" class="aligncenter size-full wp-image-3075" width="297" height="240" /> <img src="/wp-content/uploads/2017/05/rpi4.jpg" alt="" class="aligncenter size-full wp-image-3076" width="305" height="309" srcset="/wp-content/uploads/2017/05/rpi4.jpg 305w, /wp-content/uploads/2017/05/rpi4-296x300.jpg 296w" sizes="(max-width: 305px) 85vw, 305px" /></p>
+<p>&nbsp;</p>
+<p>We can even put spaces. In the image below, I enter <em>Mr Potato Head</em>:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi5.jpg" alt="" class="aligncenter size-full wp-image-3077" width="291" height="288" /></p>
+<p>Now on on <strong>iPhone</strong>:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi_iphone2.png" alt="" class="aligncenter wp-image-3080" width="308" height="462" srcset="/wp-content/uploads/2017/05/rpi_iphone2.png 640w, /wp-content/uploads/2017/05/rpi_iphone2-200x300.png 200w" sizes="(max-width: 308px) 85vw, 308px" /> <img src="/wp-content/uploads/2017/05/rpi_iphone1.png" alt="" class="aligncenter wp-image-3081" width="298" height="447" srcset="/wp-content/uploads/2017/05/rpi_iphone1.png 640w, /wp-content/uploads/2017/05/rpi_iphone1-200x300.png 200w" sizes="(max-width: 298px) 85vw, 298px" /><br />
+Note how tiny everything is. We will address this problem later.</p>
+<p><strong>iPad</strong>:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi_ipad2.png" alt="" class="aligncenter size-full wp-image-3082" width="768" height="1024" srcset="/wp-content/uploads/2017/05/rpi_ipad2.png 768w, /wp-content/uploads/2017/05/rpi_ipad2-225x300.png 225w" sizes="(max-width: 768px) 85vw, 768px" /> <img src="/wp-content/uploads/2017/05/rpi_ipad1.png" alt="" class="aligncenter size-full wp-image-3083" width="768" height="1024" srcset="/wp-content/uploads/2017/05/rpi_ipad1.png 768w, /wp-content/uploads/2017/05/rpi_ipad1-225x300.png 225w" sizes="(max-width: 768px) 85vw, 768px" /></p>
+<p>&nbsp;</p>
+<p>On your iPhone or iPad, it will not like spaces. So if you want to go to <em>Mr Potato</em>, you will need to type <em>Mr%20Potato</em>. <em>%20</em> is the HTML code for space.</p>
+<p>You should have the above working before you proceed to the next step.</p>
+<h2>Building the webserver</h2>
+<p>Create a directory called templates and add a file called index.html to it.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d95819183237" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+pyeng@pyeng-VirtualBox ~/PythonBook/rpi $ tree
+.
+├── hello.py
+├── templates
+│   └── index.html
+└── webserver.py
+
+1 directory, 3 files</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d95819183237-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d95819183237-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3d95819183237-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d95819183237-4">4</div><div class="crayon-num" data-line="crayon-5bcf8316b3d95819183237-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d95819183237-6">6</div><div class="crayon-num" data-line="crayon-5bcf8316b3d95819183237-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d95819183237-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d95819183237-1"><span class="crayon-v">pyeng</span><span class="crayon-sy">@</span><span class="crayon-v">pyeng</span><span class="crayon-o">-</span><span class="crayon-v">VirtualBox</span><span class="crayon-h"> </span><span class="crayon-o">~</span><span class="crayon-o">/</span><span class="crayon-v">PythonBook</span><span class="crayon-o">/</span><span class="crayon-i">rpi</span><span class="crayon-h"> </span><span class="crayon-sy">$</span><span class="crayon-h"> </span><span class="crayon-i">tree</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d95819183237-2"><span class="crayon-sy">.</span></div><div class="crayon-line" id="crayon-5bcf8316b3d95819183237-3">├──<span class="crayon-h"> </span><span class="crayon-v">hello</span><span class="crayon-e">.py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d95819183237-4">├──<span class="crayon-h"> </span><span class="crayon-i">templates</span></div><div class="crayon-line" id="crayon-5bcf8316b3d95819183237-5">│<span class="crayon-h">&nbsp;&nbsp; </span>└──<span class="crayon-h"> </span><span class="crayon-v">index</span><span class="crayon-e">.html</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d95819183237-6">└──<span class="crayon-h"> </span><span class="crayon-v">webserver</span><span class="crayon-e">.py</span></div><div class="crayon-line" id="crayon-5bcf8316b3d95819183237-7">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d95819183237-8"><span class="crayon-cn">1</span><span class="crayon-h"> </span><span class="crayon-v">directory</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-cn">3</span><span class="crayon-h"> </span><span class="crayon-v">files</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0011 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>Let&#8217;s look at <em>index.html</em>.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d9a519137406" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;!DOCTYPE html&gt;
+
+&lt;form action="{{ url_for('add') }}"  method="post" class="add"&gt;
+    &lt;p&gt; Please enter commmand to run&lt;/p&gt;
+    &lt;input type="text", name="post"&gt;
+    &lt;input class="button" type="submit" value="Run command remotely"&gt;
+    &lt;/form&gt;
+&lt;/form&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d9a519137406-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d9a519137406-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3d9a519137406-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d9a519137406-4">4</div><div class="crayon-num" data-line="crayon-5bcf8316b3d9a519137406-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d9a519137406-6">6</div><div class="crayon-num" data-line="crayon-5bcf8316b3d9a519137406-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d9a519137406-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d9a519137406-1"><span class="crayon-ta">&lt;!DOCTYPE </span><span class="crayon-k">html&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d9a519137406-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8316b3d9a519137406-3"><span class="crayon-k">&lt;form action="</span><span class="crayon-sy">{</span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-i">url_for</span><span class="crayon-sy">(</span><span class="crayon-s">'add'</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">}</span><span class="crayon-sy">}</span><span class="crayon-s">"&nbsp;&nbsp;method="</span><span class="crayon-i">post"</span><span class="crayon-h"> </span><span class="crayon-e">class</span><span class="crayon-i">="add"&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d9a519137406-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;p&gt;</span><span class="crayon-h"> </span><span class="crayon-i">Please</span><span class="crayon-h"> </span><span class="crayon-i">enter</span><span class="crayon-h"> </span><span class="crayon-i">commmand</span><span class="crayon-h"> </span><span class="crayon-i">to</span><span class="crayon-h"> </span><span class="crayon-i">run&lt;/p&gt;</span></div><div class="crayon-line" id="crayon-5bcf8316b3d9a519137406-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;input </span><span class="crayon-e">type</span><span class="crayon-i">="text",</span><span class="crayon-h"> </span><span class="crayon-e">name</span><span class="crayon-i">="post"&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d9a519137406-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;input </span><span class="crayon-e">class</span><span class="crayon-i">="button"</span><span class="crayon-h"> </span><span class="crayon-e">type</span><span class="crayon-i">="submit"</span><span class="crayon-h"> </span><span class="crayon-e">value</span><span class="crayon-i">="Run</span><span class="crayon-h"> </span><span class="crayon-i">command</span><span class="crayon-h"> </span><span class="crayon-i">remotely"&gt;</span></div><div class="crayon-line" id="crayon-5bcf8316b3d9a519137406-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-ta">&lt;/form&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d9a519137406-8"><span class="crayon-ta">&lt;/form&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>This is a simple html form. If you open it in a web browser, this is what it looks like:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi6.jpg" alt="" class="aligncenter size-full wp-image-3107" width="520" height="182" srcset="/wp-content/uploads/2017/05/rpi6.jpg 520w, /wp-content/uploads/2017/05/rpi6-300x105.jpg 300w" sizes="(max-width: 520px) 85vw, 520px" /></p>
+<p>I won&#8217;t go over the HTML part. If you have never seen a HTML form, there are many resources online. It&#8217;s quite simple, and I just copy pasted this from an example.</p>
+<p>All the form is doing is asking the user for a command to run. When you push the button, that command is sent to the Flask server.</p>
+<p>The only thing different is this part:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3d9f253890624" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+form action="{{ url_for('add') }}"
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3d9f253890624-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3d9f253890624-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3d9f253890624-1"><span class="crayon-e">form </span><span class="crayon-v">action</span><span class="crayon-o">=</span><span class="crayon-s">"{{ url_for('add') }}"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3d9f253890624-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p><em>form_action</em> is what happens when you press submit on your form. Normally, you&#8217;d have a link to something like register, login etc. We are doing something different.</p>
+<p><strong>Jinja2 templating</strong></p>
+<p>Flask uses the Jinja2 template system. The special code you saw is a part of that. Anything in <em>{{}}</em> or <em>{% %}</em> is usually a part of the template. This part is filled in by Flask before it displays the page.</p>
+<p>Let&#8217;s look at our code again:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3da4254020003" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+form action="{{ url_for('add') }}"
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3da4254020003-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3da4254020003-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3da4254020003-1"><span class="crayon-e">form </span><span class="crayon-v">action</span><span class="crayon-o">=</span><span class="crayon-s">"{{ url_for('add') }}"</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3da4254020003-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p><em>url_for()</em> is a function that instructs Flask to insert the url for a function we have written. At the moment, we haven&#8217;t written this function yet. Let&#8217;s do that now. Open <em>webapp.py</em>.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3da9847593616" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+@app.route('/add', methods = ["POST"])
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3da9847593616-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3da9847593616-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3da9847593616-1"><span class="crayon-sy">@</span><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">route</span><span class="crayon-sy">(</span><span class="crayon-s">'/add'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">methods</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">"POST"</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3da9847593616-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>We are adding a route to <em>/add</em>, as that&#8217;s what our form will call. <em>methods = [&#8220;POST&#8221;]</em> means you can only post to this page, not read anything from it (as all this page is doing is processing the form data).</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3dad910389564" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+def add():
+  command = request.form['post']</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3dad910389564-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3dad910389564-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3dad910389564-1"><span class="crayon-e">def </span><span class="crayon-e">add</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3dad910389564-2"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">command</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">request</span><span class="crayon-sy">.</span><span class="crayon-v">form</span><span class="crayon-sy">[</span><span class="crayon-s">'post'</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>The <em>index.html</em> page we created will send us the form with the command to run.</p>
+<p>If you remember the HTML file:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3db1142970299" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;input type="text", name="post"&gt;</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3db1142970299-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3db1142970299-1"><span class="crayon-o">&lt;</span><span class="crayon-e">input </span><span class="crayon-v">type</span><span class="crayon-o">=</span><span class="crayon-s">"text"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">name</span><span class="crayon-o">=</span><span class="crayon-s">"post"</span><span class="crayon-o">&gt;</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>We had an input box called <em>post</em>. That&#8217;s what we read here. We do is read the value of that form into a variable called <em>command</em>.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3db5293332616" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+return redirect(url_for("home", command = command))
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3db5293332616-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3db5293332616-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3db5293332616-1"><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-e">redirect</span><span class="crayon-sy">(</span><span class="crayon-e">url_for</span><span class="crayon-sy">(</span><span class="crayon-s">"home"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">command</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">command</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3db5293332616-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>We take the command and redirect to the home page, passing in the command as a variable.</p>
+<p>Now let&#8217;s look at our home page.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3db9555982065" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+@app.route("/")
+@app.route("/&lt;path:command&gt;")</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3db9555982065-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3db9555982065-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3db9555982065-1"><span class="crayon-sy">@</span><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">route</span><span class="crayon-sy">(</span><span class="crayon-s">"/"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3db9555982065-2"><span class="crayon-sy">@</span><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">route</span><span class="crayon-sy">(</span><span class="crayon-s">"/&lt;path:command&gt;"</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>This time, we have two different routes. This is possible because both the routes will call the same function. Let&#8217;s look at them one by one.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3dbd932876854" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+@app.route("/")
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3dbd932876854-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3dbd932876854-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3dbd932876854-1"><span class="crayon-sy">@</span><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">route</span><span class="crayon-sy">(</span><span class="crayon-s">"/"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3dbd932876854-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>This is the same as before. It means the root (or main) path to the website.</p>
+<path:command></path:command>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3dc2038855421" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+@app.route("/&lt;path:command&gt;")</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3dc2038855421-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3dc2038855421-1"><span class="crayon-sy">@</span><span class="crayon-v">app</span><span class="crayon-sy">.</span><span class="crayon-e">route</span><span class="crayon-sy">(</span><span class="crayon-s">"/&lt;path:command&gt;"</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>We are telling Flask that we can optionally have a command on the end of our webapp, like this:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3dc6787100374" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+http://192.168.0.8/whoami</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3dc6787100374-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3dc6787100374-1"><span class="crayon-v">http</span><span class="crayon-o">:</span><span class="crayon-c">//192.168.0.8/whoami</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>In this case, we are passing the Linux <em>whoami</em> command to our webapp. <em>whoami</em> is for people who are suffering from an existential or spiritual crisis.</p>
+<p>The format is <em>path:command</em>, which means we are passing in a variable called command, which is a type of Linux path. The reason I&#8217;m using this instead of a simple string (which would&#8217;ve been good enough) is that I was trying to run complicated commands on the Rpi, like:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3dca048977992" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+cd /; ls -l; touch foo.txt; ls -t;
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3dca048977992-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3dca048977992-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3dca048977992-1"><span class="crayon-v">cd</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">ls</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-v">l</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-e">touch </span><span class="crayon-v">foo</span><span class="crayon-sy">.</span><span class="crayon-v">txt</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">ls</span><span class="crayon-h"> </span><span class="crayon-o">-</span><span class="crayon-v">t</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3dca048977992-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>The problem is the <em>/</em> command. On Linux, it means the root file system, but as we have seen, it means something different for webapps.</p>
+<p>By signalling <em>command</em> as a <em>path</em>, I&#8217;m telling Flask that it can contain <em>/</em> which should not be treated as routing.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3dce026492171" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+def home(command = None):
+   msg = None</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3dce026492171-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3dce026492171-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3dce026492171-1"><span class="crayon-e">def </span><span class="crayon-e">home</span><span class="crayon-sy">(</span><span class="crayon-v">command</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">None</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3dce026492171-2"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">msg</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">None</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>This is our home function. We set command to <em>None</em>,  for cases when the user enters no command. <em>msg</em> is also initialised to none.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3dd3447182362" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+if command:
+        p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        msg = p.communicate()[0]
+        msg = msg.decode().split("\n")</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3dd3447182362-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3dd3447182362-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3dd3447182362-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3dd3447182362-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3dd3447182362-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">command</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3dd3447182362-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">p</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">subprocess</span><span class="crayon-sy">.</span><span class="crayon-e">Popen</span><span class="crayon-sy">(</span><span class="crayon-v">command</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">shell</span><span class="crayon-o">=</span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">stdout</span><span class="crayon-o">=</span><span class="crayon-v">subprocess</span><span class="crayon-sy">.</span><span class="crayon-v">PIPE</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">stderr</span><span class="crayon-o">=</span><span class="crayon-v">subprocess</span><span class="crayon-sy">.</span><span class="crayon-v">STDOUT</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8316b3dd3447182362-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">msg</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">p</span><span class="crayon-sy">.</span><span class="crayon-e">communicate</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3dd3447182362-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">msg</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">msg</span><span class="crayon-sy">.</span><span class="crayon-e">decode</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">"\n"</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></p>
+<p>If a command was found, we run it. Let&#8217;s go over the rest of the code line by line:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3dd7685282934" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3dd7685282934-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3dd7685282934-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3dd7685282934-1"><span class="crayon-v">p</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">subprocess</span><span class="crayon-sy">.</span><span class="crayon-e">Popen</span><span class="crayon-sy">(</span><span class="crayon-v">command</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">shell</span><span class="crayon-o">=</span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">stdout</span><span class="crayon-o">=</span><span class="crayon-v">subprocess</span><span class="crayon-sy">.</span><span class="crayon-v">PIPE</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">stderr</span><span class="crayon-o">=</span><span class="crayon-v">subprocess</span><span class="crayon-sy">.</span><span class="crayon-v">STDOUT</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3dd7685282934-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p><em>subprocess.Popen</em> is the function to run command line programs. The first argument is the command to run, the second says open a command line shell to run them.</p>
+<p>The third and fourth may require some explanation. On Linux systems, <em>stdout</em> is the standard output, and <em>stderr</em> is the standard error. When you do a <em>print</em>, it is printed to <em>stdout</em>. When you raise an error, it is printed to <em>stderr</em>. By default, both of these are printed to the screen, but you can change the behaviour, so that, for example, errors are printed to a file instead of the screen.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3ddb521821514" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+stdout=subprocess.PIPE, , stderr=subprocess.STDOUT
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3ddb521821514-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3ddb521821514-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3ddb521821514-1"><span class="crayon-v">stdout</span><span class="crayon-o">=</span><span class="crayon-v">subprocess</span><span class="crayon-sy">.</span><span class="crayon-v">PIPE</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">stderr</span><span class="crayon-o">=</span><span class="crayon-v">subprocess</span><span class="crayon-sy">.</span><span class="crayon-i">STDOUT</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3ddb521821514-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>means that we are passing the standard output and error to our Python code.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3ddf404457739" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+msg = p.communicate()[0]
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3ddf404457739-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3ddf404457739-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3ddf404457739-1"><span class="crayon-v">msg</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">p</span><span class="crayon-sy">.</span><span class="crayon-e">communicate</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3ddf404457739-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p><em>p.communicate()</em> runs the command line program and returns the result. It returns both <em>stdout</em> and <em>stderr</em>. I only want <em>stdout</em>, which is why I&#8217;m doing a <em>[0]</em>.</p>
+<p><strong>WARNING</strong> This code is very dangerous, and normally you would never run command line programs like this, as users could enter malicious commands. If you do want to do this in a commercial setting, make sure you add a login page.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3de3284041488" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+return render_template("index.html", command = command, msg = msg)
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3de3284041488-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3de3284041488-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3de3284041488-1"><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-e">render_template</span><span class="crayon-sy">(</span><span class="crayon-s">"index.html"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">command</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">command</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">msg</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">msg</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3de3284041488-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>Finally, we tell Flask to render our file <em>index.html</em>. Note that we pass in two variables: <em>command</em> and <em>msg</em>. We need to modify index.html to print these.</p>
+<p>This is what we will add to <em>index.html</em>:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3de8653778696" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+{% if msg %}
+&lt;b&gt; Running command&lt;/b&gt; &lt;i&gt; {{command}} &lt;i&gt;:
+
+{% for m in msg %}
+   {{m}}
+
+{% endfor %}
+{% endif %}</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3de8653778696-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3de8653778696-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3de8653778696-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3de8653778696-4">4</div><div class="crayon-num" data-line="crayon-5bcf8316b3de8653778696-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3de8653778696-6">6</div><div class="crayon-num" data-line="crayon-5bcf8316b3de8653778696-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3de8653778696-8">8</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3de8653778696-1"><span class="crayon-sy">{</span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">msg</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3de8653778696-2"><span class="crayon-o">&lt;</span><span class="crayon-e">b</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-e">Running</span><span class="crayon-h"> </span><span class="crayon-e">command</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">b</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-e">i</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-sy">{</span><span class="crayon-v">command</span><span class="crayon-sy">}</span><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">i</span><span class="crayon-o">&gt;</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8316b3de8653778696-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3de8653778696-4"><span class="crayon-sy">{</span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">m</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">msg</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5bcf8316b3de8653778696-5"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-sy">{</span><span class="crayon-sy">{</span><span class="crayon-v">m</span><span class="crayon-sy">}</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3de8653778696-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8316b3de8653778696-7"><span class="crayon-sy">{</span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-st">endfor</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3de8653778696-8"><span class="crayon-sy">{</span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-st">endif</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0013 seconds] -->
+<p></p>
+<p>You may have noted that we have <em>{% %}</em>, which stand for Jinja2 templates. This means Flask will process these values before displaying them  on the screen. Let&#8217;s take each part one by one:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3ded487230806" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+{% if msg %}
+</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3ded487230806-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3ded487230806-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3ded487230806-1"><span class="crayon-sy">{</span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">msg</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3ded487230806-2">&nbsp;</div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>If <em>msg</em> is not None, then enter this loop. We need to give a <em>{% endif %}</em> to show the end of the if condition.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3df1503696873" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+&lt;b&gt; Running command&lt;/b&gt; &lt;i&gt; {{command}} &lt;i&gt;:</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3df1503696873-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3df1503696873-1"><span class="crayon-o">&lt;</span><span class="crayon-e">b</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-e">Running</span><span class="crayon-h"> </span><span class="crayon-e">command</span><span class="crayon-o">&lt;</span><span class="crayon-o">/</span><span class="crayon-e">b</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-e">i</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-sy">{</span><span class="crayon-v">command</span><span class="crayon-sy">}</span><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">i</span><span class="crayon-o">&gt;</span><span class="crayon-o">:</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>We print <strong>Running command</strong> in bold, followed by the actual command, which is passed in as a parameter. Flask will replace <em>{{command}}</em> with the actual command.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8316b3df5529946341" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+{% for m in msg %}
+   {{m}}
+
+{% endfor %}</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8316b3df5529946341-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3df5529946341-2">2</div><div class="crayon-num" data-line="crayon-5bcf8316b3df5529946341-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8316b3df5529946341-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8316b3df5529946341-1"><span class="crayon-sy">{</span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">m</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">msg</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3df5529946341-2"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-sy">{</span><span class="crayon-sy">{</span><span class="crayon-v">m</span><span class="crayon-sy">}</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5bcf8316b3df5529946341-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8316b3df5529946341-4"><span class="crayon-sy">{</span><span class="crayon-o">%</span><span class="crayon-h"> </span><span class="crayon-st">endfor</span><span class="crayon-h"> </span><span class="crayon-o">%</span><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>&nbsp;</p>
+<p>We might have multiple lines in the <em>msg</em> that we pass in. That is why I&#8217;m looping over it and printing each one. Again, we need a <em>{% endfor %}</em>.</p>
+<p>And that&#8217; it. Let&#8217;s run a few examples:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi7.jpg" alt="" class="aligncenter size-full wp-image-3085" width="479" height="447" srcset="/wp-content/uploads/2017/05/rpi7.jpg 479w, /wp-content/uploads/2017/05/rpi7-300x280.jpg 300w" sizes="(max-width: 479px) 85vw, 479px" /></p>
+<p>Here I&#8217;m doing a simple <em>ls -l</em>.</p>
+<p>We can even do complicated chaining of commands like:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi8.jpg" alt="" class="aligncenter size-full wp-image-3086" width="458" height="481" srcset="/wp-content/uploads/2017/05/rpi8.jpg 458w, /wp-content/uploads/2017/05/rpi8-286x300.jpg 286w" sizes="(max-width: 458px) 85vw, 458px" /></p>
+<p>I run three separate commands by chaining them together.</p>
+<p>And we can even create, read and modify files. We do a <em>ls -l</em> to check which files we have:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi9.jpg" alt="" class="aligncenter size-full wp-image-3087" width="783" height="458" srcset="/wp-content/uploads/2017/05/rpi9.jpg 783w, /wp-content/uploads/2017/05/rpi9-300x175.jpg 300w, /wp-content/uploads/2017/05/rpi9-768x449.jpg 768w" sizes="(max-width: 783px) 85vw, 783px" /></p>
+<p>We then create it on our browser:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi10.jpg" alt="" class="aligncenter size-full wp-image-3088" width="446" height="339" srcset="/wp-content/uploads/2017/05/rpi10.jpg 446w, /wp-content/uploads/2017/05/rpi10-300x228.jpg 300w" sizes="(max-width: 446px) 85vw, 446px" /></p>
+<p>We created a file called <em>shantnu.txt</em>. Let&#8217;s check if it was created on the Rpi:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi11.jpg" alt="" class="aligncenter size-full wp-image-3089" width="811" height="482" srcset="/wp-content/uploads/2017/05/rpi11.jpg 811w, /wp-content/uploads/2017/05/rpi11-300x178.jpg 300w, /wp-content/uploads/2017/05/rpi11-768x456.jpg 768w" sizes="(max-width: 811px) 85vw, 811px" /></p>
+<p>Yes, it was. Let&#8217;s delete that file now:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi12.jpg" alt="" class="aligncenter size-full wp-image-3090" width="430" height="474" srcset="/wp-content/uploads/2017/05/rpi12.jpg 430w, /wp-content/uploads/2017/05/rpi12-272x300.jpg 272w" sizes="(max-width: 430px) 85vw, 430px" /></p>
+<p>I did a <em>ls -l</em>, and the file is there. I delete it and run <em>ls</em> again, and see the file is gone.<br />
+And check it&#8217;s gone:</p>
+<p><img src="/wp-content/uploads/2017/05/rpi13.jpg" alt="" class="aligncenter size-full wp-image-3091" width="793" height="457" srcset="/wp-content/uploads/2017/05/rpi13.jpg 793w, /wp-content/uploads/2017/05/rpi13-300x173.jpg 300w, /wp-content/uploads/2017/05/rpi13-768x443.jpg 768w" sizes="(max-width: 793px) 85vw, 793px" /></p>
+<p>Now let&#8217;s try to do the same on our iPad.</p>
+<p><img src="/wp-content/uploads/2017/05/rpi_ipad3.png" alt="" class="aligncenter wp-image-3092" width="558" height="745" srcset="/wp-content/uploads/2017/05/rpi_ipad3.png 768w, /wp-content/uploads/2017/05/rpi_ipad3-225x300.png 225w" sizes="(max-width: 558px) 85vw, 558px" /> <img src="/wp-content/uploads/2017/05/rpi_ipad4.png" alt="" class="aligncenter wp-image-3093" width="563" height="751" srcset="/wp-content/uploads/2017/05/rpi_ipad4.png 768w, /wp-content/uploads/2017/05/rpi_ipad4-225x300.png 225w" sizes="(max-width: 563px) 85vw, 563px" /></p>
+<p>&nbsp;</p>
+<p>That&#8217;s not very clear, is it?</p>
+<p>The problem is that our app doesn&#8217;t render very well on the small screen of the iPad and iPhone.</p>
+<p>There is one last thing I&#8217;m going to do. There is a great front end framework called Bootstrap, which allows you to create not only beautiful websites, but ones that are responsive too. Responsive means they detect that you are using a handheld device and resize themselves. So the page looks the same whether you use an iPhone or 16 inch monitor.</p>
+<p>I won&#8217;t explain Bootstrap, as it&#8217;s beyond the scope of this book. I&#8217;m no expert either, and all I did was find a few free themes and copy the parts I wanted. The new file is <em>webapp_bootstrap.py</em> and the only difference is it points to a <em>index2.html</em>, which is a Bootstrap file. Have a look at them.</p>
+<p>Running our code now:</p>
+<p><strong>PC</strong></p>
+<p><img src="/wp-content/uploads/2017/05/rpi14.jpg" alt="" class="aligncenter size-full wp-image-3094" width="1293" height="656" srcset="/wp-content/uploads/2017/05/rpi14.jpg 1293w, /wp-content/uploads/2017/05/rpi14-300x152.jpg 300w, /wp-content/uploads/2017/05/rpi14-768x390.jpg 768w, /wp-content/uploads/2017/05/rpi14-1024x520.jpg 1024w, /wp-content/uploads/2017/05/rpi14-1200x609.jpg 1200w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></p>
+<p><strong>iPad</strong></p>
+<p><img src="/wp-content/uploads/2017/05/rpi_ipad5.png" alt="" class="aligncenter size-full wp-image-3095" width="768" height="1024" srcset="/wp-content/uploads/2017/05/rpi_ipad5.png 768w, /wp-content/uploads/2017/05/rpi_ipad5-225x300.png 225w" sizes="(max-width: 768px) 85vw, 768px" /></p>
+<p>Much better.</p>
+<p><strong>Conclusion:</strong> Hopefully, you now understand how easy it is to turn your Rpi into a web server. But even better, I hope you have seen that anything that you can do on a normal Linux box, you can do on the Rpi. So instead of running commands, you could periodically read data from a sensor, like a temperature sensor, store it on a database, and then display it via the web server.</p>
+<p>Or if you have a robotics project (or any other project where the Rpi is connected to an external device), you could control it using your web browser.</p>
+<p>Many people I know are using the Rpi as a cheap Linux server. In many companies, buying a full server can takes months (because of processes and rules). But a Rpi can be bought over a weekend. If you don&#8217;t care about real time performance (like reading data from a sensor, as I mentioned above), then the Rpi is much better than a full server, as not only is it cheaper, it is easy to move around and install as well.</p>
+<p>So start treating the Rpi as a full fledged Linux box rather than a toy, and you will really start to see its benefits.</p>
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

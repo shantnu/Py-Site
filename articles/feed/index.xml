@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Articles</title>
+	<atom:link href="/articles/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Karthik Raghunathan</title>
+		<link>/articles/#comment-21861</link>
+		<dc:creator><![CDATA[Karthik Raghunathan]]></dc:creator>
+		<pubDate>Mon, 25 Sep 2017 18:02:20 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=44#comment-21861</guid>
+		<description><![CDATA[We want, like, deep learning. &#039;Coz it&#039;z da hoattest thing]]></description>
+		<content:encoded><![CDATA[<p>We want, like, deep learning. &#8216;Coz it&#8217;z da hoattest thing</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/articles/#comment-20904</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 25 May 2017 13:36:51 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=44#comment-20904</guid>
+		<description><![CDATA[I have a book on it, may write a few articles later]]></description>
+		<content:encoded><![CDATA[<p>I have a book on it, may write a few articles later</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Jeevan N Jyothish</title>
+		<link>/articles/#comment-20833</link>
+		<dc:creator><![CDATA[Jeevan N Jyothish]]></dc:creator>
+		<pubDate>Thu, 18 May 2017 14:48:36 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=44#comment-20833</guid>
+		<description><![CDATA[Great job! It would be nice if you post tutorials on neural networks and deep learning for beginners.]]></description>
+		<content:encoded><![CDATA[<p>Great job! It would be nice if you post tutorials on neural networks and deep learning for beginners.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Why IPython is the best thing since sliced bread &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Why IPython is the best thing since sliced bread Comments Feed" href="/why-ipython-is-the-best-thing-since-sliced-bread/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/why-ipython-is-the-best-thing-since-sliced-bread/" />
+<link rel='shortlink' href='/?p=1575' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fwhy-ipython-is-the-best-thing-since-sliced-bread%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fwhy-ipython-is-the-best-thing-since-sliced-bread%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1575">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1575" class="post-1575 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Why IPython is the best thing since sliced bread</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p>I recently saw a poll on <em>/r/Python</em>, about how many people used IDLE, which is sort of the default IDE Python comes with. I used IDLE for a long time, but its shortcomings start to catch up with you:</p>
+<ul>
+<li>Pressing up moves the cursor up, and doesn&#8217;t run the last instruction (which is the default behaviour on most command lines)</li>
+<li>Working with files/directories on your disk is a nightmare (you have to use horrible ways like <em>os.get_cwd</em> or <em>os.chdir</em>).</li>
+<li>The GUI is ugly. Real ugly</li>
+</ul>
+<p>While there are other IDEs, many require you to spend six hours creating a project, when all you want to do is run 5 lines of code.</p>
+<p>I discovered IPython by mistake, and ignored it at first. This is because unlike other IDEs, there aren&#8217;t people shouting <em>OMG! IPython is the bes</em>t. Well, it&#8217;s time to change that.</p>
+<p><strong>OMG! IPython is the Best</strong></p>
+<p>IPython is really slick, with a lot of cool features. We&#8217;ll only go over a few of them. My goal is to convince you to dump IDLE for IPython.</p>
+<p>IPython comes in two flavors: QT Console which runs as a desktop app, and Notebook, which runs as a web service. Let&#8217;s looks at QT Console first:</p>
+<p><strong>Code completion</strong></p>
+<p>If you import a library, say Pandas, and forget which function reads a csv file, pressing <em>tab</em> will give you all possible choices:</p>
+<p><a href="/wp-content/uploads/2015/05/ipy1.png"><img class="aligncenter size-full wp-image-1578" src="/wp-content/uploads/2015/05/ipy1.png" alt="ipy1" width="486" height="162" srcset="/wp-content/uploads/2015/05/ipy1.png 486w, /wp-content/uploads/2015/05/ipy1-300x100.png 300w" sizes="(max-width: 486px) 85vw, 486px" /></a>This works with local variables as well:</p>
+<p><a href="/wp-content/uploads/2015/05/ipy2.png"><img class="aligncenter size-full wp-image-1579" src="/wp-content/uploads/2015/05/ipy2.png" alt="ipy2" width="250" height="98" /></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Great directory/file access</strong></p>
+<p>IPython supports most Linux commands, so you can run commands like cd, pwd, ls etc. It makes changing directories, looking up files so easy:</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><a href="/wp-content/uploads/2015/05/ipy3.png"><img class="aligncenter size-full wp-image-1580" src="/wp-content/uploads/2015/05/ipy3.png" alt="ipy3" width="408" height="395" srcset="/wp-content/uploads/2015/05/ipy3.png 408w, /wp-content/uploads/2015/05/ipy3-300x290.png 300w" sizes="(max-width: 408px) 85vw, 408px" /></a></p>
+<p>In the example above, I do a <em>pwd</em>, then list all files in the directory using <em>ls</em>, then finally change my directory with <em>cd</em>. Try doing that with IDLE.</p>
+<p>&nbsp;</p>
+<p><strong>Magic features</strong></p>
+<p>Another cool feature is that IPython comes with many magic features. These allow you to do things like change directories, which we saw above.</p>
+<p>We can also run any Python script from within IPython using <em>%run</em>:</p>
+<p><a href="/wp-content/uploads/2015/05/ipy4.png"><img class="aligncenter size-full wp-image-1576" src="/wp-content/uploads/2015/05/ipy4.png" alt="ipy4" width="553" height="413" srcset="/wp-content/uploads/2015/05/ipy4.png 553w, /wp-content/uploads/2015/05/ipy4-300x224.png 300w" sizes="(max-width: 553px) 85vw, 553px" /></a></p>
+<p>What if you want to run other system commands? Simple, run them by adding a <em>!</em> to the front. Here is me getting info about my Windows system (by running Windows specific commands):</p>
+<p><a href="/wp-content/uploads/2015/05/ipy7.png"><img class="aligncenter size-full wp-image-1582" src="/wp-content/uploads/2015/05/ipy7.png" alt="ipy7" width="739" height="510" srcset="/wp-content/uploads/2015/05/ipy7.png 739w, /wp-content/uploads/2015/05/ipy7-300x207.png 300w" sizes="(max-width: 739px) 85vw, 739px" /></a></p>
+<p>What if you want to see which variables you have defined?</p>
+<p><a href="/wp-content/uploads/2015/05/ipy6.png"><img class="aligncenter size-full wp-image-1581" src="/wp-content/uploads/2015/05/ipy6.png" alt="ipy6" width="593" height="220" srcset="/wp-content/uploads/2015/05/ipy6.png 593w, /wp-content/uploads/2015/05/ipy6-300x111.png 300w" sizes="(max-width: 593px) 85vw, 593px" /></a></p>
+<p>Or embed your graphs directly within IPython:</p>
+<p><a href="/wp-content/uploads/2015/05/ipy5.png"><img class="aligncenter size-full wp-image-1577" src="/wp-content/uploads/2015/05/ipy5.png" alt="ipy5" width="476" height="531" srcset="/wp-content/uploads/2015/05/ipy5.png 476w, /wp-content/uploads/2015/05/ipy5-269x300.png 269w" sizes="(max-width: 476px) 85vw, 476px" /></a></p>
+<p>There are hundreds of magic commands for everything and anything you could need.</p>
+<p><strong>IPython Notebook</strong></p>
+<p>The IPython Notebook is another feature that blows you out of the water the first time you use it. It&#8217;s power is that you can mix code with Markdown/Latex formatted code. Which means that if you write tutorials, you no longer have to switch between text and code (and neither do your students). Everything is in one place:</p>
+<p>&nbsp;</p>
+<p><a href="/wp-content/uploads/2015/05/ipy8.png"><img class="aligncenter size-large wp-image-1584" src="/wp-content/uploads/2015/05/ipy8-1024x831.png" alt="ipy8" width="1024" height="831" srcset="/wp-content/uploads/2015/05/ipy8-1024x831.png 1024w, /wp-content/uploads/2015/05/ipy8-300x243.png 300w, /wp-content/uploads/2015/05/ipy8.png 1204w" sizes="(max-width: 709px) 85vw, (max-width: 909px) 67vw, (max-width: 1362px) 62vw, 840px" /></a></p>
+<p>Let that sink in for a moment. You can read a tutorial, and run the code, <em>right in the tutorial itself</em>, without having to open another window/shell.</p>
+<p>If you change your tutorial, your code gets automatically updated, as they are in the same place.</p>
+<p>And not only that, you can share your IPython Notebook as a HTML, Markdown, Rst, and in newer versions, PDF as well.</p>
+<p><strong>The future</strong></p>
+<p>IPython has evolved into the <a href="https://jupyter.org/">Jupyter </a>project, which takes IPython and extends it to other languages like R and Julia (for now).</p>
+<p>I am waiting for the time when someone writes an entire book purely in IPython. There are a few problems at the moment, but if you know someone who has done this, or trying to do it, please let me know.</p>
+<p><strong>Updated based on reader feedback</strong></p>
+<p>Ipython can also be run in a pure shell mode. Thanks to Denilson and Simon for pointing that out.</p>
+<p>And as <cite class="fn">Rachel Thomas</cite> points out, there are several books written in Ipython! <a href="https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks#entire-books-or-other-large-collections-of-notebooks-on-a-topic">Here is a selection</a>.</p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			17 thoughts on &ldquo;Why IPython is the best thing since sliced bread&rdquo;		</h2>
+
+		
+		<ol class="comment-list">
+					<li id="comment-17000" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-17000" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/f63da8a4f4efe1a459b3d0a2bbf8366a?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/f63da8a4f4efe1a459b3d0a2bbf8366a?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Jeremy</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17000">
+							<time datetime="2015-09-29T20:03:20+00:00">
+								September 29, 2015 at 8:03 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thank you for your feedback on IPython, I have been learning with IDLE and many of the complaints you have with it I share.  I will be switching&#8230;now.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17000#respond' onclick='return addComment.moveForm( "div-comment-17000", "17000", "respond", "1575" )' aria-label='Reply to Jeremy'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-17001" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-17001" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17001">
+							<time datetime="2015-09-29T20:15:22+00:00">
+								September 29, 2015 at 8:15 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks Jeremy. </p>
+<p>Yes, IDLE should not be used by anyone&#8230;</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17001#respond' onclick='return addComment.moveForm( "div-comment-17001", "17001", "respond", "1575" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-17004" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-17004" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/b6fbc8ce516e138f9ecffec2e9d8990e?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/b6fbc8ce516e138f9ecffec2e9d8990e?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://twitter.com/math_rachel' rel='external nofollow' class='url'>Rachel Thomas (@math_rachel)</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17004">
+							<time datetime="2015-09-30T00:05:44+00:00">
+								September 30, 2015 at 12:05 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>There are entire books written in IPython!<br />
+<a href="https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks#entire-books-or-other-large-collections-of-notebooks-on-a-topic" rel="nofollow">https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks#entire-books-or-other-large-collections-of-notebooks-on-a-topic</a></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17004#respond' onclick='return addComment.moveForm( "div-comment-17004", "17004", "respond", "1575" )' aria-label='Reply to Rachel Thomas (@math_rachel)'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-17012" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-17012" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17012">
+							<time datetime="2015-09-30T08:23:34+00:00">
+								September 30, 2015 at 8:23 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>That&#8217;s a great link! Thanks for sharing. It&#8217;ll go in the blog.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17012#respond' onclick='return addComment.moveForm( "div-comment-17012", "17012", "respond", "1575" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-17005" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-17005" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/5048ffde7ab92aeeedf45959f6d13c24?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/5048ffde7ab92aeeedf45959f6d13c24?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://denilson.sa.nom.br/' rel='external nofollow' class='url'>Denilson Sá</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17005">
+							<time datetime="2015-09-30T00:45:56+00:00">
+								September 30, 2015 at 12:45 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You mention two flavors of IPython: QT console and Notebook.</p>
+<p>In fact, there is a third one: the pure console. Open a terminal and run &#8220;ipython&#8221; and you get the shell directly inside the terminal. Since it is text-only, there are no inline graphics. But it also means you can run the shell in remote servers through ssh.</p>
+<p>By the way, IPython through a remote shell via ssh is the way <a href="https://www.python.org/shell/" rel="nofollow">https://www.python.org/shell/</a> works.</p>
+<p>You also have a console shell if you just run &#8220;python&#8221; , but it is very limited when compared to ipython.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17005#respond' onclick='return addComment.moveForm( "div-comment-17005", "17005", "respond", "1575" )' aria-label='Reply to Denilson Sá'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-17011" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-17011" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17011">
+							<time datetime="2015-09-30T08:22:27+00:00">
+								September 30, 2015 at 8:22 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for the link!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17011#respond' onclick='return addComment.moveForm( "div-comment-17011", "17011", "respond", "1575" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-17006" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-17006" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/5c02f73d5771e28f336dd3bf51be0c6b?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/5c02f73d5771e28f336dd3bf51be0c6b?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://gravatar.com/spradl1g' rel='external nofollow' class='url'>spradl1g</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17006">
+							<time datetime="2015-09-30T01:01:18+00:00">
+								September 30, 2015 at 1:01 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Another big drawback of IDLE: no line numbers in the editor.  If you run a program and get an error with a line number, too bad, you can&#8217;t use the line number to find it.</p>
+<p>The other IDE&#8217;s I&#8217;ve looked at seem to be bloated monstrosities that might be great for professional software developers but are unsuited to beginners, or people who want to run short scripts.  IDLE isn&#8217;t even good enough for beginners.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17006#respond' onclick='return addComment.moveForm( "div-comment-17006", "17006", "respond", "1575" )' aria-label='Reply to spradl1g'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-17010" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-17010" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17010">
+							<time datetime="2015-09-30T08:22:06+00:00">
+								September 30, 2015 at 8:22 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>True about the bloated monstrosities. I&#8217;m looking at you, Eclipse.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17010#respond' onclick='return addComment.moveForm( "div-comment-17010", "17010", "respond", "1575" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-17008" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-17008" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://2.gravatar.com/avatar/8bc44df8e998b5d5712458fdbe91925c?s=42&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/8bc44df8e998b5d5712458fdbe91925c?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Simon</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17008">
+							<time datetime="2015-09-30T05:46:57+00:00">
+								September 30, 2015 at 5:46 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Don&#8217;t forget the old console based interface. Makes for a powerful she&#8217;ll replacement on Windows with all thwbfeatures of the qt interface (-graphs in-line).</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17008#respond' onclick='return addComment.moveForm( "div-comment-17008", "17008", "respond", "1575" )' aria-label='Reply to Simon'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-17009" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-17009" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17009">
+							<time datetime="2015-09-30T08:21:34+00:00">
+								September 30, 2015 at 8:21 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Yes. Denilson mentioned the same thing. Yes, I forgot about it!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17009#respond' onclick='return addComment.moveForm( "div-comment-17009", "17009", "respond", "1575" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-17166" class="comment even thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-17166" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/6197957a895a068d48418c07f98334e9?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/6197957a895a068d48418c07f98334e9?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Michael</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17166">
+							<time datetime="2015-11-17T10:16:13+00:00">
+								November 17, 2015 at 10:16 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>For Mac users there is also a standalone frontend to IPython, called &#8220;Pineapple&#8221;.<br />
+<a href="https://nwhitehead.github.io/pineapple/" rel="nofollow">https://nwhitehead.github.io/pineapple/</a></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17166#respond' onclick='return addComment.moveForm( "div-comment-17166", "17166", "respond", "1575" )' aria-label='Reply to Michael'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-17167" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-17167" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17167">
+							<time datetime="2015-11-17T12:54:12+00:00">
+								November 17, 2015 at 12:54 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks. That looks great!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17167#respond' onclick='return addComment.moveForm( "div-comment-17167", "17167", "respond", "1575" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-17405" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-17405" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/796083c39d2ba8aaa4efcb6132aa5b2b?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/796083c39d2ba8aaa4efcb6132aa5b2b?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Jim</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17405">
+							<time datetime="2016-02-06T09:43:26+00:00">
+								February 6, 2016 at 9:43 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks. This is excellent information. I used IDLE for a while and liked it until I began using IPython. No comparison. Your article has opened up even more capabilities. Thanks! Jim</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17405#respond' onclick='return addComment.moveForm( "div-comment-17405", "17405", "respond", "1575" )' aria-label='Reply to Jim'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-17406" class="comment byuser comment-author-shantnu bypostauthor odd alt depth-2">
+			<article id="div-comment-17406" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-17406">
+							<time datetime="2016-02-06T21:52:11+00:00">
+								February 6, 2016 at 9:52 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You are welcome Jim.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=17406#respond' onclick='return addComment.moveForm( "div-comment-17406", "17406", "respond", "1575" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-18944" class="comment even thread-odd thread-alt depth-1">
+			<article id="div-comment-18944" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/9df61f420256fe4ca6edb67e48e41bf8?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/9df61f420256fe4ca6edb67e48e41bf8?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Vivek Teega</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-18944">
+							<time datetime="2016-09-06T09:37:37+00:00">
+								September 6, 2016 at 9:37 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Awesome!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=18944#respond' onclick='return addComment.moveForm( "div-comment-18944", "18944", "respond", "1575" )' aria-label='Reply to Vivek Teega'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-19488" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-19488" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/4d9d6a9a0b03197c483acfa0db61a88c?s=42&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/4d9d6a9a0b03197c483acfa0db61a88c?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn"><a href='http://astrofloyd.org/' rel='external nofollow' class='url'>AstroFloyd</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-19488">
+							<time datetime="2016-12-11T11:05:20+00:00">
+								December 11, 2016 at 11:05 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks, very useful info.  Note that the online shell you link to provides a (bare) Python shell, not iPython.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=19488#respond' onclick='return addComment.moveForm( "div-comment-19488", "19488", "respond", "1575" )' aria-label='Reply to AstroFloyd'>Reply</a></div>			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-19490" class="comment byuser comment-author-shantnu bypostauthor even depth-2">
+			<article id="div-comment-19490" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=42&#038;d=mm&#038;r=g' srcset='http://0.gravatar.com/avatar/01193237369e9c76015f770e1f5ecd38?s=84&#038;d=mm&#038;r=g 2x' class='avatar avatar-42 photo' height='42' width='42' />						<b class="fn">Shantnu</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="/why-ipython-is-the-best-thing-since-sliced-bread/#comment-19490">
+							<time datetime="2016-12-11T14:33:17+00:00">
+								December 11, 2016 at 2:33 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You are right. It did provide a link to iPython, but they must have changed it. I&#8217;ll remove the link. Thanks,</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel='nofollow' class='comment-reply-link' href='/why-ipython-is-the-best-thing-since-sliced-bread/?replytocom=19490#respond' onclick='return addComment.moveForm( "div-comment-19490", "19490", "respond", "1575" )' aria-label='Reply to Shantnu'>Reply</a></div>			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h2 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/why-ipython-is-the-best-thing-since-sliced-bread/#respond" style="display:none;">Cancel reply</a></small></h2>			<form action="/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required='required' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" required='required' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" /></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='1575' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="6292882974" /></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="62"/></p>			</form>
+			</div><!-- #respond -->
+	
+</div><!-- .comments-area -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript' src='/wp-includes/js/comment-reply.min.js?ver=4.9.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+<script async="async" type='text/javascript' src='/wp-content/plugins/akismet/_inc/form.js?ver=4.0.8'></script>
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Introduction to NLTK (Natural Language Processing) with Python &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/introduction-to-nltk-natural-language-processing-with-python/" />
+<link rel='shortlink' href='/?p=1954' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fintroduction-to-nltk-natural-language-processing-with-python%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fintroduction-to-nltk-natural-language-processing-with-python%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1954">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1954" class="post-1954 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Introduction to NLTK (Natural Language Processing) with Python</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p><a href="/natural-language-processing-and-sentiment-analysis-with-python/"><strong>0. Introduction to NLP and Sentiment Analysis</strong></a></p>
+<p><strong><a href="/introduction-to-nltk-natural-language-processing-with-python/">1. Natural Language Processing with NTLK</a></strong></p>
+<p><strong><a href="/intro-to-nltk-part-2/">2. Intro to NTLK, Part 2</a></strong></p>
+<p><a href="/build-a-sentiment-analysis-app-with-movie-reviews/"><strong>3. Build a sentiment analysis program:</strong> </a> We finally use all we learnt above to make a program that analyses sentiment of movie reviews</p>
+<p><strong><a href="/practice-session-sentiment-analysis-with-twitter/">4. Sentiment Analysis with Twitter</a></strong>: A practice session for you, with a bit of learning.</p>
+<hr />
+<p>&nbsp;</p>
+<p>This first video is just a quick introduction to the NTLK library in Python.</p>
+<p>All the source code for this and the upcoming videos is <a href="https://github.com/shantnu/ntlk_intro">here</a>.</p>
+<p>Use <em> Ntlk_Intro.ipynb</em> for this lesson.</p>
+<p>You need to download some data sources before. Run these commands (instructions in video as well):</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8043ca0f5212248230" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+import nltk
+nltk.download()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8043ca0f5212248230-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca0f5212248230-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8043ca0f5212248230-1"><span class="crayon-e">import </span><span class="crayon-e">nltk</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca0f5212248230-2"><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-e">download</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>Be prepared for it to take some time. There is one file I mention in the video- panlex_lite or something. Don&#8217;t download that, or just press cancel when it is downloading that file (because it is huge, and pretty useless).</p>
+<p>Everything else should be easy.</p>
+<p><iframe width="800" height="450" src="https://player.vimeo.com/video/148723534?title=0&amp;byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe></p>
+<p><em>Only interested in the video? Go to part 2 here: <a href="/intro-to-nltk-part-2/">Intro to NTLK, Part 2</a></em></p>
+<p>There is a great completely free book for learning Natural Language Processing at<a href="http://www.nltk.org/book/"> http://www.nltk.org/book/</a></p>
+<p>It also introduces you to Python if you are new to it. But there is a lot of information there, and it an be a bit overwhelming. What we will try to do in this lesson is, go over the main features of the Python NLTK library.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8043ca100597163962" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+import nltk.classify.util
+from nltk.classify import NaiveBayesClassifier
+from nltk.corpus import movie_reviews
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.corpus import wordnet</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8043ca100597163962-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca100597163962-2">2</div><div class="crayon-num" data-line="crayon-5bcf8043ca100597163962-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca100597163962-4">4</div><div class="crayon-num" data-line="crayon-5bcf8043ca100597163962-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca100597163962-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8043ca100597163962-1"><span class="crayon-e">import </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-v">classify</span><span class="crayon-sy">.</span><span class="crayon-e">util</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca100597163962-2"><span class="crayon-e">from </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-e">classify </span><span class="crayon-e">import </span><span class="crayon-e">NaiveBayesClassifier</span></div><div class="crayon-line" id="crayon-5bcf8043ca100597163962-3"><span class="crayon-e">from </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-e">corpus </span><span class="crayon-e">import </span><span class="crayon-e">movie_reviews</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca100597163962-4"><span class="crayon-e">from </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-e">corpus </span><span class="crayon-e">import </span><span class="crayon-e">stopwords</span></div><div class="crayon-line" id="crayon-5bcf8043ca100597163962-5"><span class="crayon-e">from </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-e">tokenize </span><span class="crayon-e">import </span><span class="crayon-e">word_tokenize</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca100597163962-6"><span class="crayon-e">from </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-e">corpus </span><span class="crayon-e">import </span><span class="crayon-v">wordnet</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p></p>
+<p>We import everything we need. We will go over these functions as we use them.</p>
+<p>To start off, say we have a sentence, and we want to extract all the words from it.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8043ca104061042121" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+sentence = "The Quick brown fox, Jumps over the lazy little dog. Hello World."
+sentence.split(" ")
+
+['The',
+ 'Quick',
+ 'brown',
+ 'fox,',
+ 'Jumps',
+ 'over',
+ 'the',
+ 'lazy',
+ 'little',
+ 'dog.',
+ 'Hello',
+ 'World.']</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8043ca104061042121-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca104061042121-2">2</div><div class="crayon-num" data-line="crayon-5bcf8043ca104061042121-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca104061042121-4">4</div><div class="crayon-num" data-line="crayon-5bcf8043ca104061042121-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca104061042121-6">6</div><div class="crayon-num" data-line="crayon-5bcf8043ca104061042121-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca104061042121-8">8</div><div class="crayon-num" data-line="crayon-5bcf8043ca104061042121-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca104061042121-10">10</div><div class="crayon-num" data-line="crayon-5bcf8043ca104061042121-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca104061042121-12">12</div><div class="crayon-num" data-line="crayon-5bcf8043ca104061042121-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca104061042121-14">14</div><div class="crayon-num" data-line="crayon-5bcf8043ca104061042121-15">15</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8043ca104061042121-1"><span class="crayon-v">sentence</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"The Quick brown fox, Jumps over the lazy little dog. Hello World."</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca104061042121-2"><span class="crayon-v">sentence</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">" "</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8043ca104061042121-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca104061042121-4"><span class="crayon-sy">[</span><span class="crayon-s">'The'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca104061042121-5"><span class="crayon-h"> </span><span class="crayon-s">'Quick'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca104061042121-6"><span class="crayon-h"> </span><span class="crayon-s">'brown'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca104061042121-7"><span class="crayon-h"> </span><span class="crayon-s">'fox,'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca104061042121-8"><span class="crayon-h"> </span><span class="crayon-s">'Jumps'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca104061042121-9"><span class="crayon-h"> </span><span class="crayon-s">'over'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca104061042121-10"><span class="crayon-h"> </span><span class="crayon-s">'the'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca104061042121-11"><span class="crayon-h"> </span><span class="crayon-s">'lazy'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca104061042121-12"><span class="crayon-h"> </span><span class="crayon-s">'little'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca104061042121-13"><span class="crayon-h"> </span><span class="crayon-s">'dog.'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca104061042121-14"><span class="crayon-h"> </span><span class="crayon-s">'Hello'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca104061042121-15"><span class="crayon-h"> </span><span class="crayon-s">'World.'</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>We can split the function on a space (&#8221; &#8220;) to get all the words. The problem with this is, we cannot extract punctuation marks like full stops, and this simple parser will not be able to handle every single type of sentence.</p>
+<p>Which is why we should use the word tokenizer provided by the NLTK library. This correctly identifies punctuation marks:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8043ca107174779657" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+word_tokenize(sentence)
+
+['The',
+ 'Quick',
+ 'brown',
+ 'fox',
+ ',',
+ 'Jumps',
+ 'over',
+ 'the',
+ 'lazy',
+ 'little',
+ 'dog',
+ '.',
+ 'Hello',
+ 'World',
+ '.']</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8043ca107174779657-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca107174779657-2">2</div><div class="crayon-num" data-line="crayon-5bcf8043ca107174779657-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca107174779657-4">4</div><div class="crayon-num" data-line="crayon-5bcf8043ca107174779657-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca107174779657-6">6</div><div class="crayon-num" data-line="crayon-5bcf8043ca107174779657-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca107174779657-8">8</div><div class="crayon-num" data-line="crayon-5bcf8043ca107174779657-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca107174779657-10">10</div><div class="crayon-num" data-line="crayon-5bcf8043ca107174779657-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca107174779657-12">12</div><div class="crayon-num" data-line="crayon-5bcf8043ca107174779657-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca107174779657-14">14</div><div class="crayon-num" data-line="crayon-5bcf8043ca107174779657-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca107174779657-16">16</div><div class="crayon-num" data-line="crayon-5bcf8043ca107174779657-17">17</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8043ca107174779657-1"><span class="crayon-e">word_tokenize</span><span class="crayon-sy">(</span><span class="crayon-v">sentence</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca107174779657-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8043ca107174779657-3"><span class="crayon-sy">[</span><span class="crayon-s">'The'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca107174779657-4"><span class="crayon-h"> </span><span class="crayon-s">'Quick'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca107174779657-5"><span class="crayon-h"> </span><span class="crayon-s">'brown'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca107174779657-6"><span class="crayon-h"> </span><span class="crayon-s">'fox'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca107174779657-7"><span class="crayon-h"> </span><span class="crayon-s">','</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca107174779657-8"><span class="crayon-h"> </span><span class="crayon-s">'Jumps'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca107174779657-9"><span class="crayon-h"> </span><span class="crayon-s">'over'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca107174779657-10"><span class="crayon-h"> </span><span class="crayon-s">'the'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca107174779657-11"><span class="crayon-h"> </span><span class="crayon-s">'lazy'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca107174779657-12"><span class="crayon-h"> </span><span class="crayon-s">'little'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca107174779657-13"><span class="crayon-h"> </span><span class="crayon-s">'dog'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca107174779657-14"><span class="crayon-h"> </span><span class="crayon-s">'.'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca107174779657-15"><span class="crayon-h"> </span><span class="crayon-s">'Hello'</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca107174779657-16"><span class="crayon-h"> </span><span class="crayon-s">'World'</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca107174779657-17"><span class="crayon-h"> </span><span class="crayon-s">'.'</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>The <em>word_tokenize()</em> function is very useful, and we will be using it later.</p>
+<p>Another useful feature is that nltk can figure out if a parts of a sentence are nouns, adverbs, verbs etc.</p>
+<p>The <em>pos_tag()</em> works on the output of <em>word_tokenize()</em>:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8043ca10a237037378" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+w = word_tokenize(sentence)
+nltk.pos_tag(w)
+
+[('The', 'DT'),
+ ('Quick', 'NNP'),
+ ('brown', 'NN'),
+ ('fox', 'NN'),
+ (',', ','),
+ ('Jumps', 'NNP'),
+ ('over', 'IN'),
+ ('the', 'DT'),
+ ('lazy', 'JJ'),
+ ('little', 'JJ'),
+ ('dog', 'NN'),
+ ('.', '.'),
+ ('Hello', 'NNP'),
+ ('World', 'NNP'),
+ ('.', '.')]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8043ca10a237037378-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca10a237037378-2">2</div><div class="crayon-num" data-line="crayon-5bcf8043ca10a237037378-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca10a237037378-4">4</div><div class="crayon-num" data-line="crayon-5bcf8043ca10a237037378-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca10a237037378-6">6</div><div class="crayon-num" data-line="crayon-5bcf8043ca10a237037378-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca10a237037378-8">8</div><div class="crayon-num" data-line="crayon-5bcf8043ca10a237037378-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca10a237037378-10">10</div><div class="crayon-num" data-line="crayon-5bcf8043ca10a237037378-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca10a237037378-12">12</div><div class="crayon-num" data-line="crayon-5bcf8043ca10a237037378-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca10a237037378-14">14</div><div class="crayon-num" data-line="crayon-5bcf8043ca10a237037378-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca10a237037378-16">16</div><div class="crayon-num" data-line="crayon-5bcf8043ca10a237037378-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca10a237037378-18">18</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8043ca10a237037378-1"><span class="crayon-v">w</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">word_tokenize</span><span class="crayon-sy">(</span><span class="crayon-v">sentence</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca10a237037378-2"><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-e">pos_tag</span><span class="crayon-sy">(</span><span class="crayon-v">w</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8043ca10a237037378-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca10a237037378-4"><span class="crayon-sy">[</span><span class="crayon-sy">(</span><span class="crayon-s">'The'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'DT'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca10a237037378-5"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'Quick'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'NNP'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca10a237037378-6"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'brown'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'NN'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca10a237037378-7"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'fox'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'NN'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca10a237037378-8"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">','</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">','</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca10a237037378-9"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'Jumps'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'NNP'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca10a237037378-10"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'over'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'IN'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca10a237037378-11"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'the'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'DT'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca10a237037378-12"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'lazy'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'JJ'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca10a237037378-13"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'little'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'JJ'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca10a237037378-14"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'dog'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'NN'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca10a237037378-15"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'.'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'.'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca10a237037378-16"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'Hello'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'NNP'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca10a237037378-17"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'World'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'NNP'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca10a237037378-18"><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-s">'.'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'.'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0014 seconds] -->
+<p></p>
+<p>If you want to know what those tags mean, you can search for them <a href="http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html">online</a>, or use the inbuilt functions:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8043ca10d693218882" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+nltk.help.upenn_tagset()</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8043ca10d693218882-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8043ca10d693218882-1"><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-v">help</span><span class="crayon-sy">.</span><span class="crayon-e">upenn_tagset</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>So for example, NN means singular noun, JJ means adjective etc.</p>
+<p>The Nltk has many great features, like finding the meaning of words, finding examples of words, finding similar and opposite words etc. You can see how useful these features would be if you were building like a search engine, or a text parser.</p>
+<p>Let&#8217;s look at a few of these features.</p>
+<p>The first thing you can do it, find the definition of any word.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8043ca110303145287" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+syn = wordnet.synsets("computer")
+print(syn)
+print(syn[0].name())
+print(syn[0].definition())
+
+print(syn[1].name())
+print(syn[1].definition())
+
+[Synset('computer.n.01'), Synset('calculator.n.01')]
+computer.n.01
+a machine for performing calculations automatically
+calculator.n.01
+an expert at calculation (or at operating calculating machines)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8043ca110303145287-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca110303145287-2">2</div><div class="crayon-num" data-line="crayon-5bcf8043ca110303145287-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca110303145287-4">4</div><div class="crayon-num" data-line="crayon-5bcf8043ca110303145287-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca110303145287-6">6</div><div class="crayon-num" data-line="crayon-5bcf8043ca110303145287-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca110303145287-8">8</div><div class="crayon-num" data-line="crayon-5bcf8043ca110303145287-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca110303145287-10">10</div><div class="crayon-num" data-line="crayon-5bcf8043ca110303145287-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca110303145287-12">12</div><div class="crayon-num" data-line="crayon-5bcf8043ca110303145287-13">13</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8043ca110303145287-1"><span class="crayon-v">syn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">wordnet</span><span class="crayon-sy">.</span><span class="crayon-e">synsets</span><span class="crayon-sy">(</span><span class="crayon-s">"computer"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca110303145287-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">syn</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8043ca110303145287-3"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">syn</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-e">name</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca110303145287-4"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">syn</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-e">definition</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8043ca110303145287-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca110303145287-6"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">syn</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-e">name</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8043ca110303145287-7"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">syn</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-e">definition</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca110303145287-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8043ca110303145287-9"><span class="crayon-sy">[</span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'computer.n.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'calculator.n.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca110303145287-10"><span class="crayon-v">computer</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01</span></div><div class="crayon-line" id="crayon-5bcf8043ca110303145287-11"><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">machine </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">performing </span><span class="crayon-e">calculations </span><span class="crayon-e">automatically</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca110303145287-12"><span class="crayon-v">calculator</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01</span></div><div class="crayon-line" id="crayon-5bcf8043ca110303145287-13"><span class="crayon-e">an </span><span class="crayon-e">expert </span><span class="crayon-e">at </span><span class="crayon-e">calculation</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-st">or</span><span class="crayon-h"> </span><span class="crayon-e">at </span><span class="crayon-e">operating </span><span class="crayon-e">calculating </span><span class="crayon-v">machines</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></p>
+<p>The <em>name()</em> function gives the internal name of the word, since a word can have multiple definitions. In the example above, the word <em>computer</em> can mean the machine (stored internally as <em>computer.n.01</em>), or a human who performs calculations (stored as <em>calculator.n.01</em>).</p>
+<p>Interesting side history in no way related to this lesson: Till World War II, computers were humans, usually women, whose job was to manually calculate the trajectories of missiles, artillery etc. Of course, they had  cheat sheets, but they did the calculations by hand. Only after WWII, when computers became fast enough to do this job, did the word <em>computer</em> come to mean the machine. The definition above makes the distinction between the words.</p>
+<p>You can also look at example usage of words:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8043ca113319876599" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+syn = wordnet.synsets("talk")
+syn[0].examples()
+
+["let's have more work and less talk around here"]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8043ca113319876599-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca113319876599-2">2</div><div class="crayon-num" data-line="crayon-5bcf8043ca113319876599-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca113319876599-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8043ca113319876599-1"><span class="crayon-v">syn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">wordnet</span><span class="crayon-sy">.</span><span class="crayon-e">synsets</span><span class="crayon-sy">(</span><span class="crayon-s">"talk"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca113319876599-2"><span class="crayon-v">syn</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">.</span><span class="crayon-e">examples</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf8043ca113319876599-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca113319876599-4"><span class="crayon-sy">[</span><span class="crayon-s">"let's have more work and less talk around here"</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>Very useful advice- for me!</p>
+<p>If you don&#8217;t know what hyponyms and hypernyms are, the <a href="https://en.wikipedia.org/wiki/Hyponymy_and_hypernymy">Wikipedia page</a> is a good place to look. Actually, just the main image gives you a good idea:</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/en/1/1f/Hyponymsandhypernyms.jpg" class="alignnone" width="430" height="186" /></p>
+<p>Hypernym is the root of the word, color in the image above. Hyponyms are similar words, like the colors red blue green etc.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8043ca116725837526" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+syn = wordnet.synsets("speak")[0]
+
+print(syn.hypernyms())
+
+print(syn.hyponyms())
+
+[Synset('communicate.v.02')]
+
+[Synset('babble.v.01'), Synset('bark.v.01'), Synset('bay.v.01'), Synset('begin.v.04'),
+ Synset('blubber.v.02'), Synset('blurt_out.v.01'), Synset('bumble.v.03'),
+ Synset('cackle.v.01'), Synset('chatter.v.04'), Synset('chatter.v.05'), 
+Synset('deliver.v.01'), Synset('drone.v.02'), Synset('enthuse.v.02'), 
+Synset('generalize.v.02'), Synset('gulp.v.02'), Synset('hiss.v.03'), 
+Synset('lip_off.v.01'), Synset('mumble.v.01'), Synset('murmur.v.01'),
+ Synset('open_up.v.07'), Synset('peep.v.04'), Synset('rant.v.01'), 
+Synset('rasp.v.02'), Synset('read.v.03'), Synset('shout.v.01'), Synset('sing.v.02'), 
+Synset('slur.v.03'), Synset('snap.v.01'), Synset('snivel.v.01'), Synset('speak_in_tongues.v.01'), 
+Synset('speak_up.v.02'), Synset('swallow.v.04'), Synset('talk_of.v.01'), 
+Synset('tone.v.01'), Synset('tone.v.02'), Synset('troll.v.07'), Synset('verbalize.v.01'), 
+Synset('vocalize.v.05'), Synset('whiff.v.05'), Synset('whisper.v.01'), Synset('yack.v.01')]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8043ca116725837526-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca116725837526-2">2</div><div class="crayon-num" data-line="crayon-5bcf8043ca116725837526-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca116725837526-4">4</div><div class="crayon-num" data-line="crayon-5bcf8043ca116725837526-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca116725837526-6">6</div><div class="crayon-num" data-line="crayon-5bcf8043ca116725837526-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca116725837526-8">8</div><div class="crayon-num" data-line="crayon-5bcf8043ca116725837526-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca116725837526-10">10</div><div class="crayon-num" data-line="crayon-5bcf8043ca116725837526-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca116725837526-12">12</div><div class="crayon-num" data-line="crayon-5bcf8043ca116725837526-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca116725837526-14">14</div><div class="crayon-num" data-line="crayon-5bcf8043ca116725837526-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca116725837526-16">16</div><div class="crayon-num" data-line="crayon-5bcf8043ca116725837526-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca116725837526-18">18</div><div class="crayon-num" data-line="crayon-5bcf8043ca116725837526-19">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca116725837526-20">20</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8043ca116725837526-1"><span class="crayon-v">syn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">wordnet</span><span class="crayon-sy">.</span><span class="crayon-e">synsets</span><span class="crayon-sy">(</span><span class="crayon-s">"speak"</span><span class="crayon-sy">)</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca116725837526-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8043ca116725837526-3"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">syn</span><span class="crayon-sy">.</span><span class="crayon-e">hypernyms</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca116725837526-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8043ca116725837526-5"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">syn</span><span class="crayon-sy">.</span><span class="crayon-e">hyponyms</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca116725837526-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8043ca116725837526-7"><span class="crayon-sy">[</span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'communicate.v.02'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca116725837526-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8043ca116725837526-9"><span class="crayon-sy">[</span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'babble.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'bark.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'bay.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'begin.v.04'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca116725837526-10"><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'blubber.v.02'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'blurt_out.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'bumble.v.03'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca116725837526-11"><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'cackle.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'chatter.v.04'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'chatter.v.05'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca116725837526-12"><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'deliver.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'drone.v.02'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'enthuse.v.02'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-5bcf8043ca116725837526-13"><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'generalize.v.02'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'gulp.v.02'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'hiss.v.03'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca116725837526-14"><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'lip_off.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'mumble.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'murmur.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf8043ca116725837526-15"><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'open_up.v.07'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'peep.v.04'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'rant.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca116725837526-16"><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'rasp.v.02'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'read.v.03'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'shout.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'sing.v.02'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-5bcf8043ca116725837526-17"><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'slur.v.03'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'snap.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'snivel.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'speak_in_tongues.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca116725837526-18"><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'speak_up.v.02'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'swallow.v.04'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'talk_of.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-5bcf8043ca116725837526-19"><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'tone.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'tone.v.02'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'troll.v.07'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'verbalize.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca116725837526-20"><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'vocalize.v.05'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'whiff.v.05'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'whisper.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Synset</span><span class="crayon-sy">(</span><span class="crayon-s">'yack.v.01'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0029 seconds] -->
+<p></p>
+<p>You can see <em>communicate</em> is the root (hypernym) of <em>speak</em>, while there are dozens of similar words. <em>Babble, chatter, rant, troll, yack</em> are a few.</p>
+<p>What if you want to find the opposite word (antonym) of a word?</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8043ca119059569790" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+syn = wordnet.synsets("good")
+for s in syn:
+    for l in s.lemmas():
+        if (l.antonyms()):
+            print(l.antonyms())
+
+[Lemma('evil.n.03.evil')]
+[Lemma('evil.n.03.evilness')]
+[Lemma('bad.n.01.bad')]
+[Lemma('bad.n.01.badness')]
+[Lemma('bad.a.01.bad')]
+[Lemma('evil.a.01.evil')]
+[Lemma('ill.r.01.ill')]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8043ca119059569790-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca119059569790-2">2</div><div class="crayon-num" data-line="crayon-5bcf8043ca119059569790-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca119059569790-4">4</div><div class="crayon-num" data-line="crayon-5bcf8043ca119059569790-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca119059569790-6">6</div><div class="crayon-num" data-line="crayon-5bcf8043ca119059569790-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca119059569790-8">8</div><div class="crayon-num" data-line="crayon-5bcf8043ca119059569790-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca119059569790-10">10</div><div class="crayon-num" data-line="crayon-5bcf8043ca119059569790-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca119059569790-12">12</div><div class="crayon-num" data-line="crayon-5bcf8043ca119059569790-13">13</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8043ca119059569790-1"><span class="crayon-v">syn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">wordnet</span><span class="crayon-sy">.</span><span class="crayon-e">synsets</span><span class="crayon-sy">(</span><span class="crayon-s">"good"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca119059569790-2"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">s</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">syn</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8043ca119059569790-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">l</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">s</span><span class="crayon-sy">.</span><span class="crayon-e">lemmas</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca119059569790-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">l</span><span class="crayon-sy">.</span><span class="crayon-e">antonyms</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8043ca119059569790-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">l</span><span class="crayon-sy">.</span><span class="crayon-e">antonyms</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca119059569790-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8043ca119059569790-7"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'evil.n.03.evil'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca119059569790-8"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'evil.n.03.evilness'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf8043ca119059569790-9"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'bad.n.01.bad'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca119059569790-10"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'bad.n.01.badness'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf8043ca119059569790-11"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'bad.a.01.bad'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca119059569790-12"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'evil.a.01.evil'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf8043ca119059569790-13"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'ill.r.01.ill'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0011 seconds] -->
+<p></p>
+<p>We have to do it this way. <em>Lemma</em> is the internal nltk term for the unique words.</p>
+<p><em>Lemmas</em> can be used to find all similar words:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf8043ca11c269844502" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+syn = wordnet.synsets("book")
+for s in syn:
+    print(s.lemmas())
+
+[Lemma('book.n.01.book')]
+[Lemma('book.n.02.book'), Lemma('book.n.02.volume')]
+[Lemma('record.n.05.record'), Lemma('record.n.05.record_book'), Lemma('record.n.05.book')]
+[Lemma('script.n.01.script'), Lemma('script.n.01.book'), Lemma('script.n.01.playscript')]
+[Lemma('ledger.n.01.ledger'), Lemma('ledger.n.01.leger'), Lemma('ledger.n.01.account_book'), Lemma('ledger.n.01.book_of_account'), Lemma('ledger.n.01.book')]
+[Lemma('book.n.06.book')]
+[Lemma('book.n.07.book'), Lemma('book.n.07.rule_book')]
+[Lemma('koran.n.01.Koran'), Lemma('koran.n.01.Quran'), Lemma('koran.n.01.al-Qur'an'), Lemma('koran.n.01.Book')]
+[Lemma('bible.n.01.Bible'), Lemma('bible.n.01.Christian_Bible'), Lemma('bible.n.01.Book'), Lemma('bible.n.01.Good_Book'), Lemma('bible.n.01.Holy_Scripture'), Lemma('bible.n.01.Holy_Writ'), Lemma('bible.n.01.Scripture'), Lemma('bible.n.01.Word_of_God'), Lemma('bible.n.01.Word')]
+[Lemma('book.n.10.book')]
+[Lemma('book.n.11.book')]
+[Lemma('book.v.01.book')]
+[Lemma('reserve.v.04.reserve'), Lemma('reserve.v.04.hold'), Lemma('reserve.v.04.book')]
+[Lemma('book.v.03.book')]
+[Lemma('book.v.04.book')]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf8043ca11c269844502-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca11c269844502-2">2</div><div class="crayon-num" data-line="crayon-5bcf8043ca11c269844502-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca11c269844502-4">4</div><div class="crayon-num" data-line="crayon-5bcf8043ca11c269844502-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca11c269844502-6">6</div><div class="crayon-num" data-line="crayon-5bcf8043ca11c269844502-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca11c269844502-8">8</div><div class="crayon-num" data-line="crayon-5bcf8043ca11c269844502-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca11c269844502-10">10</div><div class="crayon-num" data-line="crayon-5bcf8043ca11c269844502-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca11c269844502-12">12</div><div class="crayon-num" data-line="crayon-5bcf8043ca11c269844502-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca11c269844502-14">14</div><div class="crayon-num" data-line="crayon-5bcf8043ca11c269844502-15">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca11c269844502-16">16</div><div class="crayon-num" data-line="crayon-5bcf8043ca11c269844502-17">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf8043ca11c269844502-18">18</div><div class="crayon-num" data-line="crayon-5bcf8043ca11c269844502-19">19</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf8043ca11c269844502-1"><span class="crayon-v">syn</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">wordnet</span><span class="crayon-sy">.</span><span class="crayon-e">synsets</span><span class="crayon-sy">(</span><span class="crayon-s">"book"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca11c269844502-2"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">s</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">syn</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf8043ca11c269844502-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">s</span><span class="crayon-sy">.</span><span class="crayon-e">lemmas</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca11c269844502-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf8043ca11c269844502-5"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'book.n.01.book'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca11c269844502-6"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'book.n.02.book'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'book.n.02.volume'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf8043ca11c269844502-7"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'record.n.05.record'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'record.n.05.record_book'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'record.n.05.book'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca11c269844502-8"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'script.n.01.script'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'script.n.01.book'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'script.n.01.playscript'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf8043ca11c269844502-9"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'ledger.n.01.ledger'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'ledger.n.01.leger'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'ledger.n.01.account_book'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'ledger.n.01.book_of_account'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'ledger.n.01.book'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca11c269844502-10"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'book.n.06.book'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf8043ca11c269844502-11"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'book.n.07.book'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'book.n.07.rule_book'</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca11c269844502-12"><span class="crayon-sy">[</span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'koran.n.01.Koran'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'koran.n.01.Quran'</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">Lemma</span><span class="crayon-sy">(</span><span class="crayon-s">'koran.n.01.al-Qur'</span><span class="crayon-i">an</span><span class="crayon-s">'), Lemma('</span><span class="crayon-v">koran</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01.Book</span><span class="crayon-s">')]</span></div><div class="crayon-line" id="crayon-5bcf8043ca11c269844502-13"><span class="crayon-s">[Lemma('</span><span class="crayon-v">bible</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01.Bible</span><span class="crayon-s">'), Lemma('</span><span class="crayon-v">bible</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01.Christian_Bible</span><span class="crayon-s">'), Lemma('</span><span class="crayon-v">bible</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01.Book</span><span class="crayon-s">'), Lemma('</span><span class="crayon-v">bible</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01.Good_Book</span><span class="crayon-s">'), Lemma('</span><span class="crayon-v">bible</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01.Holy_Scripture</span><span class="crayon-s">'), Lemma('</span><span class="crayon-v">bible</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01.Holy_Writ</span><span class="crayon-s">'), Lemma('</span><span class="crayon-v">bible</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01.Scripture</span><span class="crayon-s">'), Lemma('</span><span class="crayon-v">bible</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01.Word_of_God</span><span class="crayon-s">'), Lemma('</span><span class="crayon-v">bible</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">01.Word</span><span class="crayon-s">')]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca11c269844502-14"><span class="crayon-s">[Lemma('</span><span class="crayon-v">book</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">10.book</span><span class="crayon-s">')]</span></div><div class="crayon-line" id="crayon-5bcf8043ca11c269844502-15"><span class="crayon-s">[Lemma('</span><span class="crayon-v">book</span><span class="crayon-sy">.</span><span class="crayon-v">n</span><span class="crayon-sy">.</span><span class="crayon-cn">11.book</span><span class="crayon-s">')]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca11c269844502-16"><span class="crayon-s">[Lemma('</span><span class="crayon-v">book</span><span class="crayon-sy">.</span><span class="crayon-v">v</span><span class="crayon-sy">.</span><span class="crayon-cn">01.book</span><span class="crayon-s">')]</span></div><div class="crayon-line" id="crayon-5bcf8043ca11c269844502-17"><span class="crayon-s">[Lemma('</span><span class="crayon-v">reserve</span><span class="crayon-sy">.</span><span class="crayon-v">v</span><span class="crayon-sy">.</span><span class="crayon-cn">04.reserve</span><span class="crayon-s">'), Lemma('</span><span class="crayon-v">reserve</span><span class="crayon-sy">.</span><span class="crayon-v">v</span><span class="crayon-sy">.</span><span class="crayon-cn">04.hold</span><span class="crayon-s">'), Lemma('</span><span class="crayon-v">reserve</span><span class="crayon-sy">.</span><span class="crayon-v">v</span><span class="crayon-sy">.</span><span class="crayon-cn">04.book</span><span class="crayon-s">')]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf8043ca11c269844502-18"><span class="crayon-s">[Lemma('</span><span class="crayon-v">book</span><span class="crayon-sy">.</span><span class="crayon-v">v</span><span class="crayon-sy">.</span><span class="crayon-cn">03.book</span><span class="crayon-s">')]</span></div><div class="crayon-line" id="crayon-5bcf8043ca11c269844502-19"><span class="crayon-s">[Lemma('</span><span class="crayon-v">book</span><span class="crayon-sy">.</span><span class="crayon-v">v</span><span class="crayon-sy">.</span><span class="crayon-cn">04.book</span>'<span class="crayon-sy">)</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0028 seconds] -->
+<p></p>
+<p>You will see Bible and Quran in the list above, because they are synoymns (similar words) of the word book. Also words like script, record etc.</p>
+<p>This was a quick intro to the nltk library. I won&#8217;t go over every feature, as the free book linked to earlier has more stuff.</p>
+<p>In the next lesson, we will look at some more features in the nltk library that will help us build our sentiment analysis program.</p>
+<p><strong><a href="/intro-to-nltk-part-2/">Intro to NTLK, Part 2</a></strong></p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

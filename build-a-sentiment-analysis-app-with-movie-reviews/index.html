@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Build a Sentiment Analysis app with Movie Reviews &#8211; Python For Engineers</title>
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Feed" href="/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Python For Engineers &raquo; Comments Feed" href="/comments/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/pythonforengineers.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.8"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='crayon-css'  href='/wp-content/plugins/crayon-syntax-highlighter/css/min/crayon.min.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-theme-github-css'  href='/wp-content/plugins/crayon-syntax-highlighter/themes/github/github.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='crayon-font-monaco-css'  href='/wp-content/plugins/crayon-syntax-highlighter/fonts/monaco.css?ver=_2.7.2_beta' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Merriweather%3A400%2C700%2C900%2C400italic%2C700italic%2C900italic%7CMontserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='/wp-content/themes/twentysixteen/genericons/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='/wp-content/themes/twentysixteen/style.css?ver=4.9.8' type='text/css' media='all' />
+<!--[if lt IE 10]>
+<link rel='stylesheet' id='twentysixteen-ie-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentysixteen-ie8-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie8.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='twentysixteen-ie7-css'  href='http://pythonforengineers.com/wp-content/themes/twentysixteen/css/ie7.css?ver=20160816' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"_2.7.2_beta","is_admin":"0","ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/crayon-syntax-highlighter/js/min/crayon.min.js?ver=_2.7.2_beta'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='http://pythonforengineers.com/wp-content/themes/twentysixteen/js/html5.js?ver=3.7.3'></script>
+<![endif]-->
+<link rel='https://api.w.org/' href='/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 4.9.8" />
+<link rel="canonical" href="/build-a-sentiment-analysis-app-with-movie-reviews/" />
+<link rel='shortlink' href='/?p=1964' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fbuild-a-sentiment-analysis-app-with-movie-reviews%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fbuild-a-sentiment-analysis-app-with-movie-reviews%2F&#038;format=xml" />
+</head>
+
+<body class="page-template-default page page-id-1964">
+<div id="page" class="site">
+	<div class="site-inner">
+		<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+		<header id="masthead" class="site-header" role="banner">
+			<div class="site-header-main">
+				<div class="site-branding">
+					
+											<p class="site-title"><a href="/" rel="home">Python For Engineers</a></p>
+									</div><!-- .site-branding -->
+
+									<button id="menu-toggle" class="menu-toggle">Menu</button>
+
+					<div id="site-header-menu" class="site-header-menu">
+													<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Menu">
+								<div class="menu-main-container"><ul id="menu-main" class="primary-menu"><li id="menu-item-52" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li id="menu-item-1533" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>							</nav><!-- .main-navigation -->
+						
+											</div><!-- .site-header-menu -->
+							</div><!-- .site-header-main -->
+
+					</header><!-- .site-header -->
+
+		<div id="content" class="site-content">
+
+<div id="primary" class="content-area">
+	<main id="main" class="site-main" role="main">
+		
+<article id="post-1964" class="post-1964 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Build a Sentiment Analysis app with Movie Reviews</h1>	</header><!-- .entry-header -->
+
+	
+	<div class="entry-content">
+		<p><a href="/natural-language-processing-and-sentiment-analysis-with-python/"><strong>0. Introduction to NLP and Sentiment Analysis</strong></a></p>
+<p><strong><a href="/introduction-to-nltk-natural-language-processing-with-python/">1. Natural Language Processing with NTLK</a></strong></p>
+<p><strong><a href="/intro-to-nltk-part-2/">2. Intro to NTLK, Part 2</a></strong></p>
+<p><a href="/build-a-sentiment-analysis-app-with-movie-reviews/"><strong>3. Build a sentiment analysis program:</strong> </a> We finally use all we learnt above to make a program that analyses sentiment of movie reviews</p>
+<p><strong><a href="/practice-session-sentiment-analysis-with-twitter/">4. Sentiment Analysis with Twitter</a></strong>: A practice session for you, with a bit of learning.</p>
+<hr />
+<p>&nbsp;</p>
+<p>So now we use everything we have learnt to build a Sentiment Analysis app.</p>
+<p>Sentiment Analysis means finding the mood of the public about things like movies, politicians, stocks, or even current events. We will analyse the sentiment of the movie reviews corpus we saw earlier.</p>
+<p><em>Sentiment Analysis.ipynb</em> is the file we are working with.</p>
+<p><iframe width="800" height="450" src="https://player.vimeo.com/video/148791251?title=0&amp;byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe></p>
+<p><em>Only interested in videos? Go here for the next part: </em><a href="/practice-session-sentiment-analysis-with-twitter/">Sentiment Analysis with Twitter</a></p>
+<p>Let&#8217;s import our libraries:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53e87450139472" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+import nltk.classify.util
+from nltk.classify import NaiveBayesClassifier
+from nltk.corpus import movie_reviews
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53e87450139472-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53e87450139472-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53e87450139472-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53e87450139472-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fa53e87450139472-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53e87450139472-1"><span class="crayon-e">import </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-v">classify</span><span class="crayon-sy">.</span><span class="crayon-e">util</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53e87450139472-2"><span class="crayon-e">from </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-e">classify </span><span class="crayon-e">import </span><span class="crayon-e">NaiveBayesClassifier</span></div><div class="crayon-line" id="crayon-5bcf82fa53e87450139472-3"><span class="crayon-e">from </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-e">corpus </span><span class="crayon-e">import </span><span class="crayon-e">movie_reviews</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53e87450139472-4"><span class="crayon-e">from </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-e">corpus </span><span class="crayon-e">import </span><span class="crayon-e">stopwords</span></div><div class="crayon-line" id="crayon-5bcf82fa53e87450139472-5"><span class="crayon-e">from </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-e">tokenize </span><span class="crayon-e">import </span><span class="crayon-v">word_tokenize</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p>We will be using the Naive Bayes classifier for this example. The Naive Bayes is a fairly simple machine learning algorithm, that works mainly with probabilities. Stack Overflow has a great (if slightly long)<a href="http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification"> explanation of how</a> it works. The top 2 answers are worth reading.</p>
+<p>Before we start, there is something that had me stumped for a long time. I saw it in all the examples, but it didn&#8217;t make sense. But the Naive Bayes classifier, especially in the Nltk library, expects the input to be in this format: Every word must be followed by true. So for example, if you have these words:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53e90835312304" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+"Hello World"</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53e90835312304-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53e90835312304-1"><span class="crayon-s">"Hello World"</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0001 seconds] -->
+<p></p>
+<p>you need to pass it in as:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53e93413112790" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+{'Hello': True,  'World': True}</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53e93413112790-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53e93413112790-1"><span class="crayon-sy">{</span><span class="crayon-s">'Hello'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-s">'World'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>It&#8217;s just a quirk of the nltk library. What bothers me is <strong>none</strong> of the dozens of tutorials/videos I looked at make this clear. They just write this weird code to do so, and expect you to figure it out for yourselves. (Hurray for us).</p>
+<p>I&#8217;ll show you the function <em>I</em> wrote, and hopefully, <em>you</em> will understand why we need to do it this way. Here is the function:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53e97196542874" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# This is how the Naive Bayes classifier expects the input
+def create_word_features(words):
+    useful_words = [word for word in words if word not in stopwords.words("english")]
+    my_dict = dict([(word, True) for word in useful_words])
+    return my_dict</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53e97196542874-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53e97196542874-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53e97196542874-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53e97196542874-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fa53e97196542874-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53e97196542874-1"><span class="crayon-p"># This is how the Naive Bayes classifier expects the input</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53e97196542874-2"><span class="crayon-e">def </span><span class="crayon-e">create_word_features</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf82fa53e97196542874-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">useful_words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-t">word</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-t">word</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">words </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-t">word</span><span class="crayon-h"> </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">stopwords</span><span class="crayon-sy">.</span><span class="crayon-e">words</span><span class="crayon-sy">(</span><span class="crayon-s">"english"</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53e97196542874-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">my_dict</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">dict</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span><span class="crayon-sy">(</span><span class="crayon-t">word</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-t">word</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">useful_words</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fa53e97196542874-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">my_dict</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0009 seconds] -->
+<p></p>
+<p>Let&#8217;s go over it line by line.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53e9d617847525" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+# This is how the Naive Bayes classifier expects the input
+def create_word_features(words):
+    useful_words = [word for word in words if word not in stopwords.words("english")]</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53e9d617847525-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53e9d617847525-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53e9d617847525-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53e9d617847525-1"><span class="crayon-p"># This is how the Naive Bayes classifier expects the input</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53e9d617847525-2"><span class="crayon-e">def </span><span class="crayon-e">create_word_features</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf82fa53e9d617847525-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">useful_words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-t">word</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-t">word</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">words </span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-t">word</span><span class="crayon-h"> </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">stopwords</span><span class="crayon-sy">.</span><span class="crayon-e">words</span><span class="crayon-sy">(</span><span class="crayon-s">"english"</span><span class="crayon-sy">)</span><span class="crayon-sy">]</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>The first thing we do is remove all stopwords. This is what we did in the last lesson. This step is optional.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53ea0416648441" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+my_dict = dict([(word, True) for word in useful_words])
+return my_dict</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53ea0416648441-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ea0416648441-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53ea0416648441-1"><span class="crayon-v">my_dict</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">dict</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span><span class="crayon-sy">(</span><span class="crayon-t">word</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-t">word</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">useful_words</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ea0416648441-2"><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">my_dict</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>For each word, we create a dictionary with all the words and <em>True</em>. Why a dictionary? So that words are not repeated. If a word already exists, it won&#8217;t be added to the dictionary.</p>
+<p>Let&#8217;s see how this works:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53ea2305271517" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+create_word_features(["the", "quick", "brown", "quick", "a", "fox"])
+
+{'brown': True, 'fox': True, 'quick': True}</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53ea2305271517-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ea2305271517-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53ea2305271517-3">3</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53ea2305271517-1"><span class="crayon-e">create_word_features</span><span class="crayon-sy">(</span><span class="crayon-sy">[</span><span class="crayon-s">"the"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"quick"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"brown"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"quick"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"a"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"fox"</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ea2305271517-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fa53ea2305271517-3"><span class="crayon-sy">{</span><span class="crayon-s">'brown'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'fox'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'quick'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p></p>
+<p>We call our function with the string &#8220;the quick brown quick a fox&#8221;.</p>
+<p>You can see that a) The stop words are removed  b) Repeat words are removed  c) There is a True with each word.</p>
+<p>Again, this is just the format the Naive Bayes classifier in nltk expects.</p>
+<p>Okay, let&#8217;s start with the code. Remember, the sentiment analysis code is just a machine learning algorithm that has been trained to identify positive/negative reviews.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53ea5669951398" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+neg_reviews = []
+for fileid in movie_reviews.fileids('neg'):</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53ea5669951398-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ea5669951398-2">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53ea5669951398-1"><span class="crayon-v">neg_reviews</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ea5669951398-2"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">fileid </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">movie_reviews</span><span class="crayon-sy">.</span><span class="crayon-e">fileids</span><span class="crayon-sy">(</span><span class="crayon-s">'neg'</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>We create an empty list called <em>neg_reviews</em>. Next, we loop over all the files in the <em>neg</em> folder.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53ea8462728891" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+words = movie_reviews.words(fileid)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53ea8462728891-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53ea8462728891-1"><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">movie_reviews</span><span class="crayon-sy">.</span><span class="crayon-e">words</span><span class="crayon-sy">(</span><span class="crayon-v">fileid</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0002 seconds] -->
+<p></p>
+<p>We get all the words in that file.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53eab817952366" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+neg_reviews.append((create_word_features(words), "negative"))</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53eab817952366-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53eab817952366-1"><span class="crayon-v">neg_reviews</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-sy">(</span><span class="crayon-e">create_word_features</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"negative"</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>Then we use the function we wrote earlier to create word features in the format nltk expects. Here is a sample of the output:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53eae031699568" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+print(neg_reviews[0])    
+print(len(neg_reviews))
+
+({'entire': True, 'really': True, '.': True, 'beauty': True, 'generally': True, 'trying': True, 'ago': True, 'mess': True, 'personally': True,
+ 'starts': True, 'character': True, 'figured': True, 'throughout': True, 'ever': True, 'even': True,)}
+
+1000</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53eae031699568-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53eae031699568-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53eae031699568-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53eae031699568-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fa53eae031699568-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53eae031699568-6">6</div><div class="crayon-num" data-line="crayon-5bcf82fa53eae031699568-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53eae031699568-1"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">neg_reviews</span><span class="crayon-sy">[</span><span class="crayon-cn">0</span><span class="crayon-sy">]</span><span class="crayon-sy">)</span><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53eae031699568-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">neg_reviews</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fa53eae031699568-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53eae031699568-4"><span class="crayon-sy">(</span><span class="crayon-sy">{</span><span class="crayon-s">'entire'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'really'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'.'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'beauty'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'generally'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'trying'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'ago'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'mess'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'personally'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span></div><div class="crayon-line" id="crayon-5bcf82fa53eae031699568-5"><span class="crayon-h"> </span><span class="crayon-s">'starts'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'character'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'figured'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'throughout'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'ever'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'even'</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-t">True</span><span class="crayon-sy">,</span><span class="crayon-sy">)</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53eae031699568-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fa53eae031699568-7"><span class="crayon-cn">1000</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0013 seconds] -->
+<p></p>
+<p>So there are a 1000 negative reviews.</p>
+<p>Let&#8217;s do the same for the positive reviews. The code is exactly the same:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53eb1242227445" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+pos_reviews = []
+for fileid in movie_reviews.fileids('pos'):
+    words = movie_reviews.words(fileid)
+    pos_reviews.append((create_word_features(words), "positive"))
+    
+#print(pos_reviews[0])    
+print(len(pos_reviews))
+
+1000</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53eb1242227445-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53eb1242227445-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53eb1242227445-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53eb1242227445-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fa53eb1242227445-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53eb1242227445-6">6</div><div class="crayon-num" data-line="crayon-5bcf82fa53eb1242227445-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53eb1242227445-8">8</div><div class="crayon-num" data-line="crayon-5bcf82fa53eb1242227445-9">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53eb1242227445-1"><span class="crayon-v">pos_reviews</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53eb1242227445-2"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-e">fileid </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">movie_reviews</span><span class="crayon-sy">.</span><span class="crayon-e">fileids</span><span class="crayon-sy">(</span><span class="crayon-s">'pos'</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf82fa53eb1242227445-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">movie_reviews</span><span class="crayon-sy">.</span><span class="crayon-e">words</span><span class="crayon-sy">(</span><span class="crayon-v">fileid</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53eb1242227445-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">pos_reviews</span><span class="crayon-sy">.</span><span class="crayon-e">append</span><span class="crayon-sy">(</span><span class="crayon-sy">(</span><span class="crayon-e">create_word_features</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"positive"</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fa53eb1242227445-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53eb1242227445-6"><span class="crayon-p">#print(pos_reviews[0])&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5bcf82fa53eb1242227445-7"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">pos_reviews</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53eb1242227445-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fa53eb1242227445-9"><span class="crayon-cn">1000</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0008 seconds] -->
+<p></p>
+<p>So we have a 1000 negative and 1000 positive reviews, for a total of 2000. We will now create our test and train samples, this time manually:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53eb4102233834" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+train_set = neg_reviews[:750] + pos_reviews[:750]
+test_set =  neg_reviews[750:] + pos_reviews[750:]
+print(len(train_set),  len(test_set))
+
+1500 500</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53eb4102233834-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53eb4102233834-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53eb4102233834-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53eb4102233834-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fa53eb4102233834-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53eb4102233834-1"><span class="crayon-v">train_set</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">neg_reviews</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-cn">750</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-v">pos_reviews</span><span class="crayon-sy">[</span><span class="crayon-o">:</span><span class="crayon-cn">750</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53eb4102233834-2"><span class="crayon-v">test_set</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">neg_reviews</span><span class="crayon-sy">[</span><span class="crayon-cn">750</span><span class="crayon-o">:</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-v">pos_reviews</span><span class="crayon-sy">[</span><span class="crayon-cn">750</span><span class="crayon-o">:</span><span class="crayon-sy">]</span></div><div class="crayon-line" id="crayon-5bcf82fa53eb4102233834-3"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">train_set</span><span class="crayon-sy">)</span><span class="crayon-sy">,</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">test_set</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53eb4102233834-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fa53eb4102233834-5"><span class="crayon-cn">1500</span><span class="crayon-h"> </span><span class="crayon-cn">500</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0007 seconds] -->
+<p></p>
+<p>We end up with 1500 training samples and 500 test.</p>
+<p>Let&#8217;s create our Naive Bayes Classifier, and train it with our training set.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53eb7137199076" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+classifier = NaiveBayesClassifier.train(train_set)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53eb7137199076-1">1</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53eb7137199076-1"><span class="crayon-v">classifier</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">NaiveBayesClassifier</span><span class="crayon-sy">.</span><span class="crayon-e">train</span><span class="crayon-sy">(</span><span class="crayon-v">train_set</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0003 seconds] -->
+<p></p>
+<p>And let&#8217;s use our test set to find the accuracy:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53eb9654033067" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+accuracy = nltk.classify.util.accuracy(classifier, test_set)
+print(accuracy * 100)
+
+72.6</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53eb9654033067-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53eb9654033067-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53eb9654033067-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53eb9654033067-4">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53eb9654033067-1"><span class="crayon-v">accuracy</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">nltk</span><span class="crayon-sy">.</span><span class="crayon-v">classify</span><span class="crayon-sy">.</span><span class="crayon-v">util</span><span class="crayon-sy">.</span><span class="crayon-e">accuracy</span><span class="crayon-sy">(</span><span class="crayon-v">classifier</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">test_set</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53eb9654033067-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-e">accuracy *</span><span class="crayon-h"> </span><span class="crayon-cn">100</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fa53eb9654033067-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53eb9654033067-4"><span class="crayon-cn">72.6</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>Ac accuracy of 72%. Could you improve it? How?</p>
+<p>For now, I want to show you how to classify a review as negative or positive. But before that, a warning.</p>
+<p>The problem with sentiment analysis, as with any machine learning approach, is that your algorithm is only as good as your data. If your data is crap, your algorithm will be crap.</p>
+<p>Not only that, the algorithm depends on the type of input you train it with. So if you train your data with long movie reviews, it will not work with Twitter data, which is much shorter.</p>
+<p>This particular dataset is, imo, a bit short. Also, the reviews are very informal, using a lot of swear words etc. Which is why I found it not very accurate when comparing it to Imdb reviews, where swearing is discouraged and reviews are (slightly) more formal.</p>
+<p>Anyway, I was looking for negative and positive reviews. Our algorithm is more accurate when the review contains stronger words (<em>horrible</em> instead of <em>bad</em>). For the bad reviews, I found this gem of a movie. A real masterpiece:</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Santa_Claus_Conquers_the_Martians_1.jpg" class="aligncenter" width="371" height="560" /></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53ebc466331883" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+review_santa = '''
+
+It would be impossible to sum up all the stuff that sucks about this film, so I'll break it down into what I remember most strongly: a man in an ingeniously fake-looking polar bear costume (funnier than the "bear" from Hercules in New York); an extra with the most unnatural laugh you're ever likely to hear; an ex-dope addict martian with tics; kid actors who make sure every syllable of their lines are slowly and caaarreee-fulll-yyy prrooo-noun-ceeed; a newspaper headline stating that Santa's been "kidnaped", and a giant robot. Yes, you read that right. A giant robot.
+
+The worst acting job in here must be when Mother Claus and her elves have been "frozen" by the "Martians'" weapons. Could they be *more* trembling? I know this was the sixties and everyone was doped up, but still.
+'''
+print(review_santa )</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53ebc466331883-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ebc466331883-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53ebc466331883-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ebc466331883-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fa53ebc466331883-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ebc466331883-6">6</div><div class="crayon-num" data-line="crayon-5bcf82fa53ebc466331883-7">7</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53ebc466331883-1"><span class="crayon-v">review_santa</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">''</span><span class="crayon-s">'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ebc466331883-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fa53ebc466331883-3"><span class="crayon-s">It would be impossible to sum up all the stuff that sucks about this film, so I'</span><span class="crayon-e">ll </span><span class="crayon-st">break</span><span class="crayon-h"> </span><span class="crayon-e">it </span><span class="crayon-e">down </span><span class="crayon-e">into </span><span class="crayon-i">what</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-e">remember </span><span class="crayon-e">most </span><span class="crayon-v">strongly</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">man </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">an </span><span class="crayon-e">ingeniously </span><span class="crayon-v">fake</span><span class="crayon-o">-</span><span class="crayon-e">looking </span><span class="crayon-e">polar </span><span class="crayon-e">bear </span><span class="crayon-e">costume</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-e">funnier </span><span class="crayon-e">than </span><span class="crayon-i">the</span><span class="crayon-h"> </span><span class="crayon-s">"bear"</span><span class="crayon-h"> </span><span class="crayon-e">from </span><span class="crayon-e">Hercules </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-r">New</span><span class="crayon-h"> </span><span class="crayon-v">York</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-e">an </span><span class="crayon-e">extra </span><span class="crayon-e">with </span><span class="crayon-e">the </span><span class="crayon-e">most </span><span class="crayon-e">unnatural </span><span class="crayon-e">laugh </span><span class="crayon-i">you</span><span class="crayon-s">'re ever likely to hear; an ex-dope addict martian with tics; kid actors who make sure every syllable of their lines are slowly and caaarreee-fulll-yyy prrooo-noun-ceeed; a newspaper headline stating that Santa'</span><span class="crayon-i">s</span><span class="crayon-h"> </span><span class="crayon-i">been</span><span class="crayon-h"> </span><span class="crayon-s">"kidnaped"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">giant </span><span class="crayon-v">robot</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-v">Yes</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">you </span><span class="crayon-e">read </span><span class="crayon-e">that </span><span class="crayon-v">right</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-i">A</span><span class="crayon-h"> </span><span class="crayon-e">giant </span><span class="crayon-v">robot</span><span class="crayon-sy">.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ebc466331883-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fa53ebc466331883-5"><span class="crayon-e">The </span><span class="crayon-e">worst </span><span class="crayon-e">acting </span><span class="crayon-e">job </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">here </span><span class="crayon-e">must </span><span class="crayon-e">be </span><span class="crayon-e">when </span><span class="crayon-e">Mother </span><span class="crayon-e">Claus </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">her </span><span class="crayon-e">elves </span><span class="crayon-e">have </span><span class="crayon-i">been</span><span class="crayon-h"> </span><span class="crayon-s">"frozen"</span><span class="crayon-h"> </span><span class="crayon-e">by </span><span class="crayon-i">the</span><span class="crayon-h"> </span><span class="crayon-s">"Martians'"</span><span class="crayon-h"> </span><span class="crayon-v">weapons</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-e">Could </span><span class="crayon-e">they </span><span class="crayon-e">be *</span><span class="crayon-e">more*</span><span class="crayon-h"> </span><span class="crayon-v">trembling</span><span class="crayon-sy">?</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-e">know </span><span class="crayon-r">this</span><span class="crayon-h"> </span><span class="crayon-e">was </span><span class="crayon-e">the </span><span class="crayon-e">sixties </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">everyone </span><span class="crayon-e">was </span><span class="crayon-e">doped </span><span class="crayon-v">up</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">but </span><span class="crayon-v">still</span><span class="crayon-sy">.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ebc466331883-6"><span class="crayon-s">''</span>'</div><div class="crayon-line" id="crayon-5bcf82fa53ebc466331883-7"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">review</span><span class="crayon-sy">_</span>santa<span class="crayon-h"> </span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0021 seconds] -->
+<p></p>
+<p>We need to <em>word_tokenize</em> the text, call our function it, and then use the <em>classify()</em> function to let our algorithm decide if this is a positive or negative review.</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53ec1680142399" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+words = word_tokenize(review_santa)
+words = create_word_features(words)
+classifier.classify(words)
+
+'negative'</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53ec1680142399-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ec1680142399-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53ec1680142399-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ec1680142399-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fa53ec1680142399-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53ec1680142399-1"><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">word_tokenize</span><span class="crayon-sy">(</span><span class="crayon-v">review_santa</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ec1680142399-2"><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">create_word_features</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fa53ec1680142399-3"><span class="crayon-v">classifier</span><span class="crayon-sy">.</span><span class="crayon-e">classify</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ec1680142399-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fa53ec1680142399-5"><span class="crayon-s">'negative'</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>That was correct, but only because the review was <em>really</em> scathing.</p>
+<p>For the positive review, I chose one of my favourite movies, <em>Spirited Away</em>, a very beautiful movie:</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/en/3/30/Spirited_Away_poster.JPG" class="aligncenter" width="300" height="423" /></p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53ec4786882077" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+review_spirit = '''
+Spirited Away' is the first Miyazaki I have seen, but from this stupendous film I can tell he is a master storyteller. A hallmark of a good storyteller is making the audience empathise or pull them into the shoes of the central character. Miyazaki does this brilliantly in 'Spirited Away'. During the first fifteen minutes we have no idea what is going on. Neither does the main character Chihiro. We discover the world as Chihiro does and it's truly amazing to watch. But Miyazaki doesn't seem to treat this world as something amazing. The world is filmed just like our workaday world would. The inhabitants of the world go about their daily business as usual as full with apathy as us normal folks. Places and buildings are not greeted by towering establishing shots and majestic music. The fact that this place is amazing doesn't seem to concern Miyazaki.
+
+What do however, are the characters. Miyazaki lingers upon the characters as if they were actors. He infixes his animated actors with such subtleties that I have never seen, even from animation giants Pixar. Twenty minutes into this film and I completely forgot these were animated characters; I started to care for them like they were living and breathing. Miyazaki treats the modest achievements of Chihiro with unashamed bombast. The uplifting scene where she cleanses the River God is accompanied by stirring music and is as exciting as watching gladiatorial combatants fight. Of course, by giving the audience developed characters to care about, the action and conflicts will always be more exciting, terrifying and uplifting than normal, generic action scenes. 
+'''
+print(review_spirit)</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53ec4786882077-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ec4786882077-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53ec4786882077-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ec4786882077-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fa53ec4786882077-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ec4786882077-6">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53ec4786882077-1"><span class="crayon-v">review_spirit</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">''</span><span class="crayon-s">'</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ec4786882077-2"><span class="crayon-s">Spirited Away'</span><span class="crayon-h"> </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-e">the </span><span class="crayon-e">first </span><span class="crayon-i">Miyazaki</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-e">have </span><span class="crayon-v">seen</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">but </span><span class="crayon-e">from </span><span class="crayon-r">this</span><span class="crayon-h"> </span><span class="crayon-e">stupendous </span><span class="crayon-i">film</span><span class="crayon-h"> </span><span class="crayon-i">I</span><span class="crayon-h"> </span><span class="crayon-e">can </span><span class="crayon-e">tell </span><span class="crayon-e">he </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">master </span><span class="crayon-v">storyteller</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-i">A</span><span class="crayon-h"> </span><span class="crayon-e">hallmark </span><span class="crayon-i">of</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-e">good </span><span class="crayon-e">storyteller </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-e">making </span><span class="crayon-e">the </span><span class="crayon-e">audience </span><span class="crayon-e">empathise </span><span class="crayon-st">or</span><span class="crayon-h"> </span><span class="crayon-e">pull </span><span class="crayon-e">them </span><span class="crayon-e">into </span><span class="crayon-e">the </span><span class="crayon-e">shoes </span><span class="crayon-e">of </span><span class="crayon-e">the </span><span class="crayon-e">central </span><span class="crayon-v">character</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-e">Miyazaki </span><span class="crayon-e">does </span><span class="crayon-r">this</span><span class="crayon-h"> </span><span class="crayon-e">brilliantly </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-s">'Spirited Away'</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-e">During </span><span class="crayon-e">the </span><span class="crayon-e">first </span><span class="crayon-e">fifteen </span><span class="crayon-e">minutes </span><span class="crayon-e">we </span><span class="crayon-e">have </span><span class="crayon-e">no </span><span class="crayon-e">idea </span><span class="crayon-e">what </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-e">going </span><span class="crayon-v">on</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-e">Neither </span><span class="crayon-e">does </span><span class="crayon-e">the </span><span class="crayon-e">main </span><span class="crayon-e">character </span><span class="crayon-v">Chihiro</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-e">We </span><span class="crayon-e">discover </span><span class="crayon-e">the </span><span class="crayon-e">world </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-e">Chihiro </span><span class="crayon-e">does </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-i">it</span><span class="crayon-s">'s truly amazing to watch. But Miyazaki doesn'</span><span class="crayon-i">t</span><span class="crayon-h"> </span><span class="crayon-e">seem </span><span class="crayon-st">to</span><span class="crayon-h"> </span><span class="crayon-e">treat </span><span class="crayon-r">this</span><span class="crayon-h"> </span><span class="crayon-e">world </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-e">something </span><span class="crayon-v">amazing</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-e">The </span><span class="crayon-e">world </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-e">filmed </span><span class="crayon-e">just </span><span class="crayon-e">like </span><span class="crayon-e">our </span><span class="crayon-e">workaday </span><span class="crayon-e">world </span><span class="crayon-v">would</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-e">The </span><span class="crayon-e">inhabitants </span><span class="crayon-e">of </span><span class="crayon-e">the </span><span class="crayon-e">world </span><span class="crayon-e">go </span><span class="crayon-e">about </span><span class="crayon-e">their </span><span class="crayon-e">daily </span><span class="crayon-e">business </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-e">usual </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-e">full </span><span class="crayon-e">with </span><span class="crayon-e">apathy </span><span class="crayon-st">as</span><span class="crayon-h"> </span><span class="crayon-e">us </span><span class="crayon-e">normal </span><span class="crayon-v">folks</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-e">Places </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">buildings </span><span class="crayon-e">are </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-e">greeted </span><span class="crayon-e">by </span><span class="crayon-e">towering </span><span class="crayon-e">establishing </span><span class="crayon-e">shots </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">majestic </span><span class="crayon-v">music</span><span class="crayon-sy">.</span><span class="crayon-h"> </span><span class="crayon-e">The </span><span class="crayon-e">fact </span><span class="crayon-e">that </span><span class="crayon-r">this</span><span class="crayon-h"> </span><span class="crayon-e">place </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-e">amazing </span><span class="crayon-i">doesn</span><span class="crayon-s">'t seem to concern Miyazaki.</span></div><div class="crayon-line" id="crayon-5bcf82fa53ec4786882077-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ec4786882077-4"><span class="crayon-s">What do however, are the characters. Miyazaki lingers upon the characters as if they were actors. He infixes his animated actors with such subtleties that I have never seen, even from animation giants Pixar. Twenty minutes into this film and I completely forgot these were animated characters; I started to care for them like they were living and breathing. Miyazaki treats the modest achievements of Chihiro with unashamed bombast. The uplifting scene where she cleanses the River God is accompanied by stirring music and is as exciting as watching gladiatorial combatants fight. Of course, by giving the audience developed characters to care about, the action and conflicts will always be more exciting, terrifying and uplifting than normal, generic action scenes. </span></div><div class="crayon-line" id="crayon-5bcf82fa53ec4786882077-5"><span class="crayon-s">'</span><span class="crayon-s">''</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ec4786882077-6"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">review_spirit</span><span class="crayon-sy">)</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0027 seconds] -->
+<p></p>
+<p>Repeat the steps:</p>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5bcf82fa53ec7838861063" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		
+			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
+words = word_tokenize(review_spirit)
+words = create_word_features(words)
+classifier.classify(words)
+
+'positive'</textarea></div>
+			<div class="crayon-main" style="">
+				<table class="crayon-table">
+					<tr class="crayon-row">
+				<td class="crayon-nums" data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf82fa53ec7838861063-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ec7838861063-2">2</div><div class="crayon-num" data-line="crayon-5bcf82fa53ec7838861063-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf82fa53ec7838861063-4">4</div><div class="crayon-num" data-line="crayon-5bcf82fa53ec7838861063-5">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf82fa53ec7838861063-1"><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">word_tokenize</span><span class="crayon-sy">(</span><span class="crayon-v">review_spirit</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ec7838861063-2"><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">create_word_features</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf82fa53ec7838861063-3"><span class="crayon-v">classifier</span><span class="crayon-sy">.</span><span class="crayon-e">classify</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf82fa53ec7838861063-4">&nbsp;</div><div class="crayon-line" id="crayon-5bcf82fa53ec7838861063-5"><span class="crayon-s">'positive'</span></div></div></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<p>Correct again, but I&#8217;d like to repeat, the  classifier isn&#8217;t very accurate overall, I suspect because the original sample is very small and not  very representative for Imdb reviews. But it&#8217;s good enough for learning.</p>
+<p>Okay, the next video is not just a practice session, but also contains some learning exercises, so I strongly recommend you do it. We will build a Sentiment analysis engine with Twitter data.</p>
+<p><strong><a href="/practice-session-sentiment-analysis-with-twitter/">Sentiment Analysis with Twitter</a></strong></p>
+
+
+
+	</div><!-- .entry-content -->
+
+	
+</article><!-- #post-## -->
+
+	</main><!-- .site-main -->
+
+	
+</div><!-- .content-area -->
+
+
+	<aside id="secondary" class="sidebar widget-area" role="complementary">
+		<section id="search-4" class="widget widget_search">
+<form role="search" method="get" class="search-form" action="/">
+	<label>
+		<span class="screen-reader-text">Search for:</span>
+		<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+	</label>
+	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
+</form>
+</section>	</aside><!-- .sidebar .widget-area -->
+
+		</div><!-- .site-content -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+							<nav class="main-navigation" role="navigation" aria-label="Footer Primary Menu">
+					<div class="menu-main-container"><ul id="menu-main-1" class="primary-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-52"><a href="/articles/">Articles</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1533"><a href="/about/">About</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-35"><a href="/contact/">Contact</a></li>
+</ul></div>				</nav><!-- .main-navigation -->
+			
+			
+			<div class="site-info">
+								<span class="site-title"><a href="/" rel="home">Python For Engineers</a></span>
+								<a href="https://wordpress.org/" class="imprint">
+					Proudly powered by WordPress				</a>
+			</div><!-- .site-info -->
+		</footer><!-- .site-footer -->
+	</div><!-- .site-inner -->
+</div><!-- .site -->
+
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/skip-link-focus-fix.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var screenReaderText = {"expand":"expand child menu","collapse":"collapse child menu"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/themes/twentysixteen/js/functions.js?ver=20160816'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var tve_dash_front = {"ajaxurl":"http:\/\/pythonforengineers.com\/wp-admin\/admin-ajax.php","force_ajax_send":"","is_crawler":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='/wp-content/plugins/thrive-visual-editor/thrive-dashboard/js/dist/frontend.min.js?ver=2.0.45'></script>
+<script type='text/javascript' src='/wp-includes/js/wp-embed.min.js?ver=4.9.8'></script>
+</body>
+</html>

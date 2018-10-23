@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Your Favorite Programming Language Sucks</title>
+	<atom:link href="/favorite-programming-language-sucks/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/favorite-programming-language-sucks/#comment-33155</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 26 Jul 2018 21:17:03 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-33155</guid>
+		<description><![CDATA[Pythons “one way “ is pure propaganda. 
+
+Shhh, don’t tell anyone, or the Python secret police will have you picked up. 
+
+YOU HAVE BEEN WARNED.]]></description>
+		<content:encoded><![CDATA[<p>Pythons “one way “ is pure propaganda. </p>
+<p>Shhh, don’t tell anyone, or the Python secret police will have you picked up. </p>
+<p>YOU HAVE BEEN WARNED.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/favorite-programming-language-sucks/#comment-33154</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 26 Jul 2018 21:14:19 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-33154</guid>
+		<description><![CDATA[Haha. Great comment. <img src="https://s.w.org/images/core/emoji/11/72x72/1f44d.png" alt="👍" class="wp-smiley" style="height: 1em; max-height: 1em;" /> 
+
+I’ll add it to the blog at some point. If you want credit, send me a message with a link to your Twitter etc]]></description>
+		<content:encoded><![CDATA[<p>Haha. Great comment. 👍 </p>
+<p>I’ll add it to the blog at some point. If you want credit, send me a message with a link to your Twitter etc</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: blahblah</title>
+		<link>/favorite-programming-language-sucks/#comment-33149</link>
+		<dc:creator><![CDATA[blahblah]]></dc:creator>
+		<pubDate>Thu, 26 Jul 2018 19:29:41 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-33149</guid>
+		<description><![CDATA[Haven&#039;t really seen SQL listed .. probably because it&#039;s more of a scripting language. But, both MS and Oracle decided to turn a simple ANSI standard scripting language into their own versions of a procedural language with all kinds of extra garbled syntax that isn&#039;t even standardized between them!
+
+&quot;Hmmm... I SQL won&#039;t let me run loops, because, you know, it&#039;s only designed to query information from a database once and return the results. Instead of using another language to code a loop statement that I feed a SQL statement through.. let&#039;s just create a procedural version of SQL that lets folks code loops WITHIN SQL! That&#039;d be so cool!&quot;
+
+No. It&#039;s not. Coding procedural statements in SQL is a PITA, and best left to procedural languages that have been doing it better.
+
+Plus, just SQL in general is a nice, clean, simple scripting language.. until you want to do some complicated stuff with it.. like hook together 20 tables b/c some DBA thought it&#039;d be cute to hyper-normalize the database without any slight denormalization to put common ID&#039;s in a few tables in order to do the same query with 5 tables instead of 20. And then you need to code big hair-ball sub-statements in the WHERE clause to act like a filter, because the toolbags in the IS dept won&#039;t give you the ability to make temp tables. And then you need a massive ORDER BY statement to order everything, and let&#039;s not forget that often you&#039;re being asked to aggregate data, so you need to write nasty formulas to do math and then debug where you&#039;re borking it all up in the HAVING clause.
+
+You started the day with a small SQL script. You ended the day with a 5 page hair-ball nightmare.
+
+Oh, and now your exec wants you to automate the output as a daily report, b/c they saw you writing code, and EVERYONE knows that &quot;code = automation&quot;.
+
+Awesome.
+
+You did all that up in Query Analyzer, which was basically a dumbed-down SQL IDE / glorified text editor. It has no automation ability. So, now you have to pester the IT guys to add your script to the autorun stack, and they&#039;ll complain b/c they&#039;d rather reinvent it in SQL Reporting Services (but poorly) and don&#039;t have time for that. Or, you can run it manually every day. Or you have to crack open an MS Access database to act as a shell to run it every day and figure something out with Windows Task Scheduler to make the Access database fire off the SQL statement as a macro on a timer.
+
+But, no.. no... SQL is a perfectly good language. smh]]></description>
+		<content:encoded><![CDATA[<p>Haven&#8217;t really seen SQL listed .. probably because it&#8217;s more of a scripting language. But, both MS and Oracle decided to turn a simple ANSI standard scripting language into their own versions of a procedural language with all kinds of extra garbled syntax that isn&#8217;t even standardized between them!</p>
+<p>&#8220;Hmmm&#8230; I SQL won&#8217;t let me run loops, because, you know, it&#8217;s only designed to query information from a database once and return the results. Instead of using another language to code a loop statement that I feed a SQL statement through.. let&#8217;s just create a procedural version of SQL that lets folks code loops WITHIN SQL! That&#8217;d be so cool!&#8221;</p>
+<p>No. It&#8217;s not. Coding procedural statements in SQL is a PITA, and best left to procedural languages that have been doing it better.</p>
+<p>Plus, just SQL in general is a nice, clean, simple scripting language.. until you want to do some complicated stuff with it.. like hook together 20 tables b/c some DBA thought it&#8217;d be cute to hyper-normalize the database without any slight denormalization to put common ID&#8217;s in a few tables in order to do the same query with 5 tables instead of 20. And then you need to code big hair-ball sub-statements in the WHERE clause to act like a filter, because the toolbags in the IS dept won&#8217;t give you the ability to make temp tables. And then you need a massive ORDER BY statement to order everything, and let&#8217;s not forget that often you&#8217;re being asked to aggregate data, so you need to write nasty formulas to do math and then debug where you&#8217;re borking it all up in the HAVING clause.</p>
+<p>You started the day with a small SQL script. You ended the day with a 5 page hair-ball nightmare.</p>
+<p>Oh, and now your exec wants you to automate the output as a daily report, b/c they saw you writing code, and EVERYONE knows that &#8220;code = automation&#8221;.</p>
+<p>Awesome.</p>
+<p>You did all that up in Query Analyzer, which was basically a dumbed-down SQL IDE / glorified text editor. It has no automation ability. So, now you have to pester the IT guys to add your script to the autorun stack, and they&#8217;ll complain b/c they&#8217;d rather reinvent it in SQL Reporting Services (but poorly) and don&#8217;t have time for that. Or, you can run it manually every day. Or you have to crack open an MS Access database to act as a shell to run it every day and figure something out with Windows Task Scheduler to make the Access database fire off the SQL statement as a macro on a timer.</p>
+<p>But, no.. no&#8230; SQL is a perfectly good language. smh</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: blahblah</title>
+		<link>/favorite-programming-language-sucks/#comment-33148</link>
+		<dc:creator><![CDATA[blahblah]]></dc:creator>
+		<pubDate>Thu, 26 Jul 2018 19:15:15 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-33148</guid>
+		<description><![CDATA[Not a rant about a specific language, but my problem when doing web coding is that it&#039;s a hodge-podge of various languages all kit-bashed together.
+
+You have some kind of ASP.net thing as a page server language
+You have HTML used to form the basic page presentation
+You have DHTML to do a few more unique things (is it just part of HTML now?)
+You have JavaScript needed to do more functionality / interactivity
+
+It&#039;s the 21st century. Can&#039;t we have one unified &quot;web language&quot; and get on with life? It&#039;s awful reading through someone&#039;s web code who wrote it all horribly and trying to constantly switch brain gears to see if their HTML, JavaScript, ASP, etc is wrong or not. It&#039;s just a hot mess. HTML5 promises to standardize more of that, but the W3C wants to add more features to HTML5 then a lot of folks need, so now it becomes a hot mess nightmare of language bloat.
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Also, I&#039;ve gotten into Python lately for school, and I find it confusing how they try to preach &quot;one way to do a thing and only one way&quot; yet there&#039;s 2 ways to do something.. 1) the obvious, and 2) &quot;some smart aleck is trying to show everyone how smart they know by doing it the not-so-obvious way that is harder to debug&quot;.
+
+And you even have weird stuff like this...
+##############
+x = [1,3,2,4]
+y = sum(x)
+z = x.sort
+
+print(&quot;x = &quot; + str(x))
+print(&quot;y = &quot; + str(y))
+print(&quot;z = &quot; + str(z))
+#############
+What you get is x&#039;s values sorted in numerical order, y is sum of x&#039;s values, and z says it&#039;s set to a sort method... NOT a new list of x&#039;s contents sorted.
+
+Essentially, what miff&#039;s is that in most cases you have to create a &quot;left = right&quot; statement to have something set to somethign else.. and the part on the right of the statement is not changing the object that&#039;s performing the task.
+
+But, things like x.sort ... the method sorts the list itself and AUTOMATICALLY sets it to the sorted list.
+
+So, you can type...
+
+x.sort
+
+.. and that will execute and sort the list. But, that seems to go against the way most everything else in python works, where you would assume that...
+
+x.sort
+
+... wouldnt&#039; do anything, b/c it&#039;s sorting x, but there&#039;s no value to set it to, so nothing happens...and if you did want to have x store the sorted list you&#039;d have to do...
+
+x = x.sort
+
+But, that&#039;s not the way to do it. Nope.... x.sort sorts itself AND sets x to the sorted value.
+
+It&#039;s just bonkers how they can&#039;t seem to standardize how things work. Personally, I don&#039;t think anything should auto-commit to a change unless you explicitly did a ...
+
+x = x.sort
+
+... that way it was very clear that you were setting x to the sorted version of itself.
+
+So, in using Python, it&#039;s hard to tell what methods will auto-commit an object to whatever it&#039;s doing, and which ones require you to &quot;x = ...&quot; to commit it.
+
+The goal of Python is to simplify and standardize things, but they can&#039;t seem to do that even with the core functionality of the f&#039;ing language, much less when you start importing code lib&#039;s and use their jack-assery.]]></description>
+		<content:encoded><![CDATA[<p>Not a rant about a specific language, but my problem when doing web coding is that it&#8217;s a hodge-podge of various languages all kit-bashed together.</p>
+<p>You have some kind of ASP.net thing as a page server language<br />
+You have HTML used to form the basic page presentation<br />
+You have DHTML to do a few more unique things (is it just part of HTML now?)<br />
+You have JavaScript needed to do more functionality / interactivity</p>
+<p>It&#8217;s the 21st century. Can&#8217;t we have one unified &#8220;web language&#8221; and get on with life? It&#8217;s awful reading through someone&#8217;s web code who wrote it all horribly and trying to constantly switch brain gears to see if their HTML, JavaScript, ASP, etc is wrong or not. It&#8217;s just a hot mess. HTML5 promises to standardize more of that, but the W3C wants to add more features to HTML5 then a lot of folks need, so now it becomes a hot mess nightmare of language bloat.<br />
+~~~~~~~~~~~~~~~~~~~~~~~~~<br />
+Also, I&#8217;ve gotten into Python lately for school, and I find it confusing how they try to preach &#8220;one way to do a thing and only one way&#8221; yet there&#8217;s 2 ways to do something.. 1) the obvious, and 2) &#8220;some smart aleck is trying to show everyone how smart they know by doing it the not-so-obvious way that is harder to debug&#8221;.</p>
+<p>And you even have weird stuff like this&#8230;<br />
+##############<br />
+x = [1,3,2,4]<br />
+y = sum(x)<br />
+z = x.sort</p>
+<p>print(&#8220;x = &#8221; + str(x))<br />
+print(&#8220;y = &#8221; + str(y))<br />
+print(&#8220;z = &#8221; + str(z))<br />
+#############<br />
+What you get is x&#8217;s values sorted in numerical order, y is sum of x&#8217;s values, and z says it&#8217;s set to a sort method&#8230; NOT a new list of x&#8217;s contents sorted.</p>
+<p>Essentially, what miff&#8217;s is that in most cases you have to create a &#8220;left = right&#8221; statement to have something set to somethign else.. and the part on the right of the statement is not changing the object that&#8217;s performing the task.</p>
+<p>But, things like x.sort &#8230; the method sorts the list itself and AUTOMATICALLY sets it to the sorted list.</p>
+<p>So, you can type&#8230;</p>
+<p>x.sort</p>
+<p>.. and that will execute and sort the list. But, that seems to go against the way most everything else in python works, where you would assume that&#8230;</p>
+<p>x.sort</p>
+<p>&#8230; wouldnt&#8217; do anything, b/c it&#8217;s sorting x, but there&#8217;s no value to set it to, so nothing happens&#8230;and if you did want to have x store the sorted list you&#8217;d have to do&#8230;</p>
+<p>x = x.sort</p>
+<p>But, that&#8217;s not the way to do it. Nope&#8230;. x.sort sorts itself AND sets x to the sorted value.</p>
+<p>It&#8217;s just bonkers how they can&#8217;t seem to standardize how things work. Personally, I don&#8217;t think anything should auto-commit to a change unless you explicitly did a &#8230;</p>
+<p>x = x.sort</p>
+<p>&#8230; that way it was very clear that you were setting x to the sorted version of itself.</p>
+<p>So, in using Python, it&#8217;s hard to tell what methods will auto-commit an object to whatever it&#8217;s doing, and which ones require you to &#8220;x = &#8230;&#8221; to commit it.</p>
+<p>The goal of Python is to simplify and standardize things, but they can&#8217;t seem to do that even with the core functionality of the f&#8217;ing language, much less when you start importing code lib&#8217;s and use their jack-assery.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Ya Boi JOHHNY</title>
+		<link>/favorite-programming-language-sucks/#comment-31096</link>
+		<dc:creator><![CDATA[Ya Boi JOHHNY]]></dc:creator>
+		<pubDate>Sat, 30 Jun 2018 13:04:12 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-31096</guid>
+		<description><![CDATA[played by the programmer!]]></description>
+		<content:encoded><![CDATA[<p>played by the programmer!</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/favorite-programming-language-sucks/#comment-23537</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Sat, 23 Dec 2017 10:52:01 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-23537</guid>
+		<description><![CDATA[Not to mention commands that are a mile long]]></description>
+		<content:encoded><![CDATA[<p>Not to mention commands that are a mile long</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: fointard</title>
+		<link>/favorite-programming-language-sucks/#comment-23527</link>
+		<dc:creator><![CDATA[fointard]]></dc:creator>
+		<pubDate>Fri, 22 Dec 2017 21:10:11 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-23527</guid>
+		<description><![CDATA[Powershell : Sucks just like everyone else here, except you get the problems before you even start to code. #Set-ExecutionPolicy]]></description>
+		<content:encoded><![CDATA[<p>Powershell : Sucks just like everyone else here, except you get the problems before you even start to code. #Set-ExecutionPolicy</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/favorite-programming-language-sucks/#comment-23000</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Fri, 24 Nov 2017 13:29:54 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-23000</guid>
+		<description><![CDATA[Oh yeah? Challenge accepted.]]></description>
+		<content:encoded><![CDATA[<p>Oh yeah? Challenge accepted.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Matt</title>
+		<link>/favorite-programming-language-sucks/#comment-22995</link>
+		<dc:creator><![CDATA[Matt]]></dc:creator>
+		<pubDate>Thu, 23 Nov 2017 23:51:46 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-22995</guid>
+		<description><![CDATA[But can you shit on D?  I bet not! It&#039;s pretty awesome.  Everybody loves D.]]></description>
+		<content:encoded><![CDATA[<p>But can you shit on D?  I bet not! It&#8217;s pretty awesome.  Everybody loves D.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Non-Idiot</title>
+		<link>/favorite-programming-language-sucks/#comment-22847</link>
+		<dc:creator><![CDATA[Non-Idiot]]></dc:creator>
+		<pubDate>Fri, 17 Nov 2017 14:40:26 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-22847</guid>
+		<description><![CDATA[One thing I hate about this list is that it only talks about the trope like issues. Sure, pointers are evil (because most programmers can&#039;t program), programing requires too much typing and is too verbose (because most programmers can&#039;t program), we need visual programming (because most programmers can&#039;t program), functional programming is confusing (because most programmers can&#039;t program), and sure python/ruby/perl is the cult of programmers (that can&#039;t program like every other cult language ;p). And who seriously uses JavaScript, it cannot even compile itself! (only programmers that cannot program use JavaScript)
+
+Even assembly... come on, program in machine code like a REAL PROGRAMMER does it! Real programmers just start typing in hex and spit out a fully runnable program. It&#039;s time to step up to REAL programming.]]></description>
+		<content:encoded><![CDATA[<p>One thing I hate about this list is that it only talks about the trope like issues. Sure, pointers are evil (because most programmers can&#8217;t program), programing requires too much typing and is too verbose (because most programmers can&#8217;t program), we need visual programming (because most programmers can&#8217;t program), functional programming is confusing (because most programmers can&#8217;t program), and sure python/ruby/perl is the cult of programmers (that can&#8217;t program like every other cult language ;p). And who seriously uses JavaScript, it cannot even compile itself! (only programmers that cannot program use JavaScript)</p>
+<p>Even assembly&#8230; come on, program in machine code like a REAL PROGRAMMER does it! Real programmers just start typing in hex and spit out a fully runnable program. It&#8217;s time to step up to REAL programming.</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: What the Bleep is Docker?</title>
+	<atom:link href="/what-the-bleep-is-docker/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: 7.15 Docker &#8211; 全栈Python</title>
+		<link>/what-the-bleep-is-docker/#comment-20751</link>
+		<dc:creator><![CDATA[7.15 Docker &#8211; 全栈Python]]></dc:creator>
+		<pubDate>Sun, 07 May 2017 10:56:41 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1510#comment-20751</guid>
+		<description><![CDATA[[&#8230;] What the Bleep is Docker? is a plain English explanation with examples of what Docker provides and what it can be used for in your environment. [&#8230;]]]></description>
+		<content:encoded><![CDATA[<p>[&#8230;] What the Bleep is Docker? is a plain English explanation with examples of what Docker provides and what it can be used for in your environment. [&#8230;]</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sebastian</title>
+		<link>/what-the-bleep-is-docker/#comment-16160</link>
+		<dc:creator><![CDATA[sebastian]]></dc:creator>
+		<pubDate>Sat, 28 Mar 2015 14:23:43 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1510#comment-16160</guid>
+		<description><![CDATA[they are closed source opengl heavy apps with command line interfaces for headless graphcs rendering]]></description>
+		<content:encoded><![CDATA[<p>they are closed source opengl heavy apps with command line interfaces for headless graphcs rendering</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/what-the-bleep-is-docker/#comment-16157</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Fri, 27 Mar 2015 22:33:37 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1510#comment-16157</guid>
+		<description><![CDATA[Yes, it uses Virtualbox, but adds a lot of cool features. Like, you can script the Virtual machine bringup. So that all you need to do is type &lt;i&gt; vagrant up&lt;/i&gt; and you will get the exact same VM as me.
+
+Also, if you are using, say Windows, you can continue using your favorite editor, while still developing in Linux.
+
+Vagrant has completely changed the VM game. Give it a try- it&#039;s quiet easy to get started with.]]></description>
+		<content:encoded><![CDATA[<p>Yes, it uses Virtualbox, but adds a lot of cool features. Like, you can script the Virtual machine bringup. So that all you need to do is type <i> vagrant up</i> and you will get the exact same VM as me.</p>
+<p>Also, if you are using, say Windows, you can continue using your favorite editor, while still developing in Linux.</p>
+<p>Vagrant has completely changed the VM game. Give it a try- it&#8217;s quiet easy to get started with.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Clark</title>
+		<link>/what-the-bleep-is-docker/#comment-16156</link>
+		<dc:creator><![CDATA[Clark]]></dc:creator>
+		<pubDate>Fri, 27 Mar 2015 16:17:56 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1510#comment-16156</guid>
+		<description><![CDATA[But it still needs to be run in something like virtualbox correct? So is it basically setting up your virtual machine and getting it to a development usable state?]]></description>
+		<content:encoded><![CDATA[<p>But it still needs to be run in something like virtualbox correct? So is it basically setting up your virtual machine and getting it to a development usable state?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/what-the-bleep-is-docker/#comment-16155</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Fri, 27 Mar 2015 11:36:21 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1510#comment-16155</guid>
+		<description><![CDATA[Depends. Are you compiling these apps from source, or are you just downloading them?]]></description>
+		<content:encoded><![CDATA[<p>Depends. Are you compiling these apps from source, or are you just downloading them?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/what-the-bleep-is-docker/#comment-16154</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Fri, 27 Mar 2015 11:34:22 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1510#comment-16154</guid>
+		<description><![CDATA[Vagrant is a very easy way to run Virtual Machines. 
+
+https://www.vagrantup.com/
+
+Nowadays, I would always use a Vagrant if I needed a VM.
+
+
+]]></description>
+		<content:encoded><![CDATA[<p>Vagrant is a very easy way to run Virtual Machines. </p>
+<p><a href="https://www.vagrantup.com/" rel="nofollow">https://www.vagrantup.com/</a></p>
+<p>Nowadays, I would always use a Vagrant if I needed a VM.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: sebastian</title>
+		<link>/what-the-bleep-is-docker/#comment-16153</link>
+		<dc:creator><![CDATA[sebastian]]></dc:creator>
+		<pubDate>Fri, 27 Mar 2015 11:01:46 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1510#comment-16153</guid>
+		<description><![CDATA[Hey, interesting writeup, do you have any experience dockerising apps like Maya or Nuke and their environments? Does it make sense?]]></description>
+		<content:encoded><![CDATA[<p>Hey, interesting writeup, do you have any experience dockerising apps like Maya or Nuke and their environments? Does it make sense?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Clark</title>
+		<link>/what-the-bleep-is-docker/#comment-16152</link>
+		<dc:creator><![CDATA[Clark]]></dc:creator>
+		<pubDate>Fri, 27 Mar 2015 00:52:47 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1510#comment-16152</guid>
+		<description><![CDATA[Alright, now what the bleep is Vagrant?]]></description>
+		<content:encoded><![CDATA[<p>Alright, now what the bleep is Vagrant?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>
