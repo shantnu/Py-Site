@@ -10,10 +10,35 @@
 	<atom:link href="/build-a-reddit-bot-part-3-automate-your-bot/feed/" rel="self" type="application/rss+xml" />
 	<link>/</link>
 	<description></description>
-	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 24 Oct 2018 06:26:31 +0000</lastBuildDate>
 	<sy:updatePeriod>hourly</sy:updatePeriod>
 	<sy:updateFrequency>1</sy:updateFrequency>
 	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Nate Henderson</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-37687</link>
+		<dc:creator><![CDATA[Nate Henderson]]></dc:creator>
+		<pubDate>Fri, 05 Oct 2018 10:59:11 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-37687</guid>
+		<description><![CDATA[The sudo pip install praw command wasn&#039;t working for me with the http url. I specified it as an https. That changed the error message. Now it says:
+
+Downloading/unpacking praw
+  Running setup.py egg_info for package praw
+    Couldn&#039;t find index page for &#039;pytest-runner&#039; (maybe misspelled?)
+    No local packages or download links found for pytest-runner&#062;=2.1
+
+I&#039;m a beginner and would appreciate any advice on what to try next.
+
+Thank you so much.]]></description>
+		<content:encoded><![CDATA[<p>The sudo pip install praw command wasn&#8217;t working for me with the http url. I specified it as an https. That changed the error message. Now it says:</p>
+<p>Downloading/unpacking praw<br />
+  Running setup.py egg_info for package praw<br />
+    Couldn&#8217;t find index page for &#8216;pytest-runner&#8217; (maybe misspelled?)<br />
+    No local packages or download links found for pytest-runner&gt;=2.1</p>
+<p>I&#8217;m a beginner and would appreciate any advice on what to try next.</p>
+<p>Thank you so much.</p>
+]]></content:encoded>
+	</item>
 	<item>
 		<title>By: Shantnu</title>
 		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-37616</link>
@@ -188,16 +213,6 @@ Also, what platform are you using (Cygwin? Debian?). You will have to search for
 <p>/usr/local/lib/python2.7/dist-packages/requests/packages/urllib3/util/ssl_.py:132: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. You can upgrade to a newer version of Python to solve this. For more information, see <a href="https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings" rel="nofollow">https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings</a></p>
 <p>  InsecurePlatformWarning</p>
 <p>/usr/local/lib/python2.7/dist-packages/requests/packages/urllib3/util/ssl_.py:132: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. You can upgrade to a newer version of Python to solve this. For more information, see <a href="https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings" rel="nofollow">https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings</a></p>
-]]></content:encoded>
-	</item>
-	<item>
-		<title>By: Shantnu</title>
-		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-20519</link>
-		<dc:creator><![CDATA[Shantnu]]></dc:creator>
-		<pubDate>Fri, 07 Apr 2017 19:50:49 +0000</pubDate>
-		<guid isPermaLink="false">/?page_id=269#comment-20519</guid>
-		<description><![CDATA[Debugging cron scripts is a pain (I know from experience). I would try to write some output to a file, to check if the script is even running. It took me a few tries before even I got it working.]]></description>
-		<content:encoded><![CDATA[<p>Debugging cron scripts is a pain (I know from experience). I would try to write some output to a file, to check if the script is even running. It took me a few tries before even I got it working.</p>
 ]]></content:encoded>
 	</item>
 </channel>

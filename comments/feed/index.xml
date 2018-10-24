@@ -10,10 +10,75 @@
 	<atom:link href="/comments/feed/" rel="self" type="application/rss+xml" />
 	<link>/</link>
 	<description></description>
-	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 24 Oct 2018 06:26:31 +0000</lastBuildDate>
 	<sy:updatePeriod>hourly</sy:updatePeriod>
 	<sy:updateFrequency>1</sy:updateFrequency>
 	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>Comment on Build Software Robots with Python by aravind</title>
+		<link>/build-software-robots-with-python/#comment-39151</link>
+		<dc:creator><![CDATA[aravind]]></dc:creator>
+		<pubDate>Wed, 24 Oct 2018 06:26:31 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=319#comment-39151</guid>
+		<description><![CDATA[thanks for good information]]></description>
+		<content:encoded><![CDATA[<p>thanks for good information</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Templates in Flask by James</title>
+		<link>/templates-flask-python/#comment-39127</link>
+		<dc:creator><![CDATA[James]]></dc:creator>
+		<pubDate>Tue, 23 Oct 2018 03:40:12 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=290#comment-39127</guid>
+		<description><![CDATA[Thank you! Helpful :)]]></description>
+		<content:encoded><![CDATA[<p>Thank you! Helpful 🙂</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Your Favorite Programming Language Sucks by Abhinav</title>
+		<link>/favorite-programming-language-sucks/#comment-39023</link>
+		<dc:creator><![CDATA[Abhinav]]></dc:creator>
+		<pubDate>Sun, 21 Oct 2018 14:57:04 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-39023</guid>
+		<description><![CDATA[Btw sorted(#list) can be used to achieve what you wanted in this case]]></description>
+		<content:encoded><![CDATA[<p>Btw sorted(#list) can be used to achieve what you wanted in this case</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Contact by Jimmy Johns</title>
+		<link>/contact/#comment-37835</link>
+		<dc:creator><![CDATA[Jimmy Johns]]></dc:creator>
+		<pubDate>Sun, 07 Oct 2018 22:36:42 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=32#comment-37835</guid>
+		<description><![CDATA[Yeah the way he explained contact was good.]]></description>
+		<content:encoded><![CDATA[<p>Yeah the way he explained contact was good.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>Comment on Build a Reddit Bot Part 3: Automate your bot by Nate Henderson</title>
+		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-37687</link>
+		<dc:creator><![CDATA[Nate Henderson]]></dc:creator>
+		<pubDate>Fri, 05 Oct 2018 10:59:11 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=269#comment-37687</guid>
+		<description><![CDATA[The sudo pip install praw command wasn&#039;t working for me with the http url. I specified it as an https. That changed the error message. Now it says:
+
+Downloading/unpacking praw
+  Running setup.py egg_info for package praw
+    Couldn&#039;t find index page for &#039;pytest-runner&#039; (maybe misspelled?)
+    No local packages or download links found for pytest-runner&#062;=2.1
+
+I&#039;m a beginner and would appreciate any advice on what to try next.
+
+Thank you so much.]]></description>
+		<content:encoded><![CDATA[<p>The sudo pip install praw command wasn&#8217;t working for me with the http url. I specified it as an https. That changed the error message. Now it says:</p>
+<p>Downloading/unpacking praw<br />
+  Running setup.py egg_info for package praw<br />
+    Couldn&#8217;t find index page for &#8216;pytest-runner&#8217; (maybe misspelled?)<br />
+    No local packages or download links found for pytest-runner&gt;=2.1</p>
+<p>I&#8217;m a beginner and would appreciate any advice on what to try next.</p>
+<p>Thank you so much.</p>
+]]></content:encoded>
+	</item>
 	<item>
 		<title>Comment on Build a Reddit Bot Part 3: Automate your bot by Shantnu</title>
 		<link>/build-a-reddit-bot-part-3-automate-your-bot/#comment-37616</link>
@@ -134,160 +199,6 @@ Thanks]]></description>
 <p>Your tutorial was exactly what I needed.  I&#8217;ll let you know if it works out.</p>
 <p>You asked if more tutorials would be beneficial.  YES  Focussed on engineering with the GIO.  </p>
 <p>Thanks</p>
-]]></content:encoded>
-	</item>
-	<item>
-		<title>Comment on Python on Windows causing you pain? Try Anaconda by chitra lalawat</title>
-		<link>/python-on-windows-causing-you-pain-try-anaconda/#comment-35873</link>
-		<dc:creator><![CDATA[chitra lalawat]]></dc:creator>
-		<pubDate>Fri, 07 Sep 2018 12:14:47 +0000</pubDate>
-		<guid isPermaLink="false">/?page_id=79#comment-35873</guid>
-		<description><![CDATA[Hey... 
-type the line below in anaconda prompt-
-conda install -c anaconda opencv]]></description>
-		<content:encoded><![CDATA[<p>Hey&#8230;<br />
-type the line below in anaconda prompt-<br />
-conda install -c anaconda opencv</p>
-]]></content:encoded>
-	</item>
-	<item>
-		<title>Comment on Your first GUI app with Python and PyQt by Shantnu</title>
-		<link>/your-first-gui-app-with-python-and-pyqt/#comment-35152</link>
-		<dc:creator><![CDATA[Shantnu]]></dc:creator>
-		<pubDate>Mon, 27 Aug 2018 21:50:59 +0000</pubDate>
-		<guid isPermaLink="false">/?page_id=1410#comment-35152</guid>
-		<description><![CDATA[Never done it on the RPI, so can’t say. 
-
-Maybe other commenters can help......]]></description>
-		<content:encoded><![CDATA[<p>Never done it on the RPI, so can’t say. </p>
-<p>Maybe other commenters can help&#8230;&#8230;</p>
-]]></content:encoded>
-	</item>
-	<item>
-		<title>Comment on Your first GUI app with Python and PyQt by Dan Kuzdas</title>
-		<link>/your-first-gui-app-with-python-and-pyqt/#comment-35151</link>
-		<dc:creator><![CDATA[Dan Kuzdas]]></dc:creator>
-		<pubDate>Mon, 27 Aug 2018 21:37:17 +0000</pubDate>
-		<guid isPermaLink="false">/?page_id=1410#comment-35151</guid>
-		<description><![CDATA[Shantnu
-I have updated my code but really bumping my head against the wall on how to update a textbox within the MyApp  QT class based on def good / def bad GPIO inputs on the Raspberry pi
-See code below:
-Looking to use the Raspberry pi to update a MySQL database with real time production data. Have it all working with QPushButton events, but need to pass contact closure  event to MyApp class
-Any Thoughts 
- 
-from __future__ import division
-import sys
-from PyQt4 import QtCore, QtGui, uic
-import RPi.GPIO as GPIO
-import time
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
-def scrap(channel):
-    GPIO.output(18, GPIO.HIGH)
-    print(&#039;scrap part&#039;)
-    
-    # How would I update a text box in the  in the MyApp Class? 
-
-def good(channel):
-    GPIO.output(18, GPIO.HIGH)
-    print(&#039;good part&#039;)
-
-    # How would I update a text box in the  in the MyApp Class? 
-    
-    time.sleep(0.1)
-    GPIO.output(18, GPIO.LOW)
-
-GPIO.add_event_detect(24, GPIO.FALLING, callback=scrap, bouncetime=500)
-GPIO.add_event_detect(25, GPIO.FALLING, callback=good, bouncetime=500)
-
-qtCreatorFile = &quot;tax_calc.ui&quot; # Enter file here.
-Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
-class MyApp(QtGui.QMainWindow, Ui_MainWindow):
-    def __init__(self):
-        QtGui.QMainWindow.__init__(self)
-        Ui_MainWindow.__init__(self)
-        self.setupUi(self)
-        self.calc_tax_button.clicked.connect(self.CalculateTax)
-
-    def CalculateTax(self):
-        price = int(self.price_box.toPlainText())
-        tax = (self.tax_rate.value())
-        total_price = price  + ((tax / 100) * price)
-        total_price_string = &quot;The total price with tax is: &quot; + str(total_price)
-        self.results_window.setText(total_price_string)
-   
-if __name__ == &quot;__main__&quot;:
-    app = QtGui.QApplication(sys.argv)
-    window = MyApp()
-    window.show()
-    sys.exit(app.exec_())]]></description>
-		<content:encoded><![CDATA[<p>Shantnu<br />
-I have updated my code but really bumping my head against the wall on how to update a textbox within the MyApp  QT class based on def good / def bad GPIO inputs on the Raspberry pi<br />
-See code below:<br />
-Looking to use the Raspberry pi to update a MySQL database with real time production data. Have it all working with QPushButton events, but need to pass contact closure  event to MyApp class<br />
-Any Thoughts </p>
-<p>from __future__ import division<br />
-import sys<br />
-from PyQt4 import QtCore, QtGui, uic<br />
-import RPi.GPIO as GPIO<br />
-import time</p>
-<p>GPIO.setmode(GPIO.BCM)<br />
-GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_UP)<br />
-GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_UP)</p>
-<p>def scrap(channel):<br />
-    GPIO.output(18, GPIO.HIGH)<br />
-    print(&#8216;scrap part&#8217;)</p>
-<p>    # How would I update a text box in the  in the MyApp Class? </p>
-<p>def good(channel):<br />
-    GPIO.output(18, GPIO.HIGH)<br />
-    print(&#8216;good part&#8217;)</p>
-<p>    # How would I update a text box in the  in the MyApp Class? </p>
-<p>    time.sleep(0.1)<br />
-    GPIO.output(18, GPIO.LOW)</p>
-<p>GPIO.add_event_detect(24, GPIO.FALLING, callback=scrap, bouncetime=500)<br />
-GPIO.add_event_detect(25, GPIO.FALLING, callback=good, bouncetime=500)</p>
-<p>qtCreatorFile = &#8220;tax_calc.ui&#8221; # Enter file here.<br />
-Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)<br />
-class MyApp(QtGui.QMainWindow, Ui_MainWindow):<br />
-    def __init__(self):<br />
-        QtGui.QMainWindow.__init__(self)<br />
-        Ui_MainWindow.__init__(self)<br />
-        self.setupUi(self)<br />
-        self.calc_tax_button.clicked.connect(self.CalculateTax)</p>
-<p>    def CalculateTax(self):<br />
-        price = int(self.price_box.toPlainText())<br />
-        tax = (self.tax_rate.value())<br />
-        total_price = price  + ((tax / 100) * price)<br />
-        total_price_string = &#8220;The total price with tax is: &#8221; + str(total_price)<br />
-        self.results_window.setText(total_price_string)</p>
-<p>if __name__ == &#8220;__main__&#8221;:<br />
-    app = QtGui.QApplication(sys.argv)<br />
-    window = MyApp()<br />
-    window.show()<br />
-    sys.exit(app.exec_())</p>
-]]></content:encoded>
-	</item>
-	<item>
-		<title>Comment on Your first GUI app with Python and PyQt by Shantnu</title>
-		<link>/your-first-gui-app-with-python-and-pyqt/#comment-35000</link>
-		<dc:creator><![CDATA[Shantnu]]></dc:creator>
-		<pubDate>Sat, 25 Aug 2018 15:41:38 +0000</pubDate>
-		<guid isPermaLink="false">/?page_id=1410#comment-35000</guid>
-		<description><![CDATA[Thanks <img src="https://s.w.org/images/core/emoji/11/72x72/1f64f.png" alt="🙏" class="wp-smiley" style="height: 1em; max-height: 1em;" />]]></description>
-		<content:encoded><![CDATA[<p>Thanks 🙏</p>
-]]></content:encoded>
-	</item>
-	<item>
-		<title>Comment on Your first GUI app with Python and PyQt by Sapan Mankad</title>
-		<link>/your-first-gui-app-with-python-and-pyqt/#comment-34997</link>
-		<dc:creator><![CDATA[Sapan Mankad]]></dc:creator>
-		<pubDate>Sat, 25 Aug 2018 14:56:19 +0000</pubDate>
-		<guid isPermaLink="false">/?page_id=1410#comment-34997</guid>
-		<description><![CDATA[This is an excellent tutorial for all beginners like me for PyQt GUI Design in Python. You are helping the community with such informative blogs. Keep on doing this. Looking forward for more such blogs from you. Thanks..!]]></description>
-		<content:encoded><![CDATA[<p>This is an excellent tutorial for all beginners like me for PyQt GUI Design in Python. You are helping the community with such informative blogs. Keep on doing this. Looking forward for more such blogs from you. Thanks..!</p>
 ]]></content:encoded>
 	</item>
 </channel>

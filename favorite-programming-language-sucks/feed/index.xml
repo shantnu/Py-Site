@@ -10,10 +10,20 @@
 	<atom:link href="/favorite-programming-language-sucks/feed/" rel="self" type="application/rss+xml" />
 	<link>/</link>
 	<description></description>
-	<lastBuildDate>Thu, 04 Oct 2018 09:41:38 +0000</lastBuildDate>
+	<lastBuildDate>Wed, 24 Oct 2018 06:26:31 +0000</lastBuildDate>
 	<sy:updatePeriod>hourly</sy:updatePeriod>
 	<sy:updateFrequency>1</sy:updateFrequency>
 	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Abhinav</title>
+		<link>/favorite-programming-language-sucks/#comment-39023</link>
+		<dc:creator><![CDATA[Abhinav]]></dc:creator>
+		<pubDate>Sun, 21 Oct 2018 14:57:04 +0000</pubDate>
+		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-39023</guid>
+		<description><![CDATA[Btw sorted(#list) can be used to achieve what you wanted in this case]]></description>
+		<content:encoded><![CDATA[<p>Btw sorted(#list) can be used to achieve what you wanted in this case</p>
+]]></content:encoded>
+	</item>
 	<item>
 		<title>By: Shantnu</title>
 		<link>/favorite-programming-language-sucks/#comment-33155</link>
@@ -215,19 +225,6 @@ What you get is x&#8217;s values sorted in numerical order, y is sum of x&#8217;
 		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-22995</guid>
 		<description><![CDATA[But can you shit on D?  I bet not! It&#039;s pretty awesome.  Everybody loves D.]]></description>
 		<content:encoded><![CDATA[<p>But can you shit on D?  I bet not! It&#8217;s pretty awesome.  Everybody loves D.</p>
-]]></content:encoded>
-	</item>
-	<item>
-		<title>By: Non-Idiot</title>
-		<link>/favorite-programming-language-sucks/#comment-22847</link>
-		<dc:creator><![CDATA[Non-Idiot]]></dc:creator>
-		<pubDate>Fri, 17 Nov 2017 14:40:26 +0000</pubDate>
-		<guid isPermaLink="false">http://pyskool.com/?page_id=548#comment-22847</guid>
-		<description><![CDATA[One thing I hate about this list is that it only talks about the trope like issues. Sure, pointers are evil (because most programmers can&#039;t program), programing requires too much typing and is too verbose (because most programmers can&#039;t program), we need visual programming (because most programmers can&#039;t program), functional programming is confusing (because most programmers can&#039;t program), and sure python/ruby/perl is the cult of programmers (that can&#039;t program like every other cult language ;p). And who seriously uses JavaScript, it cannot even compile itself! (only programmers that cannot program use JavaScript)
-
-Even assembly... come on, program in machine code like a REAL PROGRAMMER does it! Real programmers just start typing in hex and spit out a fully runnable program. It&#039;s time to step up to REAL programming.]]></description>
-		<content:encoded><![CDATA[<p>One thing I hate about this list is that it only talks about the trope like issues. Sure, pointers are evil (because most programmers can&#8217;t program), programing requires too much typing and is too verbose (because most programmers can&#8217;t program), we need visual programming (because most programmers can&#8217;t program), functional programming is confusing (because most programmers can&#8217;t program), and sure python/ruby/perl is the cult of programmers (that can&#8217;t program like every other cult language ;p). And who seriously uses JavaScript, it cannot even compile itself! (only programmers that cannot program use JavaScript)</p>
-<p>Even assembly&#8230; come on, program in machine code like a REAL PROGRAMMER does it! Real programmers just start typing in hex and spit out a fully runnable program. It&#8217;s time to step up to REAL programming.</p>
 ]]></content:encoded>
 	</item>
 </channel>

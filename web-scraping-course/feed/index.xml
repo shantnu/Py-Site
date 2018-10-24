@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments on: Web Scraping Course</title>
+	<atom:link href="/web-scraping-course/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description></description>
+	<lastBuildDate>Wed, 24 Oct 2018 06:26:31 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.8</generator>
+	<item>
+		<title>By: Haris</title>
+		<link>/web-scraping-course/#comment-25984</link>
+		<dc:creator><![CDATA[Haris]]></dc:creator>
+		<pubDate>Fri, 30 Mar 2018 03:21:04 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1157#comment-25984</guid>
+		<description><![CDATA[Can i gain knowledge to scrap and save the data into database in this course?]]></description>
+		<content:encoded><![CDATA[<p>Can i gain knowledge to scrap and save the data into database in this course?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/web-scraping-course/#comment-24038</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 18 Jan 2018 10:40:06 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1157#comment-24038</guid>
+		<description><![CDATA[No. 
+
+I’m no longer working on this.]]></description>
+		<content:encoded><![CDATA[<p>No. </p>
+<p>I’m no longer working on this.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Daniel</title>
+		<link>/web-scraping-course/#comment-24036</link>
+		<dc:creator><![CDATA[Daniel]]></dc:creator>
+		<pubDate>Thu, 18 Jan 2018 08:26:41 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1157#comment-24036</guid>
+		<description><![CDATA[Has it been redesigned yet?]]></description>
+		<content:encoded><![CDATA[<p>Has it been redesigned yet?</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Matthew Cleghorn (@krupnik)</title>
+		<link>/web-scraping-course/#comment-17203</link>
+		<dc:creator><![CDATA[Matthew Cleghorn (@krupnik)]]></dc:creator>
+		<pubDate>Thu, 26 Nov 2015 12:23:06 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1157#comment-17203</guid>
+		<description><![CDATA[Excellent, looking forward to it.]]></description>
+		<content:encoded><![CDATA[<p>Excellent, looking forward to it.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Shantnu</title>
+		<link>/web-scraping-course/#comment-17202</link>
+		<dc:creator><![CDATA[Shantnu]]></dc:creator>
+		<pubDate>Thu, 26 Nov 2015 12:22:45 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1157#comment-17202</guid>
+		<description><![CDATA[I am re-designing the course, and it will be available in its new form soon.]]></description>
+		<content:encoded><![CDATA[<p>I am re-designing the course, and it will be available in its new form soon.</p>
+]]></content:encoded>
+	</item>
+	<item>
+		<title>By: Matthew Cleghorn (@krupnik)</title>
+		<link>/web-scraping-course/#comment-17199</link>
+		<dc:creator><![CDATA[Matthew Cleghorn (@krupnik)]]></dc:creator>
+		<pubDate>Thu, 26 Nov 2015 11:18:20 +0000</pubDate>
+		<guid isPermaLink="false">/?page_id=1157#comment-17199</guid>
+		<description><![CDATA[How do I buy this course?]]></description>
+		<content:encoded><![CDATA[<p>How do I buy this course?</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

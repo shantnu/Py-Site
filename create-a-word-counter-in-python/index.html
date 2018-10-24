@@ -62,7 +62,9 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 <link rel='shortlink' href='/?p=2969' />
 <link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fcreate-a-word-counter-in-python%2F" />
 <link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F%2Fcreate-a-word-counter-in-python%2F&#038;format=xml" />
-</head>
+		<style type="text/css" id="wp-custom-css">
+			.site-info { display: None}		</style>
+	</head>
 
 <body class="page-template-default page page-id-2969">
 <div id="page" class="site">
@@ -133,7 +135,7 @@ var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Cl
 <p>Okay folks, we are going to start gentle. We will build a simple utility called word counter. Those of you who have used Linux will know this as the wc utility. On Linux, you can type:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b0d570440805" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae889247b188295938" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 wc &lt;filename&gt;</textarea></div>
@@ -141,21 +143,21 @@ wc &lt;filename&gt;</textarea></div>
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b0d570440805-1">1</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae889247b188295938-1">1</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b0d570440805-1"><span class="crayon-v">wc</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">filename</span><span class="crayon-o">&gt;</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae889247b188295938-1"><span class="crayon-v">wc</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">filename</span><span class="crayon-o">&gt;</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0005 seconds] -->
+<!-- [Format Time: 0.0004 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>to get the number of words, lines and characters in a file. The wc utility is quite advanced, of course, since it has been around for a long time. We are going to build a baby version of that. This is more interesting than just printing <em>Hello World</em> to the screen.</p>
 <p>With that in mind, let’s start. The file we are working with is read_file.py, which is in the folder Wordcount.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b1a995069173" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae8892486892468842" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 #!/usr/bin/python
@@ -164,9 +166,9 @@ wc &lt;filename&gt;</textarea></div>
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b1a995069173-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b1a995069173-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae8892486892468842-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae8892486892468842-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b1a995069173-1"><span class="crayon-p">#!/usr/bin/python</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b1a995069173-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae8892486892468842-1"><span class="crayon-p">#!/usr/bin/python</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae8892486892468842-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
@@ -177,7 +179,7 @@ wc &lt;filename&gt;</textarea></div>
 <p>Let&#8217;s start looking at the code.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b20252441779" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae889248a283165646" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 f = open("birds.txt", "r")
@@ -186,9 +188,9 @@ f = open("birds.txt", "r")
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b20252441779-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b20252441779-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae889248a283165646-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae889248a283165646-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b20252441779-1"><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-s">"birds.txt"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"r"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b20252441779-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae889248a283165646-1"><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-s">"birds.txt"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"r"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae889248a283165646-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
@@ -198,7 +200,7 @@ f = open("birds.txt", "r")
 <p>We simply open a file called “birds.txt”. It must exist in the current directory (ie, the directory you are running the code from). Later on, we will cover reading from the command line, but for now, the path is hard coded. The <em>r</em> means the file will be opened in a read only mode. Other common modes are <em>w</em> for write, <em>a</em> for append. You can also read/write binary files, however we won’t go into that for the moment. Our files are plain text.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b25089464404" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae889248d461858511" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 data = f.read()
@@ -208,19 +210,19 @@ f.close()
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b25089464404-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b25089464404-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b25089464404-3">3</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae889248d461858511-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae889248d461858511-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae889248d461858511-3">3</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b25089464404-1"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b25089464404-2"><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75b25089464404-3">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae889248d461858511-1"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae889248d461858511-2"><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae889248d461858511-3">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0005 seconds] -->
+<!-- [Format Time: 0.0004 seconds] -->
 <p></p>
 <p>After opening the file, we read its contents into a variable called data, and close the file.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b2a719078095" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae8892490400691621" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 print(data)
@@ -229,20 +231,20 @@ print(data)
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b2a719078095-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b2a719078095-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae8892490400691621-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae8892490400691621-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b2a719078095-1"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b2a719078095-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae8892490400691621-1"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae8892490400691621-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0003 seconds] -->
+<!-- [Format Time: 0.0002 seconds] -->
 <p></p>
 <p>And we print the file. And now, to test our code.<br />
 If you are on Linux, you can just type:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b32751638782" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae8892492956995887" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 ./read_file.py
@@ -251,19 +253,19 @@ If you are on Linux, you can just type:</p>
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b32751638782-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b32751638782-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae8892492956995887-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae8892492956995887-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b32751638782-1"><span class="crayon-sy">.</span><span class="crayon-o">/</span><span class="crayon-v">read_file</span><span class="crayon-sy">.</span><span class="crayon-i">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b32751638782-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae8892492956995887-1"><span class="crayon-sy">.</span><span class="crayon-o">/</span><span class="crayon-v">read_file</span><span class="crayon-sy">.</span><span class="crayon-i">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae8892492956995887-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0003 seconds] -->
+<!-- [Format Time: 0.0002 seconds] -->
 <p></p>
 <p>to run it. You might have to make the file executable. On Windows, you’ll need to do:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b37039187511" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae8892495796080970" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 python read_file.py
@@ -272,19 +274,19 @@ python read_file.py
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b37039187511-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b37039187511-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae8892495796080970-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae8892495796080970-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b37039187511-1"><span class="crayon-e">python </span><span class="crayon-v">read_file</span><span class="crayon-sy">.</span><span class="crayon-i">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b37039187511-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae8892495796080970-1"><span class="crayon-e">python </span><span class="crayon-v">read_file</span><span class="crayon-sy">.</span><span class="crayon-i">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae8892495796080970-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0003 seconds] -->
+<!-- [Format Time: 0.0002 seconds] -->
 <p></p>
 <p>Go to the folder called WordCount, and run the file there:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b3c246625067" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae8892498307555472" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 python ./read_file.py
@@ -304,21 +306,21 @@ with a sigh.
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b3c246625067-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b3c246625067-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b3c246625067-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b3c246625067-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75b3c246625067-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b3c246625067-6">6</div><div class="crayon-num" data-line="crayon-5bcf830f75b3c246625067-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b3c246625067-8">8</div><div class="crayon-num" data-line="crayon-5bcf830f75b3c246625067-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b3c246625067-10">10</div><div class="crayon-num" data-line="crayon-5bcf830f75b3c246625067-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b3c246625067-12">12</div><div class="crayon-num" data-line="crayon-5bcf830f75b3c246625067-13">13</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae8892498307555472-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae8892498307555472-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae8892498307555472-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae8892498307555472-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae8892498307555472-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae8892498307555472-6">6</div><div class="crayon-num" data-line="crayon-5bd0ae8892498307555472-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae8892498307555472-8">8</div><div class="crayon-num" data-line="crayon-5bd0ae8892498307555472-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae8892498307555472-10">10</div><div class="crayon-num" data-line="crayon-5bd0ae8892498307555472-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae8892498307555472-12">12</div><div class="crayon-num" data-line="crayon-5bd0ae8892498307555472-13">13</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b3c246625067-1"><span class="crayon-i">python</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-o">/</span><span class="crayon-v">read_file</span><span class="crayon-sy">.</span><span class="crayon-e">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b3c246625067-2"><span class="crayon-e">STRAY </span><span class="crayon-e">BIRDS</span></div><div class="crayon-line" id="crayon-5bcf830f75b3c246625067-3"><span class="crayon-e">BY</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b3c246625067-4"><span class="crayon-e">RABINDRANATH </span><span class="crayon-e">TAGORE</span></div><div class="crayon-line" id="crayon-5bcf830f75b3c246625067-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b3c246625067-6"><span class="crayon-e">STRAY </span><span class="crayon-e">birds </span><span class="crayon-e">of </span><span class="crayon-e">summer </span><span class="crayon-e">come </span><span class="crayon-st">to</span><span class="crayon-h"> </span><span class="crayon-e">my</span></div><div class="crayon-line" id="crayon-5bcf830f75b3c246625067-7"><span class="crayon-e">window </span><span class="crayon-st">to</span><span class="crayon-h"> </span><span class="crayon-e">sing </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">fly </span><span class="crayon-v">away</span><span class="crayon-sy">.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b3c246625067-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b3c246625067-9"><span class="crayon-st">And</span><span class="crayon-h"> </span><span class="crayon-e">yellow </span><span class="crayon-e">leaves </span><span class="crayon-e">of </span><span class="crayon-v">autumn</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">which</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b3c246625067-10"><span class="crayon-e">have </span><span class="crayon-e">no </span><span class="crayon-v">songs</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">flutter </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">fall </span><span class="crayon-e">there</span></div><div class="crayon-line" id="crayon-5bcf830f75b3c246625067-11"><span class="crayon-i">with</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-v">sigh</span><span class="crayon-sy">.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b3c246625067-12">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b3c246625067-13">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae8892498307555472-1"><span class="crayon-i">python</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-o">/</span><span class="crayon-v">read_file</span><span class="crayon-sy">.</span><span class="crayon-e">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae8892498307555472-2"><span class="crayon-e">STRAY </span><span class="crayon-e">BIRDS</span></div><div class="crayon-line" id="crayon-5bd0ae8892498307555472-3"><span class="crayon-e">BY</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae8892498307555472-4"><span class="crayon-e">RABINDRANATH </span><span class="crayon-e">TAGORE</span></div><div class="crayon-line" id="crayon-5bd0ae8892498307555472-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae8892498307555472-6"><span class="crayon-e">STRAY </span><span class="crayon-e">birds </span><span class="crayon-e">of </span><span class="crayon-e">summer </span><span class="crayon-e">come </span><span class="crayon-st">to</span><span class="crayon-h"> </span><span class="crayon-e">my</span></div><div class="crayon-line" id="crayon-5bd0ae8892498307555472-7"><span class="crayon-e">window </span><span class="crayon-st">to</span><span class="crayon-h"> </span><span class="crayon-e">sing </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">fly </span><span class="crayon-v">away</span><span class="crayon-sy">.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae8892498307555472-8">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae8892498307555472-9"><span class="crayon-st">And</span><span class="crayon-h"> </span><span class="crayon-e">yellow </span><span class="crayon-e">leaves </span><span class="crayon-e">of </span><span class="crayon-v">autumn</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">which</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae8892498307555472-10"><span class="crayon-e">have </span><span class="crayon-e">no </span><span class="crayon-v">songs</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">flutter </span><span class="crayon-st">and</span><span class="crayon-h"> </span><span class="crayon-e">fall </span><span class="crayon-e">there</span></div><div class="crayon-line" id="crayon-5bd0ae8892498307555472-11"><span class="crayon-i">with</span><span class="crayon-h"> </span><span class="crayon-i">a</span><span class="crayon-h"> </span><span class="crayon-v">sigh</span><span class="crayon-sy">.</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae8892498307555472-12">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae8892498307555472-13">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0013 seconds] -->
+<!-- [Format Time: 0.0010 seconds] -->
 <p></p>
 <p>And there you go. Your First Python program.</p>
 <h2>Count words and lines</h2>
 <p>Okay, so we can read a file and print it on the screen. Now, to count the number of words. We’ll be using the file count_words.py in the WordCount folder.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b41614982463" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae889249b522103037" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 #! /usr/bin/python
@@ -331,19 +333,19 @@ f.close()
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b41614982463-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b41614982463-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b41614982463-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b41614982463-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75b41614982463-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b41614982463-6">6</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae889249b522103037-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae889249b522103037-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae889249b522103037-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae889249b522103037-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae889249b522103037-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae889249b522103037-6">6</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b41614982463-1"><span class="crayon-p">#! /usr/bin/python</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b41614982463-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b41614982463-3"><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-s">"birds.txt"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"r"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b41614982463-4"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75b41614982463-5"><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b41614982463-6">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae889249b522103037-1"><span class="crayon-p">#! /usr/bin/python</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae889249b522103037-2">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae889249b522103037-3"><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-s">"birds.txt"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"r"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae889249b522103037-4"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae889249b522103037-5"><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae889249b522103037-6">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0008 seconds] -->
+<!-- [Format Time: 0.0006 seconds] -->
 <p></p>
 <p>These lines should be familiar by now. We open the file and read it.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b45327080731" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae889249d160689172" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 words = data.split(" ")
@@ -352,20 +354,20 @@ words = data.split(" ")
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b45327080731-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b45327080731-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae889249d160689172-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae889249d160689172-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b45327080731-1"><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">" "</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b45327080731-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae889249d160689172-1"><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">" "</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae889249d160689172-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0004 seconds] -->
+<!-- [Format Time: 0.0003 seconds] -->
 <p></p>
 <p>Python has several in built functions for strings. One is the <em>split()</em> function which splits the string on the given parameter. In the example above, we are splitting on a space. The function returns a list (which is what Python calls arrays) of the string split on space.</p>
 <p>To see how this works, I’ll fire up an IPython console.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b4a264078794" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924a0583608408" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 In [1]: "I am a boy".split(" ")
@@ -376,20 +378,20 @@ Out[1]: ['I', 'am', 'a', 'boy']
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b4a264078794-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b4a264078794-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b4a264078794-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b4a264078794-4">4</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924a0583608408-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924a0583608408-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924a0583608408-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924a0583608408-4">4</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b4a264078794-1"><span class="crayon-st">In</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"I am a boy"</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">" "</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b4a264078794-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b4a264078794-3"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">'I'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'am'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'a'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'boy'</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b4a264078794-4">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924a0583608408-1"><span class="crayon-st">In</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"I am a boy"</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">" "</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924a0583608408-2">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924a0583608408-3"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">'I'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'am'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'a'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'boy'</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924a0583608408-4">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0007 seconds] -->
+<!-- [Format Time: 0.0006 seconds] -->
 <p></p>
 <p>I took a sentence “I am a boy” and split it on a space. Python returned a list with four elements: <em>[&#8216;I&#8217;, &#8216;am&#8217;, &#8216;a&#8217;, &#8216;boy&#8217;]</em>.<br />
 We can split on anything. Here, I split on a comma:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b4f132696959" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924a3113722448" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 In [2]: "The birds, they are flying away, he said.".split(",")
@@ -400,19 +402,19 @@ Out[2]: ['The birds', ' they are flying away', ' he said.']
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b4f132696959-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b4f132696959-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b4f132696959-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b4f132696959-4">4</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924a3113722448-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924a3113722448-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924a3113722448-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924a3113722448-4">4</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b4f132696959-1"><span class="crayon-st">In</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"The birds, they are flying away, he said."</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">","</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b4f132696959-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b4f132696959-3"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">'The birds'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">' they are flying away'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">' he said.'</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b4f132696959-4">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924a3113722448-1"><span class="crayon-st">In</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-s">"The birds, they are flying away, he said."</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">","</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924a3113722448-2">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924a3113722448-3"><span class="crayon-v">Out</span><span class="crayon-sy">[</span><span class="crayon-cn">2</span><span class="crayon-sy">]</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-sy">[</span><span class="crayon-s">'The birds'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">' they are flying away'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">' he said.'</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924a3113722448-4">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0007 seconds] -->
+<!-- [Format Time: 0.0006 seconds] -->
 <p></p>
 <p>Coming back to our example:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b55860442035" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924a6197062396" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 words = data.split(" ")
@@ -421,19 +423,19 @@ words = data.split(" ")
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b55860442035-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b55860442035-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924a6197062396-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924a6197062396-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b55860442035-1"><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">" "</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b55860442035-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924a6197062396-1"><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">" "</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924a6197062396-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0004 seconds] -->
+<!-- [Format Time: 0.0003 seconds] -->
 <p></p>
 <p>You should know what we are doing now. We are splitting the file we read on spaces. This should give us the number of words, as in English, words are separated by space (as if you didn&#8217;t know already).</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b5a968558012" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924a9509284084" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 print("The words in the text are:")
@@ -445,20 +447,20 @@ print("The number of words is ", num_words)
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b5a968558012-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b5a968558012-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b5a968558012-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b5a968558012-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75b5a968558012-5">5</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924a9509284084-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924a9509284084-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924a9509284084-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924a9509284084-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae88924a9509284084-5">5</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b5a968558012-1"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The words in the text are:"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b5a968558012-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75b5a968558012-3"><span class="crayon-v">num_words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b5a968558012-4"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The number of words is "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">num_words</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75b5a968558012-5">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924a9509284084-1"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The words in the text are:"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924a9509284084-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924a9509284084-3"><span class="crayon-v">num_words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924a9509284084-4"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The number of words is "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">num_words</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924a9509284084-5">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0007 seconds] -->
+<!-- [Format Time: 0.0005 seconds] -->
 <p></p>
 <p>So we print the words that we found. Next, we call the <em>len()</em> function, which returns the length of a list. Remember I said the <em>split()</em> function breaks the string into a list? Well, by using the <em>len()</em> function, we can find out how many elements the list has, and hence the number of words.</p>
 <p>Next, we find the number of lines by using the same method.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b5f198691817" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924ab876299412" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 lines = data.split("\n")
@@ -470,20 +472,20 @@ print("The number of lines is", len(lines))
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b5f198691817-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b5f198691817-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b5f198691817-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b5f198691817-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75b5f198691817-5">5</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924ab876299412-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ab876299412-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924ab876299412-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ab876299412-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae88924ab876299412-5">5</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b5f198691817-1"><span class="crayon-v">lines</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">"\n"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b5f198691817-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The lines in the text are:"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75b5f198691817-3"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">lines</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b5f198691817-4"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The number of lines is"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">lines</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75b5f198691817-5">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924ab876299412-1"><span class="crayon-v">lines</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">"\n"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ab876299412-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The lines in the text are:"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924ab876299412-3"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">lines</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ab876299412-4"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The number of lines is"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">lines</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924ab876299412-5">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0008 seconds] -->
+<!-- [Format Time: 0.0006 seconds] -->
 <p></p>
 <p>We do the same thing, except this we split on the newline character (&#8220;\n&#8221;). For those who don’t know, the newline character is the code that tells the editor to insert a new line, a return. By counting the number of newline characters, we can get the number of lines in the program.</p>
 <p>Run the file <em>count_words.py</em>, and see the results.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b64669261812" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924ae773248855" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 python .\count_words.py
@@ -505,20 +507,20 @@ The number of lines is 10
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b64669261812-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b64669261812-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b64669261812-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b64669261812-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75b64669261812-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b64669261812-6">6</div><div class="crayon-num" data-line="crayon-5bcf830f75b64669261812-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b64669261812-8">8</div><div class="crayon-num" data-line="crayon-5bcf830f75b64669261812-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b64669261812-10">10</div><div class="crayon-num" data-line="crayon-5bcf830f75b64669261812-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b64669261812-12">12</div><div class="crayon-num" data-line="crayon-5bcf830f75b64669261812-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b64669261812-14">14</div><div class="crayon-num" data-line="crayon-5bcf830f75b64669261812-15">15</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924ae773248855-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ae773248855-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924ae773248855-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ae773248855-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae88924ae773248855-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ae773248855-6">6</div><div class="crayon-num" data-line="crayon-5bd0ae88924ae773248855-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ae773248855-8">8</div><div class="crayon-num" data-line="crayon-5bd0ae88924ae773248855-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ae773248855-10">10</div><div class="crayon-num" data-line="crayon-5bd0ae88924ae773248855-11">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ae773248855-12">12</div><div class="crayon-num" data-line="crayon-5bd0ae88924ae773248855-13">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ae773248855-14">14</div><div class="crayon-num" data-line="crayon-5bd0ae88924ae773248855-15">15</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b64669261812-1"><span class="crayon-i">python</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">\</span><span class="crayon-v">count_words</span><span class="crayon-sy">.</span><span class="crayon-e">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b64669261812-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b64669261812-3"><span class="crayon-e">The </span><span class="crayon-e">words </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">the </span><span class="crayon-e">text </span><span class="crayon-v">are</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b64669261812-4"><span class="crayon-sy">[</span><span class="crayon-s">'STRAY'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'BIRDS'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\nBY'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\nRABINDRANATH'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'TAGORE'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\n\nSTRAY'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'birds'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'of'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'summer'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'come'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'to'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'my'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\nwindow'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'to'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'sing'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'and'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'fly'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'away.'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\n\nAnd'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'yellow'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'leaves'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'of'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'</span></div><div class="crayon-line" id="crayon-5bcf830f75b64669261812-5"><span class="crayon-s">autumn,'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'which'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\nhave'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'no'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'songs,'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'flutter'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'and'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'fall'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'there'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\nwith'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'a'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'sigh.'</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b64669261812-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b64669261812-7"><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-e">words </span><span class="crayon-st">is</span> <span class="crayon-h"> </span><span class="crayon-cn">34</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b64669261812-8">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b64669261812-9"><span class="crayon-e">The </span><span class="crayon-e">lines </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">the </span><span class="crayon-e">text </span><span class="crayon-v">are</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b64669261812-10"><span class="crayon-sy">[</span><span class="crayon-s">'STRAY BIRDS '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'BY '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'RABINDRANATH TAGORE '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">''</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'STRAY birds of summer come to my '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'window to sing and fly away. '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">''</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'And yellow leaves of autumn, which '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'have no songs, flutter and fall th</span></div><div class="crayon-line" id="crayon-5bcf830f75b64669261812-11"><span class="crayon-s">ere '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'with a sigh.'</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b64669261812-12">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b64669261812-13"><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-e">lines </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-cn">10</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b64669261812-14">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b64669261812-15">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924ae773248855-1"><span class="crayon-i">python</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">\</span><span class="crayon-v">count_words</span><span class="crayon-sy">.</span><span class="crayon-e">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ae773248855-2">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924ae773248855-3"><span class="crayon-e">The </span><span class="crayon-e">words </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">the </span><span class="crayon-e">text </span><span class="crayon-v">are</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ae773248855-4"><span class="crayon-sy">[</span><span class="crayon-s">'STRAY'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'BIRDS'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\nBY'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\nRABINDRANATH'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'TAGORE'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\n\nSTRAY'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'birds'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'of'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'summer'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'come'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'to'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'my'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\nwindow'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'to'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'sing'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'and'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'fly'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'away.'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\n\nAnd'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'yellow'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'leaves'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'of'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'</span></div><div class="crayon-line" id="crayon-5bd0ae88924ae773248855-5"><span class="crayon-s">autumn,'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'which'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\nhave'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'no'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'songs,'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'flutter'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'and'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'fall'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'there'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'\nwith'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'a'</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'sigh.'</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ae773248855-6">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924ae773248855-7"><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-e">words </span><span class="crayon-st">is</span> <span class="crayon-h"> </span><span class="crayon-cn">34</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ae773248855-8">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924ae773248855-9"><span class="crayon-e">The </span><span class="crayon-e">lines </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">the </span><span class="crayon-e">text </span><span class="crayon-v">are</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ae773248855-10"><span class="crayon-sy">[</span><span class="crayon-s">'STRAY BIRDS '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'BY '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'RABINDRANATH TAGORE '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">''</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'STRAY birds of summer come to my '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'window to sing and fly away. '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">''</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'And yellow leaves of autumn, which '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'have no songs, flutter and fall th</span></div><div class="crayon-line" id="crayon-5bd0ae88924ae773248855-11"><span class="crayon-s">ere '</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">'with a sigh.'</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ae773248855-12">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924ae773248855-13"><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-e">lines </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-cn">10</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ae773248855-14">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924ae773248855-15">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0033 seconds] -->
+<!-- [Format Time: 0.0025 seconds] -->
 <p></p>
 <p>Now open the file <em>birds.txt</em> and count the number of lines by hand. You’ll find the answers are different. That’s because there is a bug in our code. It is counting empty lines as well. We need to fix that now.</p>
 <h2>Count lines fixed</h2>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b6a411678439" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924b1521700703" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 #! /usr/bin/python
@@ -535,21 +537,21 @@ print("Wrong: The number of lines is", len(lines))
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b6a411678439-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b6a411678439-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b6a411678439-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b6a411678439-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75b6a411678439-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b6a411678439-6">6</div><div class="crayon-num" data-line="crayon-5bcf830f75b6a411678439-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b6a411678439-8">8</div><div class="crayon-num" data-line="crayon-5bcf830f75b6a411678439-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b6a411678439-10">10</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924b1521700703-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924b1521700703-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924b1521700703-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924b1521700703-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae88924b1521700703-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924b1521700703-6">6</div><div class="crayon-num" data-line="crayon-5bd0ae88924b1521700703-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924b1521700703-8">8</div><div class="crayon-num" data-line="crayon-5bd0ae88924b1521700703-9">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924b1521700703-10">10</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b6a411678439-1"><span class="crayon-p">#! /usr/bin/python</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b6a411678439-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b6a411678439-3"><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-s">"birds.txt"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"r"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b6a411678439-4"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75b6a411678439-5"><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b6a411678439-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b6a411678439-7"><span class="crayon-v">lines</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">"\n"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b6a411678439-8"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Wrong: The number of lines is"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">lines</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75b6a411678439-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b6a411678439-10">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924b1521700703-1"><span class="crayon-p">#! /usr/bin/python</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924b1521700703-2">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924b1521700703-3"><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-s">"birds.txt"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"r"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924b1521700703-4"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924b1521700703-5"><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924b1521700703-6">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924b1521700703-7"><span class="crayon-v">lines</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">"\n"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924b1521700703-8"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Wrong: The number of lines is"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">lines</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924b1521700703-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924b1521700703-10">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0011 seconds] -->
+<!-- [Format Time: 0.0006 seconds] -->
 <p></p>
 <p>This is the old code, the one we need to correct.</p>
 <p><strong>For loop in Python</strong></p>
 <p>The syntax of the for loop is:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b73010632861" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924b4081549075" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 for &lt;counter&gt; in &lt;list / array&gt;:
@@ -558,20 +560,20 @@ for &lt;counter&gt; in &lt;list / array&gt;:
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b73010632861-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b73010632861-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924b4081549075-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924b4081549075-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b73010632861-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">counter</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">list</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-h"> </span><span class="crayon-t">array</span><span class="crayon-o">&gt;</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b73010632861-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-st">do</span><span class="crayon-h"> </span><span class="crayon-v">something</span><span class="crayon-o">&gt;</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924b4081549075-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">counter</span><span class="crayon-o">&gt;</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">list</span><span class="crayon-h"> </span><span class="crayon-o">/</span><span class="crayon-h"> </span><span class="crayon-t">array</span><span class="crayon-o">&gt;</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924b4081549075-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-st">do</span><span class="crayon-h"> </span><span class="crayon-v">something</span><span class="crayon-o">&gt;</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0007 seconds] -->
+<!-- [Format Time: 0.0003 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>A few key things. There is a colon (:) after the for instruction. And in Python, there are no brackets <em>{}</em> or start-end keywords. For example, if you come from a C/C++/Java/C# type world, this is how you would write your for loop:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b78628803634" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924b7012752847" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 for(i=0; i &lt;10; i++)
@@ -582,20 +584,20 @@ for(i=0; i &lt;10; i++)
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b78628803634-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b78628803634-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b78628803634-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b78628803634-4">4</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924b7012752847-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924b7012752847-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924b7012752847-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924b7012752847-4">4</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b78628803634-1"><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-v">i</span><span class="crayon-o">=</span><span class="crayon-cn">0</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-cn">10</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-o">++</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b78628803634-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5bcf830f75b78628803634-3"><span class="crayon-o">&lt;</span><span class="crayon-st">do</span><span class="crayon-h"> </span><span class="crayon-e">something </span><span class="crayon-v">here</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b78628803634-4"><span class="crayon-sy">}</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924b7012752847-1"><span class="crayon-st">for</span><span class="crayon-sy">(</span><span class="crayon-v">i</span><span class="crayon-o">=</span><span class="crayon-cn">0</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-cn">10</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-v">i</span><span class="crayon-o">++</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924b7012752847-2"><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5bd0ae88924b7012752847-3"><span class="crayon-o">&lt;</span><span class="crayon-st">do</span><span class="crayon-h"> </span><span class="crayon-e">something </span><span class="crayon-v">here</span><span class="crayon-o">&gt;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924b7012752847-4"><span class="crayon-sy">}</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0007 seconds] -->
+<!-- [Format Time: 0.0003 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>The curly braces <em>{}</em> tell the compiler that this code is under the for loop. Python doesn’t have these braces. Instead, it uses white space/indentation. If you don’t use indentation, Python will complain. Example:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b7d309796329" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924ba386371649" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 for i in range(5):
@@ -608,20 +610,20 @@ IndentationError: expected an indented block</textarea></div>
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b7d309796329-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b7d309796329-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b7d309796329-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b7d309796329-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75b7d309796329-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b7d309796329-6">6</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924ba386371649-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ba386371649-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924ba386371649-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ba386371649-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae88924ba386371649-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ba386371649-6">6</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b7d309796329-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b7d309796329-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">i</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75b7d309796329-3"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">File</span><span class="crayon-h"> </span><span class="crayon-s">"&lt;ipython-input-16-c04bfe0468c5&gt;"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">line</span><span class="crayon-h"> </span><span class="crayon-cn">2</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b7d309796329-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">i</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75b7d309796329-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">^</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b7d309796329-6"><span class="crayon-v">IndentationError</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">expected </span><span class="crayon-e">an </span><span class="crayon-e">indented </span><span class="crayon-v">block</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924ba386371649-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ba386371649-2"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">i</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924ba386371649-3"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-i">File</span><span class="crayon-h"> </span><span class="crayon-s">"&lt;ipython-input-16-c04bfe0468c5&gt;"</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-i">line</span><span class="crayon-h"> </span><span class="crayon-cn">2</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ba386371649-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">i</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924ba386371649-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">^</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ba386371649-6"><span class="crayon-v">IndentationError</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">expected </span><span class="crayon-e">an </span><span class="crayon-e">indented </span><span class="crayon-v">block</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0010 seconds] -->
+<!-- [Format Time: 0.0005 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>The correct way to do it is:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b82624661931" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924bc756825829" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 for i in range(5):
@@ -636,21 +638,21 @@ for i in range(5):
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b82624661931-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b82624661931-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b82624661931-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b82624661931-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75b82624661931-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b82624661931-6">6</div><div class="crayon-num" data-line="crayon-5bcf830f75b82624661931-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b82624661931-8">8</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924bc756825829-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924bc756825829-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924bc756825829-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924bc756825829-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae88924bc756825829-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924bc756825829-6">6</div><div class="crayon-num" data-line="crayon-5bd0ae88924bc756825829-7">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924bc756825829-8">8</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b82624661931-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b82624661931-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">i</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75b82624661931-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b82624661931-4"><span class="crayon-cn">0</span></div><div class="crayon-line" id="crayon-5bcf830f75b82624661931-5"><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b82624661931-6"><span class="crayon-cn">2</span></div><div class="crayon-line" id="crayon-5bcf830f75b82624661931-7"><span class="crayon-cn">3</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b82624661931-8"><span class="crayon-cn">4</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924bc756825829-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">i</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-e">range</span><span class="crayon-sy">(</span><span class="crayon-cn">5</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924bc756825829-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-v">i</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924bc756825829-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924bc756825829-4"><span class="crayon-cn">0</span></div><div class="crayon-line" id="crayon-5bd0ae88924bc756825829-5"><span class="crayon-cn">1</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924bc756825829-6"><span class="crayon-cn">2</span></div><div class="crayon-line" id="crayon-5bd0ae88924bc756825829-7"><span class="crayon-cn">3</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924bc756825829-8"><span class="crayon-cn">4</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0006 seconds] -->
+<!-- [Format Time: 0.0003 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>How much indentation to use? Four spaces is  recommended. If you are using a good text editor like Sublime Text, it will do that automatically.<br />
 Coming back to our code,</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b87783555272" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924bf616560888" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 for l in lines:
@@ -660,20 +662,20 @@ for l in lines:
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b87783555272-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b87783555272-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b87783555272-3">3</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924bf616560888-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924bf616560888-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924bf616560888-3">3</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b87783555272-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">l</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">lines</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b87783555272-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf830f75b87783555272-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">lines</span><span class="crayon-sy">.</span><span class="crayon-e">remove</span><span class="crayon-sy">(</span><span class="crayon-v">l</span><span class="crayon-sy">)</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924bf616560888-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">l</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">lines</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924bf616560888-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bd0ae88924bf616560888-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">lines</span><span class="crayon-sy">.</span><span class="crayon-e">remove</span><span class="crayon-sy">(</span><span class="crayon-v">l</span><span class="crayon-sy">)</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0006 seconds] -->
+<!-- [Format Time: 0.0003 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>Let’s go over this line by line.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b8b298264675" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924c2945858490" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 for l in lines:
@@ -682,21 +684,21 @@ for l in lines:
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b8b298264675-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b8b298264675-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924c2945858490-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924c2945858490-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b8b298264675-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">l</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">lines</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b8b298264675-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924c2945858490-1"><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">l</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">lines</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924c2945858490-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0004 seconds] -->
+<!-- [Format Time: 0.0002 seconds] -->
 <p></p>
 <p>We are looping over our list <em>lines</em>. <em>l</em> will contain each line as Python is looping over them.</p>
 <p>As a side note, those of you who come from a C/C++ background, you will be surprised by us not using arrays. We don’t need to— Python will do that for us automatically. Python will take the list <em>lines</em> and automatically loop over it. We don’t need to do <em>lines[0]</em>, <em>lines[1]</em>, <em>lines[2]</em> etc like you would do in C/C++. In fact, doing so is an anti-pattern.</p>
 <p>So now we have each line. We need to now check if it is empty. There are many ways to do it. One is:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b91557327755" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924c5117167671" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 if len(l) == 0:
@@ -705,19 +707,19 @@ if len(l) == 0:
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b91557327755-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b91557327755-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924c5117167671-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924c5117167671-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b91557327755-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">l</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b91557327755-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924c5117167671-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">l</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-cn">0</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924c5117167671-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0004 seconds] -->
+<!-- [Format Time: 0.0002 seconds] -->
 <p></p>
 <p>This checks if the current line has a length of 0, which is fine, but there is a more elegant way of doing it.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b95555422967" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924c7374552210" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 if not l:
@@ -726,14 +728,14 @@ if not l:
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b95555422967-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b95555422967-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924c7374552210-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924c7374552210-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b95555422967-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b95555422967-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">lines</span><span class="crayon-sy">.</span><span class="crayon-e">remove</span><span class="crayon-sy">(</span><span class="crayon-v">l</span><span class="crayon-sy">)</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924c7374552210-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924c7374552210-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">lines</span><span class="crayon-sy">.</span><span class="crayon-e">remove</span><span class="crayon-sy">(</span><span class="crayon-v">l</span><span class="crayon-sy">)</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0005 seconds] -->
+<!-- [Format Time: 0.0002 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>The <em>not</em> keyword in Python will automatically check for emptiness for us. If the line is empty, we remove it from the list using the <em>remove()</em> command.</p>
@@ -741,7 +743,7 @@ if not l:
 <p>We should now have the correct number of lines. Run <em>count_lines_fixed.py</em> to see the results.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b9b063646561" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924ca436897880" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 python .\count_lines_fixed.py
@@ -753,20 +755,20 @@ Right: The number of lines is 8
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b9b063646561-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b9b063646561-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b9b063646561-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b9b063646561-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75b9b063646561-5">5</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924ca436897880-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ca436897880-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924ca436897880-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ca436897880-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae88924ca436897880-5">5</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b9b063646561-1"><span class="crayon-i">python</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">\</span><span class="crayon-v">count_lines_fixed</span><span class="crayon-sy">.</span><span class="crayon-e">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b9b063646561-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75b9b063646561-3"><span class="crayon-v">Wrong</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-e">lines </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-cn">10</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b9b063646561-4"><span class="crayon-v">Right</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-e">lines </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-cn">8</span></div><div class="crayon-line" id="crayon-5bcf830f75b9b063646561-5">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924ca436897880-1"><span class="crayon-i">python</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">\</span><span class="crayon-v">count_lines_fixed</span><span class="crayon-sy">.</span><span class="crayon-e">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ca436897880-2">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924ca436897880-3"><span class="crayon-v">Wrong</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-e">lines </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-cn">10</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ca436897880-4"><span class="crayon-v">Right</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-e">lines </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-cn">8</span></div><div class="crayon-line" id="crayon-5bd0ae88924ca436897880-5">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0008 seconds] -->
+<!-- [Format Time: 0.0004 seconds] -->
 <p></p>
 <h2>Bringing it all together</h2>
 <p>Now we need to tie it all together. <em>word_count.py</em> is our final file.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75b9f970844060" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924cd072768179" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 #! /usr/bin/python
@@ -776,20 +778,20 @@ import sys
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75b9f970844060-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75b9f970844060-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75b9f970844060-3">3</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924cd072768179-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924cd072768179-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924cd072768179-3">3</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75b9f970844060-1"><span class="crayon-p">#! /usr/bin/python</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75b9f970844060-2"><span class="crayon-e">import </span><span class="crayon-i">sys</span></div><div class="crayon-line" id="crayon-5bcf830f75b9f970844060-3">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924cd072768179-1"><span class="crayon-p">#! /usr/bin/python</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924cd072768179-2"><span class="crayon-e">import </span><span class="crayon-i">sys</span></div><div class="crayon-line" id="crayon-5bd0ae88924cd072768179-3">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0003 seconds] -->
+<!-- [Format Time: 0.0001 seconds] -->
 <p></p>
 <p>The only new thing here is the <em>import sys</em> command. This is needed to read from the command line.</p>
 <p>We will beak our code into functions now. The way to write a function in Python is:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75ba4491907217" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924d0085014694" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 def foo(&lt;input&gt;):
@@ -799,21 +801,21 @@ def foo(&lt;input&gt;):
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75ba4491907217-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75ba4491907217-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75ba4491907217-3">3</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924d0085014694-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924d0085014694-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924d0085014694-3">3</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75ba4491907217-1"><span class="crayon-e">def </span><span class="crayon-e">foo</span><span class="crayon-sy">(</span><span class="crayon-o">&lt;</span><span class="crayon-v">input</span><span class="crayon-o">&gt;</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75ba4491907217-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-st">do</span><span class="crayon-h"> </span><span class="crayon-v">something</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5bcf830f75ba4491907217-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">value</span><span class="crayon-o">&gt;</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924d0085014694-1"><span class="crayon-e">def </span><span class="crayon-e">foo</span><span class="crayon-sy">(</span><span class="crayon-o">&lt;</span><span class="crayon-v">input</span><span class="crayon-o">&gt;</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924d0085014694-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-o">&lt;</span><span class="crayon-st">do</span><span class="crayon-h"> </span><span class="crayon-v">something</span><span class="crayon-o">&gt;</span></div><div class="crayon-line" id="crayon-5bd0ae88924d0085014694-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">value</span><span class="crayon-o">&gt;</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0006 seconds] -->
+<!-- [Format Time: 0.0003 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p><em>def</em> defines a function. Notice the colon (:) and the white space? Like loops and <em>if</em> conditions, you need to use indentation for code under the for loop.</p>
 <p>Our first function counts the number of words:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75bac280320568" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924d2920406532" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 def count_words(data):
@@ -824,21 +826,21 @@ def count_words(data):
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75bac280320568-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bac280320568-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75bac280320568-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bac280320568-4">4</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924d2920406532-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924d2920406532-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924d2920406532-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924d2920406532-4">4</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75bac280320568-1"><span class="crayon-e">def </span><span class="crayon-e">count_words</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bac280320568-2"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">" "</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75bac280320568-3"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">num_words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bac280320568-4"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">num_words</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924d2920406532-1"><span class="crayon-e">def </span><span class="crayon-e">count_words</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924d2920406532-2"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">" "</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924d2920406532-3"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">num_words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">words</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924d2920406532-4"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">num_words</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0008 seconds] -->
+<!-- [Format Time: 0.0004 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>It takes in the list data, and returns the number of words. Keep in mind this is the exact same code as before, the only difference is now it is in a function.</p>
 <p>The function to count lines is similar:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75bb1010337336" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924d5620927972" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 def count_lines(data):
@@ -852,21 +854,21 @@ def count_lines(data):
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75bb1010337336-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bb1010337336-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75bb1010337336-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bb1010337336-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75bb1010337336-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bb1010337336-6">6</div><div class="crayon-num" data-line="crayon-5bcf830f75bb1010337336-7">7</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924d5620927972-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924d5620927972-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924d5620927972-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924d5620927972-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae88924d5620927972-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924d5620927972-6">6</div><div class="crayon-num" data-line="crayon-5bd0ae88924d5620927972-7">7</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75bb1010337336-1"><span class="crayon-e">def </span><span class="crayon-e">count_lines</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bb1010337336-2"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">lines</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">"\n"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75bb1010337336-3"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">l</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">lines</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bb1010337336-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bcf830f75bb1010337336-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">lines</span><span class="crayon-sy">.</span><span class="crayon-e">remove</span><span class="crayon-sy">(</span><span class="crayon-v">l</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bb1010337336-6">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75bb1010337336-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">lines</span><span class="crayon-sy">)</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924d5620927972-1"><span class="crayon-e">def </span><span class="crayon-e">count_lines</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924d5620927972-2"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">lines</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">data</span><span class="crayon-sy">.</span><span class="crayon-e">split</span><span class="crayon-sy">(</span><span class="crayon-s">"\n"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924d5620927972-3"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-i">l</span><span class="crayon-h"> </span><span class="crayon-st">in</span><span class="crayon-h"> </span><span class="crayon-v">lines</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924d5620927972-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-st">not</span><span class="crayon-h"> </span><span class="crayon-v">l</span><span class="crayon-o">:</span></div><div class="crayon-line" id="crayon-5bd0ae88924d5620927972-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-v">lines</span><span class="crayon-sy">.</span><span class="crayon-e">remove</span><span class="crayon-sy">(</span><span class="crayon-v">l</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924d5620927972-6">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924d5620927972-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">lines</span><span class="crayon-sy">)</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0011 seconds] -->
+<!-- [Format Time: 0.0006 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>The next part is one of the most Googled lines:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75bb6019906251" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924d8188904110" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 if __name__ == "__main__":
@@ -875,14 +877,14 @@ if __name__ == "__main__":
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75bb6019906251-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bb6019906251-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924d8188904110-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924d8188904110-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75bb6019906251-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">__name__</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-s">"__main__"</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bb6019906251-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924d8188904110-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">__name__</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-s">"__main__"</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924d8188904110-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0003 seconds] -->
+<!-- [Format Time: 0.0002 seconds] -->
 <p></p>
 <p>There are two ways to call Python files:</p>
 <ol>
@@ -895,7 +897,7 @@ if __name__ == "__main__":
 <p>We haven’t covered calling the file as a library yet. If you wanted to use the function <em>count_words</em> in another file, you would do this:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75bbb712776415" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924db909497462" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 from word_count import count_words
@@ -904,20 +906,20 @@ from word_count import count_words
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75bbb712776415-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bbb712776415-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924db909497462-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924db909497462-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75bbb712776415-1"><span class="crayon-e">from </span><span class="crayon-e">word_count </span><span class="crayon-e">import </span><span class="crayon-v">count</span><span class="crayon-sy">_</span>words</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bbb712776415-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924db909497462-1"><span class="crayon-e">from </span><span class="crayon-e">word_count </span><span class="crayon-e">import </span><span class="crayon-v">count</span><span class="crayon-sy">_</span>words</div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924db909497462-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0004 seconds] -->
+<!-- [Format Time: 0.0002 seconds] -->
 <p></p>
 <p>This will take the function count_words and make it available in the new file.<br />
 You can also do:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75bc0727800700" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924dd699902367" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 from word_count import *
@@ -926,20 +928,20 @@ from word_count import *
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75bc0727800700-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bc0727800700-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924dd699902367-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924dd699902367-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75bc0727800700-1"><span class="crayon-e">from </span><span class="crayon-e">word_count </span><span class="crayon-e">import *</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bc0727800700-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924dd699902367-1"><span class="crayon-e">from </span><span class="crayon-e">word_count </span><span class="crayon-e">import *</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924dd699902367-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0002 seconds] -->
+<!-- [Format Time: 0.0001 seconds] -->
 <p></p>
 <p>This will import all functions and variables, but generally, this approach isn&#8217;t recommended. You should only import what you need.</p>
 <p>Now, sometimes you’ll have code you only want to run if the file is being called directly, ie, without an import. If so, you can put it under this line:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75bc5804462656" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924e0652469722" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 if __name__ == "__main__":
@@ -948,14 +950,14 @@ if __name__ == "__main__":
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75bc5804462656-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bc5804462656-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924e0652469722-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924e0652469722-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75bc5804462656-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">__name__</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-s">"__main__"</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bc5804462656-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924e0652469722-1"><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-v">__name__</span><span class="crayon-h"> </span><span class="crayon-o">==</span><span class="crayon-h"> </span><span class="crayon-s">"__main__"</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924e0652469722-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0003 seconds] -->
+<!-- [Format Time: 0.0002 seconds] -->
 <p></p>
 <p>This means (in simple English): Only run this code if I am running this file from the command line (or something similar). If we import this file in another, all of this code will be ignored.</p>
 <p>By using this syntax, you can ensure your function only runs when someone calls your program directly, and not imports is as a module.</p>
@@ -963,7 +965,7 @@ if __name__ == "__main__":
 <p>Now in our examples, we have been calling the files directly, but I thought I’d show you this syntax in case you ever saw it on the web. It is optional in our case, but good practice in case you want to turn your code into a library. Even if you don’t want to at the moment, it’s a good idea to use the command as it’s only one line.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75bca263560252" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924e3646005220" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
     if len(sys.argv) &lt; 2:
@@ -973,20 +975,20 @@ if __name__ == "__main__":
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75bca263560252-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bca263560252-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75bca263560252-3">3</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924e3646005220-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924e3646005220-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924e3646005220-3">3</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75bca263560252-1"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">sys</span><span class="crayon-sy">.</span><span class="crayon-v">argv</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bca263560252-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Usage: python word_count.py &lt;file&gt;"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75bca263560252-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">exit</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924e3646005220-1"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-e">len</span><span class="crayon-sy">(</span><span class="crayon-v">sys</span><span class="crayon-sy">.</span><span class="crayon-v">argv</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-h"> </span><span class="crayon-cn">2</span><span class="crayon-o">:</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924e3646005220-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"Usage: python word_count.py &lt;file&gt;"</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924e3646005220-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">exit</span><span class="crayon-sy">(</span><span class="crayon-cn">1</span><span class="crayon-sy">)</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0007 seconds] -->
+<!-- [Format Time: 0.0004 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>Remember we imported the sys library? It contains several system calls, one of which is the sys.argv command, which returns the command line arguments. You already know our old friend <em>len()</em>. We check if the number of command line arguments is less than two (the first is always the name of the file), and if so, print a message and exit. This is what happens:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75bcf946252687" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924e6015328299" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 python .\word_count.py
@@ -995,20 +997,20 @@ Usage: python word_count.py &lt;file&gt;</textarea></div>
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75bcf946252687-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bcf946252687-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924e6015328299-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924e6015328299-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75bcf946252687-1"><span class="crayon-i">python</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">\</span><span class="crayon-v">word_count</span><span class="crayon-sy">.</span><span class="crayon-e">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bcf946252687-2"><span class="crayon-v">Usage</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">python </span><span class="crayon-v">word_count</span><span class="crayon-sy">.</span><span class="crayon-v">py</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">file</span><span class="crayon-o">&gt;</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924e6015328299-1"><span class="crayon-i">python</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">\</span><span class="crayon-v">word_count</span><span class="crayon-sy">.</span><span class="crayon-e">py</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924e6015328299-2"><span class="crayon-v">Usage</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-e">python </span><span class="crayon-v">word_count</span><span class="crayon-sy">.</span><span class="crayon-v">py</span><span class="crayon-h"> </span><span class="crayon-o">&lt;</span><span class="crayon-v">file</span><span class="crayon-o">&gt;</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0006 seconds] -->
+<!-- [Format Time: 0.0003 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>The next line:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75bd4081528670" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924e9226722363" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 filename = sys.argv[1]
@@ -1017,19 +1019,19 @@ filename = sys.argv[1]
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75bd4081528670-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bd4081528670-2">2</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924e9226722363-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924e9226722363-2">2</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75bd4081528670-1"><span class="crayon-v">filename</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sys</span><span class="crayon-sy">.</span><span class="crayon-v">argv</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bd4081528670-2">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924e9226722363-1"><span class="crayon-v">filename</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">sys</span><span class="crayon-sy">.</span><span class="crayon-v">argv</span><span class="crayon-sy">[</span><span class="crayon-cn">1</span><span class="crayon-sy">]</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924e9226722363-2">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0004 seconds] -->
+<!-- [Format Time: 0.0002 seconds] -->
 <p></p>
 <p>As I said, the first element of sys.argv (or argv[0]) will be the name of the file itself (word_count.py in our case). The second will be the file the user entered. We read that.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75bda914650790" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924ec190157539" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 f = open(filename, "r")
@@ -1040,19 +1042,19 @@ f.close()
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75bda914650790-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bda914650790-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75bda914650790-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bda914650790-4">4</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924ec190157539-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ec190157539-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924ec190157539-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ec190157539-4">4</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75bda914650790-1"><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-v">filename</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"r"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bda914650790-2"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75bda914650790-3"><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bda914650790-4">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924ec190157539-1"><span class="crayon-v">f</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">open</span><span class="crayon-sy">(</span><span class="crayon-v">filename</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-s">"r"</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ec190157539-2"><span class="crayon-v">data</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">read</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924ec190157539-3"><span class="crayon-v">f</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ec190157539-4">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0007 seconds] -->
+<!-- [Format Time: 0.0004 seconds] -->
 <p></p>
 <p>We read the data from the file.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75bdf979975304" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924ee432242655" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 num_words = count_words(data)
@@ -1065,19 +1067,19 @@ print("The number of lines: ", num_lines)
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75bdf979975304-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bdf979975304-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75bdf979975304-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bdf979975304-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75bdf979975304-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75bdf979975304-6">6</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924ee432242655-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ee432242655-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924ee432242655-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ee432242655-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae88924ee432242655-5">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924ee432242655-6">6</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75bdf979975304-1"><span class="crayon-v">num_words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">count_words</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bdf979975304-2"><span class="crayon-v">num_lines</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">count_lines</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75bdf979975304-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bdf979975304-4"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The number of words: "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">num_words</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bcf830f75bdf979975304-5"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The number of lines: "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">num_lines</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75bdf979975304-6">&nbsp;</div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924ee432242655-1"><span class="crayon-v">num_words</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">count_words</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ee432242655-2"><span class="crayon-v">num_lines</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">count_lines</span><span class="crayon-sy">(</span><span class="crayon-v">data</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924ee432242655-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ee432242655-4"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The number of words: "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">num_words</span><span class="crayon-sy">)</span></div><div class="crayon-line" id="crayon-5bd0ae88924ee432242655-5"><span class="crayon-e">print</span><span class="crayon-sy">(</span><span class="crayon-s">"The number of lines: "</span><span class="crayon-sy">,</span><span class="crayon-h"> </span><span class="crayon-v">num_lines</span><span class="crayon-sy">)</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924ee432242655-6">&nbsp;</div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0005 seconds] -->
+<!-- [Format Time: 0.0004 seconds] -->
 <p></p>
 <p>And now we call our functions to count the number of words and lines, and print the results. Voila! A simple word counter.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
-		<div id="crayon-5bcf830f75be6324676744" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
+		<div id="crayon-5bd0ae88924f1370401747" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
 python .\word_count.py .\birds.txt
@@ -1089,14 +1091,14 @@ The number of lines:  8</textarea></div>
 				<table class="crayon-table">
 					<tr class="crayon-row">
 				<td class="crayon-nums" data-settings="show">
-					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bcf830f75be6324676744-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75be6324676744-2">2</div><div class="crayon-num" data-line="crayon-5bcf830f75be6324676744-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bcf830f75be6324676744-4">4</div><div class="crayon-num" data-line="crayon-5bcf830f75be6324676744-5">5</div></div>
+					<div class="crayon-nums-content" style="font-size: 12px !important; line-height: 15px !important;"><div class="crayon-num" data-line="crayon-5bd0ae88924f1370401747-1">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924f1370401747-2">2</div><div class="crayon-num" data-line="crayon-5bd0ae88924f1370401747-3">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5bd0ae88924f1370401747-4">4</div><div class="crayon-num" data-line="crayon-5bd0ae88924f1370401747-5">5</div></div>
 				</td>
-						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bcf830f75be6324676744-1"><span class="crayon-i">python</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">\</span><span class="crayon-v">word_count</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">\</span><span class="crayon-v">birds</span><span class="crayon-sy">.</span><span class="crayon-e">txt</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75be6324676744-2">&nbsp;</div><div class="crayon-line" id="crayon-5bcf830f75be6324676744-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bcf830f75be6324676744-4"><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-v">words</span><span class="crayon-o">:</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-cn">34</span></div><div class="crayon-line" id="crayon-5bcf830f75be6324676744-5"><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-v">lines</span><span class="crayon-o">:</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-cn">8</span></div></div></td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 12px !important; line-height: 15px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5bd0ae88924f1370401747-1"><span class="crayon-i">python</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">\</span><span class="crayon-v">word_count</span><span class="crayon-sy">.</span><span class="crayon-i">py</span><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">\</span><span class="crayon-v">birds</span><span class="crayon-sy">.</span><span class="crayon-e">txt</span></div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924f1370401747-2">&nbsp;</div><div class="crayon-line" id="crayon-5bd0ae88924f1370401747-3">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5bd0ae88924f1370401747-4"><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-v">words</span><span class="crayon-o">:</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-cn">34</span></div><div class="crayon-line" id="crayon-5bd0ae88924f1370401747-5"><span class="crayon-e">The </span><span class="crayon-e">number </span><span class="crayon-e">of </span><span class="crayon-v">lines</span><span class="crayon-o">:</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-cn">8</span></div></div></td>
 					</tr>
 				</table>
 			</div>
 		</div>
-<!-- [Format Time: 0.0007 seconds] -->
+<!-- [Format Time: 0.0004 seconds] -->
 <p></p>
 <p>&nbsp;</p>
 <p>The word counter isn’t perfect, and if you try it with different files, you will find many bugs. But it’s good enough for us to move on to the next chapter.</p>
@@ -1120,7 +1122,11 @@ The number of lines:  8</textarea></div>
 	</label>
 	<button type="submit" class="search-submit"><span class="screen-reader-text">Search</span></button>
 </form>
-</section>	</aside><!-- .sidebar .widget-area -->
+</section><section id="text-4" class="widget widget_text"><h2 class="widget-title">WARNING</h2>			<div class="textwidget"><p>This site is now in maintenance mode. <a href="/maintenance-mode/">Please see here for details</a></p>
+<p>&nbsp;</p>
+<p><strong>Tldr</strong>: I am no longer working actively on the site, though I will keep it online as it is still helping a lot of people.</p>
+</div>
+		</section>	</aside><!-- .sidebar .widget-area -->
 
 		</div><!-- .site-content -->
 
