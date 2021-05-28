@@ -575,7 +575,7 @@ cv2.imshow("Canny", canny)</textarea></div>
 		<div id="crayon-5bd0ae8b78857325256638" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
-im, contours, hierarchy= cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+contours, hierarchy= cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 </textarea></div>
 			<div class="crayon-main" style="">
 				<table class="crayon-table">
@@ -591,7 +591,7 @@ im, contours, hierarchy= cv2.findContours(canny, cv2.RETR_EXTERNAL, cv2.CHAIN_AP
 <!-- [Format Time: 0.0004 seconds] -->
 <p></p>
 <p>The <em>findContours()</em> finds the contours in the given image. The first option is the output of the canny edge detector. <em>RETR_EXTERNAL</em> tells OpenCv to only find the outermost edges (as you can find contours within contours). The second arguments tells OpenCv to use the simple approximation.</p>
-<p>The function returns three values: The image, a list of contours found, and the hierarchy (which we&#8217;ll ignore. It is used if you have many contours embedded within others).</p>
+<p>The function returns two values: A list of contours found, and the hierarchy (which we&#8217;ll ignore. It is used if you have many contours embedded within others).</p>
 <p>The <em>contours</em> return value is a simple list that contains the number of contours found. Taking the length of it will give us number of objects found.</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
