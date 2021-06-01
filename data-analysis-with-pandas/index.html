@@ -1357,7 +1357,7 @@ title
 		<div id="crayon-5bd0ae8d08922524128252" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
 		
 			<div class="crayon-plain-wrap"><textarea wrap="soft" class="crayon-plain print-no" data-settings="dblclick" readonly style="-moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4; font-size: 12px !important; line-height: 15px !important;">
-ratings_by_gender = ratings_by_gender.ix[popular_movies]
+ratings_by_gender = ratings_by_gender.loc[popular_movies]
 </textarea></div>
 			<div class="crayon-main" style="">
 				<table class="crayon-table">
@@ -1372,7 +1372,7 @@ ratings_by_gender = ratings_by_gender.ix[popular_movies]
 		</div>
 <!-- [Format Time: 0.0002 seconds] -->
 <p></p>
-<p>The <em>.ix</em> is another way to select data. We are selecting the data that is in <em>popular_movies</em> only, which means it has at least 250 ratings. If I print <em>ratings_by_gender</em> now:</p>
+<p>The <em>.loc</em> is another way to select data. We are selecting the data that is in <em>popular_movies</em> only, which means it has at least 250 ratings. If I print <em>ratings_by_gender</em> now:</p>
 <p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
 
 		<div id="crayon-5bd0ae8d08927994034070" class="crayon-syntax crayon-theme-github crayon-font-monaco crayon-os-pc print-yes notranslate" data-settings=" minimize scroll-mouseover" style=" margin-top: 12px; margin-bottom: 12px; font-size: 12px !important; line-height: 15px !important;">
